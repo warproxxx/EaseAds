@@ -23,21 +23,21 @@ sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql php-sqlite3 php
 sudo a2enmod rewrite
 sudo service apache2 restart
 
-sudo nano /etc/apache2/sites-available/adsaro.conf 
+sudo nano /etc/apache2/sites-available/easeads.conf 
 
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-	ServerName adsaro.local
-        DocumentRoot /home/warproxxx/Desktop/Projects/AdSaro
+	ServerName easeads.local
+        DocumentRoot /home/warproxxx/Desktop/Projects/EaseAds
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost> 
 
-sudo a2ensite adsaro.conf
+sudo a2ensite easeads.conf
 
 sudo nano /etc/apache2/apache2.conf
 
-<Directory /home/warproxxx/Desktop/Projects/AdSaro>
+<Directory /home/warproxxx/Desktop/Projects/EaseAds>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
