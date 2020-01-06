@@ -1,0 +1,48 @@
+sudo apt-get update
+ssh-keygen -t rsa -b 4096 -C "daniel@waterbot.xyz"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+
+sudo apt-get install -y git
+git clone git@github.com:warproxxx/inventory-mgmt.git
+git config --global user.name "Daniel Sapkota"
+git config --global user.email "daniel@waterbot.xyz"
+
+sudo apt-get update
+
+echo 'export LC_ALL="en_US.UTF-8"' >> ~/.bashrc
+echo 'export LC_CTYPE="en_US.UTF-8"' >> ~/.bashrc
+source ~/.bashrc
+sudo locale-gen --purge
+
+sudo apt-get install apache2 -y
+sudo apt-get install php -y
+sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql php-sqlite3 php-mbstring php-zip php-xml php-xmlrpc php-gd php-dom php-cli php-json php-common php-opcache php-readline php-curl -y
+
+sudo a2enmod rewrite
+sudo service apache2 restart
+
+sudo nano /etc/apache2/sites-available/adsaro.conf 
+
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+	ServerName adsaro.local
+        DocumentRoot /home/warproxxx/Desktop/Projects/AdSaro
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost> 
+
+sudo a2ensite adsaro.conf
+
+sudo nano /etc/apache2/apache2.conf
+
+<Directory /home/warproxxx/Desktop/Projects/AdSaro>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+
+sudo service apache2 restart
+sudo chmod 777 -R ~/inventory-mgmt/
+
