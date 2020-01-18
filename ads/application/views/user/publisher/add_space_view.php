@@ -181,7 +181,7 @@ for ($i=1; $i < 6; $i++) {
 <br>
   <span class="w3-text-indigo w3-small">Integration Code</span>
 <br>
-<textarea id="secretInfo" class="w3-padding w3-margin  w3-border w3-border-indigo" cols=220 rows=5 readonly>
+<textarea id="secretInfo" class="w3-padding w3-margin  w3-border w3-border-indigo" cols=110 rows=5 readonly>
   
 <?php
 if(!empty($code))

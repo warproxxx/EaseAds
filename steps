@@ -5,7 +5,7 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 
 sudo apt-get install -y git
-git clone git@github.com:warproxxx/inventory-mgmt.git
+git clone git@github.com:warproxxx/EaseAds.git
 git config --global user.name "Daniel Sapkota"
 git config --global user.email "daniel@waterbot.xyz"
 
@@ -27,8 +27,7 @@ sudo nano /etc/apache2/sites-available/easeads.conf
 
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-	ServerName easeads.local
-        DocumentRoot /home/warproxxx/Desktop/Projects/EaseAds
+        DocumentRoot /home/ubuntu/EaseAds
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost> 
@@ -37,12 +36,12 @@ sudo a2ensite easeads.conf
 
 sudo nano /etc/apache2/apache2.conf
 
-<Directory /home/warproxxx/Desktop/Projects/EaseAds>
+<Directory /home/ubuntu/EaseAds>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
 </Directory>
 
 sudo service apache2 restart
-sudo chmod 777 -R ~/inventory-mgmt/
+sudo chmod 777 -R ~/EaseAds/
 

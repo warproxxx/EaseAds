@@ -161,7 +161,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
      <a href="<?php echo site_url("How_it_Works") ; ?>" class="w3-bar-item w3-button w3-padding-large">How it Works</a>
          <!-- <a href="<?php echo site_url("Disclaimer") ; ?>" class="w3-bar-item w3-button w3-padding-large">Disclaimer</a>-->
-    <a href="<?php echo site_url("Blog"); ?>" class="w3-bar-item w3-button w3-padding-large">Our Blog</a>
+    <!-- <a href="<?php echo site_url("Blog"); ?>" class="w3-bar-item w3-button w3-padding-large">Our Blog</a> -->
     <a href="<?php echo site_url("contact_us") ; ?>" class="w3-bar-item w3-button w3-padding-large">Contact Us</a>
   </div>
 </div>
