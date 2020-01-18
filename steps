@@ -45,3 +45,5 @@ sudo nano /etc/apache2/apache2.conf
 sudo service apache2 restart
 sudo chmod 777 -R ~/EaseAds/
 
+sudo apt install mysql-server
+#SET PASSWORD @dminP@ssword
