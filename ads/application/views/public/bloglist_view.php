@@ -27,7 +27,7 @@ foreach ($items as $item)
                             Problems look mighty small from 150 miles up
                         </h3>-->
                     </a>
-                    <p class="post-meta">Posted by Custch on <?=date( "F j, Y, g:i a",$item['time']) ?></p>
+                    <p class="post-meta">Posted by EaseAds on <?=date( "F j, Y, g:i a",$item['time']) ?></p>
                 </div>
                 <hr>
                 

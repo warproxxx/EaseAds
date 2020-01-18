@@ -4,9 +4,9 @@
 	<span class="w3-xlarge w3-text-indigo"><b><?=$cpa_form['name'] ?></b></span> <br><span class='w3-small w3-text-blue'>by</span> <span class="w3-medium w3-text-indigo"><?=$cpa_form['company_name'] ?></span><br>
 
 
-<a href="<?=site_url('blog/powered_by_custch') ?>"><span class="w3-tag w3-tiny w3-padding w3-red w3-serif w3-margin" style="transform:rotate(-5deg)">
+<span class="w3-tag w3-tiny w3-padding w3-red w3-serif w3-margin" style="transform:rotate(-5deg)">
 powered by 
-Custch
+EaseAds
 </span></a></div>
 <!-- pre content-->
 <?php
@@ -112,7 +112,7 @@ echo $cpa_form['extra_data'];
 
 <!--post content ends here-->
 <div style="max-width: 90%" class="w3-container w3-small w3-center w3-margin w3-text-orang w3-serif w3-border w3-padding">
-	By Clicking on Submit,You agree that you are not submitting this form to Custch Advertising Company but to the Advertiser(Company) whose name is shown above.
+	By Clicking on Submit,You agree that you are not submitting this form to EaseAds Company but to the Advertiser(Company) whose name is shown above.
 
 
 

@@ -68,7 +68,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-blue w3-card w3-center w3-large w3-padding-large">
-    <span class="w3-large">Custch Advertisement</span>
+    <span class="w3-large">EaseAds Advertisement</span>
   </div>
 
   

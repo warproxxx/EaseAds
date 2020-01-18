@@ -9,8 +9,8 @@
       <div class="container">
 <div style="letter-spacing: 1px;" class="" id="Advertisers">
         <header class="section-header">
-          <h3>Monetizing your Contents with the Ad format of the Future and Increase your Ad Revenue by 2X Today!</h3>
-          <p>Whats Custch Native Recommendation? CNR is type of Campaign Format that is deliver to your Audience like a native web Article or Story. It look more like normal web recommendations like Related News/Blog Post,In Our Shop etc.Due to its Native Nature,we observed that CNR generate more Reaction & Conversion from Prospects than any Old Type of Ad Format thereby increasing Publishers' Ad Revenue.</p>
+          <h3>Monetizing using easy Ads and Increase your Revenue!</h3>
+          <p></p>
         </header>
 
         <div class="row about-container">
@@ -24,21 +24,21 @@
 
             <div class="icon-box wow fadeInUp">
               <div class="icon"><i class="fa fa-user-plus"></i></div>
-              <h4 class="title">Flexible Application</h4>
-              <p class="description">Due to our application flexibity we've  recorded a very acceptance ratio.</p>
+              <h4 class="title">Flexible</h4>
+              <p class="description">Lorem Ipsum</p>
             </div>
 
 
  <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
               <div class="icon"><i class="fa fa-level-up"></i></div>
-              <h4 class="title">Responsive Campaign</h4>
-              <p class="description">All our Campaign format a mobile first so our Campaign responsiveness is ensured.</p>
+              <h4 class="title">Responsive</h4>
+              <p class="description">Lorem Ipsum</p>
             </div>
 
             <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
               <div class="icon"><i class="fa fa-send"></i></div>
-              <h4 class="title">Low Payout</h4>
-              <p class="description">We have one the lowest payout threshold in the industry which is USD10 and also a wide range of payout option and you can also request for withdrawal at anytime!.</p>
+              <h4 class="title">Low Threshold</h4>
+              <p class="description">Lorem Ipsum</p>
             </div>
 
            
@@ -76,7 +76,7 @@
     <div id="why-us" class="wow fadeIn">
       <div class="container">
         <header class="div-header w3-center w3-text-white">
-          <h3>Want More Than CNR?</h3>
+          <h3>Want More?</h3>
           <p>We've got a wide range of Ad format for you and your business, we have:</p>
         </header>
 
@@ -107,7 +107,7 @@
                 <i class="fa fa-font"></i>
               <div class="card-body">
                 <h5 class="card-title">Keywords Format</h5>
-                <p class="card-text">This format is like the CNR but without banner only keywords. </p>
+                <p class="card-text"></p>
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@
       <div class="container">
 
         <header class="section-header">
-          <h3>Why Choose Us</h3>
-          <p>We offer our partners unique campaign format and we are proudly the first Africa's Article Focus Advertising Network.</p>
+          <h3>Why Us?</h3>
+          <p>Lorem Ipsum. Lorem Ipsum.</p>
         </header>
 
         <div class="row">
@@ -199,16 +199,6 @@
     ============================-->
     <section id="portfolio" class="clearfix">
       <div class="container">
-
-        <header class="section-header">
-          <h3 class="section-title">Our Presence</h3>
-<div class="w3-container">
-<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/ghana.png") ?>"/>
-<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/kenya.png") ?>"/>
-<img class="w3-image w3-margin-bottom" style="max-width: 27%;" src="<?=base_url("assets/media/images/nigeria.png") ?>"/>
-	<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/south_africa.png") ?>"/>
-</div>
-        </header>
 
       </div>
     </section><!-- #portfolio -->

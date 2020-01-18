@@ -86,7 +86,7 @@ echo $pending_campaigns;
             <td>Minimum CPM</td>
             <td><i><?= $general_details['currency_code'].' '.$general_details['minimum_cpm'] ?></i></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td><i class="fa fa-gavel w3-text-indigo w3-large"></i></td>
             <td>Minimum CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_cpa']?></i></td>
@@ -96,12 +96,12 @@ echo $pending_campaigns;
             <td><i class="fa fa-gavel w3-text-purple w3-large"></i></td>
             <td>Minimum Paid CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_paid_cpa']?></i></td>
-          </tr>
+          </tr> -->
  </table>
 
       </div>
      
-      <div class="w3-quarter">
+      <!-- <div class="w3-quarter">
         <h5>Affilate Statistics</h5>
         <table class="w3-table w3-striped w3-white">
          
@@ -136,7 +136,7 @@ echo $no_reg;
          ?></i></td>
       </tr>
         </table>
-      </div>
+      </div> -->
 
       <div class="w3-quarter">
               <h5>Account Details</h5>

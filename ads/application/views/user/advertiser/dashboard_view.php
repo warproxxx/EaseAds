@@ -127,11 +127,19 @@ echo $active_campaigns;
             <td>Minimum CPM</td>
             <td><i><?= $general_details['currency_code'].' '.$general_details['minimum_cpm'] ?></i></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td><i class="fa fa-gavel w3-text-indigo w3-large"></i></td>
             <td>Minimum CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_cpa']?></i></td>
-          </tr>
+          </tr> -->
+          <tr>
+        <td><i class="fa fa-money w3-text-blue w3-large"></i></td>
+        <td>Total Earnings.</td>
+        <td><i><?php
+  //echo $click;
+       // echo "89";
+         ?></i></td>
+      </tr>
           
 
 
@@ -150,12 +158,12 @@ echo "<br><br>
 
        ?>
         <table class="w3-table w3-striped w3-white">
-          <tr>
+          <!-- <tr>
             <td><i class="fa fa-gavel w3-text-purple w3-large"></i></td>
             <td>Minimum Paid CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_paid_cpa']?></i></td>
-          </tr>
-          <tr>
+          </tr> -->
+          <!-- <tr>
         <td><i class="fa fa-hand-pointer-o w3-text-blue w3-large"></i></td>
         <td>Affilate Link Clicks.</td>
         <td><i><?php
@@ -176,15 +184,8 @@ echo $no_reg;
         <td><i><?php
 //echo $campaign_act;
          ?></i></td>
-      </tr>
-       <tr>
-        <td><i class="fa fa-money w3-text-blue w3-large"></i></td>
-        <td>Total Earnings.</td>
-        <td><i><?php
-  //echo $click;
-       // echo "89";
-         ?></i></td>
-      </tr>
+      </tr> -->
+       
         </table>
       </div>
 

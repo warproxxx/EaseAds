@@ -59,7 +59,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                       <h2 class="subheading"><?=$item['title']?></h2>
-                        <span class="meta w3-large">Posted by <a href="#">Custch</a> <?=date('F j,Y,g:ia',$item['time']) ?> </span>
+                        <span class="meta w3-large">Posted by <a href="#">EaseAds</a> <?=date('F j,Y,g:ia',$item['time']) ?> </span>
                     </div>
                 </div>
             </div>

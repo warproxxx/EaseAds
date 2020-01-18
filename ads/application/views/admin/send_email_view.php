@@ -21,14 +21,15 @@ echo form_open('admin/email/'.$this->uri->segment(3).'/'.$this->uri->segment(4))
 ?>	
 <br>
 <span class="w3-label w3-large">Email Title:</span><br>
-<input type="text" class="w3-padding w3-margin-top" name="title" value="<?= set_value('title') ?>" placeholder="Message Title" required/>
+<input type="text" class="w3-padding w3-margin-top" name="title" value="<?= set_value('title') ?>" placeholder="Message Title" required style="width:60%"/>
 
 
 <br><br>
+<span class="w3-label w3-large">Email Content:</span><br>
 <textarea 
-cols="20" 
+cols="120" 
 rows="15" 
-class="w3-border w3-margin-top" name="contents">Your Email here</textarea>
+class="w3-border w3-margin-top" name="contents"></textarea>
 <br>
 
 
@@ -51,10 +52,7 @@ if(empty($this->uri->segment(3)))
 	>General</option>
 </select>
 <br>
-<span class="w3-label w3-small">Please do not change this option unless you really know what you are doing<br>
-General:Message for all person
-<br>
-Personal: Message for Specified User</span><br><input type="submit" name="submit" class="w3-btn w3-blue" value="Send"/>
+<span class="w3-label w3-small"><br><input type="submit" name="submit" class="w3-btn w3-blue" value="Send"/>
 </form>
 
 <br>

@@ -3,11 +3,11 @@
             <div class="row">
               <div class="col-md-6 info">
                 <i class="ion-ios-location-outline"></i>
-                <p>Internet HQ, Kenya Nigeria Ghana South Africa Ughanda</p>
+                <p></p>
               </div>
               <div class="col-md-6 info">
                 <i class="ion-ios-email-outline"></i>
-                <p>support@custch.com</p>
+                <p>support@easeads.com</p>
               </div>
               <!--<div class="col-md-3 info">
                 <i class="ion-ios-telephone-outline"></i>
@@ -16,7 +16,7 @@
             </div>
 
             <div class="form">
-              <span class="w3-small">Please note that you can also send us a message via our email ( <a class="w3-text-blue" href="mailto:support@custch.com"> support@custch.com</a> ) or via social media pages.</span>
+              <span class="w3-small">Please note that you can also send us a message via our email ( <a class="w3-text-blue" href="mailto:support@easeads.com"> support@easeads.com</a> ) or via social media pages.</span>
 <br>
 
 

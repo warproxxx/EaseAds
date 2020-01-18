@@ -8,34 +8,35 @@
       <div class="container">
 <div class="" id="Advertisers">
         <header class="section-header">
-          <h3>CNR For Advertisers</h3>
-          <p>Custch Native Recommendation(CNR) let Advertisers promote a great story/article about their Product/Service to Prospects in a non-intrusive format while also providing african publisher a better Ad Format to increase their Ad Revenue.</p>
+          <h3>Register Now</h3>
+          <p>EaseAds let Advertisers promote their Product to Prospects in a non-intrusive format. It provides
+           formats to increase Ad Revenue.</p>
         </header>
 
         <div class="row about-container">
 
           <div class="col-lg-6 content order-lg-1 order-2">
             <p>
-              Don't just sell your prospects,tell them a story instead.Telling them a story let you connect directly with their Emotion thereby increasing your leads by <b>2X</b>. Remember the saying  <b>"People Dont Buy on Fact But on Emotion"</b>  and one of the few way to connect with their Emotion is to tell them a story.Want to Increase your Leads by <b>2X</b> ?
+              Connect directly to viewers emotion by telling a story of your product and increasing your leads
             </p>
 
             <div class="icon-box wow fadeInUp">
               <div class="icon"><i class="fa fa-pencil"></i></div>
-              <h4 class="title">Write A Great Story</h4>
-              <p class="description">Arrest attention,and make sure you tell or write a story your prospects can easily relate to.</p>
+              <h4 class="title">Create A Great Story</h4>
+              <p class="description">lorem ipsum</p>
             </div>
 
 
  <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
               <div class="icon"><i class="fa fa-level-up"></i></div>
-              <h4 class="title">Have A Call To Action</h4>
-              <p class="description">have great conclusion and Easily assessible Call to Action for direct response type of campaign.</p>
+              <h4 class="title">Create Action</h4>
+              <p class="description">lorem ipsum</p>
             </div>
 
             <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
               <div class="icon"><i class="fa fa-send"></i></div>
-              <h4 class="title">Promote your story</h4>
-              <p class="description">lets your story or article reach critical mass of your prospects by promoting your article or story on CUSTCH.</p>
+              <h4 class="title">Promote</h4>
+              <p class="description">lorem ipsum</p>
             </div>
 
            
@@ -71,7 +72,7 @@
     <div id="why-us" class="wow fadeIn">
       <div class="container">
         <header class="div-header w3-center w3-text-white">
-          <h3>Want More Than CNR?</h3>
+          <h3>Want More?</h3>
           <p>We've got a wide range of Ad format for you and your business, we have:</p>
         </header>
 
@@ -102,7 +103,7 @@
                 <i class="fa fa-font"></i>
               <div class="card-body">
                 <h5 class="card-title">Keywords Format</h5>
-                <p class="card-text">This format is like the CNR but without banner only keywords. </p>
+                <p class="card-text"> </p>
               </div>
             </div>
           </div>
@@ -132,8 +133,8 @@
       <div class="container">
 
         <header class="section-header">
-          <h3>Why Choose Us</h3>
-          <p>We offer our partners unique campaign format and we are proudly the first Africa's Article Focus Advertising Network.</p>
+          <h3>Why Us?</h3>
+          <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum.</p>
         </header>
 
         <div class="row">
@@ -195,16 +196,7 @@
     <section id="portfolio" class="clearfix">
       <div class="container">
 
-        <header class="section-header">
-          <h3 class="section-title">Our Presence</h3><br>
-
-<div class="w3-container">
-<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/ghana.png") ?>"/>
-<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/kenya.png") ?>"/>
-<img class="w3-image w3-margin-bottom" style="max-width: 27%;" src="<?=base_url("assets/media/images/nigeria.png") ?>"/>
-	<img class="w3-image w3-margin-bottom" style="max-width: 20%;" src="<?=base_url("assets/media/images/south_africa.png") ?>"/>
-</div>
-        </header>
+        
 
       </div>
     </section><!-- #portfolio -->

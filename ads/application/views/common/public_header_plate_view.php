@@ -51,8 +51,8 @@
       </div>
 
       <div class="intro-info">
-        <h2>Delivering  Future Online Advertising <br><span>solutions</span><br>for 
-      Africa Today!</h2>
+        <h2>Built for Ease! <br/>
+        Lorem Ipsum</h2>
         <div>
           <a href="<?= site_url('publishers')?>" class="btn-get-started scrollto">Publisher</a>
           <a href="<?= site_url('advertisers')?>" class="btn-services scrollto">Advertiser</a>

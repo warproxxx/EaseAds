@@ -4,22 +4,7 @@
 
 <?= form_open("publisher_dashboard/add_space") ?>
 
-
-<div class=""><center>
-  <div class="" style="max-width: 80%">
-  In our last update you are now required to copy and paste the code below to the head section(inbetween the < head> tag) of your website for performance purpose(<span class="w3-text-red">Please note you are to do this once per website</span>).<br><br>
-
-<textarea readonly><?='
-<link rel="stylesheet"  href="'.base_url('assets/cj/w3.css').'"/>
-<script src="'.base_url('assets/js/jquery.js').'"></script> '?></textarea>
-
-  <br><br>After which you can create a space below and copy and paste the generated code to anywhere you want to display our adverts.</div><br>
-
-  
-</center>
-</div>
-	
-  <div class="w3-container">
+<div class="w3-container">
 <?php
 if(isset($_SESSION['action_status_report']))
 {
@@ -41,9 +26,9 @@ echo $_SESSION['action_status_report'];
 
 <center>
   <div class="w3-container">
-	<span class="w3-text-indigo w3-small">Ads Space  Category(Display Advert from):</span>
+	<span class="w3-text-indigo w3-small">Ads Space Category:</span>
 
-<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 200px;height:150px;overflow: scroll;">  <span class="">
+<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;overflow: scroll;">  <span class="">
   <span class="">
   <input type="checkbox" class="w3-check" value="agriculture" name="category[]"><span class="w3-text-grey">Agriculture</span> </span>
 <br>
@@ -175,10 +160,28 @@ for ($i=1; $i < 6; $i++) {
 
  <input type="submit" name="submit" value="Generate Code" class="w3-btn w3-indigo"/>
 </form>
+
+
+<div class=""><center>
+  <div class="" style="max-width: 80%">
+  <br/> 
+  Paste the code below to the head section of your website.<br><br>
+
+<textarea readonly cols=100><?='
+<link rel="stylesheet"  href="'.base_url('assets/cj/w3.css').'"/>
+<script src="'.base_url('assets/js/jquery.js').'"></script> '?></textarea>
+
+ <br/>
+ <br/>
+
+  
+</center>
+</div>
+	
 <br>
   <span class="w3-text-indigo w3-small">Integration Code</span>
 <br>
-<textarea id="secretInfo" class="w3-padding w3-margin  w3-border w3-border-indigo">
+<textarea id="secretInfo" class="w3-padding w3-margin  w3-border w3-border-indigo" cols=220 rows=5 readonly>
   
 <?php
 if(!empty($code))
@@ -186,7 +189,7 @@ if(!empty($code))
   echo $code;
 }else{
 
-  echo "Click Generate Code Above to Integrate Custch ADs";
+  echo "Click Generate Code Above to Integrate EaseAds ADs";
 }
 
 

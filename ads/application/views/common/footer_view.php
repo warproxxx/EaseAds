@@ -7,8 +7,8 @@
         <div class="row">
 
           <div class="col-lg-4 col-md-6 footer-info">
-            <h3>Custch Advertising</h3>
-            <p>Redefing Digital Advertising while also delivering quality Advertisement across Africa's Internet Space.</p>
+            <h3>EaseAds Advertising</h3>
+            <p>Built for easy advertising.</p>
           </div>
 
           <div class="col-lg-2 col-md-6 footer-links">
@@ -21,16 +21,6 @@
             </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Integration</h4>
-            <ul>
-              <li><a href="<?=site_url('How_it_Works') ?>">How it works</a></li>
-              <li><a href="<?=site_url('blog/how-to-add-custch-ads-to-custom-website-or-blog') ?>">Integration</a></li>
-              <li><a href="<?=site_url('blog/adding-custch-ads-to-self-hosted-wordpress-website-using-plugin') ?>" href="/">WordPress</a></li>
-              <li><a href="<?=site_url('blog') ?>">Tutorials</a></li>
-              
-            </ul>
-          </div>
          <!-- <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contact Us</h4>
             <p>
@@ -54,8 +44,8 @@
              <h4>We are Social</h4>
 
              <div class="social-links">
-              <a href="https://www.twitter.com/custchafrica" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.facebook.com/custch" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
             
       
             </div>
@@ -67,7 +57,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>Custch Advertising</strong>. All Rights Reserved
+        &copy; Copyright <strong>EaseAds Advertising</strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!--

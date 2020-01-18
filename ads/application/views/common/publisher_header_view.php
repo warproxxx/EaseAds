@@ -147,9 +147,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a href="<?php echo site_url('publisher_dashboard'); ?>" class="w3-bar-item w3-button w3-padding-large w3-white">Dashboard</a>
     <a id="to_hide_small" href="<?php echo site_url("logout"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Logout</a>
 
-    <a id="to_hide_small" href="<?php echo site_url("How_it_Works"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">How it Works</a>
+    <!-- <a id="to_hide_small" href="<?php echo site_url("How_it_Works"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">How it Works</a> -->
    <!-- <a id="to_hide_small" href="<?php echo site_url("Disclaimer"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Disclaimer</a>-->
-     <a id="to_hide_small" href="<?php echo site_url("Blog"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Our Blog</a>
+     <!-- <a id="to_hide_small" href="<?php echo site_url("Blog"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Our Blog</a> -->
     <a id="to_hide_small" href="<?php echo site_url("contact_us") ; ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Contact Us</a>
   </div>
 

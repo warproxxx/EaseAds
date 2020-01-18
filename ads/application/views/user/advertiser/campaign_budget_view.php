@@ -12,7 +12,7 @@ echo $_SESSION['action_status_report'];
 
 <div class="w3-container">
 	<div class="w3-half">
-		<span class="w3-label w3-small">Budget( ex:Total Amount  you want to spend on this campaign in <?=$general_details['currency_code'] ?>)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
+		<span class="w3-label w3-small">Budget ($)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 
 <input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_budget'] ?>' placeholder="Budget" value="<?php echo set_value('budget'); ?>" name="budget"  ><br><br>
 
@@ -57,7 +57,7 @@ if(!empty($cpa_form_data))
 }
 
 	?>" id="ppc_div">
-  <span class="w3-label w3-small">Cost Per Click-CPC( ex:Total Amount  you want to pay per click in <?=$general_details['currency_code'] ?>)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
+  <span class="w3-label w3-small">Cost Per Click-CPC*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpc'] ?>  </span><br>
 
        <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?=$general_details['minimum_cpc'] ?>" placeholder="Cost Per Click" value="<?php echo set_value('cpc'); ?>" name="cpc"  /><br>
@@ -97,7 +97,7 @@ if($cpa_form_data['access_type'] == 'free')
 
 
 	<div class="w3-hide" id="cpm_div">		
-<span class="w3-label w3-small">Cost Per View( ex:Total Amount  you want to pay per View in <?=$general_details['currency_code'] ?>)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
+<span class="w3-label w3-small">Cost Per View<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpm'] ?> </span><br>
 
        <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" value="<?php echo set_value('cpv'); ?>" name="cpv"  /><br><br>

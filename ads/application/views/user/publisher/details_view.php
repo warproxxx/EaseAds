@@ -144,7 +144,7 @@ echo $today_views;
 	<div class="w3-third">
 		<span class="w3-text-indigo"><b>Integration Code</b></span>
 <br>
-		<textarea cols="15" rows="5" id="secretInfo" class="w3-border w3-border-indigo w3-margin"><?= $item['code'] ?></textarea>
+		<textarea cols=50 rows=5 readonly id="secretInfo" class="w3-border w3-border-indigo w3-margin"><?= $item['code'] ?></textarea>
 		<input type="button" id="btnCopy" class="w3-btn w3-small w3-indigo w3-round-jumbo" name="copy" value="Copy Code"/>
 	</div>
     <script type="text/javascript">

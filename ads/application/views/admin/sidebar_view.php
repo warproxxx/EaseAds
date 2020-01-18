@@ -1,6 +1,5 @@
 <div class="w3-third w3-white">
 <div id="menuc" class="w3-text-white w3-black">
-<a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/");?>">Go to Home</a><br>
     <br>
     <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin");?>">Admin Home</a><br><br>
 
@@ -16,7 +15,7 @@
 
     <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/Spaces");?>">Spaces</a><br><br>
 
-
+<!-- 
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin_blog/pages/no");?>">Pages</a><br><br>
 
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin_blog/posts/");?>">Posts</a><br><br>
@@ -31,11 +30,12 @@
 
 <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin_blog/draft");?>">Drafts (comming soon)</a><br><br>
 
-<a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/Payments");?>">Payments</a><br><br>
+<a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/Payments");?>">Payments</a><br><br> -->
 
 <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/withdrawal");?>">Withdrawals</a><br><br>
-<a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/site_settings");?>">Site Settings</a><br><br><br><br>
+<!-- <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/site_settings");?>">Site Settings</a><br><br><br><br> -->
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 </div>
 

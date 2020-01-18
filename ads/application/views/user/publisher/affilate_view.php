@@ -4,7 +4,7 @@
 
 <div class="w3-container w3-center">
 	<center>
-<div style="max-width: 60%" class="w3-center">Use the link below to Invite Bloggers/Publishers to join Custch and earn up to 30% of your invitee first Earning</div><br></center>
+<div style="max-width: 60%" class="w3-center">Use the link below to Invite Bloggers/Publishers to join EaseAds and earn up to 30% of your invitee first Earning</div><br></center>
 <textarea cols="20" rows="5" readonly><?= site_url("affilate/pub/".$_SESSION["id"])."656dj" ?>
 </textarea>
 

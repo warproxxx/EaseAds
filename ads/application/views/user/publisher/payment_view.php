@@ -12,7 +12,7 @@ if(isset($_SESSION['action_status_report']))
 <select class="w3-padding w3-border w3-border-indigo" id="payment_type" name="payment_type">
 			<option value="choose">Choose....</option>
 		<option value="bank">Bank Transfer</option>
-	<option value="western_union">Western Union</option>
+	<!-- <option value="western_union">Western Union</option> -->
 	<option value="paypal">Paypal</option>
 </select>
 <br>
