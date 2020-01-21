@@ -37,6 +37,8 @@ public function get_publishers()
 }
 
 
+
+
 //new
 public function get_publisher_by_its_id($id)
 {
@@ -279,10 +281,8 @@ return count($query->result_array());
 public function get_publisher_sites()
 {
 
-$query = $this->db->query('SELECT websites FROM publishers WHERE id = '.$_SESSION['id']);
-return $query->row_array();
-
-
+$query = $this->db->query('SELECT website FROM publishers_websites WHERE publisher_id = '.$_SESSION['id'] . " AND approved=1");
+return $query->result_array();
 }
 
 

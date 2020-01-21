@@ -1,14 +1,12 @@
 <div class="w3-container w3-center">
 
 
-Sites:
-<?php $sites = json_decode($sites, TRUE);?>
-
+Approved Sites:
 <ul>
 
 
 <?php foreach($sites as $get): ?>
-    <li><?= $get ?></li>
+    <li><?= $get['website'] ?></li>
 <?php endforeach; ?>
 </ul>
 

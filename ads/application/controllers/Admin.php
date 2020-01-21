@@ -290,6 +290,38 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
+public function categories($table_type = NULL,$id = NULL)
+{
+
+  if ($table_type == 'delete')
+  {
+    $this->user_model->delete_category($id);
+  }
+
+  $form_data = $this->input->post();
+  $category = $this->input->post("category");
+
+  if ($category != "")
+  {
+        $this->user_model->add_category($category);
+  }
+
+  $data['title'] =$this->siteName." | Categories";
+  $data['description'] ="Admin Dashboard";
+  $data['user'] = $this->user_model->get_user_by_its_id(NULL,"publishers");
+  $data['categories'] = $this->user_model->get_categories();
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/categories_view.php',$data);
+  $this->load->view('admin/footer_view');
+
+
+
+}
+
 public function publishers_list($offset = 0) {
 
 
@@ -549,7 +581,7 @@ $this->email->initialize($config);
 $this->email->from('support@easeads.com', 'System');
 $this->email->to($user['email']);
 
-$this->email->subject('easeads | Quality Advertising for Africa');
+$this->email->subject('easeads | Quality Advertising ');
 
 $this->email->message('Unfortunately,we coudn"t accept Your website/Blog/App Please read our acceptable websites guidelines here /n '.site_url('documentation/pub_guidlines').'\n NOTE: You can always re-register whenever you think you"ve meet our basic Publisher requirement \n thank you');
 

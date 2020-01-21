@@ -19,7 +19,7 @@ class Advertiser_dashboard extends CI_Controller {
 public function __construct()
 {
      parent::__construct();
-     $this->load->model(array('blog_model','advertiser_model','campaign_model','publisher_model'));
+     $this->load->model(array('blog_model','advertiser_model','campaign_model','publisher_model', 'user_model'));
     $this->load->library(array('session','form_validation','user_agent'));
      $this->load->helper(array('url','form','page_helper','blog_helper'));
 
@@ -391,7 +391,7 @@ if(!empty($cpa_ref_id))
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+$data['categories'] = $this->user_model->get_categories();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -443,7 +443,7 @@ if(!empty($cpa_ref_id))
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+$data['categories'] = $this->user_model->get_categories();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -505,7 +505,7 @@ if(!empty($cpa_ref_id))
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+$data['categories'] = $this->user_model->get_categories();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -568,6 +568,7 @@ if(!empty($cpa_ref_id))
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+$data['categories'] = $this->user_model->get_categories();
 
 
     $this->load->view('/common/advertiser_header_view',$data);
@@ -604,7 +605,7 @@ $data['user'] =$this->user;
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+$data['categories'] = $this->user_model->get_categories();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);

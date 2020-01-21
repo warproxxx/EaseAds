@@ -18,7 +18,12 @@ echo $_SESSION['action_status_report'];
 </div>
 <div class="w3-half">
 <span class="w3-serif w3-text-indigo w3-small">Website URL</span>
-<input type="text" name="website_url" class="w3-padding w3-border w3-border-indigo w3-margin" value="<?= set_value("website_url") ?>" placeholder="www.example.com" required/>
+<select name="website_url" class="w3-padding w3-border w3-border-indigo w3-margin">
+  <?php foreach($sites as $get): ?>
+      <option value="<?= $get['website'] ?>"><?= $get['website'] ?></option>
+  <?php endforeach; ?>
+</select>
+
 <br>
 </div>
 </div>
@@ -27,76 +32,16 @@ echo $_SESSION['action_status_report'];
 <center>
   <div class="w3-container">
 	<span class="w3-text-indigo w3-small">Ads Space Category:</span>
+<?php
+foreach ($categories as $category)
+{
 
-<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;overflow: scroll;">  <span class="">
-  <span class="">
-  <input type="checkbox" class="w3-check" value="agriculture" name="category[]"><span class="w3-text-grey">Agriculture</span> </span>
-<br>
-  <div class="w3-hide">
-
-  <input type="checkbox" class="w3-check" value="advertising" name="category[]" checked><span class="w3-text-grey">Advertising</span> </span>
-</div>
-<br>
-  <span class="">
-   <input type="checkbox" class="w3-check" value="banking" name="category[]"><span class="w3-text-grey">Banking & Finance</span> </span>
-
-<br>
-
-
-<span class="">
-  <input type="checkbox" class="w3-check" value="Computers" name="category[]"><span class="w3-text-grey">Computers & Internet</span></span>
-<br>
-<span class="">
-  <input type="checkbox" class="w3-check" value="e-commerce" name="category[]"><span class="w3-text-grey">E-commerce & Trading</span>  </span>
-
-<br>
-   <span class="">
-  <input type="checkbox" class="w3-check" value="education" name="category[]"><span class="w3-text-grey">Education & Learning</span>  </span>
-<br>
-    
-
-<br>
-   <span class="">
-  <input type="checkbox" class="w3-check" value="entertainment" name="category[]"><span class="w3-text-grey">Entertainment(Gaming & Music included)</span>  </span>
-<br>
-
-   <span class="">
-  <input type="checkbox" class="w3-check" value="food" name="category[]"><span class="w3-text-grey">Food & Nutrition</span>  </span>
-<br>
-
-<div class="w3-hide"><span>
-  <input type="checkbox" class="w3-check" value="gambling" name="category[]" checked><span class="w3-text-grey">Gambling & Betting</span>  </span>
-<br>
-    </div>
- <span class="">
-  <input type="checkbox" class="w3-check" value="motoring" name="category[]"><span class="w3-text-grey">Motoring</span> </span>
-<br>
-<div class="w3-hide">
-<span>
-  <input type="checkbox" class="w3-check" value="marketing" name="category[]" checked><span class="w3-text-grey">Marketing & Affilate</span> </span>
-<br>
-</div>
-<span class="">
-  <input type="checkbox" class="w3-check" value="manufacturing" name="category[]"><span class="w3-text-grey">Manufacturing & Industry </span> </span>
-<br>
-
-
-     <span class="">
-  <input type="checkbox" class="w3-check" value="news" name="category[]"><span class="w3-text-grey">News & Media</span>  </span>
-<br>
-
-<span class="">
-  <input type="checkbox" class="w3-check" value="sport" name="category[]"><span class="w3-text-grey">Sport</span>  </span>
-
-
-<br>
-
- <span class="">
-  <input type="checkbox" class="w3-check" value="other" name="category[]"><span class="w3-text-grey">Other</span>  </span>
-
-
-<br>
-    
+ echo '<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;overflow: scroll;">  <span class="">';
+ echo '<span class="">';
+ echo '<input type="checkbox" class="w3-check" value="'.$category['name'].'" name="category[]"><span class="w3-text-grey">'.$category['name'].'</span> </span>';
+}
+?>
+  
      
 </div></div>
 <br>

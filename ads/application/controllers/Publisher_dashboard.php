@@ -389,7 +389,14 @@ $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
 public function sites()
 {
 
+      $form_data = $this->input->post();
+      $site_name = $this->input->post("site_name");
 
+      if ($site_name != "")
+      {
+            $this->user_model->add_single_site($_SESSION['id'], $site_name);
+            echo("<script>alert('The website has been submitted and is pending approval')</script>");
+      }
 
       $data['title'] = $this->siteName." |  Sites";
       $data['author'] = $this->author;
@@ -398,7 +405,7 @@ public function sites()
       $data["noindex"] = $this->noindex;
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-      $data["sites"] = $this->publisher_model->get_publisher_sites()['websites'];
+      $data["sites"] = $this->publisher_model->get_publisher_sites();
       
       $this->load->view('/common/publisher_header_view',$data);
       $this->load->view('/common/publisher_top_tiles',$data);
@@ -481,9 +488,12 @@ $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
       $data['keywords'] = $this->keywords;
       $data['description'] = $this->description;
       $data["noindex"] = $this->noindex;
-$data['user'] = $this->publisher_model->get_publisher_by_id();
-$data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-$data["code"] = $this->publisher_model->get_space($ref_id)['code'];
+      $data['user'] = $this->publisher_model->get_publisher_by_id();
+      $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+      $data["code"] = $this->publisher_model->get_space($ref_id)['code'];
+      $data['sites'] = $this->publisher_model->get_publisher_sites();
+      $data['categories'] = $this->user_model->get_categories();
+      
     $this->load->view('/common/publisher_header_view',$data);
       $this->load->view('/common/publisher_top_tiles',$data);
     $this->load->view('/user/publisher/add_space_view',$data);

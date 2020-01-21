@@ -28,28 +28,17 @@ echo set_value('campaign_name');
   <div class="w3-third">
 
 
-<span class="w3-text-indigo w3-small">Campaign  Category(Your advertisement category):</span><br><br>
+<span class="w3-text-indigo w3-small">Campaign  Category:</span><br><br>
 
 <select type="dropdown" name="category" class="w3-padding w3-border w3-border-blue w3-round" id="category">
 <option value=null selected>Choose...</option>
-<option value="agriculture">Agriculture</option>
-<option value="advertising">Advertising</option>
-<option value="banking">Banking & Finance</option>
-<option value="computers">Computers & Internet</option>
-<option value="e-commerce">E-commerce & Trading</option>
-<option value="education">Education & Learning</option>
-<option value="entertainment">Entertainment & Social</option>
-<option value="food">Food & Nutrition </option>
-<option value="gambling">Gambling & Betting</option>
-<option value="motoring">Motoring</option>
-<option value="marketing">Marketing & Affilate</option>
-<option value="manufacturing">Manufacturing & Industry </option>
-<option value="news">News & Media</option>
-<option value="sport">Sport</option>
-<option value="science">Science & Technology </option>
-<option value="product">Products & Services</option>
-<option value="politics">Politics</option>
-<option value="others">Others</option>
+<?php
+foreach ($categories as $category)
+{
+ echo '<option value="'.$category['name'].'">'.$category['name'].'</option>';
+}
+?>
+
 </select>
 </br>
 
@@ -96,7 +85,7 @@ echo 'readonly';
 <br>
 </div> <div class="w3-half">
 <span class="w3-serif w3-text-indigo w3-small">Campaign Title</span>
-<input type="text" maxlength="100" name="campaign_title_text" class="w3-padding w3-border w3-border-blue w3-margin" value="<?= set_value("campaign_title_text") ?>" placeholder="Ex: Advertise with custch Advertising" />
+<input type="text" maxlength="100" name="campaign_title_text" class="w3-padding w3-border w3-border-blue w3-margin" value="<?= set_value("campaign_title_text") ?>" placeholder="Ex: Advertise with easeads Advertising" />
 <br>
 </div>
 
@@ -144,7 +133,7 @@ if(!empty(set_value('campaign_title')))
 echo set_value('campaign_title');
 
 }else{
-  echo "E.g Advertise your business online today with www.custch.com";
+  echo "E.g Advertise your business online today with www.easeads.com";
 }
 
 ?></textarea>

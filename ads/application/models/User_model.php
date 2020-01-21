@@ -19,6 +19,12 @@ class User_model extends CI_Model {
 
 }
 
+public function get_categories()
+{
+
+  $query = $this->db->get('categories');
+  return $query->result_array();
+}
 
 
 //new
@@ -105,11 +111,11 @@ public function register_publisher()
 
 );
 
-$insert_id = $this->db->insert('publishers',$reg);
+$this->db->insert('publishers',$reg);
 
 $websites = array(
 
-  'publisher_id' =>  $insert_id,
+  'publisher_id' =>  $this->db->insert_id(),
   "website" => $this->input->post('website')
   
   );
@@ -213,6 +219,29 @@ public function get_pending_websites($offset,$limit)
     $this->db->order_by("id","ASC");
     $query = $this->db->get_where('publishers_websites',array("approved" => 0),$limit,$offset);
   return $query->result_array();
+}
+
+public function add_single_site($id, $website)
+{
+  $websites = array(
+
+    'publisher_id' =>  $id,
+    "website" => $website
+    
+    );
+  
+    $this->db->insert('publishers_websites',$websites);
+}
+
+public function add_category($category)
+{
+  $array = array('name' =>  $category);
+  $this->db->insert('categories',$array);
+}
+
+public function delete_category($id)
+{
+  $query = $this->db->query('DELETE FROM categories WHERE id= '.$id.';');
 }
 
 public function get_advertisers($offset,$limit)
