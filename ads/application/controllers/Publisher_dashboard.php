@@ -386,6 +386,29 @@ $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
 
 }
 
+public function sites()
+{
+
+
+
+      $data['title'] = $this->siteName." |  Sites";
+      $data['author'] = $this->author;
+      $data['keywords'] = $this->keywords;
+      $data['description'] = $this->description;
+      $data["noindex"] = $this->noindex;
+      $data['user'] = $this->publisher_model->get_publisher_by_id();
+      $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+      $data["sites"] = $this->publisher_model->get_publisher_sites()['websites'];
+      
+      $this->load->view('/common/publisher_header_view',$data);
+      $this->load->view('/common/publisher_top_tiles',$data);
+      $this->load->view('/user/publisher/sites_view',$data);
+      $this->load->view('/common/users_footer_view',$data);
+
+
+
+}
+
 
 
  public function spaces($offset = 0)

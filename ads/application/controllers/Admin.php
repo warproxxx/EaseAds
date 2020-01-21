@@ -229,6 +229,67 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
+public function pending_websites_list($table_type = NULL,$id = NULL, $offset = 0)
+{
+
+
+  if ($table_type != NULL)
+  {
+    if ($table_type == 'approve')
+      $str = 1;
+    elseif ($table_type == 'disapprove')
+      $str = -1;
+
+    $this->admin_model->update_single_website("publishers_websites",array("approved" => $str),$id);
+
+  }
+
+    $limit = 8;
+      $this->load->library('pagination');
+
+        $data['items'] = $this->user_model->get_pending_websites($offset,$limit);
+
+
+
+
+    $config['base_url'] = site_url("admin/pending_websites_list");
+
+  $config['total_rows'] = count($this->user_model->get_pending_websites(null,null));
+  //$config['total_rows'] = $this->db->count_all('pages');
+
+    $config['per_page'] = $limit;
+
+   //$config['uri_segment'] = 4;
+  $config['first_tag_open'] = '<span class="w3-btn w3-blue w3-text-white">';
+  $config['first_tag_close'] = '</span>';
+  $config['last_tag_open'] = '<br><span class="w3-btn w3-blue w3-text-white">';
+  $config['last_tag_close'] = '</span>';
+  $config['first_link'] = 'First';
+
+  $config['prev_link'] = 'Prev';
+  $config['next_link'] = 'Next';
+  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-blue w3-text-white">';
+  $config['next_tag_close'] = '</span><br>';
+  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-blue w3-text-white">';
+  $config['prev_tag_close'] = '</span>';
+  $config['last_link'] = 'Last';
+  $config['display_pages'] = false;
+
+       $this->pagination->initialize($config);
+  $data['pagination'] = $this->pagination->create_links();
+
+$data['title'] = "Pending Websites List | Admin Area";
+
+$this->load->view('/admin/header_view',$data);
+
+      $this->load->view('admin/sidebar_view',$data);
+      $this->load->view('admin/pending_websites_view',$data);
+      $this->load->view('admin/footer_view');
+
+
+
+}
+
 public function publishers_list($offset = 0) {
 
 
@@ -485,10 +546,10 @@ $config['wordwrap'] = TRUE;
 $this->email->initialize($config);
 
 
-$this->email->from('support@Custch.com', 'System');
+$this->email->from('support@easeads.com', 'System');
 $this->email->to($user['email']);
 
-$this->email->subject('Custch | Quality Advertising for Africa');
+$this->email->subject('easeads | Quality Advertising for Africa');
 
 $this->email->message('Unfortunately,we coudn"t accept Your website/Blog/App Please read our acceptable websites guidelines here /n '.site_url('documentation/pub_guidlines').'\n NOTE: You can always re-register whenever you think you"ve meet our basic Publisher requirement \n thank you');
 
@@ -508,6 +569,8 @@ $user = $this->user_model->get_user_by_its_id($id,"publishers");
 
 
 $this->admin_model->update_user("publishers",array("account_status" => "active"),$id);
+$this->admin_model->update_websites("publishers_websites",array("approved" => 1),$id);
+
 $_SESSION['action_status_report'] = "<span class='w3-text-red'>Account Approved</span>";
 
 //send email here
@@ -524,11 +587,11 @@ $config['wordwrap'] = TRUE;
 $this->email->initialize($config);
 
 
-$this->email->from('support@Custch.com', 'System');
+$this->email->from('support@easeads.com', 'System');
 $this->email->to($user['email']);
 
-$this->email->subject('Custch | Quality Advertising for Africa');
-$this->email->message('Congratulations,Your Custch Publisher Account has been Approved \n You can login to your account using the link below '.site_url('login'));
+$this->email->subject('easeads | Quality Advertising for Africa');
+$this->email->message('Congratulations,Your easeads Publisher Account has been Approved \n You can login to your account using the link below '.site_url('login'));
 $this->email->send();
 
 $this->session->mark_as_flash('action_status_report');
@@ -665,10 +728,10 @@ $config['wordwrap'] = TRUE;
 $this->email->initialize($config);
 
 
-$this->email->from('support@Custch.com.ng', 'System');
+$this->email->from('support@easeads.com.ng', 'System');
 $this->email->to($theemail);
 
-$this->email->subject('Custch | '.$this->input->post('title'));
+$this->email->subject('easeads | '.$this->input->post('title'));
 $this->email->message($this->input->post('contents'));
 
 $this->email->send();

@@ -10,19 +10,19 @@
           <h3><?= $count_spaces ?></h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Ads Space</h4>
+        <h4>Create Ads</h4>
       </div></a>
     </div>
-    <!-- <div class="w3-quarter"><a href="<?= site_url("publisher_dashboard/Affilate") ?>">
+    <div class="w3-quarter"><a href="<?= site_url("publisher_dashboard/sites") ?>">
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-user-plus w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>0</h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Affilate Program</h4>
+        <h4>Sites</h4>
       </div></a>
-    </div> -->
+    </div>
     <div class="w3-quarter"><a href="<?= site_url("publisher_dashboard/payment") ?>">
       <div class="w3-container w3-teal w3-padding-16">
         <div class="w3-left"><i class="fa fa-money w3-xxxlarge"></i></div>
@@ -30,7 +30,7 @@
           <h3>3</h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Payments</h4>
+        <h4>Withdraw</h4>
       </div></a>
     </div>
     <div class="w3-quarter"><a href="<?= site_url('publisher_dashboard/settings') ?>">

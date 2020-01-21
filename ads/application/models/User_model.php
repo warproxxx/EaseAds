@@ -105,7 +105,16 @@ public function register_publisher()
 
 );
 
-$this->db->insert('publishers',$reg);
+$insert_id = $this->db->insert('publishers',$reg);
+
+$websites = array(
+
+  'publisher_id' =>  $insert_id,
+  "website" => $this->input->post('website')
+  
+  );
+
+  $this->db->insert('publishers_websites',$websites);
 
 
 
@@ -198,6 +207,14 @@ public function get_pending_publishers($offset,$limit)
     $query = $this->db->get_where('publishers',array("account_status" => "pending"),$limit,$offset);
   return $query->result_array();
 }
+
+public function get_pending_websites($offset,$limit)
+{
+    $this->db->order_by("id","ASC");
+    $query = $this->db->get_where('publishers_websites',array("approved" => 0),$limit,$offset);
+  return $query->result_array();
+}
+
 public function get_advertisers($offset,$limit)
 {
   $this->db->order_by("lastlog","DESC");

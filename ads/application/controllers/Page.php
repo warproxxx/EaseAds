@@ -46,7 +46,7 @@ $this->load->view('/common/public_header_plate_view',$data);
 public function suspended_account_alert()
 {
 
-echo "<html><head><title>Account Suspended</title></head><body><script> alert('Hello,Your Account Has been suspended,This may be as a result of click fraud/invalid views/unsupported Traffics or any other offence.You can contact us at Support@AdNetwork.com if you think this is a mistake. Thank You'); 
+echo "<html><head><title>Account Suspended</title></head><body><script> alert('Hello,Your Account Has been suspended,This may be as a result of click fraud/invalid views/unsupported Traffics or any other offence.You can contact us at Support@easeads.com if you think this is a mistake. Thank You'); 
 setTimeout('redirect()',100);
 function redirect()
 {
@@ -63,7 +63,7 @@ public function pending_account_alert()
 
 
 
-echo "<html><head><title>AdNetwork Pending Account</title></head><body><script> alert('Your Publisher Account Registration Application is currently Pending and it will be approved(less than 6hrs) after Website/Blog Quality review thank you for choosing AdNetwork AFRICA'); 
+echo "<html><head><title>EaseAds Pending Account</title></head><body><script> alert('Your Publisher Account Registration Application is currently Pending and it will be approved(less than 6hrs) after Website/Blog Quality review.'); 
 setTimeout('redirect()',100);
 function redirect()
 {
@@ -513,8 +513,8 @@ $this->form_validation->set_rules('message','Message Contents','required');
 if(!$this->form_validation->run())
 {
       $data['title'] = "Contact Us | The Advertising  Network";
-      $data['author'] = "Olaniyi Ojeyinka";
-      $data['keywords'] = "Nigeria,africa,Advertising,advert,story,post,AdNetwork";
+      $data['author'] = "";
+      $data['keywords'] = "";
       $data['description'] = "The online Mobile Advertising Platform.";
       $this->load->view('/common/header_view',$data);
 $this->load->view('/common/public_header_plate_view',$data);

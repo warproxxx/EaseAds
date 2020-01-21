@@ -276,6 +276,15 @@ return count($query->result_array());
 
 }
 
+public function get_publisher_sites()
+{
+
+$query = $this->db->query('SELECT websites FROM publishers WHERE id = '.$_SESSION['id']);
+return $query->row_array();
+
+
+}
+
 
 public function count_publisher_pending_spaces()
 {

@@ -120,6 +120,16 @@ public function delete_user($id,$table_name)
   $this->db->delete($table_name,array('id' => $id));
 }
 
+public function update_websites($table_name,$_new,$id)
+{
+$this->db->update($table_name,$_new,array('publisher_id' => $id));
+}
+
+public function update_single_website($table_name,$_new,$id)
+{
+  $this->db->update($table_name,$_new,array('id' => $id));
+}
+
 public function update_user($table_name,$_new,$id)
 {
 $this->db->update($table_name,$_new,array('id' => $id));
