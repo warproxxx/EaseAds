@@ -26,9 +26,17 @@
                 });
             },
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                    window.location.assign('<?=site_url('advertiser_dashboard/confirm_pay_payment') ?>')
+                return fetch('<?=site_url('advertiser_dashboard/confirm_pay_payment') ?>', {
+                    headers: {
+                    'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    orderID: data.orderID
+                    })
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(details) {
+                    alert('Transaction approved by ' + details.payer_given_name);
                 });
             }
         }).render('#paypal-button-container');
@@ -36,6 +44,7 @@
 
 </form>
 
+Pay Manually
 <script>
     const API_publicKey = "FLWPUBK-0ec90bc8beb0120dadaac132ec3884f7-X";//live
     

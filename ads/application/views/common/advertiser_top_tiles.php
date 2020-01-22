@@ -20,7 +20,7 @@
           <h3>1</h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Payments</h4>
+        <h4>Deposit</h4>
       </div></a>
     </div>
 

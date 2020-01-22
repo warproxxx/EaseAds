@@ -15,8 +15,8 @@ if(isset($_SESSION['action_status_report']))
 
 
 </select><br><br>
-<span>Amount in Chosen Currency</span><br>
-<input type="number" name="amount" min="<?=$general_details['minimum_deposit'] ?>" class="w3-padding"/>
+<span>Amount</span><br>
+<input type="number" name="amount" min="<?=$general_details['minimum_deposit'] ?>" class="w3-padding"/>$
 <br>
 <input type="submit" name="submit" class="w3-btn w3-indigo w3-margin" value="Next" />
 <br>
