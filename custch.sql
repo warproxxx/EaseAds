@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2020 at 02:26 PM
+-- Generation Time: Jan 23, 2020 at 05:13 PM
 -- Server version: 5.7.28-0ubuntu0.16.04.2
--- PHP Version: 7.0.33-0ubuntu0.16.04.7
+-- PHP Version: 7.0.33-0ubuntu0.16.04.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,7 +42,8 @@ CREATE TABLE `admin_earning` (
 --
 
 INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `weekday`, `amount`, `time`) VALUES
-(1, 'January', '2020', 'text', 'view', 'Saturday', '0.0000', '1579334714');
+(1, 'January', '2020', 'text', 'view', 'Saturday', '0.0000', '1579334714'),
+(2, 'January', '2020', 'text', 'view', 'Tuesday', '0.0000', '1579586110');
 
 -- --------------------------------------------------------
 
@@ -76,8 +77,8 @@ CREATE TABLE `advertisers` (
 --
 
 INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
-(1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'eritrea', NULL, 'daniel@advertiser.com', NULL, '342423424', '0.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, '1578141363', 1578059534),
-(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '0.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1579336858', 1578315045),
+(1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'eritrea', NULL, 'daniel@advertiser.com', NULL, '342423424', '60.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, '1578141363', 1578059534),
+(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '10.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1579772485', 1578315045),
 (3, 'Pratk', 'Kunwar', '15cc992d5177a2ec8bd741a3163b254f', 'Nepal', NULL, 'pratik@kunwar.com', NULL, '23432424', '0.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, NULL, 1579317725);
 
 -- --------------------------------------------------------
@@ -168,6 +169,24 @@ CREATE TABLE `blog` (
   `category` varchar(225) DEFAULT NULL,
   `text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(5) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(2, 'Business');
 
 -- --------------------------------------------------------
 
@@ -366,14 +385,47 @@ CREATE TABLE `payments` (
   `user_type` varchar(128) NOT NULL,
   `method` varchar(128) NOT NULL,
   `phone` int(11) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
   `amount` decimal(19,4) NOT NULL,
   `status` varchar(128) DEFAULT NULL,
   `particular` varchar(128) DEFAULT NULL,
   `payment_type` varchar(128) DEFAULT NULL,
   `time` varchar(128) DEFAULT NULL,
   `time_of_completion` varchar(128) DEFAULT NULL,
+  `txn_id` varchar(100) DEFAULT NULL,
+  `payer_id` varchar(50) DEFAULT NULL,
+  `payment_token` varchar(50) DEFAULT NULL,
   `ldetails` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`) VALUES
+(3, '2', 'advertiser', 'paypal', NULL, '', '10.0000', NULL, NULL, 'deposit', '1579754186', NULL, 'PAYID-LYUSFMI4Y847822CA173270R', 'D34LDFXSNMR58', 'EC-7AT15982JL9061614', NULL),
+(4, '1', 'advertiser', 'manual', NULL, '', '50.0000', NULL, NULL, 'deposit', '1579772268', NULL, 'Manual', 'Manual', 'Manual', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_requests`
+--
+
+CREATE TABLE `payment_requests` (
+  `id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment_requests`
+--
+
+INSERT INTO `payment_requests` (`id`, `user_id`, `amount`, `message`, `status`) VALUES
+(1, 2, 50, 'add', 0);
 
 -- --------------------------------------------------------
 
@@ -429,9 +481,28 @@ CREATE TABLE `publishers` (
 --
 
 INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`) VALUES
-(1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'kenya', NULL, 'daniel@publisher.com', NULL, '4343424', '0.0000', '0.0000', '0.0000', NULL, 'pending', '["google.com"]', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1578059492),
-(2, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Choose', NULL, 'publisher@test.com', NULL, '3454534', '0.0000', '0.0000', '0.0000', NULL, 'active', '["facebook.com"]', NULL, '1579334680', NULL, 'abc@gmail.com', NULL, NULL, 'paypal', NULL, 1578314900),
-(3, 'Ram', 'Ramesh', 'f69c3f33e13338aad8347535ee2a82fc', 'Afghanistan', NULL, 'ram@ramesh.com', NULL, '345435', '0.0000', '0.0000', '0.0000', NULL, 'pending', '["google.com"]', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1579318189);
+(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '0.0000', '50.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1579772493', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publishers_websites`
+--
+
+CREATE TABLE `publishers_websites` (
+  `id` int(10) NOT NULL,
+  `publisher_id` int(100) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `publishers_websites`
+--
+
+INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
+(4, 7, 'waterbot.xy', 1),
+(5, 7, 'ninjasaga.com', 1);
 
 -- --------------------------------------------------------
 
@@ -543,7 +614,8 @@ CREATE TABLE `views` (
 
 INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
 (1, 1579334714, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(2, 1579334724, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL);
+(2, 1579334724, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
+(3, 1579586110, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -570,7 +642,8 @@ CREATE TABLE `withdrawal` (
 --
 
 INSERT INTO `withdrawal` (`id`, `user_id`, `ref`, `method`, `phone`, `amount`, `status`, `approval`, `email`, `time`, `details`) VALUES
-(1, '2', '14209875900', '', 3454534, '0.0000', 'pending', 'pending', 'publisher@test.com', 1579331888, NULL);
+(1, '2', '14209875900', '', 3454534, '0.0000', 'pending', 'pending', 'publisher@test.com', 1579331888, NULL),
+(2, '7', '14213867760', '', 432434, '50.0000', 'pending', 'pending', 'publisher@test.com', 1579775428, NULL);
 
 --
 -- Indexes for dumped tables
@@ -604,6 +677,12 @@ ALTER TABLE `affilate_clicks`
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -673,6 +752,12 @@ ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment_requests`
+--
+ALTER TABLE `payment_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
@@ -682,6 +767,12 @@ ALTER TABLE `projects`
 -- Indexes for table `publishers`
 --
 ALTER TABLE `publishers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `publishers_websites`
+--
+ALTER TABLE `publishers_websites`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -722,7 +813,7 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
@@ -743,6 +834,11 @@ ALTER TABLE `affilate_clicks`
 --
 ALTER TABLE `blog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `clicks`
 --
@@ -797,7 +893,12 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `payment_requests`
+--
+ALTER TABLE `payment_requests`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -807,7 +908,12 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `publishers_websites`
+--
+ALTER TABLE `publishers_websites`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `pub_story`
 --
@@ -827,12 +933,12 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
 ALTER TABLE `withdrawal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
