@@ -208,6 +208,12 @@ public function insert_to_payment_record($arr)
   $this->db->insert('payments',$arr);
 }
 
+public function check_exist($paymentId)
+{
+  $query = $this->db->query("SELECT * FROM payments WHERE txn_id = '".$paymentId."'");
+  return $query->num_rows() == 0 ? false : true;
+}
+
 public function insert_campaign_step_two($ref_id){
 if(is_array($this->input->post("platform")))
 {

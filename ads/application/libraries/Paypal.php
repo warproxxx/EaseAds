@@ -543,7 +543,7 @@ class Paypal{
         try {
           // Execute payment
           $result = $payment->execute($execution, $this->apiContext);
-          return;
+          return $result;
         } catch (PayPal\Exception\PayPalConnectionException $ex) {
           echo $ex->getCode();
           echo $ex->getData();

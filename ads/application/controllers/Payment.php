@@ -4,7 +4,9 @@ class Payment extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library("paypal");
-		$this->load->helper("url");
+		$this->load->library('session');
+		$this->load->helper(array("url", "page_helper"));
+		$this->load->model(array('advertiser_model'));
 	}
 
 
@@ -75,15 +77,15 @@ class Payment extends CI_Controller {
 
 	}
 
-	public function create_payment(){
+	public function create_payment($amount){
 
 		$this->paypal->set_api_context();
 
 		$payment_method = "paypal";
 		$return_url     = base_url()."/payment/success_payment";
-		$cancel_url     = base_url()."/payment/cancel";
-		$total          = 10;
-		$description    = "Paypal product payment";
+		$cancel_url     = base_url()."/advertiser_dashboard/payment";
+		$total          = $amount;
+		$description    = "Deposit to EaseAds";
 		$intent         = "sale";
 
 		$this->paypal->create_payment( $payment_method, $return_url, $cancel_url, 
@@ -98,8 +100,39 @@ class Payment extends CI_Controller {
 
 		if ( !empty( $_GET['paymentId'] ) && !empty( $_GET['PayerID'] ) ) {
 
-		    $this->paypal->execute_payment( $_GET['paymentId'], $_GET['PayerID'] );
-		    $this->index();
+			try{
+				$result = $this->paypal->execute_payment( $_GET['paymentId'], $_GET['PayerID'] );
+				$result = json_decode($result, true);
+				$paidAmount = $result['transactions'][0]['amount']['total'];
+				
+				if ($this->advertiser_model->check_exist($paymentId) == FALSE)
+				{
+					$user=$this->advertiser_model->get_advertiser_by_id($_SESSION['id']);
+					$previous_bal = $user['account_bal'];
+					$new_bal = $paidAmount+$previous_bal;
+					$this->advertiser_model->credit_balance(array('account_bal' =>$new_bal ));
+					$this->advertiser_model->insert_to_payment_record(array('method'=>'paypal',
+					'payment_type'=>'deposit','amount'=> $paidAmount,'user_type'=>'advertiser','user_id' => $_SESSION['id'],
+					'time'=>time(), 'txn_id'=>$_GET['paymentId'], 'payer_id'=>$_GET['PayerID'], 'payment_token'=>$_GET['token']));
+
+
+					$_SESSION['action_status_report'] ="<span class='w3-text-green'>Payment Successfully Processed</span>";
+					$this->session->mark_as_flash('action_status_report');
+					show_page("advertiser_dashboard/payment");
+				}
+				else
+				{
+					$_SESSION['action_status_report'] ="<span class='w3-text-red'>Payment Failed. The transaction already exist.</span>";
+					$this->session->mark_as_flash('action_status_report');
+					show_page("advertiser_dashboard/payment");
+				}
+			}
+			catch (Exception $e)
+			{
+				$_SESSION['action_status_report'] ="<span class='w3-text-red'>Payment Failed. Error is: " . $e->getMessage() . "</span>";
+				$this->session->mark_as_flash('action_status_report');
+				show_page("advertiser_dashboard/payment");
+			}
 
 		}
 
