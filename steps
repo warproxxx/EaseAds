@@ -39,6 +39,8 @@ sudo nano /etc/apache2/apache2.conf
 <Directory /home/ubuntu/EaseAds>
         Options Indexes FollowSymLinks
         AllowOverride All
+        Order allow,deny
+        Allow from all 
         Require all granted
 </Directory>
 
