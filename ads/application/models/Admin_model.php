@@ -130,6 +130,8 @@ public function update_single_website($table_name,$_new,$id)
   $this->db->update($table_name,$_new,array('id' => $id));
 }
 
+
+
 public function update_user($table_name,$_new,$id)
 {
 $this->db->update($table_name,$_new,array('id' => $id));
@@ -452,13 +454,18 @@ public function edit_withdrawal_single($dab ,$id)
 $this->db->update('withdrawal',$dab,array('id' => $id));
 }
 
-public function get_withdrawal($condition,$offset,$limit)
+public function get_withdrawal()
 {
 
-$query = $this->db->get_where('withdrawal',
-$condition,$limit,$offset);
-return $query->result_array();
+  $q = "SELECT p.firstname, p.lastname, p.email, w.amount, w.id, w.user_id, w.status, 
+  p.email, p.bank_acct, p.bank_det, p.bank_no, p.payment_type 
+  FROM withdrawal w 
+  LEFT OUTER JOIN publishers p 
+  ON p.id = w.user_id 
+  WHERE w.status = 'pending' ";
 
+  $query = $this->db->query($q);
+  return $query->result_array();
 }
 
 public function edit_site_details()

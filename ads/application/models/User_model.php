@@ -221,6 +221,18 @@ public function get_pending_websites($offset,$limit)
   return $query->result_array();
 }
 
+public function get_pending_payment_request()
+{
+  $q = "SELECT p.id, p.user_id, p.amount, p.message, p.status, a.email
+        FROM payment_requests p
+        LEFT OUTER JOIN advertisers a ON a.id = p.user_id
+        WHERE p.status = 0
+        ORDER BY id ASC";
+
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
 public function add_single_site($id, $website)
 {
   $websites = array(

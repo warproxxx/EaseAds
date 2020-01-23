@@ -109,6 +109,12 @@ public function get_advertiser_by_its_id($id)
   return $query->row_array();
 }
 
+public function get_payments($id)
+{
+  $query = $this->db->get_where('payments',array("user_id" => $id));
+  return $query->result_array();
+}
+
 public function get_system_variable($variable_name)
 {
 
@@ -203,9 +209,20 @@ public function credit_balance($arr)
   $this->db->update('advertisers',$arr,array("id" => $_SESSION['id']));
 }
 
+public function credit_balance_with_id($arr, $id)
+{
+
+  $this->db->update('advertisers',$arr,array("id" => $id));
+}
+
 public function insert_to_payment_record($arr)
 {
   $this->db->insert('payments',$arr);
+}
+
+public function insert_payment_request($arr)
+{
+  $this->db->insert('payment_requests',$arr);
 }
 
 public function check_exist($paymentId)

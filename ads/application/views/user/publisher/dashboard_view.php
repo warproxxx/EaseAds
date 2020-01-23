@@ -1,4 +1,4 @@
-<div class="w3-center"><a href="<?=site_url('publisher_dashboard/req_withdrawal') ?>" class="w3-button w3-indigo">Request Fund</a></div>
+<div class="w3-center"><a href="<?=site_url('publisher_dashboard/req_withdrawal') ?>" class="w3-button w3-indigo">Request Withdrawl</a></div>
 
  <?php
 if(isset($_SESSION['err_msg']))

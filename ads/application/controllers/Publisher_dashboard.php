@@ -287,15 +287,15 @@ $w_dat =  array(
       $this->user_model->insert_to_with_req($w_dat);
      
       //insert to history
-$details = "You make a withdrawal Request of 
-".$data['user']['account_bal']." with reference ".$ref;
-      $h_dat =  array(
-        'details' => $details,
-        'action' => 'w_request' ,
-        'user_id' => $_SESSION['id'],
-        'account_type' => "publisher",
-        'time' => time()
-         );
+      $details = "You make a withdrawal Request of 
+      ".$data['user']['account_bal']." with reference ".$ref;
+            $h_dat =  array(
+            'details' => $details,
+            'action' => 'w_request' ,
+            'user_id' => $_SESSION['id'],
+            'account_type' => "publisher",
+            'time' => time()
+            );
 
 
       $this->user_model->insert_to_history($h_dat);

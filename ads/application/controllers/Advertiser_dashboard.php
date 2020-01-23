@@ -847,17 +847,17 @@ $this->form_validation->set_rules('amount','Amount','required');
 if(!$this->form_validation->run())
 {
   $data['title'] = $this->siteName." | Advertiser Affilate";
-      $data['author'] =  $this->author;
-      $data['keywords'] =  $this->keywords;
-      $data['description'] =  $this->description;
-      $data["noindex"] =  $this->noindex;
-$data['user'] =$this->user;
-$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
-$data['general_details'] = $this->advertiser_model->get_general_details();
+  $data['author'] =  $this->author;
+  $data['keywords'] =  $this->keywords;
+  $data['description'] =  $this->description;
+  $data["noindex"] =  $this->noindex;
+  $data['user'] =$this->user;
+  $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+  $data['general_details'] = $this->advertiser_model->get_general_details();
 
-$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
-$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+  $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+  $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+  $data["payments"] = $this->advertiser_model->get_payments($_SESSION['id']);
 
 
     $this->load->view('/common/advertiser_header_view',$data);
@@ -901,93 +901,93 @@ $data['currency_code'] = $this->input->post('currency');
 }
 
 
-public function confirm_pay_payment()
-{
+// public function confirm_pay_payment()
+// {
 
- /* $_SESSION['hold'] = array('ref' => $ref,'amount'=>$amount,'currency_code'=>$currency_code); as saved from frontend*/
+//  /* $_SESSION['hold'] = array('ref' => $ref,'amount'=>$amount,'currency_code'=>$currency_code); as saved from frontend*/
 
-  if(!isset($_SESSION['hold']['ref']))
-  {
+//   if(!isset($_SESSION['hold']['ref']))
+//   {
 
-$_SESSION['action_status_report'] ="<span class='w3-text-red'>Unknown Error Occurred</span>";
-$this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/payment");
-  }
+// $_SESSION['action_status_report'] ="<span class='w3-text-red'>Unknown Error Occurred</span>";
+// $this->session->mark_as_flash('action_status_report');
+// show_page("advertiser_dashboard/payment");
+//   }
 
-    if (isset($_SESSION['hold']['ref'])) {
-        $ref = $_SESSION['hold']['ref'];
-        $amount = $_SESSION['hold']['amount']; //Correct Amount from Server
-        $currency = $_SESSION['hold']['currency_code'];
-        //Correct Currency from Server
+//     if (isset($_SESSION['hold']['ref'])) {
+//         $ref = $_SESSION['hold']['ref'];
+//         $amount = $_SESSION['hold']['amount']; //Correct Amount from Server
+//         $currency = $_SESSION['hold']['currency_code'];
+//         //Correct Currency from Server
 
-        $query = array(
-            "SECKEY" => "secret key here",
-            "txref" => $ref
-        );
-         /* $query = array(
-            "SECKEY" => "FLWSECK-cc257ca2f7854658a8d5ab2880253f3d-X",
-            "txref" => $ref
-        );//test*/
+//         $query = array(
+//             "SECKEY" => "secret key here",
+//             "txref" => $ref
+//         );
+//          /* $query = array(
+//             "SECKEY" => "FLWSECK-cc257ca2f7854658a8d5ab2880253f3d-X",
+//             "txref" => $ref
+//         );//test*/
 
-        $data_string = json_encode($query);
+//         $data_string = json_encode($query);
 
-         $ch = curl_init('https://api.ravepay.co/flwv3-pug/getpaidx/api/v2/verify ');
-        /*$ch = curl_init("https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify"); test */
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+//          $ch = curl_init('https://api.ravepay.co/flwv3-pug/getpaidx/api/v2/verify ');
+//         /*$ch = curl_init("https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/verify"); test */
+//         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+//         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+//         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-        $response = curl_exec($ch);
+//         $response = curl_exec($ch);
 
-        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
+//         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+//         $header = substr($response, 0, $header_size);
+//         $body = substr($response, $header_size);
 
-        curl_close($ch);
+//         curl_close($ch);
 
-        $resp = json_decode($response, true);
+//         $resp = json_decode($response, true);
 
-        $paymentStatus = $resp['data']['status'];
-        $chargeResponsecode = $resp['data']['chargecode'];
-        $chargeAmount = $resp['data']['amount'];
-        $chargeCurrency = $resp['data']['currency'];
+//         $paymentStatus = $resp['data']['status'];
+//         $chargeResponsecode = $resp['data']['chargecode'];
+//         $chargeAmount = $resp['data']['amount'];
+//         $chargeCurrency = $resp['data']['currency'];
 
-        if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && ($chargeCurrency == $currency)) {
-          //Give Value and return to Success page
-//get exchange rate by currency code returned
-//divided the returned amount by the xchange rate
-//unset ref,$_SESSION['ref']
-          //redirect to home
-          //later send email
-$exchange_rate = $this->advertiser_model->get_currency_det_by_shortcode($chargeCurrency)['xchange_rate'];
-//get previous balance
-$user=$this->advertiser_model->get_advertiser_by_id($_SESSION['id']);
-$previous_bal = $user['account_bal'];
-$new_bal = ($chargeAmount/$exchange_rate)+$previous_bal;
-//credit user account
-$this->advertiser_model->credit_balance(array('account_bal' =>$new_bal ));
-//alert admin about payment
+//         if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && ($chargeCurrency == $currency)) {
+//           //Give Value and return to Success page
+// //get exchange rate by currency code returned
+// //divided the returned amount by the xchange rate
+// //unset ref,$_SESSION['ref']
+//           //redirect to home
+//           //later send email
+// $exchange_rate = $this->advertiser_model->get_currency_det_by_shortcode($chargeCurrency)['xchange_rate'];
+// //get previous balance
+// $user=$this->advertiser_model->get_advertiser_by_id($_SESSION['id']);
+// $previous_bal = $user['account_bal'];
+// $new_bal = ($chargeAmount/$exchange_rate)+$previous_bal;
+// //credit user account
+// $this->advertiser_model->credit_balance(array('account_bal' =>$new_bal ));
+// //alert admin about payment
 
-$this->advertiser_model->insert_to_payment_record(array('method'=>'flutterwave','payment_type'=>'deposit','amount'=> ($chargeAmount/$exchange_rate),'user_type'=>'advertiser','user_id' => $_SESSION['id'], 'time'=>time()));
-unset($ref);
-//unset session variable here
-unset($_SESSION['hold']);
-$_SESSION['action_status_report'] ="<span class='w3-text-green'>Payment Successfully Processed</span>";
-$this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/payment");
-        } else {
-            //Dont Give Value and return to Failure page
-          $_SESSION['action_status_report'] ="<span class='w3-text-red'>Payment Failed</span>";
-$this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/payment");
-        }
-    }
+// $this->advertiser_model->insert_to_payment_record(array('method'=>'flutterwave','payment_type'=>'deposit','amount'=> ($chargeAmount/$exchange_rate),'user_type'=>'advertiser','user_id' => $_SESSION['id'], 'time'=>time()));
+// unset($ref);$_SESSION['id']
+// //unset session variable here
+// unset($_SESSION['hold']);
+// $_SESSION['action_status_report'] ="<span class='w3-text-green'>Payment Successfully Processed</span>";
+// $this->session->mark_as_flash('action_status_report');
+// show_page("advertiser_dashboard/payment");
+//         } else {
+//             //Dont Give Value and return to Failure page
+//           $_SESSION['action_status_report'] ="<span class='w3-text-red'>Payment Failed</span>";
+// $this->session->mark_as_flash('action_status_report');
+// show_page("advertiser_dashboard/payment");
+//         }
+//     }
 
 
 
-}
+// }
 public function edit_cpa_form_first_section($ref_id)
 {
 
@@ -1272,6 +1272,15 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
    $this->load->view('/user/advertiser/cpa_list_view',$data);
      $this->load->view('/common/users_footer_view',$data);
 
+
+}
+
+public function request_payment($amount){
+  $arr = array("user_id" => $_SESSION['id'], "amount" => $amount, "message" => $_POST['request_message'], "status" => 0);
+  $this->advertiser_model->insert_payment_request($arr);
+  $_SESSION['action_status_report'] ="<span class='w3-text-black'>Payment request has been made.</span>";
+  $this->session->mark_as_flash('action_status_report');
+  show_page("advertiser_dashboard/payment");
 
 }
 

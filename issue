@@ -1,19 +1,22 @@
-Make paypal deposit work. Then add option for manual deposit and make it work too.
-
-378282246310005
-1234
+Create a join query for here and Pending Requests
 
 
+Place the request fund in withdrawl place. Also show histroy
 
+
+
+Make withdrawls work. There is a withdrawl and histroy table already.
+
+Make withdraw request. And allow/deny them.
+
+Show all histroy below.
+
+
+Then fix withdrawl.
 Sandbox:
 
 business@waterbot.xyz
 yHT6ht!uMGmT!*
 
 buyer@waterbot.xyz
-yHT6ht!uMGmT!*
-
-
-business@waterbot.xyz
-AXa-FWWgZYHWeG_4VqQ_76e2lf5t7ueHuFtRONRXxThYOhjW1BP_QtWyjhdDJquHDPBi1W8ausmB0dQk
-EKv2m4vXtX_zTxMZ_5FN1MmAca01zwx9bTwrQOFYI3dfsVzP9BCNOJxW6Qubt1Yi5xYzIPK3QxJpL3eG
+yHT6ht!uMGmT

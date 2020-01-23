@@ -138,6 +138,7 @@ $data['pending_earning'] = $data['pending_earning'] + $pending_array[$i]['pendin
 
 
 
+
 //users earning
 $bal_array = $this->admin_model->get_users_earning('publisher',$this->input->post('country'));
 $data['bal_earning'] = 0;
@@ -288,6 +289,42 @@ $this->load->view('/admin/header_view',$data);
 
 
 
+}
+
+public function payment_requests($table_type = NULL,$id = NULL,$amt=NULL)
+{
+
+
+  if ($table_type != NULL)
+  {
+    if ($table_type == 'approve')
+    {
+      $str = 1;
+      $user=$this->advertiser_model->get_advertiser_by_id($id);
+      $previous_bal = $user['account_bal'];
+      $new_bal = $amt+$previous_bal;
+      $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $id);
+      $this->advertiser_model->insert_to_payment_record(array('method'=>'manual',
+      'payment_type'=>'deposit','amount'=> $amt,'user_type'=>'advertiser','user_id' => $id,
+      'time'=>time(), 'txn_id'=>'Manual', 'payer_id'=>'Manual', 'payment_token'=>'Manual'));      
+    }
+    elseif ($table_type == 'disapprove')
+      $str = -1;
+
+    $this->admin_model->update_single_website("payment_requests",array("status" => $str),$id);
+
+  }
+
+
+  $data['items'] = $this->user_model->get_pending_payment_request();
+
+  $data['title'] = "Pending Payment Requests | Admin Area";
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+  $this->load->view('admin/pending_requets_view',$data);
+  $this->load->view('admin/footer_view');
 }
 
 public function categories($table_type = NULL,$id = NULL)
@@ -445,59 +482,17 @@ $this->load->view('/admin/header_view',$data);
 
 
 
-  public function withdrawal($offset = NULL)
+  public function withdrawal()
 {
 
 
+  $data['withdrawls'] = $this->admin_model->get_withdrawal();
 
-    $limit = 8;
-      $this->load->library('pagination');
-$cond =array(
-
-"status" => "pending"
-
-);
-$data['items'] = $this->admin_model->get_withdrawal($cond,$offset,$limit);
-  $config['base_url'] = site_url("admin/withdrawal");
-  $config['total_rows'] = count( $this->admin_model->get_withdrawal($cond,null,null));
-  //$config['total_rows'] = $this->db->count_all('pages');
-
-    $config['per_page'] = $limit;
-
-   //$config['uri_segment'] = 4;
-  $config['first_tag_open'] = '<span class="w3-btn w3-blue w3-text-white">';
-  $config['first_tag_close'] = '</span>';
-  $config['last_tag_open'] = '<br><span class="w3-btn w3-blue w3-text-white">';
-  $config['last_tag_close'] = '</span>';
-  $config['first_link'] = 'First';
-
-
-
-  $config['prev_link'] = 'Prev';
-  $config['next_link'] = 'Next';
-  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-blue w3-text-white">';
-  $config['next_tag_close'] = '</span><br>';
-  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-blue w3-text-white">';
-  $config['prev_tag_close'] = '</span>';
-  $config['last_link'] = 'Last';
-  $config['display_pages'] = false;
-
-       $this->pagination->initialize($config);
-  $data['pagination'] = $this->pagination->create_links();
-
-
-$data['title'] =$this->siteName." | Admin Payment Page";
-$data['description'] = $this->description;
-$data["noindex"] = $this->noindex;
-$limit = NULL;
-$data['payment_items'] = $this->user_model->get_payment_items($offset,$limit);
-$cond = array(
-"status" => "pending"
-
-
-);
-
-
+  $data['title'] =$this->siteName." | Admin Payment Page";
+  $data['description'] = $this->description;
+  $data["noindex"] = $this->noindex;
+  $limit = NULL;
+  // $data['payment_items'] = $this->user_model->get_payment_items($offset,$limit);
 
 
 
@@ -537,7 +532,7 @@ $user['account_bal'] = $user['account_bal'] + $this->input->post('credit');
 
 $dat =array('account_bal' => $user['account_bal']);
 $this->admin_model->update_user($table_type,$dat,$id);
-$_SESSION['action_status_report'] = "ACcount Credited N".$this->input->post('credit')." successfully";
+$_SESSION['action_status_report'] = "ACcount Credited $".$this->input->post('credit')." successfully";
 $this->session->mark_as_flash('action_status_report');
 if($table_type =="advertisers")
 {

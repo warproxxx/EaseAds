@@ -7,6 +7,7 @@
 
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/pending_publishers_list");?>">Pending Publishers</a><br><br>
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/pending_websites_list");?>">Pending Websites</a><br><br>
+<a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/payment_requests");?>">Payment Requests</a><br><br>
 
 
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/advertisers_list");?>">Advertisers</a><br><br>

@@ -1,4 +1,5 @@
 <div class="w3-container w3-center">
+<div class="w3-center"><a href="<?=site_url('publisher_dashboard/req_withdrawal') ?>" class="w3-button w3-indigo">Request Withdrawl</a></div>
 <span class="w3-text-indigo w3-large w3-serif">Withdrawal Details</span><br>
 <?php
 

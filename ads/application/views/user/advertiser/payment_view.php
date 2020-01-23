@@ -20,4 +20,31 @@ if(isset($_SESSION['action_status_report']))
 <br>
 <input type="submit" name="submit" class="w3-btn w3-indigo w3-margin" value="Next" />
 <br>
+
+<h2> Transactions: </h2>
+<center>
+<table border=1 style='max-width:80%;/*overflow-x: scroll;*/' class='w3-table w3-striped w3-center w3-responsive'>
+<tr>
+	<td>Time</td>
+	<td>Method</td>
+	<td>Amount</td>
+	<td>Transaction ID</td>
+</tr>
+<?php
+foreach ($payments as $payment)
+{
+?>
+
+<tr>
+	<td><?= $payment['time'] ?></td>
+	<td><?= $payment['method'] ?></td>
+	<td><?= $payment['amount'] ?> $</td>
+	<td><?= $payment['txn_id'] ?></td>
+</tr>
+<?php
+}
+?>
+</center>
+
+</table>
 </div>

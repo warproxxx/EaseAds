@@ -65,17 +65,18 @@ body {
     <div>
         <form action="<?= base_url() ?>/payment/create_payment/<?= $amount ?>" method="post">
             <input type="hidden" name="plan_name" value="Make a Deposit" /> 
-            <input type="hidden" name="plan_description" value="Tutorials access to learn PHP with simple examples." />
-            <input type="submit" name="subscribe" value="Checkout" class="btn-subscribe" />
+            <input type="hidden" name="plan_description" value="" />
+            <input type="submit" name="subscribe" value="Pay Now" class="btn-subscribe" />
         </form>
     </div>
+    
 </div>
 
 
+<h4>Request Manual Deposit</h4>
 
-
-
-
-<div class="w3-center"><br>
-
-Pay Manually
+<form action="<?= base_url() ?>/advertiser_dashboard/request_payment/<?= $amount ?>" method="post">
+    <textarea cols=50 rows=10 name="request_message" value="" placeholder="Enter Your message here" /></textarea>
+    <br/>
+    <input type="submit" value="Request Deposit" />
+</form>
