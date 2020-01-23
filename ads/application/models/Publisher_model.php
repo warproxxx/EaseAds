@@ -36,6 +36,11 @@ public function get_publishers()
   return $query->result_array();
 }
 
+public function get_withdrawals($id)
+{
+$query= $this->db->get_where('withdrawal',array('user_id' => $id));
+return $query->result_array();
+}
 
 
 

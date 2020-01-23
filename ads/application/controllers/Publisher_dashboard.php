@@ -212,6 +212,7 @@ $this->publisher_model->update_payment_details();
       $data["noindex"] = $this->noindex;
 $data['user'] = $this->publisher_model->get_publisher_by_id();
 $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+$data['withdrawals'] = $this->publisher_model->get_withdrawals($_SESSION['id']);
 
     $this->load->view('/common/publisher_header_view',$data);
     $this->load->view('/common/publisher_top_tiles',$data);

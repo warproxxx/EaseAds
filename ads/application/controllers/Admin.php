@@ -661,44 +661,83 @@ show_page('admin/publisher_profile_details/'.$id);
 
 }
 
-public function process_withdrawal($id = NULL,$user_id)
+public function process_withdrawal($status, $id = NULL,$user_id)
 {
-$user = $this->user_model->get_user_by_its_id($user_id,"publishers");
-//add to total withdrawn
+  $user = $this->user_model->get_user_by_its_id($user_id,"publishers");
+  //add to total withdrawn
 
-$new_e_bal = $user['total_earning'] + $user['pending_bal'];
+  if ($status == "approve")
+  {
+    $new_e_bal = $user['total_earned'] + $user['pending_bal'];
 
-$this->user_model->edit_user_details(array(
+    $this->user_model->edit_user_details(array(
 
-"total_earning" => $new_e_bal,
-"pending_bal" => 0.00
+    "total_earned" => $new_e_bal,
+    "pending_bal" => 0.00
 
-),$user_id,'publishers');
-
-
-//change withdrawal status to proccessed
-
-$this->admin_model->edit_withdrawal_single(array(
-
-"status" => "processed"
-),$id);
-
-  //update neccessary details including history
-
-  $this->admin_model->insert_new_history(array(
-"user_id" => $user_id,
-"action" => "w_process",
-'time' => time(),
-"details" => "Your Withdrawal Request Had been Processed",
-"account_type" => "publisher"
-),$user_id);
+    ),$user_id,'publishers');
 
 
+    //change withdrawal status to proccessed
+
+    $this->admin_model->edit_withdrawal_single(array(
+    "approval" => "approved",
+    "status" => "processed"
+    ),$id);
+
+      //update neccessary details including history
+
+      $this->admin_model->insert_new_history(array(
+    "user_id" => $user_id,
+    "action" => "w_process",
+    'time' => time(),
+    "details" => "Your Withdrawal Request Had been Processed",
+    "account_type" => "publisher"
+    ),$user_id);
 
 
-$_SESSION['action_status_report'] ="<span class='w3-text-green'>processed successfully</span>";
-$this->session->mark_as_flash('action_status_report');
-  show_page('/admin/withdrawal');
+
+
+    $_SESSION['action_status_report'] ="<span class='w3-text-green'>processed successfully</span>";
+    $this->session->mark_as_flash('action_status_report');
+      show_page('/admin/withdrawal');
+  }
+  else if ($status == "deny")
+  {
+    $new_balance = $user['account_bal'] + $user['pending_bal'];
+
+    $this->user_model->edit_user_details(array(
+
+    "account_bal" => $new_balance,
+    "pending_bal" => 0.00
+
+    ),$user_id,'publishers');
+
+
+    //change withdrawal status to proccessed
+
+    $this->admin_model->edit_withdrawal_single(array(
+    "approval" => "denied",
+    "status" => "denied"
+    ),$id);
+
+      //update neccessary details including history
+
+      $this->admin_model->insert_new_history(array(
+    "user_id" => $user_id,
+    "action" => "w_process",
+    'time' => time(),
+    "details" => "Your Withdrawal Request Had been Denied",
+    "account_type" => "publisher"
+    ),$user_id);
+
+
+
+
+    $_SESSION['action_status_report'] ="<span class='w3-text-green'>denied successfully</span>";
+    $this->session->mark_as_flash('action_status_report');
+      show_page('/admin/withdrawal');
+  }
 
 }
 

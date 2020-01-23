@@ -56,6 +56,27 @@ if(isset($_SESSION['action_status_report']))
 
 <input type="submit" name="submit" class="w3-btn w3-indigo w3-margin" value="Save Details"/>
 
+<h3>Withdrawals</h3>
+<center>
+<table border=1>
+	<tr>
+		<td>Date</td>
+		<td>Amount</td>
+		<td>Status</td>
+	</tr>
+	<?php
+
+	foreach($withdrawals as $withdraw)
+	{
+		echo "<tr>";
+		echo "<td>".$withdraw['time']."</td>";
+		echo "<td>".$withdraw['amount']."</td>";
+		echo "<td>".$withdraw['status']."</td>";
+		echo "</td>";
+	}
+	?>
+</table>
+</center>
 
 <script type="text/javascript">
 	$(document).ready(
