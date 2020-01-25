@@ -327,6 +327,47 @@ public function payment_requests($table_type = NULL,$id = NULL,$amt=NULL)
   $this->load->view('admin/footer_view');
 }
 
+public function announcements($table_type = NULL,$id = NULL)
+{
+
+  if ($table_type == 'inactive')
+  {
+    $dat =array('active' => 0);
+    $this->admin_model->update_user('announcements',$dat,$id);
+  }
+  else if ($table_type == 'active')
+  {
+    $dat =array('active' => 1);
+    $this->admin_model->update_user('announcements',$dat,$id);
+  }
+
+  $form_data = $this->input->post();
+  $title = $this->input->post("title");
+  $body = $this->input->post("body");
+  $receiver = $this->input->post("receiver");
+
+  if ($title != "")
+  {
+        $array = array("title"=> $title, "message"=>$body, "receiver"=>$receiver, "active"=>1, "posted_date"=>$date = date('Y-m-d H:i:s'));
+        $this->admin_model->add_announcement($array);
+  }
+
+  $data['title'] =$this->siteName." | Announcement";
+  $data['description'] ="Admin Dashboard";
+  $data['announcements'] = $this->admin_model->get_announcements();
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/announcement_view.php',$data);
+  $this->load->view('admin/footer_view');
+
+
+
+}
+
+
 public function categories($table_type = NULL,$id = NULL)
 {
 
@@ -482,7 +523,7 @@ $this->load->view('/admin/header_view',$data);
 
 
 
-  public function withdrawal()
+public function withdrawal()
 {
 
 
@@ -502,6 +543,46 @@ $this->load->view('/admin/header_view',$data);
   $this->load->view('admin/sidebar_view',$data);
 
   $this->load->view('admin/admin_withdrawal_view',$data);
+  $this->load->view('admin/footer_view');
+
+}
+
+public function admins($account_type = NULL,$id = NULL)
+{
+
+  if ($account_type == "remove_admin")
+  {
+    $this->admin_model->delete_user($id, 'team');
+  }
+
+  $username = $this->input->post("username");
+  $firstname = $this->input->post("firstname");
+  $lastname = $this->input->post("lastname");
+  $email = $this->input->post("email");
+  $password = $this->input->post("password");
+
+  if ($username != "")
+  {
+        $array = array("firstname"=> $firstname, "lastname"=>$lastname, "username"=>$username, "perm"=>$username, "email"=>$email, "password"=> $password);
+        $this->admin_model->add_admin($array);
+  }
+
+  $data['admins'] = $this->admin_model->get_admins();
+
+  $data['title'] =$this->siteName." | Admin Management Page";
+  $data['description'] = $this->description;
+  $data["noindex"] = $this->noindex;
+  $limit = NULL;
+  // $data['payment_items'] = $this->user_model->get_payment_items($offset,$limit);
+
+  
+
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/admin_management_view',$data);
   $this->load->view('admin/footer_view');
 
 }

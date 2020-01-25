@@ -1,5 +1,5 @@
 <div class="w3-center"><a href="<?=site_url('publisher_dashboard/req_withdrawal') ?>" class="w3-button w3-indigo">Request Withdrawl</a></div>
-
+<center>
  <?php
 if(isset($_SESSION['err_msg']))
 {
@@ -7,9 +7,31 @@ echo $_SESSION['err_msg'];
 
 }
 
+if (!empty($announcements))
+{
+  ?>
+  <table border=1>
+  <tr>
+    <td>Date</td>
+    <td>Title</td>
+    <td>Announcement</td>
+  </tr>
+  
+<?php
+  foreach ($announcements as $announcement)
+  {
+    echo "<tr>";
+    echo "<td>".$announcement['posted_date']."</td>";
+    echo "<td>".$announcement['title']."</td>";
+    echo "<td>".$announcement['message']."</td>";
+    echo "</tr>";
+  }
+  echo('</table>');
+
+}
 ?> 
 
-
+</center>
 
 <div>
     <div class="w3-panel w3-small">

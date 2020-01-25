@@ -484,4 +484,34 @@ return TRUE;
 
  }
 
+public function add_announcement($array)
+{
+  $this->db->insert('announcements',$array);
+}
+
+public function add_admin($array)
+{
+  $this->db->insert('team',$array);
+}
+
+public function get_announcements()
+{
+
+  $query = $this->db->get('announcements');
+  return $query->result_array();
+}
+
+public function get_admins()
+{
+
+  $query = $this->db->get('team');
+  return $query->result_array();
+}
+
+public function get_active_announcements()
+{
+  $query = $this->db->get_where('announcements',array("active" => 1));
+  return $query->result_array();
+}
+
 }

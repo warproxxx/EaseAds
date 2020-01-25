@@ -36,6 +36,10 @@
 <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/Payments");?>">Payments</a><br><br> -->
 
 <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/withdrawal");?>">Withdrawals</a><br><br>
+<a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/announcements");?>">Announcements</a><br><br>
+<a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/admins");?>">Manage Admins</a><br><br>
+
+
 <!-- <a class="w3-text-white w3-padding w3-hover-white"  href="<?php echo site_url("/admin/site_settings");?>">Site Settings</a><br><br><br><br> -->
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

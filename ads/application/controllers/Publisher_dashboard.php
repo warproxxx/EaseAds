@@ -19,7 +19,7 @@ class Publisher_dashboard extends CI_Controller {
 public function __construct()
 {
      parent::__construct();
-     $this->load->model(array('blog_model','publisher_model','advertiser_model','user_model'));
+     $this->load->model(array('blog_model','publisher_model','advertiser_model','user_model', 'admin_model'));
     $this->load->library(array('session','form_validation','user_agent'));
      $this->load->helper(array('url','form','page_helper','blog_helper'));
 
@@ -61,18 +61,19 @@ public function index()
       $data["noindex"] = $this->noindex;
 
 
-$data['user'] = $this->publisher_model->get_publisher_by_id();
+      $data['user'] = $this->publisher_model->get_publisher_by_id();
 
-$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
-$data['general_details'] = $this->advertiser_model->get_general_details();
+      $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+      $data['general_details'] = $this->advertiser_model->get_general_details();
 
-$data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-$data["pending_campaigns"] = $this->publisher_model->count_publisher_pending_spaces();
-$data["blocked_campaigns"] = $this->publisher_model->count_publisher_blocked_campaigns();
-$data["active_campaigns"] = $this->publisher_model->count_publisher_active_campaigns();
-$data["inactive_campaigns"] = $this->publisher_model->count_publisher_inactive_campaigns();
-$data['no_clicks'] = $this->publisher_model->get_no_affilate_clicks("publisher");
-$data['no_reg'] = $this->publisher_model->get_no_affilate_reg("publisher");
+      $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+      $data["pending_campaigns"] = $this->publisher_model->count_publisher_pending_spaces();
+      $data["blocked_campaigns"] = $this->publisher_model->count_publisher_blocked_campaigns();
+      $data["active_campaigns"] = $this->publisher_model->count_publisher_active_campaigns();
+      $data["inactive_campaigns"] = $this->publisher_model->count_publisher_inactive_campaigns();
+      $data['no_clicks'] = $this->publisher_model->get_no_affilate_clicks("publisher");
+      $data['no_reg'] = $this->publisher_model->get_no_affilate_reg("publisher");
+      $data['announcements'] = $this->admin_model->get_active_announcements();
 
 
     $this->load->view('/common/publisher_header_view',$data);
