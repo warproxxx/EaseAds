@@ -32,13 +32,16 @@ echo $_SESSION['action_status_report'];
 <center>
   <div class="w3-container">
 	<span class="w3-text-indigo w3-small">Ads Space Category:</span>
+
+
 <?php
+ echo '<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;overflow: scroll;">  <span class="">';
+ echo '<span class="">';
 foreach ($categories as $category)
 {
 
- echo '<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;overflow: scroll;">  <span class="">';
- echo '<span class="">';
- echo '<input type="checkbox" class="w3-check" value="'.$category['name'].'" name="category[]"><span class="w3-text-grey">'.$category['name'].'</span> </span>';
+
+ echo '<input type="checkbox" class="w3-check" value="'.$category['name'].'" name="category[]"><span class="w3-text-grey">'.$category['name'].'</span> </span><br/>';
 }
 ?>
   
@@ -48,9 +51,10 @@ foreach ($categories as $category)
   <span class="w3-text-indigo w3-small w3-margin">Ads Space Type:</span>
 <br>
 <select id="select_btn" onchange="showDiv()" name="type" class="w3-padding w3-border w3-border-indigo w3-margin">
+<option value="banner">Banner Campaigns</option>
       <option value="text">Text Campaigns</option>
       <option value="recommendation">Native Recommendation</option>
-    <option value="banner">Banner Campaigns</option>
+    
   
 </select>
 <br>

@@ -1,5 +1,5 @@
 <div class="w3-container w3-center">
-<span class="w3-text-indigo w3-large w3-serif">Campaign Details(<?= $campaign_item['name']?>)</span><br>
+<span class="w3-text-indigo w3-large w3-serif">Campaign Details (<?= $campaign_item['name']?>)</span><br>
 
 <?php
 if(isset($_SESSION['action_status_report']))
@@ -162,7 +162,7 @@ echo "style='display:none;'";}
           </tr>
             <tr
 <?php
-if ($campaign_item['per_paid_action'] <= 0) {
+if ($campaign_item['per_action'] <= 0) {
 
 echo "style='display:none;'";}
 
@@ -170,7 +170,7 @@ echo "style='display:none;'";}
   
             >
             <td>Cost Per Paid Action</td>
-            <td><i> <?= $general_details['currency_code'].' '.$campaign_item['per_paid_action'] ?> </i></td>
+            <td><i> <?= $general_details['currency_code'].' '.$campaign_item['per_action'] ?> </i></td>
           </tr>
             <tr>
             <td>Budget</td>
