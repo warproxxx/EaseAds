@@ -145,6 +145,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-bar w3-blue w3-card w3-left-align w3-large">
     <a id="to_hide_large" class="w3-bar-item w3-button w3-right w3-padding-large w3-hover-white w3-large w3-blue w3-text-white w3-hover-text-black" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu">Menu<i class="fa fa-bars w3-text-white w3-hover-text-black"></i></a>
     <a href="<?php echo site_url('publisher_dashboard'); ?>" class="w3-bar-item w3-button w3-padding-large w3-white">Dashboard</a>
+    <a href="<?php echo site_url('publisher_dashboard/settings'); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Settings</a>
     <a id="to_hide_small" href="<?php echo site_url("logout"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">Logout</a>
 
     <!-- <a id="to_hide_small" href="<?php echo site_url("How_it_Works"); ?>" class="w3-bar-item w3-button to-hide-small w3-padding-large w3-hover-white">How it Works</a> -->

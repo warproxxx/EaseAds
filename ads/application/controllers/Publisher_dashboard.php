@@ -50,6 +50,59 @@ public function __construct()
 
 
 }
+
+public function report()
+{
+
+
+  $data['title'] = $this->siteName." | Generate Report";
+  $data['author'] =  $this->author;
+  $data['keywords'] =  $this->keywords;
+  $data['description'] =  $this->description;
+  $data["noindex"] =  $this->noindex;
+  $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+  $data['user'] = $this->publisher_model->get_publisher_by_id();
+
+  //get country details by user's country
+
+  $campaign = $this->input->post('campaign');
+
+  if ($campaign != "")
+  {
+    if ($campaign != "all")
+      $campaign = (int)$campaign;
+
+    #need to loop through and do this manually
+    $start_date = new DateTime($this->input->post('start'));
+    $end_date = new DateTime($this->input->post('end'));
+
+    $interval = DateInterval::createFromDateString('1 day');
+    $period = new DatePeriod($start_date, $interval, $end_date);
+    $report_details = array();
+
+    foreach ($period as $dt) 
+    {
+        $curr_array = array("Time" => $dt->format("Y-m-d"), 
+                            "Views" => $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
+                            "Clicks" => $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
+        $report_details[] = $curr_array;
+    }
+
+    $json = json_decode(json_encode($report_details));
+    $data['report'] = $json;
+
+    
+  }
+
+  $data['items'] =  $this->publisher_model->spaces(0,NULL);
+
+  $this->load->view('/common/publisher_header_view',$data);
+  $this->load->view('/common/publisher_top_tiles',$data);
+  $this->load->view('/user/publisher/publisher_report',$data);
+  $this->load->view('/common/users_footer_view',$data);
+
+}
+
 public function index()
 {
 

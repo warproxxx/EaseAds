@@ -901,7 +901,7 @@ $data['currency_code'] = $this->input->post('currency');
 
 }
 
-public function report($offset = 0)
+public function report()
 {
 
 
@@ -933,7 +933,7 @@ public function report($offset = 0)
     {
         $curr_array = array("Time" => $dt->format("Y-m-d"), 
                             "Views" => $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
-                            "Clicks" => $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24));
+                            "Clicks" => $this->advertiser_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
         $report_details[] = $curr_array;
     }
 
