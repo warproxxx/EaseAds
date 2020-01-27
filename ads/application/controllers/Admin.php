@@ -547,17 +547,7 @@ public function withdrawal()
 
 }
 
-public function ip_test()
-{
-  $ip = $this->input->ip_address();
-  echo($ip);  
-  $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-  print_r($ipdat);
-  $country_name = @$ipdat->geoplugin_countryName;
-  echo($country_name);
-  $country_code = @$ipdat->geoplugin_countryCode;
-  echo($country_code);
-}
+
 
 public function admins($account_type = NULL,$id = NULL)
 {
