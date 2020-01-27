@@ -901,6 +901,63 @@ $data['currency_code'] = $this->input->post('currency');
 
 }
 
+public function report($offset = 0)
+{
+
+
+  $data['title'] = $this->siteName." | Generate Report";
+  $data['author'] =  $this->author;
+  $data['keywords'] =  $this->keywords;
+  $data['description'] =  $this->description;
+  $data["noindex"] =  $this->noindex;
+  $data['user'] =$this->user;
+
+  //get country details by user's country
+
+  $campaign = $this->input->post('campaign');
+
+  if ($campaign != "")
+  {
+    if ($campaign != "all")
+      $campaign = (int)$campaign;
+
+    #need to loop through and do this manually
+    $start_date = new DateTime($this->input->post('start'));
+    $end_date = new DateTime($this->input->post('end'));
+
+    $interval = DateInterval::createFromDateString('1 day');
+    $period = new DatePeriod($start_date, $interval, $end_date);
+    $report_details = array();
+
+    foreach ($period as $dt) 
+    {
+        $curr_array = array("Time" => $dt->format("Y-m-d"), 
+                            "Views" => $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
+                            "Clicks" => $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24));
+        $report_details[] = $curr_array;
+    }
+
+    $json = json_decode(json_encode($report_details));
+    $data['report'] = $json;
+
+    
+  }
+  
+
+
+  $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+  $data['items'] =  $this->advertiser_model->get_advertiser_campaigns(0,NULL);
+
+  $this->load->view('/common/advertiser_header_view',$data);
+  $this->load->view('/common/advertiser_top_tiles',$data);
+  $this->load->view('/user/advertiser/advertiser_report',$data);
+  $this->load->view('/common/users_footer_view',$data);
+
+
+
+
+}
+
 
 // public function confirm_pay_payment()
 // {

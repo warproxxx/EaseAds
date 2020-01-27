@@ -23,6 +23,17 @@
         <h4>Deposit</h4>
       </div></a>
     </div>
+    
+    <div class="w3-quarter"><a href="<?= site_url("advertiser_dashboard/report") ?>">
+      <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-book w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>1</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Report</h4>
+      </div></a>
+    </div>
 
     <div class="w3-quarter"><a href="<?= site_url('advertiser_dashboard/settings') ?>">
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
