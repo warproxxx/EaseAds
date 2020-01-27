@@ -30,13 +30,34 @@
 </form>
 
 <h3> Report </h3>
+
+
 <?php
-   foreach($report as $key=>$val)
-   {
-       echo($val->Time);
-       echo($val->Views);
-       echo($val->Clicks);
+    if (!empty($report)) {
+        echo("<center><table border=1>
+                <tr>
+                    <td>Time</td>
+                    <td>Views</td>
+                    <td>Clicks</td>
+                </tr>");
+
+        foreach($report as $key=>$val)
+        {
+            echo("<tr>");
+            echo("<td>" . $val->Time . "</td>");
+            echo("<td>" . $val->Views . "</td>");
+            echo("<td>" . $val->Clicks . "</td>");
+            echo("</tr>");
+        }
+
+        echo("</table></center>");
    }
+   else
+   {
+       echo("Empty");
+   }
+
+   
 ?>
 
 
