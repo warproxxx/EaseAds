@@ -43,7 +43,7 @@ Ads Specified in this page will be displayed if no ads meet the provided conditi
 <br/>
 
 
-<form method="POST" name="native">
+<form method="POST" name="native" enctype="multipart/form-data">
 	<input type="hidden" name="default_native_id" value="<?=$default_native_id?>">
 	<input type="hidden" name="current_banner" value="<?=$default_native_image?>">
 
