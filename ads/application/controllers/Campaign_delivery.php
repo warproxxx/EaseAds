@@ -257,10 +257,20 @@ public function deliver_banner_js($space_id = NULL,$size_type)
   }
   else
   {
+    #handle NULL
+    if ($resulted_campaign['tplatform'] == NULL)
+      $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
+    
     foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
     {
+      if ($resulted_campaign['tbrowser'] == NULL)
+        $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
+
       foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
       {
+        if ($resulted_campaign['tcountry'] == NULL)
+          $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+
         foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
         {
           if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
