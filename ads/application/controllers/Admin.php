@@ -589,6 +589,147 @@ public function admins($account_type = NULL,$id = NULL)
 
 }
 
+public function default()
+{
+ 
+  $submit = $this->input->post("submit");
+
+  if ($submit == "Update Banner")
+  {
+    $config['upload_path'] = "assets/campaigns";
+    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+    $config['max_size'] = '1500';
+  
+    $this->load->library('upload', $config);
+    $this->upload->do_upload('default_banner_file');
+
+    $banner = $this->upload->data("file_name");
+    echo("File name is: ". $banner);
+    
+    if ($banner == "")
+      $banner = $this->input->post("current_banner");
+    
+    $id = $this->input->post("default_banner_id");
+    $dest_link = $this->input->post("default_banner_destination");
+
+    if ($id == 0)
+    {
+      $ref_id =  substr(md5(time()), 12);
+      $datab = array(
+        "user_id" => 0,
+        "clicks" => "0",
+        "views" => "0",
+        "name" => 'Default Banner',
+        "size" => "300X250",
+        "type" => "banner",
+        "category" => "Admin",
+        "disp_link" => NULL,
+        "dest_link" => $dest_link,
+        "text_content" => NULL,
+        "text_title" => NULL,
+        "img_link" => $banner,
+        "ref_id" => $ref_id,
+        "cpa_id" => NULL,
+        "edit_status" => "complete",
+        "status" => "active",
+        "spent" => "0.00",
+        "approval" => "true",
+        "cr_level" => "1",
+        "time" => time(),
+        "is_default" => 1
+        );
+        #change to models
+        $this->admin_model->insert_ad($datab);
+
+    }
+    else
+    {
+      $datab = array("dest_link" => $dest_link,
+                     "img_link" => $banner);
+      $this->admin_model->update_ad($datab, $id);
+      
+    }
+
+
+  }
+  else if ($submit == "Update Text")
+  {
+    $id = $this->input->post("default_text_id");
+    $text_content = $this->input->post("default_text_text");
+    $disp_link = $this->input->post("default_text_display");
+    $dest_link = $this->input->post("default_text_destination");
+  }
+  else if ($submit == "Update Recommendation")
+  {
+    $banner = $this->upload->data("default_native_image");
+
+    if ($banner == "")
+      $banner = $this->input->post("current_banner");
+
+    $id = $this->input->post("default_native_id");
+    $text_title = $this->input->post("default_native_title");
+    $dest_link = $this->input->post("default_native_destination");
+  }
+
+  $defaults = $this->admin_model->get_default_campaigns();
+  
+  if (count($defaults) == 0)
+  {
+    $data['default_banner_id'] = 0;
+    $data['default_banner_destination'] = "";
+    $data['default_banner_image'] = "";
+
+    $data['default_text_id'] = 0;
+    $data['default_text_text'] = "";
+    $data['default_text_display'] = "";
+    $data['default_text_destination'] = "";
+
+    $data['default_native_id'] = 0;
+    $data['default_native_title'] = "";
+    $data['default_native_destination'] = "";
+    $data['default_native_image'] = "";
+    
+  }
+  else
+  {
+    foreach ($defaults as $default)
+    {
+      if ($default['type'] == "banner")
+      {
+        $data['default_banner_id'] = $default['id'];
+        $data['default_banner_destination'] = $default['dest_link'];
+        $data['default_banner_image'] = $default['img_link'];
+      }
+      else if ($default['type'] == "text")
+      {
+        $data['default_text_id'] = $default['id'];
+        $data['default_text_text'] = $default['dest_link'];
+        $data['default_text_display'] = $default['img_link'];
+        $data['default_text_destination'] = $default['img_link'];
+      }
+      else if ($default['type'] == "recommendation")
+      {
+        $data['default_native_id'] = $default['id'];
+        $data['default_native_title'] = $default['text_title'];
+        $data['default_native_destination'] = $default['dest_link'];
+        $data['default_native_image'] = $default['img_link'];
+      }
+
+    }
+  }
+
+  $data['title'] =$this->siteName." | Default Ad Management";
+  $data['description'] = $this->description;
+  $data["noindex"] = $this->noindex;  
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/default_ad_view',$data);
+  $this->load->view('admin/footer_view');
+
+}
+
 
 
   public function credit($table_type = NULL,$id = NULL)

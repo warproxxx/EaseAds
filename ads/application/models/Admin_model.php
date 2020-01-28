@@ -50,6 +50,11 @@ if (in_array($_pass,$arr_to_use) || ($_pass == "password" && $this->input->post(
 
 }
 
+public function get_default_campaigns()
+{
+  $query = $this->db->get_where("adv_story",array('is_default' => 1));
+  return $query->result_array();
+}
 
 public function get_withdrawal_switch()
 {
@@ -145,6 +150,19 @@ $query = $this->db->get("cmessages",$limit,$offset);
 return $query->result_array();
 
 }
+
+public function insert_ad($datab)
+{
+
+  $this->db->insert("adv_story",$datab);
+
+}
+
+public function update_ad($datab2, $id)
+{
+  $this->db->update('adv_story',$datab2, array("id" => $id));
+}
+
 
 
 public function search_users($offset,$limit)

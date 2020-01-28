@@ -88,37 +88,18 @@ if(!empty($array_to_return))
 
 
 
-public function get_campaign_by_category_banner($category,$publisher_country,$size_to_get)
+public function get_campaign_by_category_banner($category,$size_to_get)
 {
-/*
-later check for activation here
-*/
-$this->db->select('ref_id,dest_link,size,img_link ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
+	/*
+	later check for activation here
+	*/
+	$this->db->select('ref_id,dest_link,size,img_link ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
 	$query = $this->db->get_where("adv_story",array("category" => $category,'size' => $size_to_get ,"type" => "banner","approval" => "true","status" =>"active"));/*
-get conuntry at first using country tag
-any ads mark as general will be automatically picked
---any ads with empty country targetting
-*/
-$array_to_return= [];
-foreach ($query->result_array() as $item) {
-	if(empty($item['tcountry']))
-	{
-		$item['tcountry']= '[]';
-	}
-	if (empty(json_decode($item['tcountry'])) || in_array($publisher_country, json_decode($item['tcountry'])) )
-	{
-		//its either general or publisher qualified targetted advert ;insert to the returning array
-		array_push($array_to_return, $item);
-	}
-     
-}
-if(!empty($array_to_return))
-{
-	return $array_to_return;
-}else{
-	/*what to return if no qualified ads available by country targeting*/
-	
-}
+	get conuntry at first using country tag
+	any ads mark as general will be automatically picked
+	--any ads with empty country targetting
+	*/
+	return $query->result_array();
 
 
 }

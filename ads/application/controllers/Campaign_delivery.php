@@ -214,7 +214,7 @@ $publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
 
 for ($i=0; $i < count(json_decode($space['category'])) ; $i++) { 
   
-if(!empty($hold = $this->campaign_model->get_campaign_by_category_banner(json_decode($space['category'])[$i],$publisher['country'],$size_to_get)
+if(!empty($hold = $this->campaign_model->get_campaign_by_category_banner(json_decode($space['category'])[$i],$size_to_get)
 ))
 {
 array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
@@ -233,42 +233,47 @@ $campaign_to_render = NULL;
 //targetting variable
  $client_browser = $this->agent->browser();
  $client_os = explode(" ", $this->agent->platform())[0];
+ $ip = $this->input->ip_address();
+$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+$client_country = @$ipdat->geoplugin_countryCode;
+
 $count = 0;
 
 do 
 {
-  $count++;
   $category = $space_categories[mt_rand(0,count($space_categories)-1)];
   //var_dump($category);
 
-  $resulted_campaigns = $this->campaign_model->get_campaign_by_category_banner($category,$publisher['country'],$size_to_get);
+  $resulted_campaigns = $this->campaign_model->get_campaign_by_category_banner($category,$size_to_get);
   //note the singularity
   $resulted_campaign = $resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)];
 
   if($resulted_campaign['targeting'] == 'false')
   {
-  //if general or targetting option is skipped by advertiser
-  $campaign_to_render = $resulted_campaign;
-  }else{
-
-    $ip = $this->input->ip_address();
-    $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-    $country_code = @$ipdat->geoplugin_countryCode;
-    $country_name = @$ipdat->geoplugin_countryName;
-
+    //if general or targetting option is skipped by advertiser
+    $campaign_to_render = $resulted_campaign;
+  }
+  else
+  {
     foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
     {
       foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
       {
-        if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)))
+        foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
         {
-            $campaign_to_render = $resulted_campaign;
-            break;
+          if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+          {
+              $campaign_to_render = $resulted_campaign;
+              break;
+          }
         }
       }
     }
 
   }
+
+  break; #get default if not found anything
+
 }while(empty($campaign_to_render));
 
 //add base url to the array
