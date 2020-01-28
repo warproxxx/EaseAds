@@ -194,53 +194,55 @@ echo "$(document).ready(function() {
 
 public function deliver_banner_js($space_id = NULL,$size_type)
 {
-  /*
-box:Box /style ads
-rec: Rectangular image ads style
-sta: Standing ads type
-  */
-if($size_type == "box")
-{
-  $size_to_get = "300X250";
-}elseif($size_type == "rec") {
-  $size_to_get = "720X90";
-}elseif($size_type == "sta") {
-  $size_to_get = "160X600";
-}
+    /*
+  box:Box /style ads
+  rec: Rectangular image ads style
+  sta: Standing ads type
+    */
+  if($size_type == "box")
+  {
+    $size_to_get = "300X250";
+  }
+  elseif($size_type == "rec") 
+  {
+    $size_to_get = "720X90";
+  }
+  elseif($size_type == "sta") 
+  {
+    $size_to_get = "160X600";
+  }
 
-$space = $this->campaign_model->get_space_by_ref_id($space_id);
-$space_categories =[];
-$publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
+  $space = $this->campaign_model->get_space_by_ref_id($space_id);
+  $space_categories =[];
+  $publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
 
-for ($i=0; $i < count(json_decode($space['category'])) ; $i++) { 
-  
-if(!empty($hold = $this->campaign_model->get_campaign_by_category_banner(json_decode($space['category'])[$i],$size_to_get)
-))
-{
-array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
-unset($hold);
-}
-}
+  for ($i=0; $i < count(json_decode($space['category'])) ; $i++) 
+  { 
+    
+    if(!empty($hold = $this->campaign_model->get_campaign_by_category_banner(json_decode($space['category'])[$i],$size_to_get)))
+    {
+      array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
+      unset($hold);
+    }
+  }
 
-//var_dump($space_categories);
-if(empty($space_categories))
-{
-  array_push($space_categories,"AdNetwork");
-  //set ads category to show if publisher category is unavailable
-}
+  if(empty($space_categories))
+  {
+    array_push($space_categories,"AdNetwork");
+    //set ads category to show if publisher category is unavailable
+  }
 
-$campaign_to_render = NULL;
-//targetting variable
- $client_browser = $this->agent->browser();
- $client_os = explode(" ", $this->agent->platform())[0];
- $ip = $this->input->ip_address();
-$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-$client_country = @$ipdat->geoplugin_countryCode;
+  $campaign_to_render = NULL;
+  //targetting variable
+  $client_browser = $this->agent->browser();
+  $client_os = explode(" ", $this->agent->platform())[0];
+  $ip = $this->input->ip_address();
+  $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+  $client_country = @$ipdat->geoplugin_countryCode;
 
-$count = 0;
+  $count = 0;
 
-do 
-{
+
   $category = $space_categories[mt_rand(0,count($space_categories)-1)];
   //var_dump($category);
 
@@ -264,85 +266,94 @@ do
           if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
           {
               $campaign_to_render = $resulted_campaign;
-              break;
+              break 3;
           }
         }
       }
     }
-
   }
 
-  break; #get default if not found anything
+  if ($campaign_to_render == NULL)
+  {
+    #set to default
+    $campaign_to_render = $this->campaign_model->get_default_campaign('banner')[0];
+    $campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
+    $campaign_to_render['banner_url'] = base_url('assets/campaigns/'.$campaign_to_render['img_link']);
+    $publisher_id = $space['user_id'];
+    $advertiser_id = $campaign_to_render['user_id'];
+  }
+  else
+  {
+      //add base url to the array
+    $campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
+    //banner url
+    $campaign_to_render['banner_url'] = base_url('assets/campaigns/'.$campaign_to_render['img_link']);
 
-}while(empty($campaign_to_render));
+    //get both campaign and space here and record its view accordingly
+    //deduct for view and credit accordingly and check for duplicate //view deducting and creditng
+    $publisher_id = $space['user_id'];
+    $advertiser_id = $campaign_to_render['user_id'];
+    //check for duplicate view on same ads
 
-//add base url to the array
-$campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
-//banner url
-$campaign_to_render['banner_url'] = base_url('assets/campaigns/'.$campaign_to_render['img_link']);
+    if(empty($this->campaign_model->get_campaign_view(array('ip' => get_client_ip(),'story_id' => $campaign_to_render['ref_id'],'story_pid' => $publisher['id']))))
+    {
 
-//get both campaign and space here and record its view accordingly
-//deduct for view and credit accordingly and check for duplicate //view deducting and creditng
-$publisher_id = $space['user_id'];
-$advertiser_id = $campaign_to_render['user_id'];
-//check for duplicate view on same ads
-
-if(empty($this->campaign_model->get_campaign_view(array('ip' => get_client_ip(),'story_id' => $campaign_to_render['ref_id'],'story_pid' => $publisher['id']))))
-{
-
-$publisher_details = $this->publisher_model->get_publisher_by_its_id($publisher_id);
-//cpm here is the cost per view for advertiser
-
-
-//bill advertiser
-if($campaign_to_render['balance'] < 0)
-{
-//mark as inactive
-  $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
-}
-if($campaign_to_render['balance'] >= $campaign_to_render['per_view'])
-{
-
-$campaign_new_balance = $campaign_to_render['balance'] - $campaign_to_render['per_view'];
-$this->campaign_model->insert_new_balance($campaign_new_balance,$campaign_to_render['ref_id']);
-//credit publisher
-$publisher_new_balance = $publisher_details['account_bal'] + ((70/100) * $campaign_to_render['per_view']);
-
-  $dat_admin =  array(
-        'time' => time(),
-        'year' => getdate()['year'],
-        'weekday' => getdate()['weekday'],
-        'month' => getdate()['month'],
-        'earning_type' => "view",
-        'type' => "banner",
-        'amount' => ((30/100) * $campaign_to_render['per_view'])
-         );
-    
-    $this->user_model->insert_admin_noti($dat_admin);
-
-$this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id);
-}else{
-//mark as inactive
-  $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
-}
+      $publisher_details = $this->publisher_model->get_publisher_by_its_id($publisher_id);
+      //cpm here is the cost per view for advertiser
 
 
-}
-//insert view here
-$this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
-$size =  explode('X', $space['size']);
+      //bill advertiser
+      if($campaign_to_render['balance'] < 0)
+      {
+      //mark as inactive
+        $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
+      }
+      if($campaign_to_render['balance'] >= $campaign_to_render['per_view'])
+      {
+        $campaign_new_balance = $campaign_to_render['balance'] - $campaign_to_render['per_view'];
+        $this->campaign_model->insert_new_balance($campaign_new_balance,$campaign_to_render['ref_id']);
+        //credit publisher
+        $publisher_new_balance = $publisher_details['account_bal'] + ((70/100) * $campaign_to_render['per_view']);
+
+          $dat_admin =  array(
+                'time' => time(),
+                'year' => getdate()['year'],
+                'weekday' => getdate()['weekday'],
+                'month' => getdate()['month'],
+                'earning_type' => "view",
+                'type' => "banner",
+                'amount' => ((30/100) * $campaign_to_render['per_view'])
+                );
+            
+            $this->user_model->insert_admin_noti($dat_admin);
+
+        $this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id);
+      }
+      else
+      {
+      //mark as inactive
+        $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
+      }
+    }
+  }
 
 
-Header("content-type: application/x-javascript");
-//make_object_unique
+  
+  //insert view here
+  $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
+  $size =  explode('X', $space['size']);
+
+
+  Header("content-type: application/x-javascript");
+  //make_object_unique
   $mou = mt_rand(0,10);
-echo "var imggotten".$mou." = ".json_encode($campaign_to_render).";";
+  echo "var imggotten".$mou." = ".json_encode($campaign_to_render).";";
 
-//image ads here
-echo "$(document).ready(function() {
- $('#".$space['div_id']."').html('<div style=\'max-width:".$size[0]."px;height:".$size[1]."px;\' class=\'w3-display-container\'><a href=\''+imggotten".$mou."['click_url']+imggotten".$mou."['ref_id']+'/".$space_id."\'><img class=\'\' style=\'display:block;width:100%;\' src=\''+imggotten".$mou."['banner_url']+'\'/></a><div class=\'w3-display-topright w3-text-blue w3-tiny w3-serif w3-border w3-border-blue\'><b><a href=\'http://www.AdNetwork.com\'>AdNetwork Ads</a></b></div></div>');
-  }
-    );";
+  //image ads here
+  echo "$(document).ready(function() {
+  $('#".$space['div_id']."').html('<div style=\'max-width:".$size[0]."px;height:".$size[1]."px;\' class=\'w3-display-container\'><a href=\''+imggotten".$mou."['click_url']+imggotten".$mou."['ref_id']+'/".$space_id."\'><img class=\'\' style=\'display:block;width:100%;\' src=\''+imggotten".$mou."['banner_url']+'\'/></a><div class=\'w3-display-topright w3-text-blue w3-tiny w3-serif w3-border w3-border-blue\'><b><a href=\'http://www.easeads.com\'>EaseAds</a></b></div></div>');
+    }
+      );";
 
 }
 

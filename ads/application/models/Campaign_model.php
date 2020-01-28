@@ -104,6 +104,18 @@ public function get_campaign_by_category_banner($category,$size_to_get)
 
 }
 
+public function get_default_campaign($type)
+{
+	/*
+	later check for activation here
+	*/
+	$this->db->select('ref_id,dest_link,size,img_link ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
+	$query = $this->db->get_where("adv_story",array("type" => $type, "user_id"=>0));
+	return $query->result_array();
+
+
+}
+
 //reco = recommendation
 public function get_campaigns_ref_id_for_reco($categories,$publisher_country)
 {
