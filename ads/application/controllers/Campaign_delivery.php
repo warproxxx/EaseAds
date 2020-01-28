@@ -281,7 +281,7 @@ public function deliver_banner_js($space_id = NULL,$size_type)
         }
       }
     }
-  }
+  } #works
 
   if ($campaign_to_render == NULL)
   {
