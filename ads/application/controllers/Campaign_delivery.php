@@ -36,155 +36,160 @@ echo json_encode(array(
 */
 public function deliver_text_js($space_id = NULL)
 {
-$space = $this->campaign_model->get_space_by_ref_id($space_id);
-$space_categories =[];
-$publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
+  $space = $this->campaign_model->get_space_by_ref_id($space_id);
+  $space_categories =[];
+  $publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
 
-for ($i=0; $i < count(json_decode($space['category'])) ; $i++) { 
-  
-if(!empty($hold = $this->campaign_model->get_campaign_by_category_text(json_decode($space['category'])[$i],$publisher['country'])
-))
-{
-array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
-unset($hold);
-}
-}
-
-//var_dump($space_categories);
-if(empty($space_categories))
-{
-  array_push($space_categories,"AdNetwork");
-  //set ads category to show if publisher category is unavailable
-}
-
-$campaign_to_render = NULL;
-//targetting variable
- $client_browser = $this->agent->browser();
- $client_os = explode(" ", $this->agent->platform())[0];
-$count = 0;
-
-do {
-$count++;
-$category = $space_categories[mt_rand(0,count($space_categories)-1)];
-//var_dump($category);
-
-$resulted_campaigns = $this->campaign_model->get_campaign_by_category_text($category,$publisher['country']);
-//note the singularity
-$resulted_campaign = $resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)];
-
-if($resulted_campaign['targeting'] == 'false')
-{
-//if general or targetting option is skipped by advertiser
-$campaign_to_render = $resulted_campaign;
-}else{
-
-$arr = array('tplatform','tbrowser');
-$index_from_random = mt_rand(0,count($arr)-1);
-$target_to_use = $arr[$index_from_random];
-if ($target_to_use == "tplatform")
-{
-  foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) {
-  	
-  	if (strtolower($client_os) == strtolower($target_platform))
-  	{
-       $campaign_to_render = $resulted_campaign;
-  		break;
-  	}
-  
-}
-
-}elseif($target_to_use == "tbrowser"){
-foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) {
-  	
-  	if (strtolower($client_browser) == strtolower($target_browser))
-  	{
-       $campaign_to_render = $resulted_campaign;
-  		break;
-  	}
-  
-}
-
-}
-
-}
-if($count == 5)
-{
-	break;
-}
-}while(empty($campaign_to_render));
-
-//add base url to the array
-$campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
-//get both campaign and space here and record its view accordingly
-//deduct for view and credit accordingly and check for duplicate //view deducting and creditng
-$publisher_id = $space['user_id'];
-$advertiser_id = $campaign_to_render['user_id'];
-
-//check for duplicate view on same ads
-
-if(empty($this->campaign_model->get_campaign_view(array('ip' => get_client_ip(),'story_id' => $campaign_to_render['ref_id'],'story_pid' => $publisher['id']))))
-{
-$publisher_details = $this->publisher_model->get_publisher_by_its_id($publisher_id);
-//cpm here is the cost per view for advertiser
-
-
-//bill advertiser
-if($campaign_to_render['balance'] < 0)
-{
-//mark as inactive
-  $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
-}
-
-if($campaign_to_render['balance'] >= $campaign_to_render['per_view'])
-{
-
-$campaign_new_balance = $campaign_to_render['balance'] - $campaign_to_render['per_view'];
-$this->campaign_model->insert_new_balance($campaign_new_balance,$campaign_to_render['ref_id']);
-//credit publisher
-$publisher_new_balance = $publisher_details['account_bal'] + ((70/100) * $campaign_to_render['per_view']);
-
-  $dat_admin =  array(
-        'time' => time(),
-        'year' => getdate()['year'],
-        'weekday' => getdate()['weekday'],
-        'month' => getdate()['month'],
-        'earning_type' => "view",
-        'type' => "text",
-        'amount' => ((30/100) * $campaign_to_render['per_view'])
-         );
-    
-    $this->user_model->insert_admin_noti($dat_admin);
-
-$this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id);
-}else{
-//mark as inactive
-  $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
-}
-
-
-}
-
-//insert view here
-$this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
-
-
-Header("content-type: application/x-javascript");
-if(!empty($campaign_to_render))
-{
-//paint border blue
-  $text_style = 'class="w3-card w3-border w3-border-blue w3-padding w3-center"';
-//make_object_unique
-  $mou = mt_rand(0,10);
-}else{
-//dont
-  $text_style =NULL;
-
-}
-echo "var gotten".$mou." = ".json_encode($campaign_to_render).";";
-echo "$(document).ready(function() {
- $('#".$space['div_id']."').html('<div ".$text_style."><a href=\''+gotten".$mou."['click_url']+gotten".$mou."['ref_id']+'/".$space_id."\'><div><span class=\'w3-text-blue\'>'+gotten".$mou."['text_title']+'</span><div class=\'w3-container w3-small\'>'+gotten".$mou."['text_content']+'</div><span class=\'w3-text-blue\'>'+gotten".$mou."['disp_link']+'</span> <span class=\'w3-text-blue w3-tiny\'>Powered by <a  class=\'w3-text-indigo w3-small w3-serif\' href=\'http://www.AdNetwork.com\'><b>AdNetwork</b></a></span></div></a></div>');
+  for ($i=0; $i < count(json_decode($space['category'])) ; $i++) 
+  {  
+    if(!empty($hold = $this->campaign_model->get_campaign_by_category_text(json_decode($space['category'])[$i],$publisher['country'])))
+    {
+      array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
+      unset($hold);
+    }
   }
-    );";
+
+  //var_dump($space_categories);
+  if(empty($space_categories))
+  {
+    array_push($space_categories,"AdNetwork");
+    //set ads category to show if publisher category is unavailable
+  }
+
+  $campaign_to_render = NULL;
+  //targetting variable
+  $client_browser = $this->agent->browser();
+  $client_os = explode(" ", $this->agent->platform())[0];
+  $ip = $this->input->ip_address();
+  $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+  $client_country = @$ipdat->geoplugin_countryCode;
+
+  $count = 0;
+
+  $category = $space_categories[mt_rand(0,count($space_categories)-1)];
+  //var_dump($category);
+
+  $resulted_campaigns = $this->campaign_model->get_campaign_by_category_text($category);
+  //note the singularity
+  $resulted_campaign = $resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)];
+
+  if($resulted_campaign['targeting'] == 'false')
+  {
+  //if general or targetting option is skipped by advertiser
+    $campaign_to_render = $resulted_campaign;
+  }
+  else
+  {
+
+    if ($resulted_campaign['tplatform'] == NULL)
+      $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
+    
+    foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
+    {
+      if ($resulted_campaign['tbrowser'] == NULL)
+        $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
+
+      foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
+      {
+        if ($resulted_campaign['tcountry'] == NULL)
+          $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+
+        foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
+        {
+          if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+          {
+              $campaign_to_render = $resulted_campaign;
+              break 3;
+          }
+        }
+      }
+    }
+
+  }
+
+  if ($campaign_to_render == NULL)
+  {
+    #set to default
+    $campaign_to_render = $this->campaign_model->get_default_campaign('text')[0];
+    $campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
+    $publisher_id = $space['user_id'];
+    $advertiser_id = $campaign_to_render['user_id'];
+  }
+  else
+  {
+    //add base url to the array
+    $campaign_to_render['click_url'] = site_url('Campaign_delivery/click/');
+    //get both campaign and space here and record its view accordingly
+    //deduct for view and credit accordingly and check for duplicate //view deducting and creditng
+    $publisher_id = $space['user_id'];
+    $advertiser_id = $campaign_to_render['user_id'];
+
+    //check for duplicate view on same ads
+
+      if(empty($this->campaign_model->get_campaign_view(array('ip' => get_client_ip(),'story_id' => $campaign_to_render['ref_id'],'story_pid' => $publisher['id']))))
+      {
+      $publisher_details = $this->publisher_model->get_publisher_by_its_id($publisher_id);
+      //cpm here is the cost per view for advertiser
+
+
+      //bill advertiser
+      if($campaign_to_render['balance'] < 0)
+      {
+      //mark as inactive
+        $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
+      }
+
+      if($campaign_to_render['balance'] >= $campaign_to_render['per_view'])
+      {
+
+      $campaign_new_balance = $campaign_to_render['balance'] - $campaign_to_render['per_view'];
+      $this->campaign_model->insert_new_balance($campaign_new_balance,$campaign_to_render['ref_id']);
+      //credit publisher
+      $publisher_new_balance = $publisher_details['account_bal'] + ((70/100) * $campaign_to_render['per_view']);
+
+        $dat_admin =  array(
+              'time' => time(),
+              'year' => getdate()['year'],
+              'weekday' => getdate()['weekday'],
+              'month' => getdate()['month'],
+              'earning_type' => "view",
+              'type' => "text",
+              'amount' => ((30/100) * $campaign_to_render['per_view'])
+              );
+          
+          $this->user_model->insert_admin_noti($dat_admin);
+
+      $this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id);
+      }else{
+      //mark as inactive
+        $this->campaign_model->edit_campaign(array("status" => "inactive"),$campaign_to_render['ref_id']);
+      }
+
+
+      }
+  }
+
+  //insert view here
+  $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
+
+
+  Header("content-type: application/x-javascript");
+  if(!empty($campaign_to_render))
+  {
+  //paint border blue
+    $text_style = 'class="w3-card w3-border w3-border-blue w3-padding w3-center"';
+  //make_object_unique
+    $mou = mt_rand(0,10);
+  }else{
+  //dont
+    $text_style =NULL;
+
+  }
+  echo "var gotten".$mou." = ".json_encode($campaign_to_render).";";
+  echo "$(document).ready(function() {
+  $('#".$space['div_id']."').html('<div ".$text_style."><a href=\''+gotten".$mou."['click_url']+gotten".$mou."['ref_id']+'/".$space_id."\'><div><span class=\'w3-text-blue\'>'+gotten".$mou."['text_title']+'</span><div class=\'w3-container w3-small\'>'+gotten".$mou."['text_content']+'</div><span class=\'w3-text-blue\'>'+gotten".$mou."['disp_link']+'</span> <span class=\'w3-text-blue w3-tiny\'>Powered by <a  class=\'w3-text-indigo w3-small w3-serif\' href=\'http://www.AdNetwork.com\'><b>AdNetwork</b></a></span></div></a></div>');
+    }
+      );";
 
 
 }

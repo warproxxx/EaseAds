@@ -1,15 +1,6 @@
-Clear database and see if it all works.
-
-
-
-Check banner. If it works, make others work too
-
-Make IP and country work. IP test works. Now make it actually work for the website.
-Then maybe other types of report too.
-
-Start Date
-End Date
-By Date, By Country, By OS, By Browser
+Fix the remaining one.
+Then add default ads in server
+Then test.
 
 Sandbox:
 
