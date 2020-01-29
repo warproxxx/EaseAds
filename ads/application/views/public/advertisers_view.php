@@ -102,8 +102,8 @@
             <div class="card wow bounceInUp">
                 <i class="fa fa-font"></i>
               <div class="card-body">
-                <h5 class="card-title">Keywords Format</h5>
-                <p class="card-text"> </p>
+                <h5 class="card-title">Popups</h5>
+                <p class="card-text">Display Popup to user</p>
               </div>
             </div>
           </div>

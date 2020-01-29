@@ -39,25 +39,13 @@ Ads Specified in this page will be displayed if no ads meet the provided conditi
 </form>
 
 <br/>
-<span class="w3-text-blue-grey w3-xlarge">Default Native Recommendation</span>
+<span class="w3-text-blue-grey w3-xlarge">Default Popup</span>
 <br/>
 
 
-<form method="POST" name="native" enctype="multipart/form-data">
-	<input type="hidden" name="default_native_id" value="<?=$default_native_id?>">
-	<input type="hidden" name="current_banner" value="<?=$default_native_image?>">
-
-	Native Title: <input type="text" name="default_native_title" value="<?=$default_native_title?>">
-	<br/><br/>
-	Native Destination: <input type="text" name="default_native_destination" value="<?=$default_native_destination?>">
-	<br/><br/>
-	Image: <input type="file" name="default_native_image">
-
-	<?php
-		if ($default_native_image != "")
-		{
-			echo("Current Banner: <br/><img src='" . base_url('assets/campaigns/'.$default_native_image) . "'>");
-		}
-	?>
-	<input type="submit" name="submit" value="Update Recommendation">
+<form method="POST" name="native">
+	<input type="hidden" name="default_popup_id" value="<?=$default_popup_id?>">
+	URL: <input type="text" name="default_popup_destination" value="<?=$default_popup_destination?>">
+	
+	<input type="submit" name="submit" value="Update Popup">
 </form>

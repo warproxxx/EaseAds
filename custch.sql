@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2020 at 09:41 AM
+-- Generation Time: Jan 29, 2020 at 08:07 AM
 -- Server version: 5.7.28-0ubuntu0.16.04.2
 -- PHP Version: 7.0.33-0ubuntu0.16.04.9
 
@@ -78,7 +78,7 @@ CREATE TABLE `advertisers` (
 
 INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
 (1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'eritrea', NULL, 'daniel@advertiser.com', NULL, '342423424', '60.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, '1578141363', 1578059534),
-(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '0.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1580010353', 1578315045),
+(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '4950.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1580217820', 1578315045),
 (3, 'Pratk', 'Kunwar', '15cc992d5177a2ec8bd741a3163b254f', 'Nepal', NULL, 'pratik@kunwar.com', NULL, '23432424', '0.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, NULL, 1579317725),
 (4, 'New', 'advertiser', 'fb469d7ef430b0baf0cab6c436e70375', 'Armenia', NULL, 'new@test.com', NULL, '9882938192', '0.0000', '0.0000', NULL, '["reddit.com"]', 'active', NULL, NULL, NULL, 1579942420);
 
@@ -126,18 +126,26 @@ CREATE TABLE `adv_story` (
   `platform` varchar(128) DEFAULT NULL,
   `action_currency` varchar(128) DEFAULT NULL,
   `action_price` decimal(19,4) DEFAULT NULL,
-  `action_type` varchar(128) DEFAULT NULL
+  `action_type` varchar(128) DEFAULT NULL,
+  `is_default` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adv_story`
 --
 
-INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `start_time`, `per_click`, `per_view`, `per_action`, `budget`, `balance`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`) VALUES
-(1, 1579183060, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-dadd', 'sdd.com', 'banner', '300X250', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'b26e69fabd97c7a31808', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'banking', '2', NULL, NULL, NULL, NULL),
-(2, 1579936613, 2, 0, 0, 1579936613, '4.0000', '0.0000', NULL, '10.0000', '10.0000', 0, '-Test', 'https://www.google.com/', 'banner', '300X250', NULL, 'Screenshot_from_2018-12-22_08-52-43.png', NULL, '6e6de8a8fab46c8ce3bc', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', '["desktop"]', NULL, '["opera","chrome","firefox"]', '["nigeria"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL),
-(3, 1579999248, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-tet', 'sdds.com', 'banner', '720X90', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'adb7c57f49a5ba8b7905', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Adventure', '1', NULL, NULL, NULL, NULL),
-(4, 1580010702, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'asdd', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-27_07-01-41.png', NULL, '47101fb177fe0f62a417', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'Business', '2', NULL, NULL, NULL, NULL);
+INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `start_time`, `per_click`, `per_view`, `per_action`, `budget`, `balance`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`) VALUES
+(1, 1579183060, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-dadd', 'sdd.com', 'banner', '300X250', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'b26e69fabd97c7a31808', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'banking', '2', NULL, NULL, NULL, NULL, 0),
+(2, 1579936613, 2, 0, 0, 1579936613, '4.0000', '0.0000', NULL, '10.0000', '10.0000', 0, '-Test', 'https://www.google.com/', 'banner', '300X250', NULL, 'Screenshot_from_2018-12-22_08-52-43.png', NULL, '6e6de8a8fab46c8ce3bc', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', '["desktop"]', NULL, '["opera","chrome","firefox"]', '["nigeria"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
+(3, 1579999248, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-tet', 'sdds.com', 'banner', '720X90', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'adb7c57f49a5ba8b7905', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Adventure', '1', NULL, NULL, NULL, NULL, 0),
+(4, 1580010702, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'asdd', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-27_07-01-41.png', NULL, '47101fb177fe0f62a417', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'Business', '2', NULL, NULL, NULL, NULL, 0),
+(5, 1580134689, 2, 0, 0, 1580134689, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Country Test', 'dsds.com', 'banner', '300X250', NULL, 'ran.png', NULL, '363e3520bb270306a75d', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', '["desktop","mobile","android","ios"]', NULL, '["opera","chrome","firefox","ie"]', '["AL","DZ","BD","NP"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
+(6, 1580182996, 2, 0, 0, 1580182996, '0.0100', '0.0000', NULL, '50.0000', '50.0000', 0, '-Text Campaign Test', 'water.com', 'text', NULL, 'water.com', '', NULL, '809b22d287c9104c64f1', NULL, 'Text', 'Text camp ad test', '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Blog', '3', NULL, NULL, NULL, NULL, 0),
+(7, 1580183930, 2, 0, 0, 1580183930, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Native', 'https://www.google.com/', 'recommendation', NULL, NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'f67c742f9c45d501b5f9', NULL, ' How I Advertise my product Online to drive more sales', NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Blog', '3', NULL, NULL, NULL, NULL, 0),
+(14, 1580197449, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'allahuakbar', 'banner', '300X250', NULL, 'ran1.png', NULL, 'd8695472862a4fa6f918', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
+(15, 1580201902, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'ggg.com', 'text', '300X250', 'ggg.com', NULL, NULL, 'f2aec19b0aba789116a9', NULL, NULL, 'Another Test', '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
+(16, 1580202008, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'sddd.com', 'recommendation', '300X250', NULL, 'Screenshot_from_2018-10-23_08-19-22.png', NULL, 'eef28a4242815d9f1214', NULL, 'Last One', NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
+(17, 1580216836, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-sdd', 'asddd.com', 'banner', '300X250', NULL, 'Screenshot_from_2018-07-23_06-45-57.png', NULL, '070a745c033731e8e71e', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Blog', '1', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -525,7 +533,7 @@ CREATE TABLE `publishers` (
 --
 
 INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`) VALUES
-(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '50.0000', '0.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1580010345', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
+(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '50.0000', '0.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1580217828', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
 
 -- --------------------------------------------------------
 
@@ -583,7 +591,8 @@ CREATE TABLE `pub_story` (
 INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `type`, `size`, `ref_id`, `website`, `name`, `gained`, `country`, `div_id`, `category`, `platform`, `code`, `os`, `browser`) VALUES
 (1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '["advertising","entertainment","food","gambling","marketing"]', NULL, '<script src="http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94"></script>\n<center><div class="w3-margin" id="Ec8" style="max-width: 70%;" class="">\n</div></center>\n', NULL, NULL),
 (2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box"></script>\n<center><div  class="w3-margin"  id="bC4">\n</div></center>', NULL, NULL),
-(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '["Blog","Adventure","Beauty"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box"></script>\n<center><div  class="w3-margin"  id="eE7">\n</div></center>', NULL, NULL);
+(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '["Blog","Adventure","Beauty"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box"></script>\n<center><div  class="w3-margin"  id="eE7">\n</div></center>', NULL, NULL),
+(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box"></script>\n<center><div  class="w3-margin"  id="AC0">\n</div></center>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -661,7 +670,14 @@ CREATE TABLE `views` (
 INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
 (1, 1579334714, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
 (2, 1579334724, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(3, 1579586110, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
+(3, 1579586110, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(4, 1580214778, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(5, 1580214839, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(6, 1580214848, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(7, 1580214854, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
+(8, 1580214874, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(9, 1580214905, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
+(10, 1580214909, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -874,7 +890,7 @@ ALTER TABLE `advertisers`
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
@@ -974,7 +990,7 @@ ALTER TABLE `publishers_websites`
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `system_var`
 --
@@ -989,7 +1005,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --

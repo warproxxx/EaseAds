@@ -40,9 +40,10 @@ if(!empty($cpa_form_data))
 	echo '<option value="cpa">Click Per Action </option>
 ';
 }else{
-	echo '<option value="ppc">Pay Per Click</option>
-	<option value="cpm">Pay Per View</option>
-	<option value="both">Click & View </option>';
+	echo '
+	<option value="both">CPM & PPC </option>
+	<option value="cpm">CPM</option>
+	<option value="ppc">PPC</option>';
 }
 
 	?>
@@ -56,8 +57,8 @@ if(!empty($cpa_form_data))
 	echo 'w3-hide';
 }
 
-	?>" id="ppc_div">
-  <span class="w3-label w3-small">Cost Per Click-CPC*</b></sup>:</span><br>
+	?>" id="ppc_div" class="w3-hide">
+  <span class="w3-label w3-small">Cost Per Click-CPC (Leave empty for Popup)</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpc'] ?>  </span><br>
 
        <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?=$general_details['minimum_cpc'] ?>" placeholder="Cost Per Click" value="<?php echo set_value('cpc'); ?>" name="cpc"  /><br>
@@ -96,7 +97,7 @@ if($cpa_form_data['access_type'] == 'free')
 		
 
 
-	<div class="w3-hide" id="cpm_div">		
+	<div class="w3-show" id="cpm_div">		
 <span class="w3-label w3-small">Cost Per View<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpm'] ?> </span><br>
 
@@ -124,6 +125,8 @@ cpm_div.className = " w3-show";
 ppc_div.className = " w3-show";
 	}
 }
+
+
 
 
 </script><!--

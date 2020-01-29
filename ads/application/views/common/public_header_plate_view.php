@@ -30,7 +30,7 @@
               </li>
               <li><a href="#">Banner</a></li>
               <li><a href="#">Text</a></li>
-              <li><a href="#">Keyword</a></li>
+              <li><a href="#">Popup</a></li>
             </ul>
           </li>
           <li><a href="<?php echo site_url("contact_us") ; ?>">Contact Us</a></li>

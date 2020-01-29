@@ -168,9 +168,9 @@ $size_to_get = 'rec';
 <center><div  class="w3-margin"  id="'.$div_id.'">
 </div></center>';
 
-}elseif($this->input->post('type') == "recommendation")
+}elseif($this->input->post('type') == "popup")
 {
- $code = '<script src="'.site_url('campaign_delivery/deliver_recommendation_js/'.$ref_id.'/'.$this->input->post('no_post')).'"></script>
+ $code = '<script src="'.site_url('campaign_delivery/deliver_popup_js/'.$ref_id).'"></script>
 <div  class="w3-margin"  style="" id="'.$div_id.'">
 </div>';
 

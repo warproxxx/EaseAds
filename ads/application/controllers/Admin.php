@@ -699,23 +699,10 @@ public function default()
       
     }
   }
-  else if ($submit == "Update Recommendation")
-  {
-    $config['upload_path'] = "assets/campaigns";
-    $config['allowed_types'] = 'gif|jpg|png|jpeg';
-    $config['max_size'] = '1500';
-  
-    $this->load->library('upload', $config);
-    $this->upload->do_upload('default_native_image');
-
-    $banner = $this->upload->data("file_name");
-    
-    if ($banner == "")
-      $banner = $this->input->post("current_banner");
-    
-    $id = $this->input->post("default_native_id");
-    $text_title = $this->input->post("default_native_title");
-    $dest_link = $this->input->post("default_native_destination");
+  else if ($submit == "Update Popup")
+  { 
+    $id = $this->input->post("default_popup_id");
+    $dest_link = $this->input->post("default_popup_destination");
 
     if ($id == 0)
     {
@@ -726,13 +713,13 @@ public function default()
         "views" => "0",
         "name" => 'Default Banner',
         "size" => "300X250",
-        "type" => "recommendation",
+        "type" => "popup",
         "category" => "Admin",
         "disp_link" => NULL,
         "dest_link" => $dest_link,
         "text_content" => NULL,
-        "text_title" => $text_title,
-        "img_link" => $banner,
+        "text_title" => NULL,
+        "img_link" => NULL,
         "ref_id" => $ref_id,
         "cpa_id" => NULL,
         "edit_status" => "complete",
@@ -749,9 +736,7 @@ public function default()
     }
     else
     {
-      $datab = array("dest_link" => $dest_link,
-                      "text_title" => $text_title,
-                     "img_link" => $banner);
+      $datab = array("dest_link" => $dest_link);
       $this->admin_model->update_ad($datab, $id);
       
     }
@@ -778,12 +763,10 @@ public function default()
         $data['default_text_display'] = $default['disp_link'];
         $data['default_text_destination'] = $default['dest_link'];
       }
-      else if ($default['type'] == "recommendation")
+      else if ($default['type'] == "popup")
       {
-        $data['default_native_id'] = $default['id'];
-        $data['default_native_title'] = $default['text_title'];
-        $data['default_native_destination'] = $default['dest_link'];
-        $data['default_native_image'] = $default['img_link'];
+        $data['default_popup_id'] = $default['id'];
+        $data['default_popup_destination'] = $default['dest_link'];
       }
 
     }
@@ -804,12 +787,10 @@ public function default()
     $data['default_text_destination'] = "";
   }
 
-  if (array_key_exists('default_native_id', $data) == false)
+  if (array_key_exists('default_popup_id', $data) == false)
   {
-    $data['default_native_id'] = 0;
-    $data['default_native_title'] = "";
-    $data['default_native_destination'] = "";
-    $data['default_native_image'] = "";
+    $data['default_popup_id'] = 0;
+    $data['default_popup_destination'] = "";
   }
 
 

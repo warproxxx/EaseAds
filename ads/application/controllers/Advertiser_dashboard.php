@@ -469,7 +469,7 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
 
  }
 
- public function add_recommendation($cpa_ref_id = NULL)
+ public function add_popup($cpa_ref_id = NULL)
  {
 
 $this->form_validation->set_rules('campaign_name','Campaign Name','required|max_length[30]',array("max_length" => "Campaign Name is too long <br> The allow Character length is 30"));
@@ -510,7 +510,7 @@ $data['categories'] = $this->user_model->get_categories();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
-    $this->load->view('/user/advertiser/add_recommendation_view',$data);
+    $this->load->view('/user/advertiser/add_popup_view',$data);
      $this->load->view('/common/users_footer_view',$data);
 
 

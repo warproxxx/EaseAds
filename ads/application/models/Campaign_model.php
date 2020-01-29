@@ -65,6 +65,22 @@ return $query->result_array();
 
 }
 
+public function get_campaign_by_category_popup($category)
+{
+/*
+later check for activation here
+*/
+$this->db->select('ref_id, disp_link ,dest_link , text_content,text_title ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
+$query = $this->db->get_where("adv_story",array("category" => $category ,"type" => "popup","approval" => "true","status" =>"active"));/*
+get conuntry at first using country tag
+any ads mark as general will be automatically picked
+--any ads with empty country targeting
+*/
+return $query->result_array();
+
+
+}
+
 
 
 

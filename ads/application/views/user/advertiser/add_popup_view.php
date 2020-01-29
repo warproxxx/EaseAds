@@ -1,6 +1,6 @@
 <div class="w3-container w3-center">
 <br><br>
-  <b class="w3-serif w3-large w3-text-indigo">Create New Native Recommendation</b><br>
+  <b class="w3-serif w3-large w3-text-indigo">Create New Popup</b><br>
 
 <br>
 <div class="w3-text-red w3-small"><?= validation_errors()."<br>".$error ?>
@@ -51,7 +51,7 @@ foreach ($categories as $category)
 
   <div class="w3-third">
 
-<span class="w3-serif w3-text-indigo w3-small">Article or Story Link</span>
+<span class="w3-serif w3-text-indigo w3-small">Popup Link</span>
 <br>
 <input type="text" value='<?php
 if(!empty($this->uri->segment(3)))
@@ -73,77 +73,11 @@ echo 'readonly';
   </div>
 
   </div>
-   <input type="hidden" name="campaign_type" value="recommendation" />
-
-
-
-<div  id="both_img" class="w3-container">
-<div class="w3-half ">
-
-<div id="banner_text" class="">
-   <span class="w3-serif w3-text-indigo w3-small">Article Title (Not > 140 characters)</span><br>
-<textarea maxlength="140" cols="15" rows="5" name="campaign_title" class="w3-padding w3-border w3-border-blue"> <?php
-if(!empty(set_value('campaign_title')))
-{
-echo set_value('campaign_title');
-
-}else{
-  echo "E.g Learn How I Advertise my product Online to drive more sales";
-}
-
-?></textarea>
-
-<br>
-</div>
-
-
-</div>
-<!--image here-->
-<div class="w3-half">
-
-
-  
-<br>
+   <input type="hidden" name="campaign_type" value="popup" />
 
 
 
 
-<style type="text/css">
-  div.use {
-  padding:5px 10px;
-  //background:#00ad2d;
-  border:1px solid #00ad2d;
-  position:relative;
-  color:#fff;
-  border-radius:2px;
-  text-align:center;
-  //float:right;
-  cursor:pointer
-}
-.hide_file {
-    position: absolute;
-    z-index: 1000;
-    opacity: 0;
-    cursor: pointer;
-    right: 0;
-    top: 0;
-    height: 100%;
-    font-size: 24px;
-    width: 100%;
-    
-}
-</style>
-<br>
-<span class="w3-serif w3-text-indigo w3-small w3-margin">Feature Image</span><br>
-
-<div class="use w3-button w3-indigo w3-hover-white w3-hover-text-indigo"><i class="fa fa-file-image-o w3-jumbo"></i>
- <input type="file" name="banner" class="hide_file" />
-</div>
- 
-</div>
-
-
-</div>
 
 
 <br>
