@@ -1,3 +1,4 @@
+
 <div class="w3-container w3-center">
     <span class="w3-text-indigo w3-xlarge w3-serif">Payment & Budget</span><br>
 
@@ -33,17 +34,24 @@ echo $_SESSION['action_status_report'];
 		<div class="w3-half">
 			<br>
 <span class="w3-label">Billing Type:</span><br>
-<select onchange="toggleInputDiv(this.value)" class="w3-padding" name="billing">
+<select onchange="toggleInputDiv(this.value)" class="w3-padding" name="billing" id="billing">
 	<?php
 if(!empty($cpa_form_data))
 {
 	echo '<option value="cpa">Click Per Action </option>
 ';
 }else{
-	echo '
-	<option value="both">CPM & PPC </option>
-	<option value="cpm">CPM</option>
-	<option value="ppc">PPC</option>';
+	if ($type == 'popup')
+	{
+		echo ('	<option value="cpm">CPM</option>');
+	}
+	else
+	{
+		echo '
+		<option value="both">CPM & PPC </option>
+		<option value="cpm">CPM</option>
+		<option value="ppc">PPC</option>';
+	}
 }
 
 	?>
@@ -58,7 +66,7 @@ if(!empty($cpa_form_data))
 }
 
 	?>" id="ppc_div" class="w3-hide">
-  <span class="w3-label w3-small">Cost Per Click-CPC (Leave empty for Popup)</b></sup>:</span><br>
+  <span class="w3-label w3-small">Cost Per Click-CPC</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpc'] ?>  </span><br>
 
        <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?=$general_details['minimum_cpc'] ?>" placeholder="Cost Per Click" value="<?php echo set_value('cpc'); ?>" name="cpc"  /><br>
@@ -127,13 +135,16 @@ ppc_div.className = " w3-show";
 }
 
 
-
-
 </script><!--
 <div class="w3-container">
 Need Help? Please read this page documentation <a class="w3-text-indigo" href="<?= site_url('blog/page-documentation-payment-and-budget') ?>">HERE</a>
 
 </div>-->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    toggleInputDiv(document.getElementById('billing').value);
+});
+ </script>
 
 
 </div>

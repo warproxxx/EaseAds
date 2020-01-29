@@ -15,13 +15,10 @@
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="<?=site_url() ?>">Home</a></li>
-          <li><a href="<?php echo site_url("Login#login"); ?>">Login</a>
           </li>
           <li><a href="<?php echo site_url("Register"); ?>">Register</a></li>
-          <li><a href="<?php echo site_url("Blog"); ?>">Blog</a></li>
-
-          <li><a href="<?php echo site_url("advertisers"); ?>">Advertisers</a></li>
-          <li><a href="<?php echo site_url("publishers"); ?>">Publishers</a></li>
+          <li><a href="<?php echo site_url("Login?type=advertiser"); ?>">Advertisers</a></li>
+          <li><a href="<?php echo site_url("Login?type=publisher"); ?>">Publisher</a></li>
           <li><a href="<?php echo site_url("How_it_Works") ; ?>">How It Works</a></li>
           <li class="drop-down"><a href="">Ad Formats</a>
             <ul>

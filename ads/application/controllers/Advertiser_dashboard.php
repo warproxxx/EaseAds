@@ -664,6 +664,7 @@ if(!$this->form_validation->run())
       $data['keywords'] =  $this->keywords;
       $data['description'] =  $this->description;
       $data["noindex"] =  $this->noindex;
+      $data['type'] = $this->advertiser_model->get_campaign_ref_id($ref_id)['type'];
 
 //get country details by user's country
 

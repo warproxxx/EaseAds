@@ -40,7 +40,8 @@
        <i  style='margin-right:3%' class="fa fa-dash
         w3-large w3-text-blue w3-center"></i>
   <select name="accounttype" class="w3-padding">
-          <option value="Advertiser">Advertiser</option><option value="Publisher">Publisher</option>
+          <option value="Advertiser" <?php if ($type == 'advertiser') echo('selected'); ?>>Advertiser</option>
+          <option value="Publisher" <?php if ($type == 'publisher') echo('selected'); ?>>Publisher</option>
         </select>
    </div><br>
 

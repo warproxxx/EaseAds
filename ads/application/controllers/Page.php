@@ -440,7 +440,7 @@ if ($_SESSION['reg_account_type'] == "Advertiser")
     }
 
 }
-	public function login($slug = null)
+	public function login($slug=null)
 	{
 
 $this->form_validation->set_rules("password","Password","trim|required");
@@ -455,6 +455,8 @@ if (!$this->form_validation->run())
       $data['author'] = $this->author;
       $data['keywords'] = $this->keywords;
       $data['description'] = $this->description;
+      $data['type'] = $_GET['type'];
+
     $this->load->view('/common/header_view',$data);
 
     
