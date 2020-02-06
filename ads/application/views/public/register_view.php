@@ -44,10 +44,10 @@
 
 
  <div class='w3-half'>
-     <i  style='margin-right:3%' class="fa fa-phone
+     <i  style='margin-right:3%' class="fa fa-skype
       w3-large w3-text-blue w3-center"></i>
-      <input class='w3-center w3-padding' type='tel' name='phone'
-       value='<?= set_value('phone') ?>' placeholder='Phone Number'/>
+      <input class='w3-center w3-padding' name='phone'
+       value='<?= set_value('phone') ?>' placeholder='Skype/IM'/>
  </div>
 </div>
  <br>

@@ -60,8 +60,8 @@ echo strtoupper(str_replace('-',' ',$user['country']));
           </tr>
 
                     <tr>
-                      <td><i class="fa fa-phone w3-text-green w3-large"></i></td>
-                      <td>Account Mobile No</td>
+                      <td><i class="fa fa-skype w3-text-green w3-large"></i></td>
+                      <td>Account Skype/IM</td>
                       <td><i><?php
         echo $user['phone'];
                        ?></i></td>
@@ -196,9 +196,9 @@ echo "<br><br>
             <td>Minimum Paid CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_paid_cpa']?></i></td>
           </tr> -->
-          <!-- <tr>
+          <tr>
         <td><i class="fa fa-hand-pointer-o w3-text-blue w3-large"></i></td>
-        <td>Affilate Link Clicks.</td>
+        <td>Referrel Link Clicks.</td>
         <td><i><?php
 echo $no_clicks;
          ?></i></td>
@@ -211,11 +211,11 @@ echo $no_reg;
       </tr>
 
 
-      <tr>
+      <!-- <tr>
         <td><i class="fa fa-bookmark w3-text-green w3-large"></i></td>
-        <td> Total Approved  Registeration</td>
+        <td> Total Approved  Referrels</td>
         <td><i><?php
-//echo $campaign_act;
+echo $campaign_act;
          ?></i></td>
       </tr> -->
        

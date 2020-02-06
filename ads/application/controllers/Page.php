@@ -308,7 +308,6 @@ if (!isset($_SESSION['reg_account_type']))
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique['.strtolower($_SESSION['reg_account_type']).'s.email]',array("is_unique" => "This Email has been used by another user,Please use another email"));
     $this->form_validation->set_rules('password','Password','required');
     $this->form_validation->set_rules("cpassword","Password","required|min_length[4]|matches[password]");
-    $this->form_validation->set_rules('phone', 'Mobile Number', 'required|numeric',array("numeric" => "Please Provide a valid Phone Number"));
   if (!$this->form_validation->run())
     {
       $data['title'] = $this->siteName." | Register";
@@ -672,7 +671,7 @@ $this->load->view('/common/public_header_plate_view',$data);
     $_SESSION['action_status_report'] = '<span class="w3-text-red">You are Successfully logged out</span>';
     $this->session->mark_as_flash('action_status_report');
 
-    show_page("page/login");
+    show_page("page/login?type=publisher");
 
 
 

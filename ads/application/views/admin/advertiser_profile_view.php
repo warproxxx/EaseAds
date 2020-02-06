@@ -22,6 +22,7 @@ echo  $user['firstname'].' '.$user['lastname'];
 <table class='w3-table w3-striped'>
 <tr><td>Account Status</td><td><?= $user['account_status'] ?></td></tr>
 <tr><td>Referral Username</td><td><?= $user['referral_id'] ?></td></tr>
+<tr><td>Skype/IM</td><td><?= $user['phone'] ?></td></tr>
 <tr><td>Website</td><td><a href="http://<?= json_decode($user['websites'])[0] ?>"><?= json_decode($user['websites'])[0] ?></a></td></tr>
 <tr><td>Account Email</td><td>
 <?= $user['email'] ?>

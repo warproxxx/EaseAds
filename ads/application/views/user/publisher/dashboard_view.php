@@ -123,26 +123,26 @@ echo $pending_campaigns;
 
       </div>
      
-      <!-- <div class="w3-quarter">
-        <h5>Affilate Statistics</h5>
+      <div class="w3-quarter">
+        <h5>Referrel Statistics</h5>
         <table class="w3-table w3-striped w3-white">
          
           <tr>
         <td><i class="fa fa-hand-pointer-o w3-text-blue w3-large"></i></td>
-        <td>Affilate Link Clicks.</td>
+        <td>Referrel Link Clicks.</td>
         <td><i><?php
 echo $no_clicks;
          ?></i></td>
       </tr>
                   <td><i class="fa fa-user-plus w3-text-red w3-large"></i></td>
-        <td>Total Registration.</td>
+        <td>Referrel Registration.</td>
         <td><i><?php
 echo $no_reg;
          ?></i></td>
       </tr>
 
 
-      <tr>
+      <!-- <tr>
         <td><i class="fa fa-bookmark w3-text-green w3-large"></i></td>
         <td> Total Approved  Registeration</td>
         <td><i><?php
@@ -156,9 +156,9 @@ echo $no_reg;
   //echo $click;
        // echo "89";
          ?></i></td>
-      </tr>
+      </tr> -->
         </table>
-      </div> -->
+      </div>
 
       <div class="w3-quarter">
               <h5>Account Details</h5>
@@ -185,8 +185,8 @@ echo strtoupper(str_replace('-',' ',$user['country']));
           </tr>
 
                     <tr>
-                      <td><i class="fa fa-phone w3-text-green w3-large"></i></td>
-                      <td>Account Mobile No</td>
+                      <td><i class="fa fa-skype w3-text-green w3-large"></i></td>
+                      <td>Account Skype/IM</td>
                       <td><i><?php
         echo $user['phone'];
                        ?></i></td>

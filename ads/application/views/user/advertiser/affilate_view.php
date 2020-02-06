@@ -1,5 +1,5 @@
 <div class="w3-container w3-center">
-    <span class="w3-text-indigo w3-xlarge w3-serif">Affilate Program</span><br>
+    <span class="w3-text-indigo w3-xlarge w3-serif">Referral Program</span><br>
 
 
 <div class="w3-container w3-center">
