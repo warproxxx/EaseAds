@@ -72,24 +72,35 @@ public function report()
     if ($campaign != "all")
       $campaign = (int)$campaign;
 
-    #need to loop through and do this manually
+    $report = $this->input->post('report');
     $start_date = new DateTime($this->input->post('start'));
     $end_date = new DateTime($this->input->post('end'));
 
-    $interval = DateInterval::createFromDateString('1 day');
-    $period = new DatePeriod($start_date, $interval, $end_date);
-    $report_details = array();
-
-    foreach ($period as $dt) 
+    if ($report == 'day')
     {
-        $curr_array = array("Time" => $dt->format("Y-m-d"), 
-                            "Views" => $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
-                            "Clicks" => $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
-        $report_details[] = $curr_array;
-    }
+      $interval = DateInterval::createFromDateString('1 day');
+      $period = new DatePeriod($start_date, $interval, $end_date);
+      $report_details = array();
 
-    $json = json_decode(json_encode($report_details));
-    $data['report'] = $json;
+      foreach ($period as $dt) 
+      {
+          $curr_array = array("Time" => $dt->format("Y-m-d"), 
+                              "Views" => $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
+                              "Clicks" => $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
+          $report_details[] = $curr_array;
+      }
+      $json = json_decode(json_encode($report_details));
+      $data['day_report'] = $json;
+
+    }
+    else
+    {
+      #also send campaign id. Check report sending value AND space_id = "'.$ref_id.'";'
+      $start_date = $start_date->getTimestamp();
+      $end_date = $end_date->getTimestamp();
+      $data['report'] = $this->publisher_model->get_other_report($report, $start_date, $end_date, $campaign);
+     
+    }    
 
     
   }

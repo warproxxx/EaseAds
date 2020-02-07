@@ -354,6 +354,18 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 
 }
 
+public function get_other_report($col, $start_time, $end_time, $ref_id)
+{
+  $q = "SELECT *
+        FROM  (SELECT ". $col .", COUNT(id) AS total_views FROM views WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_pid= " . $ref_id . " GROUP BY ". $col .") AS a
+        JOIN (SELECT ". $col .", COUNT(id) AS total_clicks FROM clicks WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_pid= " . $ref_id . " GROUP BY ". $col .") AS b
+        ON a.".$col." = b.".$col.";";
+
+  $query = $this->db->query($q);
+  return $query->result_array();
+
+}
+
 public function get_campaign_at_all_time_views($ref_id)
 {
 
