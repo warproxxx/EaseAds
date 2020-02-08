@@ -2,7 +2,7 @@
 
 <form method="post">
     Start Date:
-    <input type="date" name="start">
+    <input type="date" name="start" value="2019-01-01">
     <br/>
 
     End Date:

@@ -69,8 +69,7 @@ public function report()
 
   if ($campaign != "")
   {
-    if ($campaign != "all")
-      $campaign = (int)$campaign;
+    echo($campaign);
 
     $report = $this->input->post('report');
     $start_date = new DateTime($this->input->post('start'));

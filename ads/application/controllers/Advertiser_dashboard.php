@@ -916,12 +916,8 @@ public function report()
   //get country details by user's country
 
   $campaign = $this->input->post('campaign');
-
   if ($campaign != "")
   {
-    if ($campaign != "all")
-      $campaign = (int)$campaign;
-
     $report = $this->input->post('report');
     $start_date = new DateTime($this->input->post('start'));
     $end_date = new DateTime($this->input->post('end'));

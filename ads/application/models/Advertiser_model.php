@@ -559,7 +559,6 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
    $time_interval  = $time_interval * 60 * 60;
 
     $query = $this->db->query('SELECT * FROM views WHERE time >= '.($today - $time_interval).' AND time <= '.$today.' AND story_id = "'.$ref_id.'";');
-
  return count($query->result_array());
 
 }
@@ -639,8 +638,8 @@ show_page("advertiser_dashboard/campaign_budget/".$ref_id);
 public function get_other_report($col, $start_time, $end_time, $ref_id)
 {
   $q = "SELECT *
-        FROM  (SELECT ". $col .", COUNT(id) AS total_views FROM views WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_id= '" . $ref_id . "' GROUP BY ". $col .") AS a
-        JOIN (SELECT ". $col .", COUNT(id) AS total_clicks FROM clicks WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_id= '" . $ref_id . "' GROUP BY ". $col .") AS b
+        FROM  (SELECT ". $col .", COUNT(id) AS Views FROM views WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_id= '" . $ref_id . "' GROUP BY ". $col .") AS a
+        JOIN (SELECT ". $col .", COUNT(id) AS Clicks FROM clicks WHERE time >= ".$start_time." AND time <= ".$end_time. " AND story_id= '" . $ref_id . "' GROUP BY ". $col .") AS b
         ON a.".$col." = b.".$col.";";
 
   $query = $this->db->query($q);
