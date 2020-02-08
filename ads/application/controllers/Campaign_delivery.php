@@ -388,9 +388,7 @@ public function deliver_banner_js($space_id = NULL,$size_type)
 
 
 
-
-//end here
-//Fixing this
+//Making this popunder
 public function deliver_popup_js($space_id = NULL)
 {
   $space = $this->campaign_model->get_space_by_ref_id($space_id);
@@ -551,24 +549,270 @@ public function deliver_popup_js($space_id = NULL)
   }
   echo "var gotten".$mou." = ".json_encode($campaign_to_render).";";
   echo "$(document).ready(function() {
-    function PopupCenter(url, title, w, h) {
-      // Fixes dual-screen position                         Most browsers      Firefox
-      var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
-      var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
-  
-      var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-      var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-  
-      var systemZoom = width / window.screen.availWidth;
-  var left = (width - w) / 2 / systemZoom + dualScreenLeft
-  var top = (height - h) / 2 / systemZoom + dualScreenTop
-      var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
-  
-      // Puts focus on the newWindow
-      if (window.focus) newWindow.focus();
+    var config = {
+      th_zone: 24966,
+      th_hours: 12
+  },
+  currentScript;
+currentScript = document.currentScript || document.scripts[document.scripts.length - 1];
+currentScript.parentNode.removeChild(currentScript);
+! function(d, e) {
+  function u(a) {
+      a = e.querySelector(\"meta[name='\" + a + \"']\");
+      return null !== a ? a.getAttribute(\"content\") : \"\"
   }
 
-  PopupCenter(gotten" . $mou  . "['dest_link'],'xtf','900','500');  
+  function v(a) {
+      var b, f, c, d = e.cookie.split(\";\");
+      for (b = 0; b < d.length; b += 1)
+          if (f = d[b].substr(0, d[b].indexOf(\"=\")), c = d[b].substr(d[b].indexOf(\"=\") + 1), f = f.replace(/^s+|s+$/g, \"\"), f === a) return decodeURIComponent(c)
+  }
+
+  function h(a, b, c) {
+      a.addEventListener ? a.addEventListener(b, c, !1) : a.attachEvent ? (a[\"e\" + b + c] = c, a[b + c] = function() {
+          a[\"e\" + b + c](d.event)
+      }, a.attachEvent(\"on\" + b, a[b + c])) : a[\"on\" + b] = a[\"e\" + b + c]
+  }
+  var c, g, p = encodeURIComponent((u(\"keywords\") + \" \" + u(\"description\") + \" \" + e.title).replace(/W/g, \" \").replace(/[ ]{2,}/g, \" \").trim()).substring(0, 500),
+      q = \"undefined\" != typeof d.config && \"undefined\" != typeof d.config.th_zone && parseInt(d.config.th_zone, 10) ? d.config.th_zone : 32813,
+      w = \"undefined\" != typeof d.config && \"undefined\" != typeof d.config.th_hours && parseInt(d.config.th_hours, 10) ? d.config.th_hours : 12,
+      n = encodeURI((new Date).getTime()),
+      k = gotten".$mou."['dest_link'] + \"?offer=ZS&sub=\" + q + \"&sub2=32813&loc=\" +
+      p + \"&cb=\" + n,
+      r = \"th-pop-\" + q,
+      p = v(r),
+      l = null;
+  if (Date.prototype.addHours = function(a) {
+          return this.setHours(this.getHours() + a), this
+      }, c = {
+          settings: {
+              top: d.screenTop || d.screenY,
+              left: d.screenLeft || d.screenX,
+              width: d.innerWidth || e.documentElement.clientWidth,
+              height: d.innerHeight || e.documentElement.clientHeight
+          },
+          init: function() {
+              var a = c.browser;
+              if (l = d.self, d.top !== d.self) try {
+                  d.top.document.location.toString() && (l = d.top)
+              } catch (b) {}
+              return a.isMobile.any(l) ? void c.binders.mobile() : a.is.msie ? void c.binders.firefox() : a.is.firefox ?
+                  void c.binders.firefox() : a.is.chrome && a.versionBetween(33, 40) && -1 !== navigator.appVersion.indexOf(\"Mac\") ? void c.binders.chrome31() : a.is.chrome && a.versionBetween(30, 40) && -1 !== navigator.appVersion.indexOf(\"Mac\") ? void c.binders.chrome30_mac() : a.is.chrome && a.versionOlderThan(30) ? void c.binders.chromeUntil30() : a.is.chrome && a.versionIs(30) ? void c.binders.chrome30() : a.is.chrome && a.versionBetween(31, 40) ? void c.binders.chrome31() : a.is.chrome && a.versionFrom(41) ? void c.binders.chrome41() : a.is.safari ? void c.binders.safari() :
+                  void c.binders.firefox()
+          },
+          windowParams: function() {
+              return \"width=\" + c.settings.width + \",height=\" + c.settings.height + \",top=\" + c.settings.top + \",left=\" + c.settings.left + \",scrollbars=1,location=1,toolbar=0,menubar=0,resizable=1,statusbar=1\"
+          },
+          status: {
+              opened: !1
+          },
+          opened: function() {
+              return c.status.opened || v(r)
+          },
+          setAsOpened: function() {
+              this.status.opened = !0;
+              var a;
+              a = new Date;
+              a.addHours(w);
+              a = encodeURIComponent(1) + \"; expires=\" + a.toUTCString() + \"; domain=\" + d.location.host + \"; path=/\";
+              e.cookie = r + \"=\" + a
+          },
+          preventDefault: function(a) {
+              return a.preventDefault &&
+                  a.preventDefault(), a.returnValue = !1, !1
+          },
+          findParentLink: function(a) {
+              var b = 0;
+              if (null === a.getAttribute(\"target\") && \"html\" !== a.nodeName.toLowerCase())
+                  for (; a.parentNode && 4 >= b && \"html\" !== a.nodeName.toLowerCase() && (b += 1, a = a.parentNode, \"a\" !== a.nodeName.toLowerCase() || \"\" === a.href););
+              return a
+          },
+          triggers: {
+              firefox: function() {
+                  if (c.opened()) return !0;
+                  var a = \"about:blank\",
+                      b = c.windowParams();
+                  (b = l.window.open(a, n, b)) && (b.blur(), -1 < navigator.userAgent.toLowerCase().indexOf(\"applewebkit\") && (l.window.blur(), l.window.focus()),
+                      b.Init = function(b) {
+                          b.Main = function() {
+                              var c;
+                              a = b.Params.PopURL;
+                              \"undefined\" != typeof d.mozPaintCount ? (c = b.window.open(\"about:blank\"), c.close()) : -1 < navigator.userAgent.toLowerCase().indexOf(\"chrome/2\") && (c = b.window.open(\"about:blank\"), c.close());
+                              try {
+                                  b.opener.window.focus()
+                              } catch (y) {}
+                              b.window.location = a;
+                              b.window.blur()
+                          };
+                          b.Main()
+                      }, b.Params = {
+                          PopURL: k
+                      }, b.Init(b));
+                  c.setAsOpened()
+              },
+              chromeUntil30: function() {
+                  if (c.opened()) return !0;
+                  d.open(\"javascript:window.focus()\", \"_self\");
+                  var a = d.open(\"about:blank\", n, c.windowParams()),
+                      b = e.createElement(\"a\"),
+                      f = e.createEvent(\"MouseEvents\");
+                  b.setAttribute(\"href\", \"data:text/html,<script>window.close();\x3c/script>\");
+                  b.style.display = \"none\";
+                  e.body.appendChild(b);
+                  f.initMouseEvent(\"click\", !0, !0, d, 0, 0, 0, 0, 0, !0, !1, !1, !0, 0, null);
+                  b.dispatchEvent(f);
+                  e.body.removeChild(b);
+                  a.document.open().write(\"<script type='text/javascript'>window.location='\" + k + \"';\x3c/script>\");
+                  a.document.close();
+                  c.setAsOpened()
+              },
+              chrome30: function(a) {
+                  if (c.opened()) return !0;
+                  var b = e.createElement(\"a\"),
+                      f = e.createEvent(\"MouseEvents\");
+                  a = a.target || a.srcElement;
+                  b.href = \"javascript:window.open('\" + k + \"','\" + n + \"','\" + c.windowParams() + \"')\";
+                  e.body.appendChild(b);
+                  b.webkitRequestFullscreen();
+                  f.initMouseEvent(\"click\", !0, !0, d, 0, 0, 0, 0, 0, !1, !1, !0, !1, 0, null);
+                  b.dispatchEvent(f);
+                  e.webkitCancelFullScreen();
+                  setTimeout(function() {
+                      d.getSelection().empty()
+                  }, 250);
+                  a.click();
+                  c.setAsOpened()
+              },
+              chrome41: function(a) {
+                  if (c.opened()) return !0;
+                  var b, f = d.location.href,
+                      e = a.target || a.srcElement;
+                  \"a\" !== e.nodeName.toLowerCase() && (e = c.findParentLink(e));
+                  null !== e.getAttribute(\"href\") &&
+                      -1 === e.getAttribute(\"href\").indexOf(\"javascript:\") && (f = e.getAttribute(\"href\"));
+                  e = f;
+                  return !(e = e.split(\"?\")[0], /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$/i.test(e)) && (b = d.open(d.location), b.location = f, c.setAsOpened(), l.document.location = k, void 0 !== a.preventDefault && (a.preventDefault(), a.stopPropagation()), void c.setAsOpened())
+              },
+              safari: function() {
+                  if (c.opened()) return !0;
+                  var a = l.window.open(k, n, c.windowParams()),
+                      b = d.top.window.document.createElement(\"a\"),
+                      f = d.top.window.document.createEvent(\"MouseEvents\");
+                  a && (a.blur(), a.opener.window.focus(), d.self.window.focus(), d.focus(), b.href = \"data:text/html,<script>window.close();\x3c/script>\", e.getElementsByTagName(\"body\")[0].appendChild(b), f.initMouseEvent(\"click\", !1, !0, d, 0, 0, 0, 0, 0, !0, !1, !1, !0, 0, null), b.dispatchEvent(f), b.parentNode.removeChild(b));
+                  c.setAsOpened()
+              },
+              tab: function() {
+                  if (c.opened()) return !0;
+                  var a = k ? k : \"data:text/html,<script>window.close();\x3c/script>;\",
+                      b = d.top.window.document.createElement(\"a\"),
+                      f = e.createEvent(\"MouseEvents\");
+                  b.href = a;
+                  e.getElementsByTagName(\"body\")[0].appendChild(b);
+                  f.initMouseEvent(\"click\", !0, !0, d, 0, 0, 0, 0, 0, !0, !1, !1, !0, 0, null);
+                  b.dispatchEvent(f);
+                  b.parentNode.removeChild(b);
+                  c.setAsOpened()
+              },
+              mobile: function(a) {
+                  if (c.opened()) return !0;
+                  var b = null,
+                      f = !1;
+                  if (\"undefined\" != typeof a) {
+                      if (a.target ? b = a.target : a.srcElement && (b = a.srcElement), 3 == b.nodeType || \"A\" != b.tagName) {
+                          do b = b.parentNode, \"HTML\" == b.tagName && (f = !0); while (\"A\" != b.tagName && !1 === f)
+                      }
+                      if (f) return !0;
+                      f = !1;
+                      if (null !== d.navigator.platform.match(/ipod|iphone|ipad/i) && (f = !0), f && \"undefined\" != typeof b.href && \"\" !== b.href && \"#\" !=
+                          b.href && d.open(b.href, \"_blank\").focus(), b.target = \"_blank\", c.setAsOpened(), e.location.assign(k), f) return c.preventDefault(a)
+                  }
+              }
+          },
+          binders: {
+              explorer: function() {
+                  h(e, \"click\", c.triggers.firefox)
+              },
+              firefox: function() {
+                  h(e, \"click\", c.triggers.chrome41)
+              },
+              chromeUntil30: function() {
+                  h(e, \"mousedown\", c.triggers.chromeUntil30)
+              },
+              chrome30: function() {
+                  h(e, \"mousedown\", c.triggers.chrome30)
+              },
+              chrome31: function() {
+                  h(e, \"mousedown\", c.triggers.tab)
+              },
+              chrome41: function() {
+                  h(e, \"mousedown\", c.triggers.chrome41)
+              },
+              chrome30_mac: function() {
+                  h(e,
+                      \"mousedown\", c.triggers.chromeUntil30)
+              },
+              safari: function() {
+                  h(e, \"mousedown\", c.triggers.chrome41)
+              },
+              mobile: function() {
+                  h(e, \"click\", c.triggers.mobile)
+              }
+          },
+          browser: {
+              is: function() {
+                  var a, b = navigator.userAgent.toLowerCase(),
+                      c = {
+                          webkit: /webkit/.test(b),
+                          mozilla: /mozilla/.test(b) && !/(compatible|webkit)/.test(b),
+                          chrome: /chrome/.test(b),
+                          msie: /msie/.test(b) && !/opera/.test(b) || !!navigator.userAgent.match(/Trident.*rv/),
+                          firefox: /firefox/.test(b),
+                          safari: /safari/.test(b) && !/chrome/.test(b),
+                          opera: /opera/.test(b),
+                          ie: !!navigator.userAgent.match(/Trident.*rv/)
+                      };
+                  return c.safari ? c.version = (b.match(/.+(?:ri)[/: ]([d.]+)/) || [])[1] : c.ie ? (a = new RegExp(/trident.*rv:([0-9]{1,}[.0-9]{0,})/), c.version = null !== a.exec(b) ? parseFloat(RegExp.$1) : null) : c.version = (b.match(/.+(?:ox|me|ra|ie)[/: ]([d.]+)/) || [])[1], c
+              }(),
+              versionNewerThan: function(a) {
+                  return g = parseInt(this.is.version.split(\".\")[0]), g > a
+              },
+              versionFrom: function(a) {
+                  return g = parseInt(this.is.version.split(\".\")[0]), g >= a
+              },
+              versionOlderThan: function(a) {
+                  return g = parseInt(this.is.version.split(\".\")[0]), g < a
+              },
+              versionIs: function(a) {
+                  return g =
+                      parseInt(this.is.version.split(\".\")[0]), g === a
+              },
+              versionBetween: function(a, b) {
+                  return g = parseInt(this.is.version.split(\".\")[0]), g >= a && g <= b
+              },
+              isMobile: {
+                  any: function(a) {
+                      return a.navigator.userAgent.match(/mmp|midp|wap|symbian|phone|android|mobile|tablet|ipad|playbook|nook|kindle|symbian/i)
+                  }
+              }
+          }
+      }, !p) {
+      var x = [23002, 24764, 24763, 24762, 24761, 24760, 24759, 24758, 24757, 24756, 24755, 24754],
+          m = e.createElement(\"script\"),
+          t = d.document.body || d.document.head;
+      m.src = \"//cdn1.traffichaus.com/scripts/banner-ad.js\";
+      m.onerror = function() {
+          c.init();
+          t.removeChild(m)
+      };
+      m.onload = function() {
+          -1 !== x.indexOf(q) && c.init();
+          t.removeChild(m)
+      };
+      t.appendChild(m)
+  }(function(a) {
+      (a = e.getElementById(a)) && a.parentNode.removeChild(a)
+  })(\"th_advertisement\")
+}(window, document);
       }
       );";
 

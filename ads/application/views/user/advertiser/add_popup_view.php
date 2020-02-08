@@ -1,6 +1,6 @@
 <div class="w3-container w3-center">
 <br><br>
-  <b class="w3-serif w3-large w3-text-indigo">Create New Popup</b><br>
+  <b class="w3-serif w3-large w3-text-indigo">Create New Popunder</b><br>
 
 <br>
 <div class="w3-text-red w3-small"><?= validation_errors()."<br>".$error ?>
@@ -51,7 +51,7 @@ foreach ($categories as $category)
 
   <div class="w3-third">
 
-<span class="w3-serif w3-text-indigo w3-small">Popup Link</span>
+<span class="w3-serif w3-text-indigo w3-small">Popunder Link</span>
 <br>
 <input type="text" value='<?php
 if(!empty($this->uri->segment(3)))

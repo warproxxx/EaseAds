@@ -12,6 +12,9 @@
     Report Type:
     <select name="report">
         <option value="day">By Day</option>
+        <option value="country">By Country</option>
+        <option value="platform">By Platform</option>
+        <option value="browser">By Browser</option>
     </select> 
     <br/>
     Campaign:

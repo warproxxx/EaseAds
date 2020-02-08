@@ -51,7 +51,7 @@ foreach ($categories as $category)
   <span class="w3-text-indigo w3-small w3-margin">Ads Space Type:</span>
 <br>
 <select id="select_btn" onchange="showDiv()" name="type" class="w3-padding w3-border w3-border-indigo w3-margin">
-      <option value="popup">Popup</option>
+      <option value="popup">Popunder</option>
       <option value="banner">Banner Campaigns</option>
       <option value="text">Text Campaigns</option>
       

@@ -27,8 +27,8 @@
 <div class="w3-third">
 <a href="<?=site_url('advertiser_dashboard/add_popup/'.$this->uri->segment(3)) ?>">	<div class="w3-container w3-padding-xlarge w3-card w3-margin">
          <i class="fa fa-align-center w3-text-red w3-jumbo"></i>	<br>
-         <span class="w3-large">Popups</span><br>
-        <span class="w3-small"> Display popups</span>
+         <span class="w3-large">Popunder</span><br>
+        <span class="w3-small"> Display popunder</span>
 	</div></a>
 
 </div>
