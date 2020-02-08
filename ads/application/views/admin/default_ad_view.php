@@ -24,7 +24,7 @@ Ads Specified in this page will be displayed if no ads meet the provided conditi
 </form>
 
 <br/>
-<span class="w3-text-blue-grey w3-xlarge">Default Text</span>
+<!-- <span class="w3-text-blue-grey w3-xlarge">Default Text</span>
 <br/>
 
 
@@ -36,7 +36,7 @@ Ads Specified in this page will be displayed if no ads meet the provided conditi
 	<br/><br/>
 	Destination Link: <input type="text" name="default_text_destination" value="<?=$default_text_destination?>">
 	<input type="submit" name="submit" value="Update Text">
-</form>
+</form> -->
 
 <br/>
 <span class="w3-text-blue-grey w3-xlarge">Default Popup</span>

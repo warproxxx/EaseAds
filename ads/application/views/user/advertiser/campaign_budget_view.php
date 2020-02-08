@@ -43,14 +43,12 @@ if(!empty($cpa_form_data))
 }else{
 	if ($type == 'popup')
 	{
-		echo ('	<option value="cpm">CPM</option>');
+		echo ('	<option value="ppc">CPC</option>');
 	}
 	else
 	{
 		echo '
-		<option value="both">CPM & PPC </option>
-		<option value="cpm">CPM</option>
-		<option value="ppc">PPC</option>';
+		<option value="both">CPM & PPC </option>';
 	}
 }
 

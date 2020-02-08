@@ -52,11 +52,7 @@ foreach ($categories as $category)
 <br>
 <select id="select_btn" onchange="showDiv()" name="type" class="w3-padding w3-border w3-border-indigo w3-margin">
       <option value="popup">Popunder</option>
-      <option value="banner">Banner Campaigns</option>
-      <option value="text">Text Campaigns</option>
-      
-    
-  
+      <option value="banner">Banner Campaigns</option>      
 </select>
 <br>
 <div id="rec_div" style="display: none;" class="">

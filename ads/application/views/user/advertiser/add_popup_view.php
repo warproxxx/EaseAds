@@ -51,7 +51,7 @@ foreach ($categories as $category)
 
   <div class="w3-third">
 
-<span class="w3-serif w3-text-indigo w3-small">Popunder Link</span>
+<span class="w3-serif w3-text-indigo w3-small">Popunder Link (Start with http:// or https://)</span>
 <br>
 <input type="text" value='<?php
 if(!empty($this->uri->segment(3)))
@@ -61,7 +61,7 @@ echo $campaign_dest;
 echo set_value('destination_link');
 }
 
-  ?>' name="destination_link" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="www.example.com/landing_page" required <?php
+  ?>' name="destination_link" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="http://example.com/landing_page" required <?php
   if(!empty($this->uri->segment(3)))
 {
 echo 'readonly';

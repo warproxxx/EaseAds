@@ -15,20 +15,20 @@
 
 </div>
 
-<div class="w3-third">
+<!-- <div class="w3-third">
 	<a href="<?=site_url('advertiser_dashboard/add_text_campaign/'.$this->uri->segment(3)) ?>">	<div class="w3-container w3-padding-xlarge w3-card w3-margin">
          <i class="fa fa-font w3-text-green w3-jumbo"></i>	<br>
          <span class="w3-large">Text Only Campaign</span><br>
         <span class="w3-small">To Promote Your Products/Services in Text Only Format</span>
 	</div></a>
 
-</div>
+</div> -->
 
 <div class="w3-third">
 <a href="<?=site_url('advertiser_dashboard/add_popup/'.$this->uri->segment(3)) ?>">	<div class="w3-container w3-padding-xlarge w3-card w3-margin">
          <i class="fa fa-align-center w3-text-red w3-jumbo"></i>	<br>
          <span class="w3-large">Popunder</span><br>
-        <span class="w3-small"> Display popunder</span>
+        <span class="w3-small">Link gets opened behind when anything is clicked in your website</span>
 	</div></a>
 
 </div>

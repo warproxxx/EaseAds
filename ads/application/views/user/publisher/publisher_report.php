@@ -23,7 +23,7 @@
             <?php
                 foreach ($items as $item) 
                 {
-                    echo "<option value='".$item['id']."'>" .$item['name']. "</option>";
+                    echo "<option value='".$item['ref_id']."'>" .$item['name']. "</option>";
                 }
             ?>
         </select> 

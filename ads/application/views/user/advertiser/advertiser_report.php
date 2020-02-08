@@ -23,7 +23,7 @@
         <?php
             foreach ($items as $item) 
             {
-                echo "<option value='".$item['id']."'>" .$item['name']. "</option>";
+                echo "<option value='".$item['ref_id']."'>" .$item['name']. "</option>";
             }
         ?>
     </select> 
@@ -33,36 +33,50 @@
 </form>
 
 <h3> Report </h3>
-
-
 <?php
-    if (!empty($report)) {
+        if (!empty($day_report)) {
+            echo("<center><table border=1>
+                    <tr>
+                        <td>Time</td>
+                        <td>Views</td>
+                        <td>Clicks</td>
+                    </tr>");
+
+            foreach($day_report as $key=>$val)
+            {
+                echo("<tr>");
+                echo("<td>" . $val->Time . "</td>");
+                echo("<td>" . $val->Views . "</td>");
+                echo("<td>" . $val->Clicks . "</td>");
+                echo("</tr>");
+            }
+
+            echo("</table></center>");
+    }
+    else if (!empty($report))
+    {
+        $keys = array_keys($report[0]);
         echo("<center><table border=1>
                 <tr>
-                    <td>Time</td>
-                    <td>Views</td>
-                    <td>Clicks</td>
+                    <td>". $keys[0] ."</td>
+                    <td>". $keys[1] ."</td>
+                    <td>". $keys[2] ."</td>
                 </tr>");
 
-        foreach($report as $key=>$val)
-        {
-            echo("<tr>");
-            echo("<td>" . $val->Time . "</td>");
-            echo("<td>" . $val->Views . "</td>");
-            echo("<td>" . $val->Clicks . "</td>");
-            echo("</tr>");
-        }
+            foreach($report as $key=>$val)
+            {
+                echo("<tr>");
+                echo("<td>" . $val[$keys[0]]. "</td>");
+                echo("<td>" . $val[$keys[1]] . "</td>");
+                echo("<td>" . $val[$keys[2]] . "</td>");
+                echo("</tr>");
+            }
+            echo("</table></center>");
+    }
+    else
+    {
+        echo("Empty");
+    }
 
-        echo("</table></center>");
-   }
-   else
-   {
-       echo("Empty");
-   }
-
-   
-?>
-
-
-
-
+    
+    ?>
