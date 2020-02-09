@@ -345,12 +345,16 @@ return $query->row_array();
 */
 public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 {
+  $time_interval  = $time_interval * 60 * 60;
+    $q = "SELECT COUNT(v.id) AS total_views, AVG(a.per_view) AS eCPM
+    FROM views v
+    LEFT JOIN adv_story a
+    ON a.ref_id = v.space_id
+    WHERE v.time >= ".($today - $time_interval)." AND v.time <= ".$today." AND v.space_id= '".$ref_id."'";
 
-   $time_interval  = $time_interval * 60 * 60;
 
-    $query = $this->db->query('SELECT * FROM views WHERE time >= '.($today - $time_interval).' AND time <= '.$today.' AND space_id = "'.$ref_id.'";');
-
- return count($query->result_array());
+    $query = $this->db->query($q);
+    return $query->row_array();
 
 }
 
@@ -384,10 +388,17 @@ public function get_campaign_at_all_time_clicks($ref_id)
 
 public function get_campaign_at_time_clicks($ref_id,$today,$time_interval)
 {
-$time_interval  = $time_interval * 60 * 60;
-  $query = $this->db->query('SELECT * FROM clicks WHERE time >= '.($today - $time_interval).' AND time <= '.$today.' AND space_id = "'.$ref_id.'";');
 
- return count($query->result_array());
+  $time_interval  = $time_interval * 60 * 60;
+  $q = "SELECT COUNT(c.id) AS total_clicks, AVG(a.per_view) AS eCPM
+  FROM clicks c
+  LEFT JOIN adv_story a
+  ON a.ref_id = c.space_id
+  WHERE c.time >= ".($today - $time_interval)." AND c.time <= ".$today." AND c.space_id= '".$ref_id."'";
+
+
+  $query = $this->db->query($q);
+  return $query->row_array();
 
 }
 public function get_campaign_views($ref_id,$today)
@@ -409,4 +420,31 @@ public function get_campaign_clicks($ref_id,$today)
  return count($query->result_array());
 
 }
+
+public function get_other_view_report($col, $start_time, $end_time, $ref_id)
+{
+  $q = "SELECT z.platform, AVG(z.per_view) AS eCPM, COUNT(z.space_id) AS Views FROM (SELECT v.platform, v.browser, v.country, v.space_id, a.per_click, a.per_view, v.time
+        FROM views v
+        LEFT JOIN adv_story a
+        ON a.ref_id = v.space_id
+        WHERE v.time >= ".$start_time." AND v.time <= ".$end_time." AND v.space_id= '".$ref_id."') AS z 
+        GROUP BY z.".$col;
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
+public function get_other_click_report($col, $start_time, $end_time, $ref_id)
+{
+  $q = "SELECT  z.platform, AVG(z.per_click) AS eCPC, COUNT(z.space_id) AS Clicks FROM (SELECT c.platform, c.browser, c.country, c.space_id, a.per_click, a.per_view, c.time
+        FROM clicks c
+        LEFT JOIN adv_story a
+        ON a.ref_id = c.space_id
+        WHERE c.time >= ".$start_time." AND c.time <= ".$end_time." AND c.space_id= '".$ref_id."') AS z 
+        GROUP BY z.".$col;
+  $query = $this->db->query($q);
+  return $query->result_array();
+
+}
+
+
 }

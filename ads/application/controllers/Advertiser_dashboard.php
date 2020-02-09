@@ -930,9 +930,15 @@ public function report()
 
       foreach ($period as $dt) 
       {
+        $view_details = $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24);
+        $click_details = $this->advertiser_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24);
           $curr_array = array("Time" => $dt->format("Y-m-d"), 
-                              "Views" => $this->advertiser_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
-                              "Clicks" => $this->advertiser_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
+                              "Views" => $view_details['total_views'],
+                              "eCPM" => $view_details['eCPM'],
+                              "Clicks" => $click_details['total_clicks'],
+                              "eCPC" => $click_details['total_clicks']
+                            ); 
+
           $report_details[] = $curr_array;
       }
 
@@ -943,7 +949,9 @@ public function report()
     {
       $start_date = $start_date->getTimestamp();
       $end_date = $end_date->getTimestamp();
-      $data['report'] = $this->advertiser_model->get_other_report($report, $start_date, $end_date, $campaign);
+      $data['view_report'] = $this->advertiser_model->get_other_view_report($report, $start_date, $end_date, $campaign);
+      $data['click_report'] = $this->advertiser_model->get_other_click_report($report, $start_date, $end_date, $campaign);
+
     }
 
     

@@ -81,11 +81,18 @@ public function report()
       $period = new DatePeriod($start_date, $interval, $end_date);
       $report_details = array();
 
+      
+
       foreach ($period as $dt) 
       {
+        $view_details = $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24);
+      $click_details = $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24);
           $curr_array = array("Time" => $dt->format("Y-m-d"), 
-                              "Views" => $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24),
-                              "Clicks" => $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24));
+                              "Views" => $view_details['total_views'],
+                              "eCPM" => $view_details['eCPM'],
+                              "Clicks" => $click_details['total_clicks'],
+                              "eCPC" => $click_details['total_clicks']
+                            );
           $report_details[] = $curr_array;
       }
       $json = json_decode(json_encode($report_details));
@@ -97,8 +104,8 @@ public function report()
       #also send campaign id. Check report sending value AND space_id = "'.$ref_id.'";'
       $start_date = $start_date->getTimestamp();
       $end_date = $end_date->getTimestamp();
-      $data['report'] = $this->publisher_model->get_other_report($report, $start_date, $end_date, $campaign);
-     
+      $data['view_report'] = $this->publisher_model->get_other_view_report($report, $start_date, $end_date, $campaign);
+      $data['click_report'] = $this->publisher_model->get_other_click_report($report, $start_date, $end_date, $campaign);     
     }    
 
     
