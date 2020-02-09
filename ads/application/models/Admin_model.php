@@ -56,6 +56,12 @@ public function get_default_campaigns()
   return $query->result_array();
 }
 
+public function get_default_sizes()
+{
+  $query = $this->db->get_where("countries",array('select_value' => 'general'));
+  return $query->row_array();
+}
+
 public function get_withdrawal_switch()
 {
 
@@ -108,6 +114,7 @@ public function get_supported_countries()
 }
 public function get_country_details_by_select_value($select_value)
 {
+
 $query= $this->db->get_where('countries',array('select_value' => $select_value));
 return $query->row_array();
 }
@@ -158,9 +165,9 @@ public function insert_ad($datab)
 
 }
 
-public function update_ad($datab2, $id)
+public function update_defaults($items)
 {
-  $this->db->update('adv_story',$datab2, array("id" => $id));
+$this->db->update('countries',$items, array("select_value" => 'general'));
 }
 
 

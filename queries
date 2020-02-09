@@ -1,0 +1,14 @@
+SELECT z.platform, AVG(z.per_view) AS eCPM, COUNT(z.story_id) AS total_view FROM (SELECT v.platform, v.browser, v.country, v.story_id, v.space_id, a.per_click, a.per_view, v.time
+FROM views v
+LEFT JOIN adv_story a
+ON a.ref_id = v.story_id
+WHERE v.time >= 1546280100 AND v.time <= 1581185700 AND v.story_id= 'b1b04aa3c1e2464d4265') AS z GROUP BY z.platform;
+
+
+
+
+SELECT z.platform, AVG(z.per_click) AS eCPC, COUNT(z.story_id) AS total_clicks FROM (SELECT c.platform, c.browser, c.country, c.story_id, c.space_id, a.per_click, a.per_view, c.time
+FROM clicks c
+LEFT JOIN adv_story a
+ON a.ref_id = c.story_id
+WHERE c.time >= 1546280100 AND c.time <= 1581185700 AND c.story_id= 'b1b04aa3c1e2464d4265') AS z GROUP BY z.platform;

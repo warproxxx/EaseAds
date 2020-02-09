@@ -589,6 +589,46 @@ public function admins($account_type = NULL,$id = NULL)
 
 }
 
+public function size()
+{
+ 
+  $minimum_cpc = $this->input->post("minimum_cpc");
+  $minimum_cpm = $this->input->post("minimum_cpm");
+  $minimum_deposit = $this->input->post("minimum_deposit");
+  $minimum_budget = $this->input->post("minimum_budget");
+
+  if ($minimum_cpc != "")
+  {
+    $datab = array(
+      "minimum_cpc" => $minimum_cpc,
+      "minimum_cpm" => $minimum_cpm,
+      "minimum_deposit" => $minimum_deposit,
+      "minimum_budget" => $minimum_budget);
+
+    $this->admin_model->update_defaults($datab);
+  }
+
+  $defaults = $this->admin_model->get_default_sizes();
+
+  $data['minimum_cpc'] = $defaults['minimum_cpc'];
+  $data['minimum_cpm'] = $defaults['minimum_cpm'];
+  $data['minimum_deposit'] = $defaults['minimum_deposit'];
+  $data['minimum_budget'] = $defaults['minimum_budget'];
+  
+
+
+  $data['title'] =$this->siteName." | Default Size Management";
+  $data['description'] = $this->description;
+  $data["noindex"] = $this->noindex;  
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/default_size_view',$data);
+  $this->load->view('admin/footer_view');
+
+}
 
 
 public function default()
