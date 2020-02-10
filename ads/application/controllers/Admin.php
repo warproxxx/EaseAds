@@ -327,6 +327,19 @@ public function payment_requests($table_type = NULL,$id = NULL,$amt=NULL)
   $this->load->view('admin/footer_view');
 }
 
+public function transactions()
+{
+  $data['items'] = $this->admin_model->get_transactions();
+
+  $data['title'] = "Transactions | Admin Area";
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+  $this->load->view('admin/transactions_view',$data);
+  $this->load->view('admin/footer_view');
+}
+
 public function announcements($table_type = NULL,$id = NULL)
 {
 
@@ -1184,6 +1197,7 @@ $data['campaign'] = $this->admin_model->get_campaign_by_ref_id($ref_id);
   $this->load->view('admin/campaign_details_view',$data);
   $this->load->view('admin/footer_view');
 }
+
 
 
 

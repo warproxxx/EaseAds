@@ -493,6 +493,18 @@ public function get_withdrawal()
   return $query->result_array();
 }
 
+public function get_transactions()
+{
+
+  $q = "SELECT p.id AS transaction_id, p.time AS transaction_time, a.email AS user, p.method, p.amount, p.txn_id AS paypal_id, p.payer_id AS paypal_payer_id, p.payment_token AS paypal_payment_token
+  from payments p
+  LEFT JOIN advertisers a 
+  ON a.id = p.user_id";
+
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
 public function edit_site_details()
 {
     $this->db->update("system_var",array("variable_value"=> $this->input->post("site_name")),array("variable_name"=> "site_name"));

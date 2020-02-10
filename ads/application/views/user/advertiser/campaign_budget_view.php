@@ -43,7 +43,7 @@ if(!empty($cpa_form_data))
 }else{
 	if ($type == 'popup')
 	{
-		echo ('	<option value="ppc">CPC</option>');
+		echo ('	<option value="ppc">CPM</option>');
 	}
 	else
 	{
@@ -64,10 +64,23 @@ if(!empty($cpa_form_data))
 }
 
 	?>" id="ppc_div" class="w3-hide">
-  <span class="w3-label w3-small">Cost Per Click-CPC</b></sup>:</span><br>
-<span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpc'] ?>  </span><br>
+	<?php
 
-       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?=$general_details['minimum_cpc'] ?>" placeholder="Cost Per Click" value="<?php echo set_value('cpc'); ?>" name="cpc"  /><br>
+if ($type == 'popup')
+{
+	echo('<span class="w3-label w3-small">Cost Per Mile-CPM</b></sup>:</span><br>');
+	echo('<span class="w3-text-red">min:' . $general_details['currency_code'] . ' ' .$general_details['minimum_cpm'] . '</span><br>');
+	echo('<input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="'.$general_details['minimum_cpm'] .'" value="'.set_value('cpc').'" name="cpc"  /><br>');
+}
+else
+{
+  echo('<span class="w3-label w3-small">Cost Per Click-CPC</b></sup>:</span><br>');
+  echo('<span class="w3-text-red">min:' . $general_details['currency_code'] . ' ' .$general_details['minimum_cpc'] . '</span><br>');
+  echo('<input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="'.$general_details['minimum_cpc'] .'" value="'.set_value('cpc').'" name="cpc"  /><br>');
+}
+?>
+
+       
    </div>
 		
 <div  class="<?php
