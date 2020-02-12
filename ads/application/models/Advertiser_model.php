@@ -165,6 +165,12 @@ public function get_advertisers()
   $query = $this->db->get('advertisers');
   return $query->result_array();
 }
+public function get_manual_payments()
+{
+
+  $query = $this->db->get('manual_payment');
+  return $query->result_array();
+}
 
 //new
 public function get_no_affilate_clicks($account_type)

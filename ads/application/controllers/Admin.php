@@ -602,6 +602,56 @@ public function admins($account_type = NULL,$id = NULL)
 
 }
 
+public function payments($account_type = NULL,$id = NULL)
+{
+
+  if ($account_type == "remove_payment")
+  {
+    $this->admin_model->delete_user($id, 'manual_payment');
+  }
+
+  $payment_method = $this->input->post("payment_method");
+  $message = $this->input->post("message");
+  $values_used = $this->input->post("values_used");
+  $deposit_1_name = $this->input->post("deposit_1_name");
+  $deposit_1_value = $this->input->post("deposit_1_value");
+  $deposit_2_name = $this->input->post("deposit_2_name");
+  $deposit_2_value = $this->input->post("deposit_2_value");
+  $deposit_3_name = $this->input->post("deposit_3_name");
+  $deposit_3_value = $this->input->post("deposit_3_value");
+  $deposit_4_name = $this->input->post("deposit_4_name");
+  $deposit_4_value = $this->input->post("deposit_4_value");
+  $deposit_5_name = $this->input->post("deposit_5_name");
+  $deposit_5_value = $this->input->post("deposit_5_value");
+
+  if ($payment_method != "")
+  {
+        $array = array("payment_method"=> $payment_method, "message"=>$message,"values_used"=>$values_used, 
+                       "deposit_1_name"=>$deposit_1_name, "deposit_1_value"=>$deposit_1_value,
+                       "deposit_2_name"=>$deposit_2_name, "deposit_2_value"=>$deposit_2_value,
+                       "deposit_3_name"=>$deposit_3_name, "deposit_3_value"=>$deposit_3_value,
+                       "deposit_4_name"=>$deposit_4_name, "deposit_4_value"=>$deposit_4_value,
+                       "deposit_5_name"=>$deposit_5_name, "deposit_5_value"=>$deposit_5_value);
+
+        $this->admin_model->add_payment($array);
+  }
+
+  $data['payments'] = $this->admin_model->get_payments();
+
+  $data['title'] =$this->siteName." | Payments Management Page";
+  $data['description'] = $this->description;
+  $data["noindex"] = $this->noindex;
+  $limit = NULL;
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/payments_view',$data);
+  $this->load->view('admin/footer_view');
+
+}
+
 public function size()
 {
  

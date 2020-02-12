@@ -888,6 +888,7 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 //when we get usd account we rewrite this logic
 $data['amount'] = $this->input->post('amount');
 $data['currency_code'] = $this->input->post('currency');
+$data['manual_payments'] = $this->advertiser_model->get_manual_payments();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);

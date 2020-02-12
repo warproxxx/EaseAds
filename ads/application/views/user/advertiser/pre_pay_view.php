@@ -73,9 +73,55 @@ body {
 </div>
 
 
-<h4>Request Manual Deposit</h4>
+<h4>Other Manual Method</h4>
 
+
+<script>
+var details = {}
+</script>
 <form action="<?= base_url() ?>/advertiser_dashboard/request_payment/<?= $amount ?>" method="post">
+Method:
+
+<select id="type" onchange="changeHTML(this)">
+<option value="">Pick One</option>
+<?php
+foreach ($manual_payments as $payment) 
+{
+    echo("<option value='" . $payment['payment_method'] . "'>" . $payment['payment_method'] . "</option>");
+    $string = $payment['message'] . "<br/>";
+
+    foreach (range(1, $payment['values_used']) as $number) {
+        $first = 'deposit_' . strval($number) . '_name';
+        $second = 'deposit_' . strval($number) . '_value';
+
+        $string = $string . "<b>" . $payment[$first] . ":</b>";
+        $string = $string . $payment[$second] . "</br>";
+    }
+
+    echo("<script>details['".$payment['payment_method']."'] = '".$string."';</script>\n");
+    
+    
+}
+?>
+</select>
+
+    <div id = "details">
+    
+    </div>
+
+    <script>
+
+    function changeHTML(selectObject) 
+    {
+        var value = selectObject.value;  
+        document.getElementById("details").innerHTML = details[value];
+    }
+    
+
+    </script>
+
+    <br/><br/>
+    
     <textarea cols=50 rows=10 name="request_message" value="" placeholder="Enter Your message here" /></textarea>
     <br/>
     <input type="submit" value="Request Deposit" />

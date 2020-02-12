@@ -531,6 +531,12 @@ public function add_admin($array)
   $this->db->insert('team',$array);
 }
 
+public function add_payment($array)
+{
+  $this->db->insert('manual_payment',$array);
+}
+
+
 public function get_announcements()
 {
 
@@ -542,6 +548,13 @@ public function get_admins()
 {
 
   $query = $this->db->get('team');
+  return $query->result_array();
+}
+
+public function get_payments()
+{
+
+  $query = $this->db->get('manual_payment');
   return $query->result_array();
 }
 
