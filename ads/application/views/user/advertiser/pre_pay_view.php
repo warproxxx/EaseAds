@@ -82,7 +82,7 @@ var details = {}
 <form action="<?= base_url() ?>/advertiser_dashboard/request_payment/<?= $amount ?>" method="post">
 Method:
 
-<select id="type" onchange="changeHTML(this)">
+<select id="payment_type" name="payment_type" onchange="changeHTML(this)">
 <option value="">Pick One</option>
 <?php
 foreach ($manual_payments as $payment) 

@@ -115,6 +115,12 @@ public function get_payments($id)
   return $query->result_array();
 }
 
+public function get_other_payments($id)
+{
+  $query = $this->db->get_where('payment_requests',array("user_id" => $id));
+  return $query->result_array();
+}
+
 public function get_system_variable($variable_name)
 {
 
@@ -171,6 +177,8 @@ public function get_manual_payments()
   $query = $this->db->get('manual_payment');
   return $query->result_array();
 }
+
+
 
 //new
 public function get_no_affilate_clicks($account_type)
@@ -430,6 +438,18 @@ return $query->result_array();
 public function get_cpa_form_by_ref_id($ref_id)
 {
   $query= $this->db->get_where('cpa_forms',array('ref_id' => $ref_id));
+  return $query->row_array();
+}
+
+public function get_receipt($id)
+{
+  $q = "SELECT p.method, p.amount, p.time, p.id AS transaction_id, u.firstname, u.lastname, u.country, u.email, u.phone 
+  FROM payments p
+  INNER JOIN advertisers u
+  ON u.id = p.user_id
+  WHERE p.id = " . $id;
+  
+  $query = $this->db->query($q);
   return $query->row_array();
 }
 

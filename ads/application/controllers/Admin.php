@@ -291,7 +291,9 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
-public function payment_requests($table_type = NULL,$id = NULL,$amt=NULL)
+
+
+public function payment_requests($table_type = NULL,$user_id = NULL, $id=NULL, $amt=NULL, $method=NULL)
 {
 
 
@@ -304,8 +306,8 @@ public function payment_requests($table_type = NULL,$id = NULL,$amt=NULL)
       $previous_bal = $user['account_bal'];
       $new_bal = $amt+$previous_bal;
       $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $id);
-      $this->advertiser_model->insert_to_payment_record(array('method'=>'manual',
-      'payment_type'=>'deposit','amount'=> $amt,'user_type'=>'advertiser','user_id' => $id,
+      $this->advertiser_model->insert_to_payment_record(array('method'=>$method,
+      'payment_type'=>'deposit','amount'=> $amt,'user_type'=>'advertiser','user_id' => $user_id,
       'time'=>time(), 'txn_id'=>'Manual', 'payer_id'=>'Manual', 'payment_token'=>'Manual'));      
     }
     elseif ($table_type == 'disapprove')

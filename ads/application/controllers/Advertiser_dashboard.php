@@ -98,6 +98,25 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 
 }
 
+public function receipt($id=NULL)
+{
+  $data['title'] = $this->siteName." | Advertiser Settings";
+  $data['author'] =  $this->author;
+  $data['keywords'] =  $this->keywords;
+  $data['description'] =  $this->description;
+  $data["noindex"] =  $this->noindex;
+  $data['user'] =$this->user;
+  $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+  $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+  $data['receipt'] = $this->advertiser_model->get_receipt($id);
+
+  $this->load->view('/common/advertiser_header_view',$data);
+    $this->load->view('/common/advertiser_top_tiles',$data);
+
+  $this->load->view('/user/advertiser/receipt_view',$data);
+  $this->load->view('/common/users_footer_view',$data);
+}
+
 
 
  public function change_password($slug = null)
@@ -860,7 +879,7 @@ if(!$this->form_validation->run())
   $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
   $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
   $data["payments"] = $this->advertiser_model->get_payments($_SESSION['id']);
-
+  $data["other_payments"] = $this->advertiser_model->get_other_payments($_SESSION['id']);
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -1349,7 +1368,7 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 }
 
 public function request_payment($amount){
-  $arr = array("user_id" => $_SESSION['id'], "amount" => $amount, "message" => $_POST['request_message'], "status" => 0);
+  $arr = array("user_id" => $_SESSION['id'], "amount" => $amount, "message" => $_POST['request_message'], "status" => 0, "method" => $_POST['payment_type'], "time" => time());
   $this->advertiser_model->insert_payment_request($arr);
   $_SESSION['action_status_report'] ="<span class='w3-text-black'>Payment request has been made.</span>";
   $this->session->mark_as_flash('action_status_report');
