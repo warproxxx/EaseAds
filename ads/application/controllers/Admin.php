@@ -301,19 +301,16 @@ public function payment_requests($table_type = NULL,$user_id = NULL, $id=NULL, $
   {
     if ($table_type == 'approve')
     {
-      $str = 1;
+      $str = "CONFIRMED";
       $user=$this->advertiser_model->get_advertiser_by_id($id);
       $previous_bal = $user['account_bal'];
       $new_bal = $amt+$previous_bal;
-      $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $id);
-      $this->advertiser_model->insert_to_payment_record(array('method'=>$method,
-      'payment_type'=>'deposit','amount'=> $amt,'user_type'=>'advertiser','user_id' => $user_id,
-      'time'=>time(), 'txn_id'=>'Manual', 'payer_id'=>'Manual', 'payment_token'=>'Manual'));      
+      $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $id);      
     }
     elseif ($table_type == 'disapprove')
-      $str = -1;
+      $str = "DENIED";
 
-    $this->admin_model->update_single_website("payment_requests",array("status" => $str),$id);
+    $this->admin_model->update_single_website("payments",array("status" => $str),$id);
 
   }
 
@@ -917,7 +914,7 @@ public function default()
 {
 
 
-
+#add to logs
 $user = $this->user_model->get_user_by_its_id($id,$table_type);
 
 $this->form_validation->set_rules('credit',"Amount","required");
@@ -934,11 +931,18 @@ $user['account_bal'] = $user['account_bal'] + $this->input->post('credit');
 
 //insert to db
 
+if ($user['account_bal']  > 0)
+{
+  $dat =array('account_bal' => $user['account_bal']);
+  $this->admin_model->update_user($table_type,$dat,$id);
+  $_SESSION['action_status_report'] = "ACcount Credited $".$this->input->post('credit')." successfully";
+  $this->session->mark_as_flash('action_status_report');
 
-$dat =array('account_bal' => $user['account_bal']);
-$this->admin_model->update_user($table_type,$dat,$id);
-$_SESSION['action_status_report'] = "ACcount Credited $".$this->input->post('credit')." successfully";
-$this->session->mark_as_flash('action_status_report');
+
+  $arr = array("user_id" => $id, "amount" => $this->input->post('credit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
+  $this->advertiser_model->insert_payment_request($arr);
+}
+  
 if($table_type =="advertisers")
 {
 show_page('admin/advertiser_profile_details/'.$id);
@@ -1049,12 +1053,25 @@ if($this->form_validation->run())
 $user['account_bal'] = $user['account_bal'] - $this->input->post('debit');
 
 //insert to db
+if ($user['account_bal']  > 0)
+{
+  $dat =array('account_bal' => $user['account_bal']);
+  $this->admin_model->update_user($table_type,$dat,$id);
+  $_SESSION['action_status_report'] = "Account Debited ".$this->input->post('debit')." successfully";
+  $this->session->mark_as_flash('action_status_report');
 
 
-$dat =  array('account_bal' => $user['account_bal'] );
-$this->admin_model->update_user($table_type,$dat,$id);
-$_SESSION['action_status_report'] = "ACcount Debited ".$this->input->post('debit')." successfully";
-$this->session->mark_as_flash('action_status_report');
+  $arr = array("user_id" => $id, "amount" => $this->input->post('debit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
+  $this->advertiser_model->insert_payment_request($arr);
+}
+else
+{
+  $_SESSION['action_status_report'] = "Decreasing ".$this->input->post('debit')." will make the balance negative.";
+}
+  
+
+
+
 if($table_type =="advertisers")
 {
 show_page('admin/advertiser_profile_details/'.$id);

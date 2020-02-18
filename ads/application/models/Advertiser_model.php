@@ -236,7 +236,7 @@ public function insert_to_payment_record($arr)
 
 public function insert_payment_request($arr)
 {
-  $this->db->insert('payment_requests',$arr);
+  $this->db->insert('payments',$arr);
 }
 
 public function check_exist($paymentId)

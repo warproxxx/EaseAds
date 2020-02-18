@@ -29,6 +29,7 @@ if(isset($_SESSION['action_status_report']))
 	<td>Time</td>
 	<td>Method</td>
 	<td>Amount</td>
+	<td>Status</td>
 	<td>Receipt</td>
 </tr>
 <?php
@@ -41,6 +42,7 @@ foreach ($payments as $payment)
 	<td><?= date("Y-m-d H:i:s", $payment['time']) ?></td>
 	<td><?= $payment['method'] ?></td>
 	<td><?= $payment['amount'] ?> $</td>
+	<td><?= $payment['status'] ?></td>
 	<td><a href="./receipt/<?= $payment['id'] ?>">Generate</a></td>
 </tr>
 <?php
@@ -49,44 +51,3 @@ foreach ($payments as $payment)
 </center>
 </table>
 	
-<h2> Manual Payments: </h2>
-<center>
-<table border=1 style='max-width:80%;/*overflow-x: scroll;*/' class='w3-table w3-striped w3-center w3-responsive'>
-<tr>
-	<td>ID</td>
-	<td>Time</td>
-	<td>Amount</td>
-	<td>Details</td>
-	<td>Status</td>
-</tr>
-<?php
-foreach ($other_payments as $other)
-{
-?>
-
-<tr>
-	<td><?= $other['id'] ?></td>
-	<td><?= date("Y-m-d H:i:s", $other['time']) ?></td>
-	<td><?= $other['amount'] ?></td>
-	<td><?= $other['message'] ?> $</td>
-	<td><?php 
-	if ($other['status'] == 0)
-	{
-		echo('PENDING');
-	}
-	elseif ($other['status'] == 1)
-	{
-		echo('APPROVED');
-	}
-	else
-	{
-		echo('DENIED');
-	}
-	?></td>
-</tr>
-<?php
-}
-?>
-</center>
-
-</div>

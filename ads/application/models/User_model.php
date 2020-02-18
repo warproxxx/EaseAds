@@ -224,9 +224,9 @@ public function get_pending_websites($offset,$limit)
 public function get_pending_payment_request()
 {
   $q = "SELECT p.id, p.user_id, p.amount, p.message, p.status, p.time, p.method, a.email
-        FROM payment_requests p
+        FROM payments p
         LEFT OUTER JOIN advertisers a ON a.id = p.user_id
-        WHERE p.status = 0
+        WHERE p.status = 'PENDING'
         ORDER BY id ASC";
 
   $query = $this->db->query($q);

@@ -1368,7 +1368,7 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 }
 
 public function request_payment($amount){
-  $arr = array("user_id" => $_SESSION['id'], "amount" => $amount, "message" => $_POST['request_message'], "status" => 0, "method" => $_POST['payment_type'], "time" => time());
+  $arr = array("user_id" => $_SESSION['id'], "amount" => $amount, "user_type" => 'advertiser', "method" => $_POST['payment_type'], "status" => "PENDING", "payment_type" => "DEPOSIT", "message" => $_POST['request_message'], "time" => time());
   $this->advertiser_model->insert_payment_request($arr);
   $_SESSION['action_status_report'] ="<span class='w3-text-black'>Payment request has been made.</span>";
   $this->session->mark_as_flash('action_status_report');
