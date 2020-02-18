@@ -1067,6 +1067,7 @@ if ($user['account_bal']  > 0)
 else
 {
   $_SESSION['action_status_report'] = "Decreasing ".$this->input->post('debit')." will make the balance negative.";
+  $this->session->mark_as_flash('action_status_report');
 }
   
 

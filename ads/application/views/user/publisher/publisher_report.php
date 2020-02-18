@@ -1,3 +1,5 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <center>
 
     <form method="post">
@@ -34,7 +36,9 @@
 
     <h3> Report </h3>
 
-    
+    <button type="button" id="transactionspdf">Download Report</button>
+
+    <div id = "fullreport">
     <?php
         if (!empty($day_report)) {
             echo("<center><table border=1>
@@ -106,7 +110,28 @@
 
     
     ?>
+    </div>
 
 </center>
 
 
+<script>
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+$('#transactionspdf').click(function () {
+	download("report.html", $('#fullreport').html());
+});
+
+
+</script>
