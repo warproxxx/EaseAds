@@ -1,5 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script src="<?php echo base_url('assets/js/excellentexport.js'); ?>"></script>
 
 <div class="w3-container w3-center">
 <span class="w3-text-indigo w3-large w3-serif">Account Deposit</span><br>
@@ -30,7 +30,7 @@ if(isset($_SESSION['action_status_report']))
 
 	<center>
 
-	<table border=1 style='max-width:80%;/*overflow-x: scroll;*/' class='w3-table w3-striped w3-center w3-responsive'>
+	<table border=1 style='max-width:80%;/*overflow-x: scroll;*/' class='w3-table w3-striped w3-center w3-responsive' id="transactionstable">
 	<tr>
 		<td>Transaction ID</td>
 		<td>Time</td>
@@ -65,7 +65,8 @@ if(isset($_SESSION['action_status_report']))
 	</center>
 	</table>
 </div>
-<button type="button" id="transactionspdf">Download transactions</button>
+<a download="transactions.xls" href="#" onclick="return ExcellentExport.excel(this, 'transactionstable', 'Transactions');">Download Transactions</a>
+
 
 <?php
 foreach ($payments as $payment)
@@ -73,12 +74,31 @@ foreach ($payments as $payment)
 ?>
 
 <div id="receipt" style="display:none">
-	<b>Status:</b> <div id="receipt_status"></div>
-	<b>Date:</b> <div id="receipt_date"></div>
-	<b>Transaction ID:</b> <div id="receipt_transaction_id"></div>
-	<b>Method:</b> <div id="receipt_method"></div>
-	<b>Amount:</b> <div id="receipt_amount"></div>
-	<button id="cmd">Download receipt</button>
+	<center>
+	<table id="receipttable">
+		<tr>
+			<td><b>Status:</b></td>
+			<td id="receipt_status"></td>
+		</tr>
+		<tr>
+			<td><b>Date:</b></td>
+			<td id="receipt_date"></td>
+		</tr>
+		<tr>
+			<td><b>Transaction ID:</b></td>
+			<td id="receipt_transaction_id"></td>
+		</tr>
+		<tr>
+			<td><b>Method:</b></td>
+			<td id="receipt_method"></td>
+		</tr>
+		<tr>
+			<td><b>Amount:</b></td>
+			<td id="receipt_amount"></td>
+		</tr>
+	</table>
+	<a download="receipt.xls" href="#" onclick="return ExcellentExport.excel(this, 'receipttable', 'Receipt');">Export to Excel</a>
+	</center>
 </div>
 
 

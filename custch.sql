@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2020 at 07:37 PM
--- Server version: 5.7.28-0ubuntu0.16.04.2
+-- Generation Time: Feb 19, 2020 at 10:32 AM
+-- Server version: 5.7.29-0ubuntu0.16.04.1
 -- PHP Version: 7.0.33-0ubuntu0.16.04.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -48,7 +48,13 @@ INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `wee
 (4, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580278960'),
 (5, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580301895'),
 (6, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580302312'),
-(7, 'January', '2020', 'popup', 'click', 'Wednesday', '0.0000', '1580303133');
+(7, 'January', '2020', 'popup', 'click', 'Wednesday', '0.0000', '1580303133'),
+(8, 'February', '2020', 'banner', 'click', 'Saturday', '0.0000', '1581166415'),
+(9, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581166885'),
+(10, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581166909'),
+(11, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581167040'),
+(12, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581167068'),
+(13, 'February', '2020', 'popup', 'click', 'Saturday', '0.0000', '1581167092');
 
 -- --------------------------------------------------------
 
@@ -83,9 +89,10 @@ CREATE TABLE `advertisers` (
 
 INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
 (1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'eritrea', NULL, 'daniel@advertiser.com', NULL, '342423424', '60.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, '1578141363', 1578059534),
-(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '4900.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1580305426', 1578315045),
-(3, 'Pratk', 'Kunwar', '15cc992d5177a2ec8bd741a3163b254f', 'Nepal', NULL, 'pratik@kunwar.com', NULL, '23432424', '0.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, NULL, 1579317725),
-(4, 'New', 'advertiser', 'fb469d7ef430b0baf0cab6c436e70375', 'Armenia', NULL, 'new@test.com', NULL, '9882938192', '0.0000', '0.0000', NULL, '["reddit.com"]', 'active', NULL, NULL, NULL, 1579942420);
+(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '5349.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1582086684', 1578315045),
+(3, 'Pratk', 'Kunwar', '15cc992d5177a2ec8bd741a3163b254f', 'Nepal', NULL, 'pratik@kunwar.com', NULL, '23432424', '4950.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, NULL, 1579317725),
+(4, 'New', 'advertiser', 'fb469d7ef430b0baf0cab6c436e70375', 'Armenia', NULL, 'new@test.com', NULL, '9882938192', '4978.0000', '0.0000', NULL, '["reddit.com"]', 'active', NULL, NULL, NULL, 1579942420),
+(5, 'IM', 'Test', 'e20a922006822f58699cbe1e181be9be', 'Aruba', NULL, 'sd@aa.com', NULL, 'noobydan', '5516.0000', '0.0000', NULL, '["asdd.com"]', 'active', NULL, NULL, NULL, 1580952182);
 
 -- --------------------------------------------------------
 
@@ -146,16 +153,20 @@ INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `star
 (4, 1580010702, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'asdd', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-27_07-01-41.png', NULL, '47101fb177fe0f62a417', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'Business', '2', NULL, NULL, NULL, NULL, 0),
 (5, 1580134689, 2, 0, 0, 1580134689, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Country Test', 'dsds.com', 'banner', '300X250', NULL, 'ran.png', NULL, '363e3520bb270306a75d', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', '["desktop","mobile","android","ios"]', NULL, '["opera","chrome","firefox","ie"]', '["AL","DZ","BD","NP"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
 (6, 1580182996, 2, 0, 0, 1580182996, '0.0100', '0.0000', NULL, '50.0000', '50.0000', 0, '-Text Campaign Test', 'water.com', 'text', NULL, 'water.com', '', NULL, '809b22d287c9104c64f1', NULL, 'Text', 'Text camp ad test', '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Blog', '3', NULL, NULL, NULL, NULL, 0),
-(14, 1580197449, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'allahuakbar', 'banner', '300X250', NULL, 'ran1.png', NULL, 'd8695472862a4fa6f918', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
+(14, 1580197449, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '0.0000', 0, 'Default Banner', 'allahuakbar', 'banner', '300X250', NULL, 'ran1.png', NULL, 'd8695472862a4fa6f918', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
 (15, 1580201902, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'ggg.com', 'text', '300X250', 'ggg.com', NULL, NULL, 'f2aec19b0aba789116a9', NULL, NULL, 'Another Test', '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
 (17, 1580216836, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-sdd', 'asddd.com', 'banner', '300X250', NULL, 'Screenshot_from_2018-07-23_06-45-57.png', NULL, '070a745c033731e8e71e', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Blog', '1', NULL, NULL, NULL, NULL, 0),
 (18, 1580279017, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-aadadsdf', 'sdad.com', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-02_07-20-02.png', NULL, 'e3f06aca678d9f0e038d', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, '["AF"]', 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
 (19, 1580285324, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-Test Popup', 'sdsdd.com', 'recommendation', NULL, NULL, '', NULL, '47c262021808c46bcc0d', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
 (20, 1580287795, 2, 0, 0, 1580287795, '0.0000', '0.1000', NULL, '50.0000', '50.0000', 0, '-Popup Test', 'popup.com', 'popup', NULL, NULL, '', NULL, 'b2f5b738d3dcab2febea', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
 (21, 1580287816, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdasd', 'aaa.com', 'popup', NULL, NULL, '', NULL, '215a169ba202e31a1641', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Blog', '2', NULL, NULL, NULL, NULL, 0),
-(22, 1580288431, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'gg.com', 'popup', '300X250', NULL, NULL, NULL, '390044bf862378c1686c', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
+(22, 1580288431, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '0.0000', 0, 'Default Banner', 'http://ask.com', 'popup', '300X250', NULL, NULL, NULL, '390044bf862378c1686c', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
 (23, 1580302087, 2, 0, 0, 1580302087, NULL, NULL, NULL, '50.0000', '50.0000', 0, '-Working Popup', 'waterbot.xyz', 'popup', NULL, NULL, '', NULL, 'b1b04aa3c1e2464d4265', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(24, 1580305479, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdd', 'http://a.com', 'popup', NULL, NULL, '', NULL, '1ad1a22c44f778c82ee0', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', '["windows"]', NULL, '["chrome"]', NULL, 'true', 'Beauty', '2', NULL, NULL, NULL, NULL, 0);
+(24, 1580305479, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdd', 'http://a.com', 'popup', NULL, NULL, '', NULL, '1ad1a22c44f778c82ee0', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', '["windows"]', NULL, '["chrome"]', NULL, 'true', 'Beauty', '2', NULL, NULL, NULL, NULL, 0),
+(25, 1581164987, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'http://gg.com', 'banner', '300X250', NULL, 'ran2.png', NULL, 'f10fa1c99b9060923062', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Blog', '2', NULL, NULL, NULL, NULL, 0),
+(26, 1581165102, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdd', 'http://aa.com', 'popup', NULL, NULL, '', NULL, '7919926834d54fa810fb', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
+(27, 1581252333, 2, 0, 0, 1581252333, '0.2000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Actual Test', 'htpp://aaa.com', 'popup', NULL, NULL, '', NULL, '1635f056f81b232afc1d', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
+(28, 1581323171, 2, 0, 0, 1581323171, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-sadd', 'http://aa.com', 'popup', NULL, NULL, '', NULL, '9133c73326a7e7934d8c', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -263,7 +274,13 @@ CREATE TABLE `clicks` (
 --
 
 INSERT INTO `clicks` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `os`, `is_mobile`, `country`) VALUES
-(1, 1580303133, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', NULL, '0', NULL);
+(1, 1580303133, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', NULL, '0', NULL),
+(2, 1581166415, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(3, 1581166885, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(4, 1581166909, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(5, 1581167040, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(6, 1581167068, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(7, 1581167092, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,7 +330,7 @@ CREATE TABLE `countries` (
 --
 
 INSERT INTO `countries` (`id`, `name`, `select_value`, `language`, `currency_code`, `currency_name`, `xchange_rate`, `minimum_cpc`, `minimum_cpa`, `minimum_paid_cpa`, `minimum_cpm`, `minimum_budget`, `minimum_deposit`, `minimum_payout`, `flag_slug`, `time`) VALUES
-(1, 'general', 'general', 'english', '$', 'USD', '1.0000', '0.0010', '0.0010', '0.0010', '0.0010', '50.0000', '5.0000', '50.0000', NULL, NULL);
+(1, 'general', 'general', 'english', '$', 'USD', '1.0000', '0.0200', '0.0010', '0.0010', '0.0010', '10.0000', '50.0000', '50.0000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -359,6 +376,37 @@ CREATE TABLE `history` (
 
 INSERT INTO `history` (`id`, `user_id`, `details`, `action`, `time`, `account_type`) VALUES
 (1, '7', 'Your Withdrawal Request Had been Processed', 'w_process', 1579786211, 'publisher');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manual_payment`
+--
+
+CREATE TABLE `manual_payment` (
+  `id` int(10) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `deposit_1_name` varchar(50) NOT NULL,
+  `deposit_1_value` varchar(50) NOT NULL,
+  `deposit_2_name` varchar(50) NOT NULL,
+  `deposit_2_value` varchar(50) NOT NULL,
+  `deposit_3_name` varchar(50) NOT NULL,
+  `deposit_3_value` varchar(50) NOT NULL,
+  `deposit_4_name` varchar(50) NOT NULL,
+  `deposit_4_value` varchar(50) NOT NULL,
+  `deposit_5_name` varchar(50) NOT NULL,
+  `deposit_5_value` varchar(50) NOT NULL,
+  `values_used` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `manual_payment`
+--
+
+INSERT INTO `manual_payment` (`id`, `payment_method`, `deposit_1_name`, `deposit_1_value`, `deposit_2_name`, `deposit_2_value`, `deposit_3_name`, `deposit_3_value`, `deposit_4_name`, `deposit_4_value`, `deposit_5_name`, `deposit_5_value`, `values_used`, `message`) VALUES
+(3, 'Skrill', 'Email', 'test@skrill.com', 'Reference No', 'jdkadjkjdkjd', '', '', '', '', '', '', 2, 'Please Enter the transaction id below'),
+(4, 'Bank', 'SWIFT', '23', 'Account Number', '37887382', 'Bank Name', 'Siddhartha', '', '', '', '', 3, 'This our bank account detail');
 
 -- --------------------------------------------------------
 
@@ -456,7 +504,7 @@ CREATE TABLE `payments` (
   `phone` int(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `amount` decimal(19,4) NOT NULL,
-  `status` varchar(128) DEFAULT NULL,
+  `status` varchar(128) DEFAULT 'CONFIRMED',
   `particular` varchar(128) DEFAULT NULL,
   `payment_type` varchar(128) DEFAULT NULL,
   `time` varchar(128) DEFAULT NULL,
@@ -464,17 +512,24 @@ CREATE TABLE `payments` (
   `txn_id` varchar(100) DEFAULT NULL,
   `payer_id` varchar(50) DEFAULT NULL,
   `payment_token` varchar(50) DEFAULT NULL,
-  `ldetails` text
+  `ldetails` text,
+  `message` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`) VALUES
-(3, '2', 'advertiser', 'paypal', NULL, '', '10.0000', NULL, NULL, 'deposit', '1579754186', NULL, 'PAYID-LYUSFMI4Y847822CA173270R', 'D34LDFXSNMR58', 'EC-7AT15982JL9061614', NULL),
-(4, '1', 'advertiser', 'manual', NULL, '', '50.0000', NULL, NULL, 'deposit', '1579772268', NULL, 'Manual', 'Manual', 'Manual', NULL),
-(5, '2', 'advertiser', 'paypal', NULL, '', '50.0000', NULL, NULL, 'deposit', '1580279167', NULL, 'PAYID-LYYSKPY7AH51123JT047525A', 'D34LDFXSNMR58', 'EC-4A212519D5035631K', NULL);
+INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`, `message`) VALUES
+(3, '2', 'advertiser', 'paypal', NULL, '', '10.0000', 'CONFIRMED', NULL, 'deposit', '1579754186', NULL, 'PAYID-LYUSFMI4Y847822CA173270R', 'D34LDFXSNMR58', 'EC-7AT15982JL9061614', NULL, ''),
+(4, '1', 'advertiser', 'manual', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1579772268', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
+(5, '2', 'advertiser', 'paypal', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1580279167', NULL, 'PAYID-LYYSKPY7AH51123JT047525A', 'D34LDFXSNMR58', 'EC-4A212519D5035631K', NULL, ''),
+(6, '2', 'advertiser', 'manual', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1581511274', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
+(9, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589157', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
+(10, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589159', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
+(11, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589304', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
+(13, '2', 'advertiser', 'Bank', NULL, '', '50.0000', 'CONFIRMED', NULL, 'DEPOSIT', '1582011278', NULL, NULL, NULL, NULL, NULL, 'Hello plz'),
+(14, '2', 'advertisers', 'Manual', NULL, '', '55.0000', 'CONFIRMED', NULL, 'MANUAL', '1582013032', NULL, NULL, NULL, NULL, NULL, 'Manually done by admin');
 
 -- --------------------------------------------------------
 
@@ -487,15 +542,21 @@ CREATE TABLE `payment_requests` (
   `user_id` int(10) NOT NULL,
   `amount` int(10) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
+  `status` int(11) NOT NULL DEFAULT '0',
+  `method` varchar(20) NOT NULL,
+  `time` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payment_requests`
 --
 
-INSERT INTO `payment_requests` (`id`, `user_id`, `amount`, `message`, `status`) VALUES
-(1, 2, 50, 'add', 0);
+INSERT INTO `payment_requests` (`id`, `user_id`, `amount`, `message`, `status`, `method`, `time`) VALUES
+(1, 2, 50, 'add', -1, '', 0),
+(2, 2, 50, 'My deposit ID is ', 1, 'Skrill', 1581498527),
+(3, 2, 100, 'I sent the transaction to: \r\n\r\nasdd', 1, 'Skrill', 1581567644),
+(4, 2, 128, 'asdadasd fasf asdd', 1, 'Bank', 1581588923),
+(5, 2, 222, 'asdad add asd', 1, 'Skrill', 1581589079);
 
 -- --------------------------------------------------------
 
@@ -551,7 +612,7 @@ CREATE TABLE `publishers` (
 --
 
 INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`) VALUES
-(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '50.0000', '0.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1580302277', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
+(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '50.0000', '0.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1581323229', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
 
 -- --------------------------------------------------------
 
@@ -613,7 +674,8 @@ INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `
 (4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box"></script>\n<center><div  class="w3-margin"  id="AC0">\n</div></center>', NULL, NULL),
 (5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '["Business"]', NULL, NULL, NULL, NULL),
 (6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4"></script>\n<div  class="w3-margin"  style="" id="ee6">\n</div>', NULL, NULL),
-(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6"></script>\n<div  class="w3-margin"  style="" id="BE1">\n</div>', NULL, NULL);
+(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6"></script>\n<div  class="w3-margin"  style="" id="BE1">\n</div>', NULL, NULL),
+(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b"></script>\n<div  class="w3-margin"  style="" id="cc5">\n</div>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -726,7 +788,39 @@ INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_
 (35, 1580303456, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
 (36, 1580303456, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
 (37, 1580303472, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(38, 1580303762, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
+(38, 1580303762, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(39, 1581148597, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(40, 1581148665, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(41, 1581148692, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(42, 1581148736, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(43, 1581148747, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(44, 1581148783, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(45, 1581148820, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(46, 1581148821, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(47, 1581166360, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(48, 1581166407, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(49, 1581166517, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(50, 1581166712, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(51, 1581166736, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(52, 1581166753, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(53, 1581166793, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(54, 1581166824, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(55, 1581166879, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(56, 1581166883, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(57, 1581166885, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(58, 1581166980, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(59, 1581166992, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(60, 1581167004, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(61, 1581167016, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(62, 1581167031, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(63, 1581167039, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(64, 1581167040, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(65, 1581167078, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(66, 1581167086, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(67, 1581167091, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(68, 1581167092, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(69, 1581323241, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(70, 1581323489, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -832,6 +926,12 @@ ALTER TABLE `history`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `manual_payment`
+--
+ALTER TABLE `manual_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `media`
 --
 ALTER TABLE `media`
@@ -929,17 +1029,17 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
@@ -964,7 +1064,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `cmessages`
 --
@@ -985,6 +1085,11 @@ ALTER TABLE `cpa_forms`
 --
 ALTER TABLE `history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `manual_payment`
+--
+ALTER TABLE `manual_payment`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `media`
 --
@@ -1014,12 +1119,12 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
 ALTER TABLE `payment_requests`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -1039,7 +1144,7 @@ ALTER TABLE `publishers_websites`
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `system_var`
 --
@@ -1054,7 +1159,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
