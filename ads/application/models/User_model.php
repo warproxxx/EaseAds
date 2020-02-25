@@ -56,6 +56,13 @@ $this->db->insert('advertisers',$reg);
 
  return true;
 }
+
+public function custom_advertiser($reg)
+{
+  $this->db->insert('advertisers',$reg);
+}
+
+
 //new
 public function select_with_password($pass)
 {
@@ -88,6 +95,20 @@ return $query->row_array();
 
 
 //new
+
+public function custom_publisher($reg, $website)
+{
+  $this->db->insert('publishers',$reg);
+  $websites = array(
+  
+    'publisher_id' =>  $this->db->insert_id(),
+    "website" => $website
+    
+    );
+  
+  $this->db->insert('publishers_websites',$websites);
+}
+
 public function register_publisher()
 {
 

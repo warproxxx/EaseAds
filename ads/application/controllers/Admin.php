@@ -182,8 +182,7 @@ $data["noindex"] = $this->noindex;
 }
 public function pending_publishers_list($offset = 0)
 {
-
-
+  
     $limit = 8;
       $this->load->library('pagination');
 
@@ -414,6 +413,34 @@ public function categories($table_type = NULL,$id = NULL)
 
 public function publishers_list($offset = 0) {
 
+  $website = $this->input->post('website');
+
+
+  if ($website != "")
+  {
+    $reg = array(
+
+      'firstname' =>  $this->input->post('firstname'),
+      'lastname' =>  $this->input->post('lastname'),
+      'password' =>  md5(md5($this->input->post('password'))),
+      'phone' => $this->input->post('phone'),
+      'email' => $this->input->post('email'),
+      "account_status" => "active",
+      "country" => $this->input->post('country'),
+      "total_earned" => "0.00",
+      "pending_bal" => "0.00",
+      "account_bal" => "0.00",
+      "referral_id" => NULL,
+      "websites" => json_encode(array($this->input->post('website'))),
+      'time' => time()
+      
+      );
+      
+    
+    
+      $this->user_model->custom_publisher($reg, $this->input->post('website'));
+
+    }
 
   	$limit = 8;
   		$this->load->library('pagination');
@@ -475,6 +502,33 @@ $this->load->view('/admin/header_view',$data);
 
 public function advertisers_list($offset = 0) {
 
+  $firstname = $this->input->post('firstname');
+
+
+  if ($firstname != "")
+  {
+    $reg = array(
+
+      'firstname' =>  $this->input->post('firstname'),
+      'lastname' =>  $this->input->post('lastname'),
+      'password' =>  md5(md5($this->input->post('password'))),
+      'phone' => $this->input->post('phone'),
+      'email' => $this->input->post('email'),
+      "account_status" => "active",
+      "country" => $this->input->post('country'),
+      "total_spent" => "0.00",
+      "account_bal" => "0.00",
+      "referral_id" => NULL,
+      "websites" => json_encode(array($this->input->post('website'))),
+      'time' => time()
+      
+      );
+      
+    
+    
+      $this->user_model->custom_advertiser($reg);
+
+    }
 
     $limit = 8;
       $this->load->library('pagination');
@@ -1052,24 +1106,24 @@ if($this->form_validation->run())
 
 $user['account_bal'] = $user['account_bal'] - $this->input->post('debit');
 
-//insert to db
-if ($user['account_bal']  > 0)
+if ($user['account_bal']  < 0)
 {
-  $dat =array('account_bal' => $user['account_bal']);
-  $this->admin_model->update_user($table_type,$dat,$id);
-  $_SESSION['action_status_report'] = "Account Debited ".$this->input->post('debit')." successfully";
-  $this->session->mark_as_flash('action_status_report');
-
-
-  $arr = array("user_id" => $id, "amount" => $this->input->post('debit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
-  $this->advertiser_model->insert_payment_request($arr);
+  $user['account_bal'] = 0;
+  $_SESSION['action_status_report'] = "Account Balance set to 0";
 }
 else
 {
-  $_SESSION['action_status_report'] = "Decreasing ".$this->input->post('debit')." will make the balance negative.";
-  $this->session->mark_as_flash('action_status_report');
+  $_SESSION['action_status_report'] = "Account Debited ".$this->input->post('debit')." successfully";
 }
-  
+
+$dat =array('account_bal' => $user['account_bal']);
+$this->admin_model->update_user($table_type,$dat,$id);
+
+$this->session->mark_as_flash('action_status_report');
+
+
+$arr = array("user_id" => $id, "amount" => $this->input->post('debit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
+$this->advertiser_model->insert_payment_request($arr);
 
 
 
