@@ -454,8 +454,15 @@ if (!$this->form_validation->run())
       $data['author'] = $this->author;
       $data['keywords'] = $this->keywords;
       $data['description'] = $this->description;
-      $data['type'] = $_GET['type'];
-
+      
+      if (array_key_exists('type', $_GET)) 
+      {
+          $data['type'] = $_GET['type'];
+      }
+      else
+      {
+        $data['type'] = 'publisher';
+      }
     $this->load->view('/common/header_view',$data);
 
     
@@ -486,7 +493,15 @@ $this->load->view('/common/public_header_plate_view',$data);
     $_SESSION["accounttype"] = ucfirst($this->input->post('accounttype'));
 //log login time
     $this->user_model->insert_login_time($_SESSION['accounttype']);
-    $_SESSION['account_status'] =$this->user_model->get_user_by_its_id($_SESSION['id'],"publishers")['account_status'];
+
+    if ($_SESSION["accounttype"] == 'Advertiser')
+    {
+      $_SESSION['account_status'] =$this->user_model->get_user_by_its_id($_SESSION['id'],"advertisers")['account_status'];
+    }
+    else
+    {
+      $_SESSION['account_status'] =$this->user_model->get_user_by_its_id($_SESSION['id'],"publishers")['account_status'];
+    }
 
     $_SESSION["logged_in"] = true;
     show_page($this->input->post('accounttype')."_dashboard");

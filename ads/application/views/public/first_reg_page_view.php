@@ -28,7 +28,7 @@
     <center>
        <div class="w3-text- w3-small w3-margin-bottom w3-margin-bottom">Already have Account? <span class="w3-text-blue"><?php
     echo "<a href='";
-    echo site_url('login');
+    echo site_url('login?type=publisher');
     echo "'>Login Here</a>";
 
          ?></span></div>

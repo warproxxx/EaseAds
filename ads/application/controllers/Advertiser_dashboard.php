@@ -27,6 +27,11 @@ public function __construct()
       {
         show_page('page/logout');
       }
+      //check for account approval
+      if($_SESSION['account_status'] == "suspended")
+      {
+        show_page('page/suspended_account_alert');
+      }
 
       $this->siteName = $this->advertiser_model->get_system_variable("site_name");
       $this->author = $this->advertiser_model->get_system_variable("author");
@@ -721,7 +726,7 @@ $this->advertiser_model->insert_campaign_step_three($ref_id,$data['user']);
 
 }
 }
- public function campaign($offset = 0)
+ public function campaign()
  {
 
 
@@ -729,34 +734,10 @@ $this->advertiser_model->insert_campaign_step_three($ref_id,$data['user']);
     $limit = 5;
       $this->load->library('pagination');
 
-        $data['items'] =  $this->advertiser_model->get_advertiser_campaigns($offset,$limit);
-    $config['base_url'] = site_url("advertiser_dashboard/campaign");
-  $config['total_rows'] = count($this->advertiser_model->get_advertiser_campaigns(null,null));
-  //$config['total_rows'] = $this->db->count_all('pages');
-
-    $config['per_page'] = $limit;
-
-   //$config['uri_segment'] = 4;
-  $config['first_tag_open'] = '<span class="w3-btn w3-indigo w3-text-white">';
-  $config['first_tag_close'] = '</span>';
-  $config['last_tag_open'] = '<br><span class="w3-btn w3-indigo w3-text-white">';
-  $config['last_tag_close'] = '</span>';
-  $config['first_link'] = 'First';
-
-
-
-  $config['prev_link'] = 'Prev';
-  $config['next_link'] = 'Next';
-  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-indigo w3-text-white">';
-  $config['next_tag_close'] = '</span><br>';
-  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-indigo w3-text-white">';
-  $config['prev_tag_close'] = '</span>';
-  $config['last_link'] = 'Last';
-  $config['display_pages'] = false;
-
-       $this->pagination->initialize($config);
-  $data['pagination'] = $this->pagination->create_links();
-
+        $data['items'] =  $this->advertiser_model->get_advertiser_campaigns(null,null);
+        $config['base_url'] = site_url("advertiser_dashboard/campaign");
+        $config['total_rows'] = count($this->advertiser_model->get_advertiser_campaigns(null,null));
+  
       $data['title'] = $this->siteName." | Advertiser Campaign";
       $data['author'] =  $this->author;
       $data['keywords'] =  $this->keywords;
@@ -858,6 +839,28 @@ $this->advertiser_model->fund_campaign($ref_id,$this->advertiser_model->get_adve
 }
 
 
+}
+
+public function transactions()
+{
+  $data['title'] = $this->siteName." | Advertiser Affilate";
+  $data['author'] =  $this->author;
+  $data['keywords'] =  $this->keywords;
+  $data['description'] =  $this->description;
+  $data["noindex"] =  $this->noindex;
+  $data['user'] =$this->user;
+  $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+  $data['general_details'] = $this->advertiser_model->get_general_details();
+
+  $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+  $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+  $data["payments"] = $this->advertiser_model->get_payments($_SESSION['id']);
+  $data["other_payments"] = $this->advertiser_model->get_other_payments($_SESSION['id']);
+
+  $this->load->view('/common/advertiser_header_view',$data);
+    $this->load->view('/common/advertiser_top_tiles',$data);
+  $this->load->view('/user/advertiser/transactions_view',$data);
+    $this->load->view('/common/users_footer_view',$data);
 }
 
 public function payment()

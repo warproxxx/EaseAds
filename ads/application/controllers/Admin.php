@@ -993,7 +993,7 @@ if ($user['account_bal']  > 0)
   $this->session->mark_as_flash('action_status_report');
 
 
-  $arr = array("user_id" => $id, "amount" => $this->input->post('credit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
+  $arr = array("user_id" => $id, "amount" => $this->input->post('credit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => $this->input->post('message'), "time" => time());
   $this->advertiser_model->insert_payment_request($arr);
 }
   
@@ -1122,7 +1122,7 @@ $this->admin_model->update_user($table_type,$dat,$id);
 $this->session->mark_as_flash('action_status_report');
 
 
-$arr = array("user_id" => $id, "amount" => $this->input->post('debit'), "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => "Manually done by admin", "time" => time());
+$arr = array("user_id" => $id, "amount" => $this->input->post('debit') * -1, "user_type" => $table_type, "method" => "Manual", "status" => "CONFIRMED", "payment_type" => "MANUAL", "message" => $this->input->post('message'), "time" => time());
 $this->advertiser_model->insert_payment_request($arr);
 
 

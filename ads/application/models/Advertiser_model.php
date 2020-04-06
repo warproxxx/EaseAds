@@ -583,7 +583,7 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 {
 
    $time_interval  = $time_interval * 60 * 60;
-    $q = "SELECT COUNT(v.id) AS total_views, AVG(a.per_view) AS eCPM
+    $q = "SELECT COUNT(v.id) AS total_views, SUM(a.per_view * a.views) AS eCPM
     FROM views v
     LEFT JOIN adv_story a
     ON a.ref_id = v.story_id
@@ -598,7 +598,7 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 public function get_campaign_at_time_clicks($ref_id,$today,$time_interval)
 {
   $time_interval  = $time_interval * 60 * 60;
-  $q = "SELECT COUNT(c.id) AS total_clicks, AVG(a.per_view) AS eCPM
+  $q = "SELECT COUNT(c.id) AS total_clicks, SUM(a.per_click * a.clicks) AS eCPM
   FROM clicks c
   LEFT JOIN adv_story a
   ON a.ref_id = c.story_id

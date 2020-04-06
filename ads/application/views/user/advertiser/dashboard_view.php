@@ -165,7 +165,7 @@ echo $active_campaigns;
             <td>Minimum CPA</td>
             <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_cpa']?></i></td>
           </tr> -->
-          <tr>
+          <!-- <tr>
         <td><i class="fa fa-money w3-text-blue w3-large"></i></td>
         <td>Total Earnings.</td>
         <td><i><?php
@@ -173,7 +173,7 @@ echo $active_campaigns;
        // echo "89";
          ?></i></td>
       </tr>
-          
+           -->
 
 
  </table>

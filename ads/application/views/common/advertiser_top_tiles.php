@@ -10,7 +10,13 @@
           <h3><?= $count_campaigns ?></h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Campaigns</h4>
+        <div class="dropdown">
+          <button class="dropbtn_red">Campaigns</button>
+          <div class="dropdown-content">
+            <a href="<?= site_url("advertiser_dashboard/Campaign") ?>">Campaign List</a>
+            <a href="<?= site_url("advertiser_dashboard/choose_campaign_type") ?>">Start Campaign</a>
+          </div>
+        </div> 
       </div></a>
     </div>
     <div class="w3-quarter"><a href="<?= site_url("advertiser_dashboard/payment") ?>">
@@ -20,7 +26,13 @@
           <h3>1</h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Deposit</h4>
+        <div class="dropdown">
+          <button class="dropbtn_green">Deposit</button>
+          <div class="dropdown-content">
+            <a href="<?= site_url("advertiser_dashboard/payment") ?>">Add Fund</a>
+            <a href="<?= site_url("advertiser_dashboard/transactions") ?>">Transaction List</a>
+          </div>
+        </div>
       </div></a>
     </div>
     

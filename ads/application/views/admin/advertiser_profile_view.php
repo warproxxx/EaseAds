@@ -68,6 +68,8 @@ echo form_open('admin/credit/advertisers/'.$this->uri->segment(3));
 
 ?>
 <input type="text" name="credit" class="w3-padding" placeholder="Amount" required/><br>
+<input type="text" name="message" class="w3-padding" placeholder="Message" required/><br>
+
 <input type="submit" name="submit" class="w3-btn w3-green" value="Credit"/>
 
 </form>
@@ -84,7 +86,10 @@ echo form_open('admin/debit/advertisers/'.$this->uri->segment(3));
 
 ?>
 <input type="text" name="debit" class="w3-padding" placeholder="Amount" required/><br>
+<input type="text" name="message" class="w3-padding" placeholder="Message" required/><br>
+
 <input type="submit" name="submit" class="w3-red w3-btn" value="Debit"/>
+
 
 </form>
 
