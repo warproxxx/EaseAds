@@ -488,6 +488,36 @@ public function sites()
 
 }
 
+public function sites_list()
+{
+
+      $form_data = $this->input->post();
+      $site_name = $this->input->post("site_name");
+
+      if ($site_name != "")
+      {
+            $this->user_model->add_single_site($_SESSION['id'], $site_name);
+            echo("<script>alert('The website has been submitted and is pending approval')</script>");
+      }
+
+      $data['title'] = $this->siteName." |  Sites";
+      $data['author'] = $this->author;
+      $data['keywords'] = $this->keywords;
+      $data['description'] = $this->description;
+      $data["noindex"] = $this->noindex;
+      $data['user'] = $this->publisher_model->get_publisher_by_id();
+      $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+      $data["sites"] = $this->publisher_model->get_publisher_sites();
+      
+      $this->load->view('/common/publisher_header_view',$data);
+      $this->load->view('/common/publisher_top_tiles',$data);
+      $this->load->view('/user/publisher/sites_list',$data);
+      $this->load->view('/common/users_footer_view',$data);
+
+
+
+}
+
 
 
  public function spaces($offset = 0)
@@ -498,33 +528,8 @@ public function sites()
     $limit = 5;
       $this->load->library('pagination');
 
-        $data['items'] =  $this->publisher_model->spaces($offset,$limit);
+        $data['items'] =  $this->publisher_model->spaces();
     $config['base_url'] = site_url("publisher_dashboard/spaces");
-  $config['total_rows'] = count($this->publisher_model->spaces(null,null));
-  //$config['total_rows'] = $this->db->count_all('pages');
-
-    $config['per_page'] = $limit;
-
-   //$config['uri_segment'] = 4;
-  $config['first_tag_open'] = '<span class="w3-btn w3-indigo w3-text-white">';
-  $config['first_tag_close'] = '</span>';
-  $config['last_tag_open'] = '<br><span class="w3-btn w3-indigo w3-text-white">';
-  $config['last_tag_close'] = '</span>';
-  $config['first_link'] = 'First';
-
-
-
-  $config['prev_link'] = 'Prev';
-  $config['next_link'] = 'Next';
-  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-indigo w3-text-white">';
-  $config['next_tag_close'] = '</span><br>';
-  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-indigo w3-text-white">';
-  $config['prev_tag_close'] = '</span>';
-  $config['last_link'] = 'Last';
-  $config['display_pages'] = false;
-
-       $this->pagination->initialize($config);
-  $data['pagination'] = $this->pagination->create_links();
       $data['title'] = $this->siteName." |  Publisher Campaign";
             $data['author'] = $this->author;
       $data['keywords'] = $this->keywords;

@@ -121,7 +121,7 @@ public function register_publisher()
 'password' =>  md5(md5($_SESSION['first_details']['password'])),
 'phone' => $_SESSION['first_details']['phone'],
 'email' => $_SESSION['first_details']['email'],
-"account_status" => "pending",
+"account_status" => "active",
 "country" => $this->input->post("country"),
 "total_earned" => "0.00",
 "pending_bal" => "0.00",

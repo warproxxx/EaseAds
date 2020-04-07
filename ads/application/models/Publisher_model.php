@@ -241,12 +241,12 @@ $datab = array(
 $this->db->update("publishers",$datab,array('id' => $_SESSION['id']));
 }
 
-public function spaces($offset,$limit)
+public function spaces()
 {
 
     $this->db->order_by("id","DESC");
 
-$query = $this->db->get_where("pub_story",array('user_id' => $_SESSION['id']),$limit,$offset);
+$query = $this->db->get_where("pub_story",array('user_id' => $_SESSION['id']));
 return $query->result_array();
 
 

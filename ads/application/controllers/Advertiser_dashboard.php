@@ -68,6 +68,11 @@ public function index()
     $data['general_details'] = $this->advertiser_model->get_general_details();
     $data['announcements'] = $this->admin_model->get_active_announcements();
 
+    $data['today_views'] = $this->advertiser_model->get_campaign_views_user(strtotime(date("y-m-d")))[0]['views'];
+    $data['today_clicks'] = $this->advertiser_model->get_campaign_clicks_user(strtotime(date("y-m-d")))[0]['clicks'];
+    // $data['today_spent'] = $this->advertiser_model->get_spent_user(strtotime(date("y-m-d")))[0]['spent'];
+
+
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
     $this->load->view('/user/advertiser/dashboard_view',$data);

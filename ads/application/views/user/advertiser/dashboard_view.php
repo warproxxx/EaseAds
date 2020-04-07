@@ -35,6 +35,80 @@ if (!empty($announcements))
 <div>
     <div class="w3-panel w3-small">
     <div class="w3-row-padding" style="margin:0 -16px">
+
+    <div class="w3-third">
+    <h5>Account Details</h5>
+    
+       <br>
+
+        <table class="w3-table w3-striped w3-white">
+          <!-- <tr>
+            <td><i class="fa fa-gavel w3-text-purple w3-large"></i></td>
+            <td>Minimum Paid CPA</td>
+            <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_paid_cpa']?></i></td>
+          </tr> -->
+      
+          <tr>
+            <td><i class="fa fa-credit-card w3-text-yellow w3-large"></i></td>
+            <td>Total Account balance.</td>
+            <td><i><?php
+        echo $general_details['currency_code']." ".$user['account_bal'];
+             ?></i></td>
+          </tr>
+
+          <tr>
+            <td><i class="fa fa-credit-card w3-text-yellow w3-large"></i></td>
+            <td>Total Views</td>
+            <td><i><?php
+        echo $today_views;
+             ?></i></td>
+          </tr>
+
+          <tr>
+            <td><i class="fa fa-credit-card w3-text-yellow w3-large"></i></td>
+            <td>Total Clicks</td>
+            <td><i><?php
+        echo $today_clicks;
+             ?></i></td>
+          </tr>
+
+          <!-- <tr>
+            <td><i class="fa fa-credit-card w3-text-yellow w3-large"></i></td>
+            <td>Spent Today</td>
+            <td><i><?php
+        echo $general_details['currency_code']." ".$user['account_bal'];
+             ?></i></td>
+          </tr> -->
+      
+      <tr>
+        <td><i class="fa fa-hand-pointer-o w3-text-blue w3-large"></i></td>
+        <td>Referrel Link Clicks.</td>
+        <td><i><?php
+echo $no_clicks;
+         ?></i></td>
+      </tr>
+                  <td><i class="fa fa-user-plus w3-text-red w3-large"></i></td>
+        <td>Total Registration.</td>
+        <td><i><?php
+echo $no_reg;
+         ?></i></td>
+      </tr>
+
+
+      <!-- <tr>
+        <td><i class="fa fa-bookmark w3-text-green w3-large"></i></td>
+        <td> Total Approved  Referrels</td>
+        <td><i><?php
+echo $campaign_act;
+         ?></i></td>
+      </tr> -->
+       
+        </table>
+      </div>
+
+
+
+    
             <div class="w3-third">
               <h5>Account Details</h5>
         <table class="w3-table w3-striped w3-white">
@@ -76,13 +150,8 @@ echo strtoupper(str_replace('-',' ',$user['country']));
         echo $user['account_status'];
              ?></i></td>
           </tr>
-    <tr>
-            <td><i class="fa fa-credit-card w3-text-yellow w3-large"></i></td>
-            <td>Total Account balance.</td>
-            <td><i><?php
-        echo $general_details['currency_code']." ".$user['account_bal'];
-             ?></i></td>
-          </tr>
+          
+
          
           <tr>
             <td><i class="fa fa-calendar-o w3-text-green w3-large"></i></td>
@@ -101,6 +170,7 @@ echo strtoupper(str_replace('-',' ',$user['country']));
  </table>
 
       </div>
+      
       <div class="w3-third">
               <h4>Campaign & Affilate Statistics</h4>
         <table class="w3-table w3-striped w3-white">
@@ -179,52 +249,9 @@ echo $active_campaigns;
  </table>
 
       </div>
-
-         <div class="w3-third">
-       <br>
-<?php
-if (!$this->agent->is_mobile()) {
-
-echo "<br><br>
-";
-}
-
-       ?>
-        <table class="w3-table w3-striped w3-white">
-          <!-- <tr>
-            <td><i class="fa fa-gavel w3-text-purple w3-large"></i></td>
-            <td>Minimum Paid CPA</td>
-            <td><i> <?=$general_details['currency_code'].' '.$general_details['minimum_paid_cpa']?></i></td>
-          </tr> -->
-          <tr>
-        <td><i class="fa fa-hand-pointer-o w3-text-blue w3-large"></i></td>
-        <td>Referrel Link Clicks.</td>
-        <td><i><?php
-echo $no_clicks;
-         ?></i></td>
-      </tr>
-                  <td><i class="fa fa-user-plus w3-text-red w3-large"></i></td>
-        <td>Total Registration.</td>
-        <td><i><?php
-echo $no_reg;
-         ?></i></td>
-      </tr>
-
-
-      <!-- <tr>
-        <td><i class="fa fa-bookmark w3-text-green w3-large"></i></td>
-        <td> Total Approved  Referrels</td>
-        <td><i><?php
-echo $campaign_act;
-         ?></i></td>
-      </tr> -->
-       
-        </table>
       </div>
 
-
-
-    </div>
+         
   </div>
   <hr>
 

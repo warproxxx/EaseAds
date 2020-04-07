@@ -10,7 +10,13 @@
           <h3><?= $count_spaces ?></h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Create Ads</h4>
+        <div class="dropdown">
+          <button class="dropbtn_red">Create Ads</button>
+          <div class="dropdown-content">
+            <a href="<?= site_url("publisher_dashboard/add_space") ?>">Create Ad Space</a>
+            <a href="<?= site_url("publisher_dashboard/spaces") ?>">List of Ad Space</a>
+          </div>
+        </div> 
       </div></a>
     </div>
     <div class="w3-quarter"><a href="<?= site_url("publisher_dashboard/sites") ?>">
@@ -20,7 +26,13 @@
           <h3>0</h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Sites</h4>
+        <div class="dropdown">
+          <button class="dropbtn_blue">Sites</button>
+          <div class="dropdown-content">
+            <a href="<?= site_url("publisher_dashboard/sites") ?>">Add New Site</a>
+            <a href="<?= site_url("publisher_dashboard/sites_list") ?>">Sites List</a>
+          </div>
+        </div>
       </div></a>
     </div>
     <div class="w3-quarter"><a href="<?= site_url("publisher_dashboard/payment") ?>">
@@ -47,5 +59,3 @@
 
 
 </div>
-<div class="w3-center">
-<span class="w3-text-purple w3-large w3-serif"><a class="w3-btn w3-white w3-text-purple w3-large w3-serif" href="<?= site_url("publisher_dashboard/add_space") ?>">Create New Ads Space</a></span><br></div>

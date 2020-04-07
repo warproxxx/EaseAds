@@ -619,6 +619,22 @@ public function get_campaign_views($ref_id,$today)
 
 }
 
+public function get_campaign_views_user($today)
+{
+
+ $q = "SELECT COUNT(v.id) AS views
+        FROM views v
+        LEFT JOIN adv_story a
+        ON a.ref_id = v.story_id
+        WHERE v.time >= ".$today." AND a.user_id= '".$_SESSION['id']."'";
+  $query = $this->db->query($q);
+  return $query->result_array();
+
+
+
+}
+
+
 public function get_campaign_clicks($ref_id,$today)
 {
 
@@ -627,6 +643,32 @@ public function get_campaign_clicks($ref_id,$today)
  return count($query->result_array());
 
 }
+
+public function get_campaign_clicks_user($today)
+{
+  $q = "SELECT COUNT(c.id) AS clicks
+  FROM clicks c
+  LEFT JOIN adv_story a
+  ON a.ref_id = c.story_id
+  WHERE c.time >= ".$today." AND a.user_id= '".$_SESSION['id']."'";
+$query = $this->db->query($q);
+return $query->result_array();
+
+}
+
+public function get_spent_user($today)
+{
+
+  $q = "SELECT SUM(v.id) AS views
+  FROM views v
+  LEFT JOIN adv_story a
+  ON a.ref_id = v.story_id
+  WHERE v.time >= ".$today." AND a.user_id= '".$_SESSION['id']."'";
+$query = $this->db->query($q);
+return $query->result_array();
+
+}
+
 public function fund_campaign($ref_id,$user,$campaign)
 {
 

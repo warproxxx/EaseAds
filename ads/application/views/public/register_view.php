@@ -16,17 +16,17 @@
 <div class="w3-row">
    <div class='w3-half'>
        <i  style='margin-right:3%' class="fa fa-user
-        w3-large w3-text-blue w3-center"></i>
+        w3-large w3-text-blue w3-center"><font color="red">*</font></i>
         <input class='w3-center w3-padding' type='text' name='firstname'
-        value='<?= set_value('firstname') ?>' placeholder='First Name'/>
+        value='<?= set_value('firstname') ?>' placeholder='First Name' required/>
    </div>
 
 
    <div class='w3-half'>
        <i  style='margin-right:3%' class="fa fa-user
-        w3-large w3-text-blue w3-center"></i>
+        w3-large w3-text-blue w3-center"><font color="red">*</font></i>
         <input class='w3-center w3-padding' type='text' name='lastname'
-          value='<?= set_value('lastname') ?>'  placeholder='Last Name'/>
+          value='<?= set_value('lastname') ?>'  placeholder='Last Name' required/>
    </div>
 </div>
    <br>
@@ -37,34 +37,34 @@
 <div class="w3-row">
  <div class='w3-half'>
      <i  style='margin-right:3%' class="fa fa-envelope
-      w3-large w3-text-blue w3-center"></i>
+      w3-large w3-text-blue w3-center"><font color="red">*</font></i>
       <input class='w3-center w3-padding' type='email' name='email'
-        value='<?= set_value('email') ?>'  placeholder='Email Address'/>
+        value='<?= set_value('email') ?>'  placeholder='Email Address' required/>
  </div>
 
 
  <div class='w3-half'>
      <i  style='margin-right:3%' class="fa fa-skype
-      w3-large w3-text-blue w3-center"></i>
+      w3-large w3-text-blue w3-center"><font color="red">*</font></i>
       <input class='w3-center w3-padding' name='phone'
-       value='<?= set_value('phone') ?>' placeholder='Skype/IM'/>
+       value='<?= set_value('phone') ?>' placeholder='Skype/IM' required/>
  </div>
 </div>
  <br>
 <div class="w3-row">
  <div class='w3-half'>
      <i  style='margin-right:3%' class="fa fa-unlock-alt
-      w3-large w3-text-blue w3-center"></i>
+      w3-large w3-text-blue w3-center"><font color="red">*</font></i>
       <input id="password_box" class='w3-center w3-padding' type='password' name='password'
-        value='<?= set_value('password') ?>'  placeholder='Password'/>
+        value='<?= set_value('password') ?>'  placeholder='Password' required/>
  </div>
 
 
  <div class='w3-half'>
      <i  style='margin-right:3%' class="fa fa-unlock-alt
-      w3-large w3-text-blue w3-center"></i>
+      w3-large w3-text-blue w3-center"><font color="red">*</font></i>
       <input id="password_box" class='w3-center w3-padding' type='password' name='cpassword'
-        value='<?= set_value('cpassword') ?>' placeholder='Confirm Password'/>
+        value='<?= set_value('cpassword') ?>' placeholder='Confirm Password' required/>
  </div></div>
 <!--<input type="checkbox" id="show_p" name="show_pass" value="checked" class=""/>Show Password<br>
 --><script type="text/javascript">
