@@ -1159,7 +1159,8 @@ public function process_withdrawal($status, $id = NULL,$user_id)
 
     $this->admin_model->edit_withdrawal_single(array(
     "approval" => "approved",
-    "status" => "processed"
+    "status" => "processed",
+    "message" => $_POST['message']
     ),$id);
 
       //update neccessary details including history
@@ -1168,7 +1169,7 @@ public function process_withdrawal($status, $id = NULL,$user_id)
     "user_id" => $user_id,
     "action" => "w_process",
     'time' => time(),
-    "details" => "Your Withdrawal Request Had been Processed",
+    "details" => "Your Withdrawal Request Had been Processed because" . $_POST['message'],
     "account_type" => "publisher"
     ),$user_id);
 
@@ -1195,7 +1196,8 @@ public function process_withdrawal($status, $id = NULL,$user_id)
 
     $this->admin_model->edit_withdrawal_single(array(
     "approval" => "denied",
-    "status" => "denied"
+    "status" => "denied",
+    "message" => $_POST['message']
     ),$id);
 
       //update neccessary details including history
@@ -1204,7 +1206,7 @@ public function process_withdrawal($status, $id = NULL,$user_id)
     "user_id" => $user_id,
     "action" => "w_process",
     'time' => time(),
-    "details" => "Your Withdrawal Request Had been Denied",
+    "details" => "Your Withdrawal Request Had been Denied because" . $_POST['message'],
     "account_type" => "publisher"
     ),$user_id);
 

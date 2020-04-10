@@ -284,6 +284,9 @@ $this->publisher_model->update_payment_details();
 $data['user'] = $this->publisher_model->get_publisher_by_id();
 $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
 $data['withdrawals'] = $this->publisher_model->get_withdrawals($_SESSION['id']);
+$data['manual_payments'] = $this->advertiser_model->get_manual_payments();
+
+
 
     $this->load->view('/common/publisher_header_view',$data);
     $this->load->view('/common/publisher_top_tiles',$data);
@@ -507,7 +510,8 @@ public function sites_list()
       $data["noindex"] = $this->noindex;
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-      $data["sites"] = $this->publisher_model->get_publisher_sites();
+      $data["sites"] = $this->publisher_model->get_full_sites();
+      print_r($data["sites"]);
       
       $this->load->view('/common/publisher_header_view',$data);
       $this->load->view('/common/publisher_top_tiles',$data);

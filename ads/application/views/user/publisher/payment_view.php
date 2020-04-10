@@ -13,8 +13,8 @@ if(isset($_SESSION['action_status_report']))
 <select class="w3-padding w3-border w3-border-indigo" id="payment_type" name="payment_type">
 			<option value="choose">Choose....</option>
 		<option value="bank">Bank Transfer</option>
-	<!-- <option value="western_union">Western Union</option> -->
 	<option value="paypal">Paypal</option>
+	<option value="western_union">Other</option>
 </select>
 <br>
 <div style="display: none;" class="" id="paypal_div">
@@ -47,9 +47,38 @@ if(isset($_SESSION['action_status_report']))
 </div>
 
 <div style="display: none;" class="" id="western_div">
-<h5 class="w3-label">Address</h5>
+	<h5 class="w3-label">Other Method</h5>
 
-	<input type="text" name="address" class="w3-padding w3-border w3-border-indigo" placeholder="Address"  value="<?= $user['bank_acct'] ?>"/><br>
+
+	<select id="manual_type" name="manual_type" onchange="changeHTML(this)">
+	<?php
+		foreach ($manual_payments as $payment) 
+		{
+			if ($user['other_name'] == $payment['payment_method'])
+				echo("<option value='" . $payment['payment_method'] . " selected='selected''>" . $payment['payment_method'] . "</option>");
+			else
+				echo("<option value='" . $payment['payment_method'] . "'>" . $payment['payment_method'] . "</option>");
+
+			$string = "";
+
+			foreach (range(1, $payment['values_used']) as $number) {
+				$first = 'deposit_' . strval($number) . '_name';
+				$second = 'deposit_' . strval($number) . '_value';
+
+				$string = $string . "<b>" . $payment[$first] . ":</b>";
+				$string = $string . $payment[$second] . "</br>";
+			}
+
+			echo("<script>details['".$payment['payment_method']."'] = '".$string."';</script>\n");
+	
+		}
+	?>
+	</select>
+
+	<h5 class="w3-label">Details</h5>
+	<textarea rows="5" cols="50" name="withdrawl_details" placeholder="Enter all needed information for this type"  value="<?= $user['other_detail'] ?>"></textarea><br>
+
+
 </div>
 
 
@@ -63,6 +92,7 @@ if(isset($_SESSION['action_status_report']))
 		<td>Date</td>
 		<td>Amount</td>
 		<td>Status</td>
+		<!-- <td>Message</td> -->
 	</tr>
 	<?php
 
@@ -72,6 +102,7 @@ if(isset($_SESSION['action_status_report']))
 		echo "<td>".$withdraw['time']."</td>";
 		echo "<td>".$withdraw['amount']."</td>";
 		echo "<td>".$withdraw['status']."</td>";
+		// echo "<td>".$withdraw['message']."</td>";
 		echo "</td>";
 	}
 	?>

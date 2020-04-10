@@ -483,7 +483,7 @@ public function get_withdrawal()
 {
 
   $q = "SELECT p.firstname, p.lastname, p.email, w.amount, w.id, w.user_id, w.status, 
-  p.email, p.bank_acct, p.bank_det, p.bank_no, p.payment_type 
+  p.email, p.bank_acct, p.bank_det, p.bank_no, p.payment_type, p.other_name, p.other_detail
   FROM withdrawal w 
   LEFT OUTER JOIN publishers p 
   ON p.id = w.user_id 

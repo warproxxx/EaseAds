@@ -233,8 +233,9 @@ $datab = array(
 }elseif($_POST['payment_type'] == "western_union")
 {
 $datab = array(
-"bank_acct" => $_POST['address'],
-"payment_type" =>  $_POST['payment_type']
+"other_name" => $_POST['manual_type'],
+"payment_type" =>  $_POST['payment_type'],
+"other_detail" => $_POST['withdrawl_details']
 );
 }
 
@@ -288,6 +289,20 @@ public function get_publisher_sites()
 
 $query = $this->db->query('SELECT website FROM publishers_websites WHERE publisher_id = '.$_SESSION['id'] . " AND approved=1");
 return $query->result_array();
+}
+
+public function get_full_sites()
+{
+
+  $q = "SELECT SUM(ps.views) AS total_views, SUM(ps.clicks) AS total_clicks, pw.website, pw.approved
+    FROM publishers_websites pw
+    LEFT JOIN pub_story ps
+    ON ps.website = pw.website
+    WHERE pw.publisher_id= ".$_SESSION['id'];
+
+
+    $query = $this->db->query($q);
+    return $query->result_array();
 }
 
 
