@@ -28,9 +28,13 @@ public function __construct()
         show_page('page/logout');
       }
       //check for account approval
-      if($_SESSION['account_status'] == "suspended")
+
+      if (isset($_SESSION['account_status']))
       {
-        show_page('page/suspended_account_alert');
+        if($_SESSION['account_status'] == "suspended")
+        {
+          show_page('page/suspended_account_alert');
+        }
       }
 
       $this->siteName = $this->advertiser_model->get_system_variable("site_name");
