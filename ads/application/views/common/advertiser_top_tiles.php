@@ -27,7 +27,7 @@
         </div>
         <div class="w3-clear"></div>
         <div class="dropdown">
-          <button class="dropbtn_green">Deposit</button>
+          <button class="dropbtn_green">Funds</button>
           <div class="dropdown-content">
             <a href="<?= site_url("advertiser_dashboard/payment") ?>">Add Fund</a>
             <a href="<?= site_url("advertiser_dashboard/transactions") ?>">Transaction List</a>

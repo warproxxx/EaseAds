@@ -1,5 +1,10 @@
+
+
 <div class="w3-container w3-center">
 <span class="w3-text-indigo w3-large w3-serif">Campaign Details (<?= $campaign_item['name']?>)</span><br>
+
+
+
 
 <?php
 if(isset($_SESSION['action_status_report']))
@@ -197,6 +202,7 @@ if($campaign_item['status'] == "active")
 {
 echo "<a  class='w3-button w3-red w3-margin' href='".site_url('advertiser_dashboard/campaign_action/stop/'.$this->uri->segment(3))."'>Stop</a>";
 
+
 }elseif($campaign_item['status'] == "pending")
 {
 	echo "<a  class='w3-button w3-grey w3-margin' href=''>Pending</a>";
@@ -207,6 +213,9 @@ echo "<a  class='w3-button w3-red w3-margin' href='".site_url('advertiser_dashbo
 	echo "<a  class='w3-button w3-green w3-margin' href='".site_url('advertiser_dashboard/campaign_action/start/'.$this->uri->segment(3))."'>Start</a>";
 
 }
+
+echo "<a  class='w3-button w3-red w3-margin' href='".site_url('advertiser_dashboard/campaign_action/delete/'.$this->uri->segment(3))."'>Delete</a>";
+
 ?>
 
 </div>

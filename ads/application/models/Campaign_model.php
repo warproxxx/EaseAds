@@ -222,6 +222,12 @@ public function edit_campaign($data_array,$ref_id)
 $this->db->update('adv_story',$data_array,array("ref_id" => $ref_id));
 }
 
+public function delete_campaign($ref_id)
+{
+	$this->db->where('ref_id', $ref_id);
+	$this->db->delete('adv_story');
+}
+
 public function edit_space($data_array,$ref_id)
 {
 $this->db->update('pub_story',$data_array,array("ref_id" => $ref_id));

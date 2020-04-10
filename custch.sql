@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 19, 2020 at 10:32 AM
--- Server version: 5.7.29-0ubuntu0.16.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.9
+-- Host: localhost:3306
+-- Generation Time: Apr 10, 2020 at 01:38 PM
+-- Server version: 5.7.29-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,25 +37,6 @@ CREATE TABLE `admin_earning` (
   `time` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `admin_earning`
---
-
-INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `weekday`, `amount`, `time`) VALUES
-(1, 'January', '2020', 'text', 'view', 'Saturday', '0.0000', '1579334714'),
-(2, 'January', '2020', 'text', 'view', 'Tuesday', '0.0000', '1579586110'),
-(3, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580278372'),
-(4, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580278960'),
-(5, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580301895'),
-(6, 'January', '2020', 'text', 'view', 'Wednesday', '0.0000', '1580302312'),
-(7, 'January', '2020', 'popup', 'click', 'Wednesday', '0.0000', '1580303133'),
-(8, 'February', '2020', 'banner', 'click', 'Saturday', '0.0000', '1581166415'),
-(9, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581166885'),
-(10, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581166909'),
-(11, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581167040'),
-(12, 'February', '2020', NULL, 'click', 'Saturday', '0.0000', '1581167068'),
-(13, 'February', '2020', 'popup', 'click', 'Saturday', '0.0000', '1581167092');
-
 -- --------------------------------------------------------
 
 --
@@ -82,17 +63,6 @@ CREATE TABLE `advertisers` (
   `lastlog` varchar(128) DEFAULT NULL,
   `time` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `advertisers`
---
-
-INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
-(1, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'eritrea', NULL, 'daniel@advertiser.com', NULL, '342423424', '60.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, '1578141363', 1578059534),
-(2, 'asdasd', 'asdsdsd', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Choose', NULL, 'advertiser@test.com', NULL, '3554354', '5349.0000', '0.0000', NULL, '["sd.com"]', 'active', NULL, NULL, '1582086684', 1578315045),
-(3, 'Pratk', 'Kunwar', '15cc992d5177a2ec8bd741a3163b254f', 'Nepal', NULL, 'pratik@kunwar.com', NULL, '23432424', '4950.0000', '0.0000', NULL, '["google.com"]', 'active', NULL, NULL, NULL, 1579317725),
-(4, 'New', 'advertiser', 'fb469d7ef430b0baf0cab6c436e70375', 'Armenia', NULL, 'new@test.com', NULL, '9882938192', '4978.0000', '0.0000', NULL, '["reddit.com"]', 'active', NULL, NULL, NULL, 1579942420),
-(5, 'IM', 'Test', 'e20a922006822f58699cbe1e181be9be', 'Aruba', NULL, 'sd@aa.com', NULL, 'noobydan', '5516.0000', '0.0000', NULL, '["asdd.com"]', 'active', NULL, NULL, NULL, 1580952182);
 
 -- --------------------------------------------------------
 
@@ -141,32 +111,6 @@ CREATE TABLE `adv_story` (
   `action_type` varchar(128) DEFAULT NULL,
   `is_default` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `adv_story`
---
-
-INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `start_time`, `per_click`, `per_view`, `per_action`, `budget`, `balance`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`) VALUES
-(1, 1579183060, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-dadd', 'sdd.com', 'banner', '300X250', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'b26e69fabd97c7a31808', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'banking', '2', NULL, NULL, NULL, NULL, 0),
-(2, 1579936613, 2, 0, 0, 1579936613, '4.0000', '0.0000', NULL, '10.0000', '10.0000', 0, '-Test', 'https://www.google.com/', 'banner', '300X250', NULL, 'Screenshot_from_2018-12-22_08-52-43.png', NULL, '6e6de8a8fab46c8ce3bc', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', '["desktop"]', NULL, '["opera","chrome","firefox"]', '["nigeria"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(3, 1579999248, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-tet', 'sdds.com', 'banner', '720X90', NULL, 'rest_framewor*3zzzzzzzzzzzzz', NULL, 'adb7c57f49a5ba8b7905', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Adventure', '1', NULL, NULL, NULL, NULL, 0),
-(4, 1580010702, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'asdd', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-27_07-01-41.png', NULL, '47101fb177fe0f62a417', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'false', 'Business', '2', NULL, NULL, NULL, NULL, 0),
-(5, 1580134689, 2, 0, 0, 1580134689, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Country Test', 'dsds.com', 'banner', '300X250', NULL, 'ran.png', NULL, '363e3520bb270306a75d', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', '["desktop","mobile","android","ios"]', NULL, '["opera","chrome","firefox","ie"]', '["AL","DZ","BD","NP"]', 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(6, 1580182996, 2, 0, 0, 1580182996, '0.0100', '0.0000', NULL, '50.0000', '50.0000', 0, '-Text Campaign Test', 'water.com', 'text', NULL, 'water.com', '', NULL, '809b22d287c9104c64f1', NULL, 'Text', 'Text camp ad test', '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Blog', '3', NULL, NULL, NULL, NULL, 0),
-(14, 1580197449, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '0.0000', 0, 'Default Banner', 'allahuakbar', 'banner', '300X250', NULL, 'ran1.png', NULL, 'd8695472862a4fa6f918', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
-(15, 1580201902, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Default Banner', 'ggg.com', 'text', '300X250', 'ggg.com', NULL, NULL, 'f2aec19b0aba789116a9', NULL, NULL, 'Another Test', '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
-(17, 1580216836, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-sdd', 'asddd.com', 'banner', '300X250', NULL, 'Screenshot_from_2018-07-23_06-45-57.png', NULL, '070a745c033731e8e71e', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, NULL, 'Blog', '1', NULL, NULL, NULL, NULL, 0),
-(18, 1580279017, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-aadadsdf', 'sdad.com', 'banner', '300X250', NULL, 'Screenshot_from_2018-08-02_07-20-02.png', NULL, 'e3f06aca678d9f0e038d', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, '["AF"]', 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
-(19, 1580285324, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-Test Popup', 'sdsdd.com', 'recommendation', NULL, NULL, '', NULL, '47c262021808c46bcc0d', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
-(20, 1580287795, 2, 0, 0, 1580287795, '0.0000', '0.1000', NULL, '50.0000', '50.0000', 0, '-Popup Test', 'popup.com', 'popup', NULL, NULL, '', NULL, 'b2f5b738d3dcab2febea', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(21, 1580287816, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdasd', 'aaa.com', 'popup', NULL, NULL, '', NULL, '215a169ba202e31a1641', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Blog', '2', NULL, NULL, NULL, NULL, 0),
-(22, 1580288431, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '0.0000', 0, 'Default Banner', 'http://ask.com', 'popup', '300X250', NULL, NULL, NULL, '390044bf862378c1686c', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, NULL, 'Admin', '1', NULL, NULL, NULL, NULL, 1),
-(23, 1580302087, 2, 0, 0, 1580302087, NULL, NULL, NULL, '50.0000', '50.0000', 0, '-Working Popup', 'waterbot.xyz', 'popup', NULL, NULL, '', NULL, 'b1b04aa3c1e2464d4265', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(24, 1580305479, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdd', 'http://a.com', 'popup', NULL, NULL, '', NULL, '1ad1a22c44f778c82ee0', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', '["windows"]', NULL, '["chrome"]', NULL, 'true', 'Beauty', '2', NULL, NULL, NULL, NULL, 0),
-(25, 1581164987, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asd', 'http://gg.com', 'banner', '300X250', NULL, 'ran2.png', NULL, 'f10fa1c99b9060923062', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Blog', '2', NULL, NULL, NULL, NULL, 0),
-(26, 1581165102, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '-asdd', 'http://aa.com', 'popup', NULL, NULL, '', NULL, '7919926834d54fa810fb', NULL, NULL, NULL, '0.00', 'false', 'incomplete', 'incomplete', NULL, NULL, NULL, NULL, 'true', 'Business', '2', NULL, NULL, NULL, NULL, 0),
-(27, 1581252333, 2, 0, 0, 1581252333, '0.2000', '0.0000', NULL, '50.0000', '50.0000', 0, '-Actual Test', 'htpp://aaa.com', 'popup', NULL, NULL, '', NULL, '1635f056f81b232afc1d', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0),
-(28, 1581323171, 2, 0, 0, 1581323171, '0.1000', '0.0000', NULL, '50.0000', '50.0000', 0, '-sadd', 'http://aa.com', 'popup', NULL, NULL, '', NULL, '9133c73326a7e7934d8c', NULL, NULL, NULL, '0.00', 'Pending', 'complete', 'Pending', NULL, NULL, NULL, NULL, 'true', 'Business', '3', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -269,19 +213,6 @@ CREATE TABLE `clicks` (
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `clicks`
---
-
-INSERT INTO `clicks` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `os`, `is_mobile`, `country`) VALUES
-(1, 1580303133, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', NULL, '0', NULL),
-(2, 1581166415, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
-(3, 1581166885, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
-(4, 1581166909, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
-(5, 1581167040, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
-(6, 1581167068, NULL, NULL, NULL, '390044bf862378c1686c7c05da1f7a906a50cb6f7ed4', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
-(7, 1581167092, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -375,7 +306,11 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `user_id`, `details`, `action`, `time`, `account_type`) VALUES
-(1, '7', 'Your Withdrawal Request Had been Processed', 'w_process', 1579786211, 'publisher');
+(1, '7', 'Your Withdrawal Request Had been Processed', 'w_process', 1579786211, 'publisher'),
+(2, '7', 'You make a withdrawal Request of \n      50.0000 with reference 14271385797', 'w_request', 1586166321, 'publisher'),
+(3, '7', 'Your Withdrawal Request Had been Processed because', 'w_process', 1586494194, 'publisher'),
+(4, '7', 'You make a withdrawal Request of \n      500.0000 with reference 14274337941', 'w_request', 1586494338, 'publisher'),
+(5, '7', 'Your Withdrawal Request Had been Processed because', 'w_process', 1586495312, 'publisher');
 
 -- --------------------------------------------------------
 
@@ -529,7 +464,8 @@ INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`
 (10, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589159', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
 (11, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589304', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
 (13, '2', 'advertiser', 'Bank', NULL, '', '50.0000', 'CONFIRMED', NULL, 'DEPOSIT', '1582011278', NULL, NULL, NULL, NULL, NULL, 'Hello plz'),
-(14, '2', 'advertisers', 'Manual', NULL, '', '55.0000', 'CONFIRMED', NULL, 'MANUAL', '1582013032', NULL, NULL, NULL, NULL, NULL, 'Manually done by admin');
+(14, '2', 'advertisers', 'Manual', NULL, '', '55.0000', 'CONFIRMED', NULL, 'MANUAL', '1582013032', NULL, NULL, NULL, NULL, NULL, 'Manually done by admin'),
+(15, '7', 'publishers', 'Manual', NULL, '', '500.0000', 'CONFIRMED', NULL, 'MANUAL', '1586490316', NULL, NULL, NULL, NULL, NULL, 'asddsd');
 
 -- --------------------------------------------------------
 
@@ -604,15 +540,10 @@ CREATE TABLE `publishers` (
   `bank_no` varchar(128) DEFAULT NULL,
   `payment_type` varchar(128) DEFAULT NULL,
   `referral_id` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL
+  `time` int(100) DEFAULT NULL,
+  `other_name` text NOT NULL,
+  `other_detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `publishers`
---
-
-INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`) VALUES
-(7, 'Publisher', 'Test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Nepal', NULL, 'publisher@test.com', NULL, '432434', '50.0000', '50.0000', '0.0000', NULL, 'active', '["waterbot.xy"]', NULL, '1581323229', NULL, 'daniel@paypal.com', NULL, NULL, 'paypal', NULL, 1579591304);
 
 -- --------------------------------------------------------
 
@@ -633,7 +564,10 @@ CREATE TABLE `publishers_websites` (
 
 INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
 (4, 7, 'waterbot.xy', 1),
-(5, 7, 'ninjasaga.com', 1);
+(5, 7, 'ninjasaga.com', 1),
+(6, 8, 'http://googlee.com', 0),
+(7, 9, 'http://aa.com', 0),
+(8, 10, 'http://aaa.com', 0);
 
 -- --------------------------------------------------------
 
@@ -668,14 +602,14 @@ CREATE TABLE `pub_story` (
 --
 
 INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `type`, `size`, `ref_id`, `website`, `name`, `gained`, `country`, `div_id`, `category`, `platform`, `code`, `os`, `browser`) VALUES
-(1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '["advertising","entertainment","food","gambling","marketing"]', NULL, '<script src="http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94"></script>\n<center><div class="w3-margin" id="Ec8" style="max-width: 70%;" class="">\n</div></center>\n', NULL, NULL),
-(2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box"></script>\n<center><div  class="w3-margin"  id="bC4">\n</div></center>', NULL, NULL),
-(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '["Blog","Adventure","Beauty"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box"></script>\n<center><div  class="w3-margin"  id="eE7">\n</div></center>', NULL, NULL),
-(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box"></script>\n<center><div  class="w3-margin"  id="AC0">\n</div></center>', NULL, NULL),
-(5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '["Business"]', NULL, NULL, NULL, NULL),
-(6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4"></script>\n<div  class="w3-margin"  style="" id="ee6">\n</div>', NULL, NULL),
-(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6"></script>\n<div  class="w3-margin"  style="" id="BE1">\n</div>', NULL, NULL),
-(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b"></script>\n<div  class="w3-margin"  style="" id="cc5">\n</div>', NULL, NULL);
+(1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '[\"advertising\",\"entertainment\",\"food\",\"gambling\",\"marketing\"]', NULL, '<script src=\"http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94\"></script>\n<center><div class=\"w3-margin\" id=\"Ec8\" style=\"max-width: 70%;\" class=\"\">\n</div></center>\n', NULL, NULL),
+(2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '[\"Business\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"bC4\">\n</div></center>', NULL, NULL),
+(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '[\"Blog\",\"Adventure\",\"Beauty\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"eE7\">\n</div></center>', NULL, NULL),
+(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '[\"Business\",\"Blog\",\"Adventure\",\"Beauty\",\"Investing\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"AC0\">\n</div></center>', NULL, NULL),
+(5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '[\"Business\"]', NULL, NULL, NULL, NULL),
+(6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"ee6\">\n</div>', NULL, NULL),
+(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '[\"Business\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"BE1\">\n</div>', NULL, NULL),
+(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '[\"Business\",\"Blog\",\"Adventure\",\"Beauty\",\"Investing\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"cc5\">\n</div>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -746,82 +680,6 @@ CREATE TABLE `views` (
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `views`
---
-
-INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
-(1, 1579334714, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(2, 1579334724, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(3, 1579586110, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(4, 1580214778, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(5, 1580214839, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(6, 1580214848, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(7, 1580214854, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(8, 1580214874, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(9, 1580214905, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(10, 1580214909, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(11, 1580278372, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(12, 1580278960, '2', '9fe4fca09cdb0c9c8ee14d94', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(13, 1580301895, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(14, 1580302099, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(15, 1580302124, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(16, 1580302127, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(17, 1580302196, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(18, 1580302257, '7', '7c05da1f7a906a50cb6f7ed4', NULL, NULL, '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(19, 1580302312, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(20, 1580302787, '7', '2f92e94f7baded459b49f0f6', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(21, 1580302839, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(22, 1580302877, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(23, 1580303131, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(24, 1580303160, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(25, 1580303205, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(26, 1580303211, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(27, 1580303266, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(28, 1580303292, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(29, 1580303295, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(30, 1580303309, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(31, 1580303434, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(32, 1580303435, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(33, 1580303454, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(34, 1580303455, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(35, 1580303456, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(36, 1580303456, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(37, 1580303472, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Chrome', '0', NULL),
-(38, 1580303762, '7', '2f92e94f7baded459b49f0f6', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(39, 1581148597, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(40, 1581148665, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(41, 1581148692, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(42, 1581148736, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(43, 1581148747, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(44, 1581148783, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(45, 1581148820, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(46, 1581148821, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(47, 1581166360, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(48, 1581166407, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(49, 1581166517, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(50, 1581166712, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(51, 1581166736, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(52, 1581166753, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(53, 1581166793, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(54, 1581166824, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(55, 1581166879, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(56, 1581166883, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(57, 1581166885, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(58, 1581166980, '7', '6b4ee6c4fb02909d1c3fbae2', '0', 'd8695472862a4fa6f918', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(59, 1581166992, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(60, 1581167004, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(61, 1581167016, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(62, 1581167031, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(63, 1581167039, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(64, 1581167040, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(65, 1581167078, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(66, 1581167086, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(67, 1581167091, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(68, 1581167092, '7', '7c05da1f7a906a50cb6f7ed4', '0', '390044bf862378c1686c', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(69, 1581323241, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
-(70, 1581323489, '7', '17d212057b633e51ea16fb7b', '2', 'b1b04aa3c1e2464d4265', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -839,15 +697,18 @@ CREATE TABLE `withdrawal` (
   `approval` varchar(128) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `time` int(100) DEFAULT NULL,
-  `details` text
+  `details` text,
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `withdrawal`
 --
 
-INSERT INTO `withdrawal` (`id`, `user_id`, `ref`, `method`, `phone`, `amount`, `status`, `approval`, `email`, `time`, `details`) VALUES
-(2, '7', '14213867760', '', 432434, '50.0000', 'processed', 'pending', 'publisher@test.com', 1579775428, NULL);
+INSERT INTO `withdrawal` (`id`, `user_id`, `ref`, `method`, `phone`, `amount`, `status`, `approval`, `email`, `time`, `details`, `message`) VALUES
+(2, '7', '14213867760', '', 432434, '50.0000', 'processed', 'pending', 'publisher@test.com', 1579775428, NULL, ''),
+(3, '7', '14271385797', '', 432434, '50.0000', 'processed', 'approved', 'publisher@test.com', 1586166321, NULL, ''),
+(4, '7', '14274337941', '', 432434, '500.0000', 'processed', 'approved', 'publisher@test.com', 1586494337, NULL, '');
 
 --
 -- Indexes for dumped tables
@@ -1034,7 +895,7 @@ ALTER TABLE `admin_earning`
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
@@ -1084,7 +945,7 @@ ALTER TABLE `cpa_forms`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `manual_payment`
 --
@@ -1119,7 +980,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
@@ -1134,12 +995,12 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `publishers_websites`
 --
 ALTER TABLE `publishers_websites`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `pub_story`
 --
@@ -1164,7 +1025,7 @@ ALTER TABLE `views`
 -- AUTO_INCREMENT for table `withdrawal`
 --
 ALTER TABLE `withdrawal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
