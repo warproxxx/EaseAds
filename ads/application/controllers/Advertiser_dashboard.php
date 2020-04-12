@@ -762,7 +762,7 @@ $data['user'] =$this->user;
 
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-
+$data['country_click_details'] = $this->advertiser_model->country_click_by_adv_id($_SESSION['id']);
 
 
     $this->load->view('/common/advertiser_header_view',$data);

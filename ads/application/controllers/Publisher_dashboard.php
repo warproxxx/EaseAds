@@ -430,6 +430,10 @@ $data['two_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clic
 $data['three_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(48*60*60)),72);
 $data['four_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(72*60*60)),96);
 $data['today_clicks'] = $this->publisher_model->get_campaign_clicks($ref_id,strtotime(date("y-m-d")));
+
+$data['country_click_details'] = $this->publisher_model->country_click_by_pub_space($ref_id);
+
+
     $this->load->view('/common/publisher_header_view',$data);
     $this->load->view('/common/publisher_top_tiles',$data);
     $this->load->view('/user/publisher/details_view',$data);
@@ -511,7 +515,7 @@ public function sites_list()
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
       $data["sites"] = $this->publisher_model->get_full_sites();
-      print_r($data["sites"]);
+      
       
       $this->load->view('/common/publisher_header_view',$data);
       $this->load->view('/common/publisher_top_tiles',$data);
@@ -541,7 +545,7 @@ public function sites_list()
       $data["noindex"] = $this->noindex;
 $data['user'] = $this->publisher_model->get_publisher_by_id();
 $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-
+$data['country_click_details'] = $this->publisher_model->country_click_by_pub_id($_SESSION['id']);
  
 
     $this->load->view('/common/publisher_header_view',$data);

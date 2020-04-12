@@ -305,6 +305,34 @@ public function get_full_sites()
     return $query->result_array();
 }
 
+public function country_click_by_pub_id($id)
+{
+  $q = "SELECT 
+  * 
+  FROM
+  (SELECT count(id) AS views, country FROM views WHERE story_pid='$id' GROUP BY country) t1
+  INNER JOIN
+  (SELECT count(id) AS clicks, country FROM views WHERE story_pid='$id' GROUP BY country) t2
+  ON t1.country = t2.country";
+  
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
+public function country_click_by_pub_space($id)
+{
+  $q = "SELECT 
+  * 
+  FROM
+  (SELECT count(id) AS views, country FROM views WHERE space_id='$id' GROUP BY country) t1
+  INNER JOIN
+  (SELECT count(id) AS clicks, country FROM views WHERE space_id='$id' GROUP BY country) t2
+  ON t1.country = t2.country";
+  
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
 
 public function count_publisher_pending_spaces()
 {
