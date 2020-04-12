@@ -200,7 +200,7 @@ public function deliver_banner_js($space_id = NULL,$size_type)
 
   
   //insert view here
-  $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
+  $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile(), "country" => $client_country));
   $size =  explode('X', $space['size']);
 
 
@@ -668,6 +668,10 @@ $campaign_rendered = $this->campaign_model->get_campaign_by_ref_id($ref_id);
 $publisher_id = $space['user_id'];
 $advertiser_id = $campaign_rendered['user_id'];
 //check for duplicate view on same ads
+$ip = $this->input->ip_address();
+$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+$client_country = @$ipdat->geoplugin_countryCode;
+
 
 
 if(empty($this->campaign_model->get_campaign_click(array('ip' => get_client_ip(),'story_id' => $campaign_rendered['ref_id'],'story_pid' => $publisher['id']))))
@@ -710,7 +714,7 @@ $this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id)
 }
 
 //insert click here
-$this->campaign_model->insert_click(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $ref_id,"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
+$this->campaign_model->insert_click(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $ref_id,"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile(), "country" => $client_country));
 
 if(empty($campaign_rendered['cpa_id']))
 {

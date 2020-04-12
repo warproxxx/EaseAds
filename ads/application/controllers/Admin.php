@@ -301,10 +301,10 @@ public function payment_requests($table_type = NULL,$user_id = NULL, $id=NULL, $
     if ($table_type == 'approve')
     {
       $str = "CONFIRMED";
-      $user=$this->advertiser_model->get_advertiser_by_id($id);
+      $user=$this->advertiser_model->get_advertiser_by_id($user_id);
       $previous_bal = $user['account_bal'];
       $new_bal = $amt+$previous_bal;
-      $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $id);      
+      $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $user_id);      
     }
     elseif ($table_type == 'disapprove')
       $str = "DENIED";

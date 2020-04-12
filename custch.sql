@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 10, 2020 at 01:38 PM
+-- Generation Time: Apr 12, 2020 at 06:03 AM
 -- Server version: 5.7.29-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.3
 
@@ -451,22 +451,6 @@ CREATE TABLE `payments` (
   `message` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`, `message`) VALUES
-(3, '2', 'advertiser', 'paypal', NULL, '', '10.0000', 'CONFIRMED', NULL, 'deposit', '1579754186', NULL, 'PAYID-LYUSFMI4Y847822CA173270R', 'D34LDFXSNMR58', 'EC-7AT15982JL9061614', NULL, ''),
-(4, '1', 'advertiser', 'manual', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1579772268', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
-(5, '2', 'advertiser', 'paypal', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1580279167', NULL, 'PAYID-LYYSKPY7AH51123JT047525A', 'D34LDFXSNMR58', 'EC-4A212519D5035631K', NULL, ''),
-(6, '2', 'advertiser', 'manual', NULL, '', '50.0000', 'CONFIRMED', NULL, 'deposit', '1581511274', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
-(9, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589157', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
-(10, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589159', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
-(11, '2', 'advertiser', 'Skrill', NULL, '', '222.0000', 'CONFIRMED', NULL, 'deposit', '1581589304', NULL, 'Manual', 'Manual', 'Manual', NULL, ''),
-(13, '2', 'advertiser', 'Bank', NULL, '', '50.0000', 'CONFIRMED', NULL, 'DEPOSIT', '1582011278', NULL, NULL, NULL, NULL, NULL, 'Hello plz'),
-(14, '2', 'advertisers', 'Manual', NULL, '', '55.0000', 'CONFIRMED', NULL, 'MANUAL', '1582013032', NULL, NULL, NULL, NULL, NULL, 'Manually done by admin'),
-(15, '7', 'publishers', 'Manual', NULL, '', '500.0000', 'CONFIRMED', NULL, 'MANUAL', '1586490316', NULL, NULL, NULL, NULL, NULL, 'asddsd');
-
 -- --------------------------------------------------------
 
 --
@@ -890,17 +874,17 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
@@ -925,7 +909,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cmessages`
 --
@@ -980,7 +964,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
@@ -995,7 +979,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `publishers_websites`
 --
@@ -1020,7 +1004,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
