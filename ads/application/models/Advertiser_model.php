@@ -453,6 +453,20 @@ public function get_receipt($id)
   return $query->row_array();
 }
 
+public function country_click_by_story_id($id)
+{
+  $q = "SELECT 
+  * 
+  FROM
+  (SELECT count(id) AS views, country FROM views WHERE story_id='$id' GROUP BY country) t1
+  INNER JOIN
+  (SELECT count(id) AS clicks, country FROM views WHERE story_id='$id' GROUP BY country) t2
+  ON t1.country = t2.country";
+  
+  $query = $this->db->query($q);
+  return $query->result_array();
+}
+
 public function count_advertisers_campaigns()
 {
 

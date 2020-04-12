@@ -811,6 +811,7 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 $data['campaign_item'] = $this->advertiser_model->get_campaign_ref_id($ref_id);
 $data['today_views'] = $this->advertiser_model->get_campaign_views($ref_id,strtotime(date("y-m-d")));
 $data['today_clicks'] = $this->advertiser_model->get_campaign_clicks($ref_id,strtotime(date("y-m-d")));
+$data['country_click_details'] = $this->advertiser_model->country_click_by_story_id($ref_id);
 
 
 $data['yesterday_views'] = $this->advertiser_model->get_campaign_at_time_views($ref_id,strtotime(date("y-m-d")),24)['total_views'];
@@ -836,6 +837,8 @@ $data['campaign_item']['views'] = $this->advertiser_model->get_campaign_at_all_t
 
 
 }
+
+
 public function fund_campaign($ref_id)
 {
 

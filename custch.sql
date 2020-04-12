@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Apr 12, 2020 at 06:03 AM
--- Server version: 5.7.29-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.3
+-- Host: localhost
+-- Generation Time: Apr 12, 2020 at 01:49 AM
+-- Server version: 5.7.29-0ubuntu0.16.04.1
+-- PHP Version: 7.0.33-0ubuntu0.16.04.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,6 +37,14 @@ CREATE TABLE `admin_earning` (
   `time` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `admin_earning`
+--
+
+INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `weekday`, `amount`, `time`) VALUES
+(1, 'April', '2020', 'banner', 'view', 'Sunday', '0.0015', '1586653121'),
+(2, 'April', '2020', 'banner', 'click', 'Sunday', '0.0000', '1586656126');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +71,13 @@ CREATE TABLE `advertisers` (
   `lastlog` varchar(128) DEFAULT NULL,
   `time` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `advertisers`
+--
+
+INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
+(8, 'Advertiser', 'Test', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Afghanistan', NULL, 'advertiser@test.com', NULL, 'advertiser', '384.0000', '0.0000', NULL, '["fdx.com"]', 'active', NULL, NULL, NULL, 1586652316);
 
 -- --------------------------------------------------------
 
@@ -111,6 +126,13 @@ CREATE TABLE `adv_story` (
   `action_type` varchar(128) DEFAULT NULL,
   `is_default` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adv_story`
+--
+
+INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `start_time`, `per_click`, `per_view`, `per_action`, `budget`, `balance`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`) VALUES
+(1, 1586652959, 8, 0, 0, 1586652959, '0.4000', '0.0050', NULL, '60.0000', '59.5950', 0, '-asdasd', 'waterbot.xyz', 'banner', '300X250', NULL, 'Screenshot_from_2020-04-08_11-44-50.png', NULL, 'f9a926d6fd09fc9d028e', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'false', 'Business', '3', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -212,6 +234,13 @@ CREATE TABLE `clicks` (
   `is_mobile` varchar(128) DEFAULT NULL,
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clicks`
+--
+
+INSERT INTO `clicks` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `os`, `is_mobile`, `country`) VALUES
+(1, 1586656126, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', NULL, '0', 'NP');
 
 -- --------------------------------------------------------
 
@@ -451,6 +480,13 @@ CREATE TABLE `payments` (
   `message` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`, `message`) VALUES
+(19, '8', 'advertiser', 'Skrill', NULL, '', '444.0000', 'CONFIRMED', NULL, 'DEPOSIT', '1586652812', NULL, NULL, NULL, NULL, NULL, 'adsd');
+
 -- --------------------------------------------------------
 
 --
@@ -529,6 +565,13 @@ CREATE TABLE `publishers` (
   `other_detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `publishers`
+--
+
+INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`, `other_name`, `other_detail`) VALUES
+(1, 'Publisher', 'test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Afghanistan', NULL, 'publisher@test.com', NULL, 'publisher', '0.2835', '0.0000', '0.0000', NULL, 'active', '["aaa.com"]', NULL, '1586653019', NULL, NULL, NULL, NULL, NULL, NULL, 1586652267, '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -549,9 +592,10 @@ CREATE TABLE `publishers_websites` (
 INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
 (4, 7, 'waterbot.xy', 1),
 (5, 7, 'ninjasaga.com', 1),
-(6, 8, 'http://googlee.com', 0),
-(7, 9, 'http://aa.com', 0),
-(8, 10, 'http://aaa.com', 0);
+(6, 8, 'http://googlee.com', 1),
+(7, 9, 'http://aa.com', 1),
+(8, 10, 'http://aaa.com', 1),
+(9, 1, 'aaa.com', 1);
 
 -- --------------------------------------------------------
 
@@ -586,14 +630,15 @@ CREATE TABLE `pub_story` (
 --
 
 INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `type`, `size`, `ref_id`, `website`, `name`, `gained`, `country`, `div_id`, `category`, `platform`, `code`, `os`, `browser`) VALUES
-(1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '[\"advertising\",\"entertainment\",\"food\",\"gambling\",\"marketing\"]', NULL, '<script src=\"http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94\"></script>\n<center><div class=\"w3-margin\" id=\"Ec8\" style=\"max-width: 70%;\" class=\"\">\n</div></center>\n', NULL, NULL),
-(2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '[\"Business\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"bC4\">\n</div></center>', NULL, NULL),
-(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '[\"Blog\",\"Adventure\",\"Beauty\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"eE7\">\n</div></center>', NULL, NULL),
-(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '[\"Business\",\"Blog\",\"Adventure\",\"Beauty\",\"Investing\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"AC0\">\n</div></center>', NULL, NULL),
-(5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '[\"Business\"]', NULL, NULL, NULL, NULL),
-(6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"ee6\">\n</div>', NULL, NULL),
-(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '[\"Business\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"BE1\">\n</div>', NULL, NULL),
-(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '[\"Business\",\"Blog\",\"Adventure\",\"Beauty\",\"Investing\"]', NULL, '<script src=\"http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"cc5\">\n</div>', NULL, NULL);
+(1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '["advertising","entertainment","food","gambling","marketing"]', NULL, '<script src="http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94"></script>\n<center><div class="w3-margin" id="Ec8" style="max-width: 70%;" class="">\n</div></center>\n', NULL, NULL),
+(2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box"></script>\n<center><div  class="w3-margin"  id="bC4">\n</div></center>', NULL, NULL),
+(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '["Blog","Adventure","Beauty"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box"></script>\n<center><div  class="w3-margin"  id="eE7">\n</div></center>', NULL, NULL),
+(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box"></script>\n<center><div  class="w3-margin"  id="AC0">\n</div></center>', NULL, NULL),
+(5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '["Business"]', NULL, NULL, NULL, NULL),
+(6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4"></script>\n<div  class="w3-margin"  style="" id="ee6">\n</div>', NULL, NULL),
+(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6"></script>\n<div  class="w3-margin"  style="" id="BE1">\n</div>', NULL, NULL),
+(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b"></script>\n<div  class="w3-margin"  style="" id="cc5">\n</div>', NULL, NULL),
+(9, 1586653066, 1, 0, 0, 'active', 'banner', '300X250', 'bc6c1ae50d70ba43c4cd36c6', 'aaa.com', 'Frr', NULL, NULL, 'BC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://3.17.5.137/ads/campaign_delivery/deliver_banner_js/bc6c1ae50d70ba43c4cd36c6/box"></script>\n<center><div  class="w3-margin"  id="BC0">\n</div></center>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -663,6 +708,15 @@ CREATE TABLE `views` (
   `is_mobile` varchar(128) DEFAULT NULL,
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `views`
+--
+
+INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
+(1, 1586653121, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP'),
+(2, 1586653130, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP'),
+(3, 1586656123, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP');
 
 -- --------------------------------------------------------
 
@@ -874,17 +928,17 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
@@ -909,7 +963,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cmessages`
 --
@@ -964,7 +1018,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
@@ -979,17 +1033,17 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `publishers_websites`
 --
 ALTER TABLE `publishers_websites`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `system_var`
 --
@@ -1004,7 +1058,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
