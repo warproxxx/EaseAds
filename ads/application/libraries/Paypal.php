@@ -66,9 +66,9 @@ class Paypal{
         $this->apiContext->setConfig(
                 array(
                     'mode' => config_item("mode"),
-                    // 'log.LogEnabled' => true,
-                    // 'log.FileName' => '../PayPal.log',
-                    // 'log.LogLevel' => 'DEBUG',
+                    //'log.LogEnabled' => true,
+                    //'log.FileName' => '../PayPal.log',
+                    //'log.LogLevel' => 'DEBUG',
                     'cache.enabled' => true
                 )
             );
