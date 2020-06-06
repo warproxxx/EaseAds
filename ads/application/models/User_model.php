@@ -31,7 +31,16 @@ public function get_categories()
 public function register_advertiser()
 {
 
+  if (isset($_SESSION["referral_id"]))
+  {
+    $ref_id = $_SESSION["referral_id"];
+  }
+  else
+  {
+    $ref_id = "";
+  }
 
+  $token = md5(uniqid(rand(), true));
 
      $reg = array(
 
@@ -45,8 +54,9 @@ public function register_advertiser()
 "websites" => json_encode(array($this->input->post('website'))),
 "total_spent" => "0.00",
 "account_bal" => "0.00",
-"referral_id" => $_SESSION["referral_id"],
-'time' => time()
+"referral_id" =>  $ref_id,
+'time' => time(),
+"token" => $token
 
 );
 
@@ -54,7 +64,7 @@ $this->db->insert('advertisers',$reg);
 
 
 
- return true;
+return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email']);
 }
 
 public function custom_advertiser($reg)
@@ -112,7 +122,16 @@ public function custom_publisher($reg, $website)
 public function register_publisher()
 {
 
+  if (isset($_SESSION["referral_id"]))
+  {
+    $ref_id = $_SESSION["referral_id"];
+  }
+  else
+  {
+    $ref_id = "";
+  }
 
+  $token = md5(uniqid(rand(), true));
 
        $reg = array(
 
@@ -126,9 +145,10 @@ public function register_publisher()
 "total_earned" => "0.00",
 "pending_bal" => "0.00",
 "account_bal" => "0.00",
-"referral_id" => $_SESSION["referral_id"],
+"referral_id" => $ref_id,
 "websites" => json_encode(array($this->input->post('website'))),
- 'time' => time()
+ 'time' => time(),
+ "token" => $token
 
 );
 
@@ -145,7 +165,7 @@ $websites = array(
 
 
 
- return true;
+ return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email']);
 
 
 

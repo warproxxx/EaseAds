@@ -290,31 +290,40 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
-public function email_test()
+public function send_email($detail)
 {
+  $name = $detail[0];
+  $token = $detail[1];
+  $address = $detail[2];
 
   $config = Array(
     'protocol' => 'smtp',
-    'smtp_host' => 'smtp.migadu.com',
-    'smtp_port' => 587,
-    'smtp_user' => 'notifications@easeads.com',
-    'smtp_pass' => 'Jhapali@1234',
+    'smtp_host' => 'smtp.zoho.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'notifications@waterbot.xyz',
+    'smtp_pass' => 'Notify@Bot123',
     'mailtype'  => 'html', 
     'charset'   => 'iso-8859-1',
-    'smtp_crypto' => 'tls'
+    'smtp_crypto' => 'ssl'
   );
   
   $this->load->library('email', $config);
   $this->email->set_newline("\r\n");
 
-  $this->email->from('notifications@easeads.com', 'EaseAds');
-  $this->email->to('jdoe03744@gmail.com'); 
+  $this->email->from('notifications@waterbot.xyz', 'Waterbot');
+  $this->email->to($address); 
 
-  $this->email->subject('Email Test');
-  $this->email->message('Testing the email class.');  
+  $this->email->subject('Verify your registration at EaseAds');
+  $this->email->message('Hello ' . $name . "<br/>Than you for registering with EaseAds! Click on the link below to confirm your registration https://easeads.com/confirm?token=" . $token . "&email=" . $email . "<br/>We look forward for a succesful parternship.<br/>Thank you,<br/>EaseAds Team");  
 
   $result = $this->email->send();
 
+  echo("alert('" . $name . $token . $address . "');");
+}
+
+public function email_test()
+{
+  $this->send_email(array());
 }
 
 

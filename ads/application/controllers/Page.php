@@ -383,6 +383,35 @@ $data['contents'] = $this->pages_model->get_about_us_view() ;
 
 }
 
+public function send_email($detail)
+{
+  $name = $detail[0];
+  $token = $detail[1];
+  $address = $detail[2];
+
+  $config = Array(
+    'protocol' => 'smtp',
+    'smtp_host' => 'smtp.zoho.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'notifications@waterbot.xyz',
+    'smtp_pass' => 'Notify@Bot123',
+    'mailtype'  => 'html', 
+    'charset'   => 'iso-8859-1',
+    'smtp_crypto' => 'ssl'
+  );
+  
+  $this->load->library('email', $config);
+  $this->email->set_newline("\r\n");
+
+  $this->email->from('notifications@waterbot.xyz', 'EaseAds Team');
+  $this->email->to($address); 
+
+  $this->email->subject('Verify your registration at EaseAds');
+  $this->email->message('Hello ' . $name . ", <br/>Than you for registering with EaseAds! Click on the link below to confirm your registration:<br/><br/> https://easeads.com/confirm?token=" . $token . "&email=" . $address . " <br/><br/>We look forward for a succesful parternship.<br/><br/>Thank you,<br/>EaseAds Team");  
+
+  $result = $this->email->send();
+
+}
 
     public function next_reg()
     {
@@ -410,38 +439,25 @@ $data['terms'] = $this->pages_model->get_terms() ;
 if ($_SESSION['reg_account_type'] == "Advertiser")
 {
 //insert into advertiser table
-  if (!$this->user_model->register_advertiser() )
-    {
-      $_SESSION['err_msg'] ='Unknown Error Occurred,
-       Please try again later';
-      $this->session->mark_as_flash('err_msg');
-      unset($_SESSION['first_details']);
-      show_page("register");
 
-   }
-    else{
+  $detail = $this->user_model->register_advertiser();
+  $this->send_email($detail);
+
 //show dash
 
-    $_SESSION["id"] = $this->user_model->get_user_id_by_email($_SESSION['first_details']['email'],"advertiser");
-    $_SESSION["accounttype"] = "Advertiser";
-    
-    $_SESSION["logged_in"] = true;
-          unset($_SESSION['first_details']);
-    show_page("Advertiser_dashboard");
-  }
+  $_SESSION["id"] = $this->user_model->get_user_id_by_email($_SESSION['first_details']['email'],"advertiser");
+  $_SESSION["accounttype"] = "Advertiser";
+  
+  $_SESSION["logged_in"] = true;
+        unset($_SESSION['first_details']);
+  show_page("Advertiser_dashboard");
+  
+
 
 }elseif ($_SESSION['reg_account_type'] == "Publisher") {
 //insert into advertiser table
-  if (!$this->user_model->register_publisher() )
-    {
-
-      $_SESSION['err_msg'] ='Unknown Error Occurred,
-       Please try again later';
-      $this->session->mark_as_flash('err_msg');
-      show_page("register");
-
-   }
-    else{
+  $details = $this->user_model->register_publisher();
+  $this->send_email($detail);
 //show dash
 
     $_SESSION["id"] = $this->user_model->get_user_id_by_email($_SESSION['first_details']['email'],"publisher");
@@ -457,7 +473,7 @@ if ($_SESSION['reg_account_type'] == "Advertiser")
 
     }
 
-}
+
 	public function login($slug=null)
 	{
 
