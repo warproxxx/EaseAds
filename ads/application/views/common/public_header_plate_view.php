@@ -9,7 +9,7 @@
       <div class="logo float-left">
         <!-- Uncomment below if you prefer to use an image logo -->
         <!--<h1 class="text-light"><a href="#header"><span>Easeads</span></a></h1>-->
-        <a href="/"><img src="<?=base_url("assets/media/images/logo.png") ?>"></a>
+        <img src="<?=base_url("assets/media/images/logo.png") ?>">
       </div>
 
       <nav class="main-nav float-right d-none d-lg-block">
