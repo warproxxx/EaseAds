@@ -2,7 +2,7 @@
 <html>
 <title><?php echo $title; ?></title>
 <meta charset="UTF-8">
-<link rel="icon" href="<?php echo base_url('assets/media/images/favicon.png'); ?>" type="image/x-icon"/>
+<<link rel="icon" href="<?php echo base_url('assets/media/images/favicon.png'); ?>" type="image/x-icon"/>
 
 <meta name="description" content="<?php echo $description; ?>">
 <meta name="keywords" content="<?php

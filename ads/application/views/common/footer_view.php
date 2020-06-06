@@ -51,6 +51,23 @@
             </div>
           </div>
 
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+          
+             <h4>Quick Link</h4>
+             <div class="col-lg-3 col-md-6 footer-links">
+             <ul>
+              <li><a href="">Advitiser</a></li>
+              <li><a href="">Publisher</a></li>
+              <li><a href="<?php echo site_url("page/contact_us") ;?>">About us</a></li>
+              
+              <li><a href="">Contact US</a></li>
+              
+            </ul>
+</div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

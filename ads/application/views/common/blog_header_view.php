@@ -23,16 +23,8 @@
           <li><a href="<?php echo site_url("advertisers"); ?>">Advertisers</a></li>
           <li><a href="<?php echo site_url("publishers"); ?>">Publishers</a></li>
           <li><a href="<?php echo site_url("How_it_Works") ; ?>">How It Works</a></li>
-          <li class="drop-down"><a href="">Ad Formats</a>
-            <ul>
-              <li><a href="#">Native Recomendation</a></li>
-             
-              </li>
-              <li><a href="#">Banner</a></li>
-              <li><a href="#">Popunder</a></li>
-            </ul>
-          </li>
-          <li><a href="<?php echo site_url("contact_us") ; ?>">Contact Us</a></li>
+          <li><a href="<?php echo site_url("About_Us") ; ?>">About Us</a></li>
+         <li><a href="<?php echo site_url("contact_us") ; ?>">Contact Us</a></li>
         </ul>
       </nav><!-- .main-nav -->
       

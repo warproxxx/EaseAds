@@ -6,6 +6,7 @@
 <span class=""><b>get started now</b></span>
 
 	</div>
+	 
 <div>
 <a href="<?= site_url("register#reg") ?>" class="w3-button w3-round-jumbo w3-blue w3-margin-bottom w3-hover-white w3-hover-text-blue w3-border w3-border-blue" style="width:80%">Sign Up</a><br>
 <a href="<?= site_url("login") ?>" class="w3-button w3-round-jumbo w3-blue w3-margin-top w3-hover-white w3-hover-text-blue w3-border w3-border-blue" style="width:80%">Log in</a>

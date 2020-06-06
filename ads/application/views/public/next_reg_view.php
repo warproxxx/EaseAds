@@ -3,6 +3,12 @@
 
     <form class='w3-center' method='POST' action='<?php echo
     site_url('next_reg'); ?>'>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
  <h4 class='w3-text-blue'><b>Registration</b></h4>
 
  <div class='w3-text-red w3-tiny'><?php echo validation_errors();

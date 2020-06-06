@@ -59,6 +59,12 @@ public function get_how_it_works()
 	return $query->row_array()['text'];
 }
 
+public function get_About_Us()
+{
+	$query= $this->db->get_where('pages',array('slug'=> 'About_Us'));
+	return $query->row_array()['text'];
+}
+
 public function get_terms()
 {
 	$query= $this->db->get_where('pages',array('slug'=> 'terms'));

@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <link rel="icon" href="<?php echo base_url('assets/media/images/favicon.png'); ?>" type="image/x-icon"/>
 
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+
+<!-- font-awesome icons CSS -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons CSS -->
+
+ <!-- side nav css file -->
+ <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+ <!-- side nav css file -->
+ 
+ <!-- js-->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+ <!-- added code-->
+
 <meta name="description" content="<?php echo $description; ?>">
 <meta name="keywords" content="<?php
 echo $keywords;

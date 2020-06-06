@@ -3,7 +3,13 @@
 
     <form class='w3-center' method='POST' action='<?php echo
     site_url('Register'); ?>'>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
  <h4 class='w3-text-blue'><b>Registration</b></h4>
+ <hr>
 
  <div class='w3-text-red w3-tiny'><?php echo validation_errors();
  if(isset($_SESSION['err_msg']))

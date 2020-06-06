@@ -4,11 +4,11 @@
 <form method="post">
     Start Date:
     <input type="date" name="start" value="2019-01-01">
-    <br/>
+    <br>
 
     End Date:
     <input type="date" name="end">
-    <br/>
+    <br>
 
     Report Type:
     <select name="report">
@@ -17,7 +17,7 @@
         <option value="platform">By Platform</option>
         <option value="browser">By Browser</option>
     </select> 
-    <br/>
+    <br>
     Campaign:
     <select name="campaign">
         <!-- <option value="all">All</option> -->
@@ -29,7 +29,7 @@
         ?>
     </select> 
     
-    <br/>
+    <br>
     <input type="submit" value="Generate">
 </form>
 

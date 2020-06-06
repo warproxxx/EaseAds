@@ -55,21 +55,31 @@
         });
 	</script>
 	
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+<table class="w3-table w3-striped">
+    <thead>
+    <tr>
+      <th scope="col">Campaign Name</i></th>
+      <th scope="col">Campaign Status</th>
+      <th scope="col">Campaign Budget</th>
+      <th scope="col">Total impressions</i></th>
+      <th scope="col">Total clicks</th>
+      <th scope="col">eCPM</th>
+      <th scope="col">eCPC</th>
+      <th scope="col">Review campaign</th>
+
+</tr>
+</thead>
+   
+  <tbody>
 <?php
 if(!empty($items))
 {
-echo("<table border=1>");
-echo("<tr>
-		<td>Campaign Name</td>
-		<td>Campaign Status</td>
-		<td>Campaign Budget</td>
-		<td>Total impressions</td>
-		<td>Total clicks</td>
-		<td>eCPM</td>
-		<td>eCPC</td>
-		<td>Review campaign</td>
-	
-	 <tr/>	");
+
 
 foreach ($items as $item) {
 

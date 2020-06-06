@@ -19,21 +19,21 @@ echo base_url('assets/media/images/faviconsocial.png');
 <meta property="og:title" content="<?php echo $title; ?>" />
 <meta name="author" content="<?php echo $author;?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--<link rel="stylesheet"  href="<?php echo base_url('assets/cj/fontawesome-4.6.3.min.css'); ?>"/>
--->
+<link rel="stylesheet"  href="<?php echo base_url('assets/cj/fontawesome-4.6.3.min.css'); ?>"/>
+
 <link rel="stylesheet"  href="<?php echo base_url('assets/cj/w3mobile.css'); ?>"/>
 
 
 <link rel="stylesheet"  href="<?php echo base_url('assets/cj/w3.css'); ?>"/>
 
-<!--<link rel="stylesheet"  href="<?php echo base_url('assets/cj/w3mobile.css'); ?>">-->
+<link rel="stylesheet"  href="<?php echo base_url('assets/cj/w3mobile.css'); ?>"
 
     <!--apple 180X180-->
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
-  <!-- Bootstrap CSS File -->
+  <!-- Bootstrap CSS File --> <!--added code-->
   <link href="<?php echo base_url('assets/cj/lib/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
@@ -45,6 +45,28 @@ echo base_url('assets/media/images/faviconsocial.png');
 
   <!-- Main Stylesheet File -->
   <link href="<?php echo base_url('assets/cj/css/style.css'); ?>" rel="stylesheet">
+
+  <!-- Bootstrap Core CSS -->
+<link href="<?php echo base_url('assets/css/bootstrap.css');?>" rel='stylesheet' type='text/css' />
+
+<!-- Custom CSS -->
+<link href="<?php echo base_url('assets/css/style.css');?>" rel='stylesheet' type='text/css' />
+
+<!-- font-awesome icons CSS -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons CSS -->
+
+ <!-- side nav css file -->
+ <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+ <!-- side nav css file -->
+ 
+ <!-- js-->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+
+<!--webfonts-->
+<link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+<!--//webfonts end added--> 
 
 <style>
 
@@ -72,12 +94,6 @@ echo base_url('assets/media/images/faviconsocial.png');
 }
 
 }
-
-
-
-
-
-
 
 a {
 text-decoration:none;

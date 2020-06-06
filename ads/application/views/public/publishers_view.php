@@ -25,20 +25,20 @@
             <div class="icon-box wow fadeInUp">
               <div class="icon"><i class="fa fa-user-plus"></i></div>
               <h4 class="title">Flexible</h4>
-              <p class="description">Lorem Ipsum</p>
+              <p class="description">desc</p>
             </div>
 
 
  <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
               <div class="icon"><i class="fa fa-level-up"></i></div>
               <h4 class="title">Responsive</h4>
-              <p class="description">Lorem Ipsum</p>
+              <p class="description"></p>
             </div>
 
             <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
               <div class="icon"><i class="fa fa-send"></i></div>
               <h4 class="title">Low Threshold</h4>
-              <p class="description">Lorem Ipsum</p>
+              <p class="description"></p>
             </div>
 
            
@@ -138,7 +138,7 @@
 
         <header class="section-header">
           <h3>Why Us?</h3>
-          <p>Lorem Ipsum. Lorem Ipsum.</p>
+          <p>The all in one advertisement network.</p>
         </header>
 
         <div class="row">

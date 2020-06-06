@@ -364,6 +364,25 @@ $data['contents'] = $this->pages_model->get_how_it_works() ;
 
 }
 
+public function about_us_view()
+{
+
+ $data['title'] = $this->siteName." | About Us";
+      $data['author'] = $this->author;
+      $data['keywords'] = $this->keywords;
+      $data['description'] = $this->description;
+$data['items'] = $this->blog_model->get_posts_pag(0,7);
+$data['contents'] = $this->pages_model->get_about_us_view() ;
+
+  $this->load->view('/common/header_view',$data);
+     $this->load->view('/common/public_header_plate_view',$data);
+            $this->load->view('public/how_it_works_view',$data);
+      $this->load->view('common/blog_sidebar_view',$data);
+    $this->load->view('common/footer_view');
+
+
+}
+
 
     public function next_reg()
     {
