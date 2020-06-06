@@ -290,6 +290,33 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
+public function email_test()
+{
+
+  $config = Array(
+    'protocol' => 'smtp',
+    'smtp_host' => 'smtp.migadu.com',
+    'smtp_port' => 587,
+    'smtp_user' => 'notifications@easeads.com',
+    'smtp_pass' => 'Jhapali@1234',
+    'mailtype'  => 'html', 
+    'charset'   => 'iso-8859-1',
+    'smtp_crypto' => 'tls'
+  );
+  
+  $this->load->library('email', $config);
+  $this->email->set_newline("\r\n");
+
+  $this->email->from('notifications@easeads.com', 'EaseAds');
+  $this->email->to('jdoe03744@gmail.com'); 
+
+  $this->email->subject('Email Test');
+  $this->email->message('Testing the email class.');  
+
+  $result = $this->email->send();
+
+}
+
 
 
 public function payment_requests($table_type = NULL,$user_id = NULL, $id=NULL, $amt=NULL, $method=NULL)
