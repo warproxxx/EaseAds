@@ -662,6 +662,18 @@ public function get_campaign_views_user($today)
 
 }
 
+public function get_email_verified()
+{
+
+ $q = "SELECT email_verified
+       FROM advertisers
+       WHERE id= '".$_SESSION['id']."'";
+  $query = $this->db->query($q);
+
+  return $query->row_array();
+
+}
+
 
 public function get_campaign_clicks($ref_id,$today)
 {

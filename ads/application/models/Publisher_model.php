@@ -43,6 +43,17 @@ return $query->result_array();
 }
 
 
+public function get_email_verified()
+{
+
+ $q = "SELECT email_verified
+       FROM publishers
+       WHERE id= '".$_SESSION['id']."'";
+  $query = $this->db->query($q);
+
+  return $query->row_array();
+
+}
 
 //new
 public function get_publisher_by_its_id($id)

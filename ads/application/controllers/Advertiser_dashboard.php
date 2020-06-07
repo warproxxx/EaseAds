@@ -45,6 +45,9 @@ public function __construct()
       $this->user =  $this->advertiser_model->get_advertiser_by_id();
 
 }
+
+
+
 public function index()
 {
 
@@ -55,6 +58,19 @@ public function index()
       $data['description'] =  $this->description;
       $data["noindex"] =  $this->noindex;
       $data['user'] =$this->user;
+      
+      $email_verified = $this->advertiser_model->get_email_verified();
+      if ($email_verified['email_verified'] == 0)
+      {
+        unset($_SESSION["id"]);
+        unset($_SESSION["logged_in"]);
+        unset($_SESSION["accounttype"]);
+
+        $_SESSION['action_status_report'] = '<span class="w3-text-red">You must verify your email to login</span>';
+        $this->session->mark_as_flash('action_status_report');
+
+        show_page("page/login?type=advertiser");
+      }
 
 
     $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();

@@ -64,7 +64,7 @@ $this->db->insert('advertisers',$reg);
 
 
 
-return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email']);
+return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email'], 'advertisers');
 }
 
 public function custom_advertiser($reg)
@@ -165,7 +165,7 @@ $websites = array(
 
 
 
- return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email']);
+ return array($_SESSION['first_details']['firstname'], $token, $_SESSION['first_details']['email'], 'publishers');
 
 
 
@@ -452,6 +452,12 @@ $this->db->update($table_name,$dab,array("id" => $id));
 
 }
 
+public function verify_email($table_name, $token)
+{
+
+  $this->db->update($table_name, array("email_verified" => 1), array("token" => $token));
+
+}
 
 
 }

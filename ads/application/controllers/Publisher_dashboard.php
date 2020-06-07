@@ -409,6 +409,22 @@ public function view_details($ref_id)
       $data['keywords'] = $this->keywords;
       $data['description'] = $this->description;
       $data["noindex"] = $this->noindex;
+
+
+      $email_verified = $this->publisher_model->get_email_verified();
+      if ($email_verified['email_verified'] == 0)
+      {
+        unset($_SESSION["id"]);
+        unset($_SESSION["logged_in"]);
+        unset($_SESSION["accounttype"]);
+
+        $_SESSION['action_status_report'] = '<span class="w3-text-red">You must verify your email to login</span>';
+        $this->session->mark_as_flash('action_status_report');
+
+        show_page("page/login?type=publisher");
+      }
+
+
 $data['user'] = $this->publisher_model->get_publisher_by_id();
 $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
 $data['item'] = $this->publisher_model->get_space_by_id($ref_id);

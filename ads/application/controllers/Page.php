@@ -388,6 +388,7 @@ public function send_email($detail)
   $name = $detail[0];
   $token = $detail[1];
   $address = $detail[2];
+  $type = $detail[3];
 
   $config = Array(
     'protocol' => 'smtp',
@@ -407,7 +408,7 @@ public function send_email($detail)
   $this->email->to($address); 
 
   $this->email->subject('Verify your registration at EaseAds');
-  $this->email->message('Hello ' . $name . ", <br/>Than you for registering with EaseAds! Click on the link below to confirm your registration:<br/><br/> https://easeads.com/confirm?token=" . $token . "&email=" . $address . " <br/><br/>We look forward for a succesful parternship.<br/><br/>Thank you,<br/>EaseAds Team");  
+  $this->email->message('Hello ' . $name . ", <br/>Than you for registering with EaseAds! Click on the link below to confirm your registration:<br/><br/> https://easeads.com/page/confirm?type=" . $type . "&token=" . $token . " <br/><br/>We look forward for a succesful parternship.<br/><br/>Thank you,<br/>EaseAds Team");  
 
   $result = $this->email->send();
 
@@ -726,6 +727,30 @@ $this->load->view('/common/public_header_plate_view',$data);
 
 
  }
+
+ public function confirm()
+ {
+   if ($_GET['type'] == 'advertisers')
+   {
+      $this->user_model->verify_email($_GET['type'], $_GET['token']);
+      $_SESSION['action_status_report'] = '<span class="w3-text-green">Email verified succesfully. You can now login</span>';
+      $this->session->mark_as_flash('action_status_report');
+  
+      show_page("page/login?type=advertiser");
+
+   }
+   else if ($_GET['type'] == 'publishers')
+   {
+    $this->user_model->verify_email($_GET['type'], $_GET['token']);
+    $_SESSION['action_status_report'] = '<span class="w3-text-green">Email verified succesfully. You can now login</span>';
+      $this->session->mark_as_flash('action_status_report');
+  
+      show_page("page/login?type=publisher");
+   }
+
+   
+ }
+ 
 
 }
 
