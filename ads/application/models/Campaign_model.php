@@ -222,6 +222,38 @@ public function edit_campaign($data_array,$ref_id)
 $this->db->update('adv_story',$data_array,array("ref_id" => $ref_id));
 }
 
+public function update_clicks($space_id, $ref_id)
+{
+	$q = "UPDATE adv_story
+		  SET clicks = clicks + 1
+		  WHERE ref_id='" . $ref_id . "'";
+  
+	$query = $this->db->query($q);
+	  
+	$q = "UPDATE pub_story
+		  SET clicks = clicks + 1
+		  WHERE ref_id='" . $space_id . "'";
+
+	$query = $this->db->query($q);
+}
+
+public function update_views($space_id, $ref_id)
+{
+	$q = "UPDATE adv_story
+		  SET views = views + 1
+		  WHERE ref_id='" . $ref_id . "'";
+  
+	$query = $this->db->query($q);
+	  
+	$q = "UPDATE pub_story
+		  SET views = views + 1
+		  WHERE ref_id='" . $space_id . "'";
+
+	$query = $this->db->query($q);
+}
+
+
+
 public function delete_campaign($ref_id)
 {
 	$this->db->where('ref_id', $ref_id);

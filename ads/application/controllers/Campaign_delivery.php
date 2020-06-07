@@ -201,6 +201,8 @@ public function deliver_banner_js($space_id = NULL,$size_type)
   
   //insert view here
   $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile(), "country" => $client_country));
+  $this->campaign_model->update_views($space_id, $campaign_to_render['ref_id']);
+  
   $size =  explode('X', $space['size']);
 
 
@@ -361,7 +363,7 @@ public function deliver_popup_js($space_id = NULL)
 
   //insert view here
   $this->campaign_model->insert_view(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $campaign_to_render['ref_id'],"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile()));
-
+  $this->campaign_model->update_views($space_id, $campaign_to_render['ref_id']);
 
   Header("content-type: application/x-javascript");
   if(!empty($campaign_to_render))
@@ -715,12 +717,15 @@ $this->publisher_model->insert_new_balance($publisher_new_balance,$publisher_id)
 
 //insert click here
 $this->campaign_model->insert_click(array("story_pid" => $publisher_id,"story_aid" => $advertiser_id ,"space_id" => $space_id,"browser" => $this->agent->browser(),"story_id" => $ref_id,"ip" => get_client_ip(),"platform" => $this->agent->platform(),"time" => time(),"is_mobile" => $this->agent->is_mobile(), "country" => $client_country));
+#update clicks and views too.
+$this->campaign_model->update_clicks($space_id, $ref_id);
+
 
 if(empty($campaign_rendered['cpa_id']))
 {
   //if not cpa
 //redirect to destination url
-header('Location: http://'.$campaign_rendered['dest_link']);
+header('Location: '.$campaign_rendered['dest_link']);
 }else{
   //get cpa slug here
   $cpa = $this->advertiser_model->get_cpa_form_by_ref_id($campaign_rendered['cpa_id']);

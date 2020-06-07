@@ -767,7 +767,7 @@ $this->advertiser_model->insert_campaign_step_three($ref_id,$data['user']);
 
         $data['items'] =  $this->advertiser_model->get_advertiser_campaigns(null,null);
         $config['base_url'] = site_url("advertiser_dashboard/campaign");
-        $config['total_rows'] = count($this->advertiser_model->get_advertiser_campaigns(null,null));
+        $config['total_rows'] = count($data['items']);
   
       $data['title'] = $this->siteName." | Advertiser Campaign";
       $data['author'] =  $this->author;
