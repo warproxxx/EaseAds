@@ -69,7 +69,6 @@ public function report()
 
   if ($campaign != "")
   {
-    echo($campaign);
 
     $report = $this->input->post('report');
     $start_date = new DateTime($this->input->post('start'));
@@ -123,6 +122,18 @@ public function report()
 public function index()
 {
 
+  $email_verified = $this->publisher_model->get_email_verified();
+  if ($email_verified['email_verified'] == 0)
+  {
+    unset($_SESSION["id"]);
+    unset($_SESSION["logged_in"]);
+    unset($_SESSION["accounttype"]);
+
+    $_SESSION['action_status_report'] = '<span class="w3-text-red">You must verify your email to login</span>';
+    $this->session->mark_as_flash('action_status_report');
+
+    show_page("page/login?type=publisher");
+  }
 
       $data['title'] = $this->siteName." | Publisher Dashboard";
             $data['author'] = $this->author;
@@ -411,18 +422,7 @@ public function view_details($ref_id)
       $data["noindex"] = $this->noindex;
 
 
-      $email_verified = $this->publisher_model->get_email_verified();
-      if ($email_verified['email_verified'] == 0)
-      {
-        unset($_SESSION["id"]);
-        unset($_SESSION["logged_in"]);
-        unset($_SESSION["accounttype"]);
-
-        $_SESSION['action_status_report'] = '<span class="w3-text-red">You must verify your email to login</span>';
-        $this->session->mark_as_flash('action_status_report');
-
-        show_page("page/login?type=publisher");
-      }
+      
 
 
 $data['user'] = $this->publisher_model->get_publisher_by_id();

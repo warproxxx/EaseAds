@@ -477,7 +477,7 @@ public function get_campaign_clicks($ref_id,$today)
 
 public function get_other_view_report($col, $start_time, $end_time, $ref_id)
 {
-  $q = "SELECT z.platform, AVG(z.per_view) AS eCPM, COUNT(z.space_id) AS Views FROM (SELECT v.platform, v.browser, v.country, v.space_id, a.per_click, a.per_view, v.time
+  $q = "SELECT z." . $col . ", AVG(z.per_view) AS eCPM, COUNT(z.space_id) AS Views FROM (SELECT v.platform, v.browser, v.country, v.space_id, a.per_click, a.per_view, v.time
         FROM views v
         LEFT JOIN adv_story a
         ON a.ref_id = v.space_id
@@ -489,7 +489,7 @@ public function get_other_view_report($col, $start_time, $end_time, $ref_id)
 
 public function get_other_click_report($col, $start_time, $end_time, $ref_id)
 {
-  $q = "SELECT  z.platform, AVG(z.per_click) AS eCPC, COUNT(z.space_id) AS Clicks FROM (SELECT c.platform, c.browser, c.country, c.space_id, a.per_click, a.per_view, c.time
+  $q = "SELECT  z." . $col . ", AVG(z.per_click) AS eCPC, COUNT(z.space_id) AS Clicks FROM (SELECT c.platform, c.browser, c.country, c.space_id, a.per_click, a.per_view, c.time
         FROM clicks c
         LEFT JOIN adv_story a
         ON a.ref_id = c.space_id

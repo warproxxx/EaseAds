@@ -457,7 +457,7 @@ if ($_SESSION['reg_account_type'] == "Advertiser")
 
 }elseif ($_SESSION['reg_account_type'] == "Publisher") {
 //insert into advertiser table
-  $details = $this->user_model->register_publisher();
+  $detail = $this->user_model->register_publisher();
   $this->send_email($detail);
 //show dash
 
