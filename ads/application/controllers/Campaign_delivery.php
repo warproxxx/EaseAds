@@ -120,8 +120,21 @@ public function deliver_banner_js($space_id = NULL,$size_type)
           {
             if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
             {
+
+              if ($resulted_campaign['billing'] == 'cpm')
+              {
+                $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+              }
+              else
+              {
+                $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+              }
+
+              if ($total_count <= $resulted_campaign['raw_traffic'])
+              {
                 $campaign_to_render = $resulted_campaign;
                 break 3;
+              }
             }
           }
         }
@@ -285,8 +298,22 @@ public function deliver_popup_js($space_id = NULL)
           {
             if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
             {
-                $campaign_to_render = $resulted_campaign;
-                break 3;
+
+                if ($resulted_campaign['billing'] == 'cpm')
+                {
+                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                }
+                else
+                {
+                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+                }
+
+                if ($total_count <= $resulted_campaign['raw_traffic'])
+                {
+                  $campaign_to_render = $resulted_campaign;
+                  break 3;
+                }
+                
             }
           }
         }

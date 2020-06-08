@@ -70,7 +70,7 @@ public function get_campaign_by_category_popup($category)
 /*
 later check for activation here
 */
-$this->db->select('ref_id, disp_link ,dest_link , text_content,text_title ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
+$this->db->select('ref_id, disp_link ,dest_link , text_content,text_title ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance,billing,raw_traffic');
 $query = $this->db->get_where("adv_story",array("category" => $category ,"type" => "popup","approval" => "true","status" =>"active"));/*
 get conuntry at first using country tag
 any ads mark as general will be automatically picked
@@ -89,7 +89,7 @@ public function get_campaign_by_category_banner($category,$size_to_get)
 	/*
 	later check for activation here
 	*/
-	$this->db->select('ref_id,dest_link,size,img_link ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance');
+	$this->db->select('ref_id,dest_link,size,img_link ,tplatform ,tcategory,tbrowser,tcountry,targeting,category,user_id,per_view,per_click,balance,billing,raw_traffic');
 	$query = $this->db->get_where("adv_story",array("category" => $category,'size' => $size_to_get ,"type" => "banner","approval" => "true","status" =>"active"));/*
 	get conuntry at first using country tag
 	any ads mark as general will be automatically picked
@@ -250,6 +250,19 @@ public function update_views($space_id, $ref_id)
 		  WHERE ref_id='" . $space_id . "'";
 
 	$query = $this->db->query($q);
+}
+
+public function count_24_hr($space_id, $ip, $table)
+{
+	$today = strtotime(date("y-m-d"));
+	$start_time = $today - 24;
+
+	$q = "SELECT * FROM " . $table . " WHERE
+		  ip='" . $ip . "' AND story_id='" . $space_id . "' AND time >= " . $start_time;
+  
+	$query = $this->db->query($q);
+	
+	return count($query->result_array());
 }
 
 

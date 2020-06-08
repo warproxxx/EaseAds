@@ -339,7 +339,8 @@ $datab2 = array(
 'balance' =>  $this->input->post('budget'),
 'time' => time(),
 'cr_level' => "3",
-'billing' => $this->input->post('billing')
+'billing' => $this->input->post('billing'),
+'raw_traffic' => $this->input->post('raw_traffic')
 );
 
 if( $this->db->update('adv_story',$datab2, array("ref_id" => $ref_id,"user_id" => $_SESSION['id'])) && $this->db->update('advertisers',$databu, array("id" => $_SESSION['id'])))
