@@ -314,32 +314,19 @@ show_page("advertiser_dashboard/campaign_budget/".$ref_id);
 $new_acct_bal = $user['account_bal'] - $this->input->post('budget');
 
 $databu = array('account_bal' => $new_acct_bal);
+
 if($this->input->post('billing') == "cpc")
 {
-$cpc = 0.000;
-  $cpm = $this->input->post('cpc');
-  
-
-}elseif($this->input->post('billing') == "ppc")
-{
   $cpc = $this->input->post('cpc');
-  $cpm = 0.000;
-  
-}elseif($this->input->post('billing') == "both")
+  $cpm = 0;
+}
+elseif($this->input->post('billing') == "cpm")
 {
-  $cpc = $this->input->post('cpc');
-  $cpm = $this->input->post('cpv');
-  
-}elseif($this->input->post('billing') == "cpa")
-{
-  $cpa = $this->input->post('cpa');
-  $cpc = 0.000;
-  $cpm = 0.000;
-  
+  $cpc = 0;
+  $cpm = $this->input->post('cpm');
 }
 
 $datab2 = array(
-
 'budget' => $this->input->post('budget'),
 'per_click' => $cpc,
 'per_view' => $cpm,
@@ -351,8 +338,8 @@ $datab2 = array(
 "edit_status" => "complete",
 'balance' =>  $this->input->post('budget'),
 'time' => time(),
-'cr_level' => "3"
-
+'cr_level' => "3",
+'billing' => $this->input->post('billing')
 );
 
 if( $this->db->update('adv_story',$datab2, array("ref_id" => $ref_id,"user_id" => $_SESSION['id'])) && $this->db->update('advertisers',$databu, array("id" => $_SESSION['id'])))

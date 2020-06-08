@@ -43,12 +43,12 @@ if(!empty($cpa_form_data))
 }else{
 	if ($type == 'popup')
 	{
-		echo ('	<option value="ppc">CPM</option>');
+		echo ('	<option value="cpm">CPM</option>');
 	}
 	else
 	{
-		echo '
-		<option value="both">CPM & PPC </option>';
+		echo '<option value="cpm">CPM</option>';
+		echo '<option value="cpc">CPC</option>';
 	}
 }
 
@@ -70,7 +70,7 @@ if ($type == 'popup')
 {
 	echo('<span class="w3-label w3-small">Cost Per Mile-CPM</b></sup>:</span><br>');
 	echo('<span class="w3-text-red">min:' . $general_details['currency_code'] . ' ' .$general_details['minimum_cpm'] . '</span><br>');
-	echo('<input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="'.$general_details['minimum_cpm'] .'" value="'.set_value('cpc').'" name="cpc"  /><br>');
+	echo('<input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="'.$general_details['minimum_cpm'] .'" value="'.set_value('cpm').'" name="cpm"  /><br>');
 }
 else
 {
@@ -120,7 +120,7 @@ if($cpa_form_data['access_type'] == 'free')
 <span class="w3-label w3-small">Cost Per View<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpm'] ?> </span><br>
 
-       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" value="<?php echo set_value('cpv'); ?>" name="cpv"  /><br><br>
+       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" value="<?php echo set_value('cpm'); ?>" name="cpm"  /><br><br>
   </div>   
 </div>
 <br>
@@ -139,7 +139,13 @@ ppc_div.className = " w3-show";
 
 ppc_div.className = " w3-hide";
 cpm_div.className = " w3-show";
-	}else{
+	}
+	else if (input_value == "cpc"){
+cpm_div.className = " w3-hide";
+ppc_div.className = " w3-show";
+	}
+	
+	else{
 cpm_div.className = " w3-show";
 ppc_div.className = " w3-show";
 	}
