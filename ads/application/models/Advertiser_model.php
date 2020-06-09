@@ -489,6 +489,13 @@ public function get_general_details()
   $query = $this->db->get_where('countries',array('select_value'=> 'general'));
   return $query->row_array();
 }
+
+public function get_story_details($ref_id)
+{
+  $query = $this->db->get_where('adv_story',array('ref_id'=> $ref_id));
+  return $query->row_array();
+}
+
 public function count_advertisers_cpa()
 {
 

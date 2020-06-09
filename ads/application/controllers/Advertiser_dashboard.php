@@ -587,6 +587,32 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
  }
 
 
+  public function edit($ref_id)
+ {
+      $data['title'] = $this->siteName." | Edit Campaign";
+      $data['author'] =  $this->author;
+      $data['keywords'] =  $this->keywords;
+      $data['description'] =  $this->description;
+      $data["noindex"] =  $this->noindex;
+$data['user'] =$this->user;
+
+
+$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+$data['categories'] = $this->user_model->get_categories();
+$data['detail'] = $this->advertiser_model->get_story_details($ref_id);
+
+    $this->load->view('/common/advertiser_header_view',$data);
+      $this->load->view('/common/advertiser_top_tiles',$data);
+    $this->load->view('/user/advertiser/edit_view',$data);
+     $this->load->view('/common/users_footer_view',$data);
+
+
+
+
+}
+
+
  public function add_campaign($cpa_ref_id = NULL)
  {
 

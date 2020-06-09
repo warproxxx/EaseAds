@@ -258,6 +258,7 @@ echo "style='display:none;'";}
 if($campaign_item['status'] == "active")
 {
 echo "<a  class='w3-button w3-red w3-margin' href='".site_url('advertiser_dashboard/campaign_action/stop/'.$this->uri->segment(3))."'>Stop</a>";
+echo "<a  class='w3-button w3-red w3-margin' href='".site_url('advertiser_dashboard/edit/'.$this->uri->segment(3))."'>Edit</a>";
 
 
 }elseif($campaign_item['status'] == "pending")
