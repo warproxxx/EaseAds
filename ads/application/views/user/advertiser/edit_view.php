@@ -32,9 +32,11 @@ foreach ($categories as $category)
 <?php
 if ($detail['type'] == 'banner')
 {
-  echo('Update Banner?');
-
-  echo('Upload:');
+  echo('<br/><br/>Update Banner?<br/>');
+	echo('<input type="radio" id="yes" name="yes" value="yes">
+	<label for="yes">Yes</label> 
+	<input type="radio" id="no" name="no" value="no">
+	<label for="no">No</label><br>');
 
   echo('<span class="w3-serif w3-text-indigo w3-small w3-margin">Upload Banner</span><br>
 
@@ -42,7 +44,7 @@ if ($detail['type'] == 'banner')
  <input type="file" name="banner" class="hide_file" />
 </div>');
 
-echo('<span class="w3-serif w3-text-indigo w3-small">Campaign Size/Type</span><br>
+echo('<br/><span class="w3-serif w3-text-indigo w3-small">Campaign Size/Type</span><br>
 <select name="campaign_size" class="w3-padding w3-border w3-border-blue">
     <option value="300X250">300 X 250 (Banner Only)</option>
     <option value="720X90"">468 X 60 (Recommended For Mobile Campaign)</option>
@@ -68,7 +70,7 @@ Leave these empty to target all
 
      <input type="checkbox" class="w3-check" value="firefox" name="browser[]"><span class="w3-label"> <i class="fa fa-firefox w3-text-blue"></i>Mozilla Firefox</span>
 
-     <input type="checkbox" class="w3-check" value="sefari" name="browser[]"><span class="w3-label"> <i class="fa fa-safari w3-text-indigo"></i>Safari Browser</span>
+     <input type="checkbox" class="w3-check" value="safari" name="browser[]"><span class="w3-label"> <i class="fa fa-safari w3-text-indigo"></i>Safari Browser</span>
 
     <input type="checkbox" class="w3-check" value="uc" name="browser[]"><span class="w3-label"> <i class="fa fa-uc-browser w3-text-blue"></i>UC Browser/Uc web</span> 
 
@@ -356,12 +358,12 @@ Leave these empty to target all
                         
     
                </center>     
-
+<br/><br/>
                <div class="w3-container">
-	<div class="w3-half">
+	<div class="w3-container">
 		<span class="w3-label w3-small">Budget ($)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 
-<input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_budget'] ?>' placeholder="Budget" value="<?php echo set_value('budget'); ?>" name="budget"  ><br><br>
+<input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_budget'] ?>' placeholder="Budget" value="<?php echo $detail['budget']; ?>" name="budget"  ><br><br>
 
 <span class="w3-label w3-small">Starting Date:</span><br>
 
@@ -380,7 +382,7 @@ Leave these empty to target all
 
   </div>
 
-  <div class="w3-half">
+  <div class="w3-container">
 			<br>
 <span class="w3-label">Billing Type:</span><br>
 <select onchange="toggleInputDiv(this.value)" class="w3-padding" name="billing" id="billing">
@@ -390,14 +392,23 @@ if(!empty($cpa_form_data))
 	echo '<option value="cpa">Click Per Action </option>
 ';
 }else{
-	if ($type == 'popup')
+	if ($detail['type'] == 'popup')
 	{
 		echo ('	<option value="cpm">CPM</option>');
 	}
 	else
 	{
-		echo '<option value="cpm">CPM</option>';
-		echo '<option value="cpc">CPC</option>';
+		if ($detail['billing'] == 'cpm')
+		{
+			echo '<option value="cpm" selected>CPM</option>';
+			echo '<option value="cpc">CPC</option>';
+		}
+		else
+		{
+			echo '<option value="cpm">CPM</option>';
+			echo '<option value="cpc" selected>CPC</option>';
+		}
+		
 	}
 }
 
@@ -415,7 +426,7 @@ if(!empty($cpa_form_data))
 	?>" id="ppc_div" class="w3-hide">
 	<?php
 
-if ($type == 'popup')
+if ($detail['type'] == 'popup')
 {
 	echo('<span class="w3-label w3-small">Cost Per Mile-CPM</b></sup>:</span><br>');
 	echo('<span class="w3-text-red">min:' . $general_details['currency_code'] . ' ' .$general_details['minimum_cpm'] . '</span><br>');
@@ -432,36 +443,7 @@ else
        
    </div>
 		
-<div  class="<?php
-if(empty($cpa_form_data))
-{
-	echo 'w3-hide';
-}
 
-	?>" id="cpa_div">
-  <span class="w3-label w3-small">Cost Per Action-CPA( ex:Total Amount  you want to pay per Action in  <?=$general_details['currency_code'] ?>)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
-<span class="w3-text-red">min: <?=$general_details['currency_code']." "?><?php
-//check if free if not use paid_action minimum
-if($cpa_form_data['access_type'] == 'free')
-{
-	echo $general_details['minimum_cpa'];
-}else{
-		echo $general_details['minimum_paid_cpa'];
-
-}
-        ?>  </span><br>
-
-       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?php
-//check if free if not use paid_action minimum
-if($cpa_form_data['access_type'] == 'free')
-{
-	echo $general_details['minimum_cpa'];
-}else{
-		echo $general_details['minimum_paid_cpa'];
-
-}
-        ?>" placeholder="Cost Per Action" value="<?php echo set_value('cpa'); ?>" name="cpa"  /><br>
-   </div>
 		
 
 
@@ -469,7 +451,7 @@ if($cpa_form_data['access_type'] == 'free')
 <span class="w3-label w3-small">Cost Per View<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpm'] ?> </span><br>
 
-       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" name="cpm"  /><br><br>
+       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" name="cpm" value="<?= $detail['per_view'] ?>" /><br><br>
   </div>   
 </div>
 
@@ -477,14 +459,33 @@ if($cpa_form_data['access_type'] == 'free')
 <span class="w3-label w3-small">Raw Traffic:</span><br>
 
 <select class="w3-padding w3-border w3-border-indigo" name="raw_traffic">
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
+	<?php
+
+	if ($detail['raw_traffic'] == 1)
+	{
+		echo('<option value="1" selected>1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>');
+	}
+	else if ($detail['raw_traffic'] == 2)
+	{
+		echo('<option value="1">1</option>
+		<option value="2" selected>2</option>
+		<option value="3">3</option>');
+	}
+	else if ($detail['raw_traffic'] == 3)
+	{
+		echo('<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3" selected>3</option>');
+	}
+	
+	?>
 </select>
 
 
 <br>
-<input class="w3-btn w3-indigo w3-margin" type="submit" name="submit" value="Submit">
+<input class="w3-btn w3-indigo w3-margin" type="submit" name="submit" value="Update and Review">
 </form>
 <script type="text/javascript">
 	function toggleInputDiv(input_value) {
@@ -525,17 +526,29 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 </div>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head> 
+<script>
+	var platforms = <?= $detail['tplatform'] ?>;
+	var browsers = <?= $detail['tbrowser'] ?>;
+	var countries = <?= $detail['tcountry'] ?>;
 
+	
 
-Budget:
+	for (platform of platforms) 
+	{
+		$('input:checkbox[name="platform[]"][value="' + platform + '"]').prop('checked',true);
+	}
 
-Per Click:
+	for (browser of browsers) 
+	{
+		$('input:checkbox[name="browser[]"][value="' + browser + '"]').prop('checked',true);
+	}
 
-Per View:
+	for (country of countries) 
+	{
+		$('input:checkbox[name="tcountry[]"][value="' + country + '"]').prop('checked',true);
+	}
 
-
-Raw Traffic:
-
-
-Country etc:
-
+</script>

@@ -601,6 +601,8 @@ $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns(
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 $data['categories'] = $this->user_model->get_categories();
 $data['detail'] = $this->advertiser_model->get_story_details($ref_id);
+$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+$data['general_details'] = $this->advertiser_model->get_general_details();
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
