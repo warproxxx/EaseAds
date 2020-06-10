@@ -17,6 +17,10 @@
 
 
     <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/Spaces");?>">Ad Campaigns</a><br><br>
+
+    <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/site_wise");?>">Sites</a><br><br>
+
+
     <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin/Categories");?>">Categories</a><br><br>
 <!-- 
 <a class="w3-text-white w3-padding w3-hover-white" href="<?php echo site_url("/admin_blog/pages/no");?>">Pages</a><br><br>

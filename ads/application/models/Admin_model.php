@@ -255,6 +255,18 @@ return $query->result_array();
 
 }
 
+public function get_site_wise()
+{
+
+$query = $this->db->query('SELECT SUM(clicks) as total_clicks, SUM(views) as total_views, website
+FROM pub_story
+GROUP BY website;');
+
+  return $query->result_array();
+
+
+}
+
 
 public function delete_item($type,$id)
 {

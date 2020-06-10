@@ -1701,6 +1701,30 @@ $data["noindex"] = $this->noindex;
 
 }
 
+public function site_wise()
+{
+
+  $data['spaces']= $this->admin_model->get_site_wise();
+   
+
+
+  //check login for admin here later
+
+$data["title"] =$this->siteName." | Admin Dashboard";
+$data["keywords"] = $this->keywords;
+$data["author"] = $this->author;
+$data["description"] = $this->description;
+
+$data["noindex"] = $this->noindex;
+$this->load->view('/admin/header_view',$data);
+
+$this->load->view('admin/sidebar_view',$data);
+
+        $this->load->view('admin/sites_view',$data);
+$this->load->view('admin/footer_view');
+
+}
+
 
 public function spaces()
 {
