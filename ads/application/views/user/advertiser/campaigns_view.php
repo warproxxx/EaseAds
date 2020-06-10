@@ -1,5 +1,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
 <script src="<?php echo base_url('assets/js/datamaps.world.min.js'); ?>"></script>
 
 <div class="w3-container w3-center">
@@ -60,7 +64,7 @@
 <body>
 
 <div class="w3-container">
-<table class="w3-table w3-striped">
+<table class="w3-table w3-striped sortable">
     <thead>
     <tr>
       <th scope="col">Campaign Name</i></th>
@@ -103,3 +107,11 @@ echo("</table>");
 </center>
 
 </div>
+
+<script>
+
+$(document).ready( function () {
+    $('.sortable').DataTable();
+} );
+
+</script>

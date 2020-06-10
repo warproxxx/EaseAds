@@ -237,20 +237,20 @@ return $query->result_array();
 
 
 
-public function get_campaigns($limit,$offset)
+public function get_campaigns()
 {
 
-$query = $this->db->get("adv_story",$limit,$offset);
+$query = $this->db->get("adv_story");
 return $query->result_array();
 
 }
 
 
 
-public function get_spaces($limit,$offset)
+public function get_spaces()
 {
 
-$query = $this->db->get("pub_story",$limit,$offset);
+$query = $this->db->get("pub_story");
 return $query->result_array();
 
 }

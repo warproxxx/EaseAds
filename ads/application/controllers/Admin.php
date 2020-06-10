@@ -1352,6 +1352,35 @@ public function view_campaign_details($ref_id = NULL)
 $data["noindex"] = $this->noindex;
 $data['campaign'] = $this->admin_model->get_campaign_by_ref_id($ref_id);
 
+
+//get country details by user's country
+
+$data['general_details'] = $this->advertiser_model->get_general_details();
+
+
+
+$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+
+$data['campaign_item'] = $this->advertiser_model->get_campaign_ref_id($ref_id);
+$data['today_views'] = $this->advertiser_model->get_campaign_views($ref_id,strtotime(date("y-m-d")));
+$data['today_clicks'] = $this->advertiser_model->get_campaign_clicks($ref_id,strtotime(date("y-m-d")));
+$data['country_click_details'] = $this->advertiser_model->country_click_by_story_id($ref_id);
+
+
+$data['yesterday_views'] = $this->advertiser_model->get_campaign_at_time_views($ref_id,strtotime(date("y-m-d")),24)['total_views'];
+$data['two_days_ago_views'] = $this->advertiser_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(24*60*60)),48)['total_views'];
+$data['three_days_ago_views'] = $this->advertiser_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(48*60*60)),72)['total_views'];
+$data['four_days_ago_views'] = $this->advertiser_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(72*60*60)),96)['total_views'];
+
+$data['yesterday_clicks'] = $this->advertiser_model->get_campaign_at_time_clicks($ref_id,strtotime(date("y-m-d")),24)['total_clicks'];
+$data['two_days_ago_clicks'] = $this->advertiser_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(24*60*60)),48)['total_clicks'];
+$data['three_days_ago_clicks'] = $this->advertiser_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(48*60*60)),72)['total_clicks'];
+$data['four_days_ago_clicks'] = $this->advertiser_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(72*60*60)),96)['total_clicks'];
+
+$data['campaign_item']['clicks'] = $this->advertiser_model->get_campaign_at_all_time_clicks($ref_id);
+$data['campaign_item']['views'] = $this->advertiser_model->get_campaign_at_all_time_views($ref_id);
+
  $this->load->view('/admin/header_view',$data);
 
   $this->load->view('admin/sidebar_view',$data);
@@ -1376,6 +1405,30 @@ public function view_space_details($ref_id = NULL)
 
 $data["noindex"] = $this->noindex;
 $data['space'] = $this->admin_model->get_space_by_ref_id($ref_id);
+
+$data['user'] = $this->publisher_model->get_publisher_by_id();
+$data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+$data['item'] = $this->publisher_model->get_space_by_id($ref_id);
+$data['item']['clicks'] =$this->publisher_model->get_campaign_at_all_time_clicks($ref_id);
+$data['item']['views'] =$this->publisher_model->get_campaign_at_all_time_views($ref_id);
+
+
+
+
+$data['yesterday_views'] = $this->publisher_model->get_campaign_at_time_views($ref_id,strtotime(date("y-m-d")),24);
+$data['two_days_ago_views'] = $this->publisher_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(24*60*60)),48);
+$data['three_days_ago_views'] = $this->publisher_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(48*60*60)),72);
+$data['four_days_ago_views'] = $this->publisher_model->get_campaign_at_time_views($ref_id,(strtotime(date("y-m-d"))-(72*60*60)),96);
+$data['today_views'] = $this->publisher_model->get_campaign_views($ref_id,strtotime(date("y-m-d")));
+
+
+$data['yesterday_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,strtotime(date("y-m-d")),24);
+$data['two_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(24*60*60)),48);
+$data['three_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(48*60*60)),72);
+$data['four_days_ago_clicks'] = $this->publisher_model->get_campaign_at_time_clicks($ref_id,(strtotime(date("y-m-d"))-(72*60*60)),96);
+$data['today_clicks'] = $this->publisher_model->get_campaign_clicks($ref_id,strtotime(date("y-m-d")));
+
+$data['country_click_details'] = $this->publisher_model->country_click_by_pub_space($ref_id);
 
  $this->load->view('/admin/header_view',$data);
 
@@ -1617,45 +1670,15 @@ $config['total_rows'] = count($this->admin_model->search_users(NULL,NULL));
 
   }
 
-public function Campaigns($offset=0)
+public function Campaigns()
 {
 
-  //    $limit = 10;
-      $limit = 8;
 
 
-    $data['campaigns']= $this->admin_model->get_campaigns($limit,$offset);
-      $this->load->library('pagination');
+
+    $data['campaigns']= $this->admin_model->get_campaigns();
 
     $config['base_url'] = site_url("admin/Campaigns");
-
-
-
-  $config['total_rows'] = $this->db->count_all('adv_story');
-
-    $config['per_page'] = $limit;
-
-   //$config['uri_segment'] = 4;
-  $config['first_tag_open'] = '<span class="w3-btn w3-blue w3-text-white">';
-  $config['first_tag_close'] = '</span>';
-  $config['last_tag_open'] = '<br><span class="w3-btn w3-blue w3-text-white">';
-  $config['last_tag_close'] = '</span>';
-  $config['first_link'] = 'First';
-
-
-
-  $config['prev_link'] = 'Prev';
-  $config['next_link'] = 'Next';
-  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-blue w3-text-white">';
-  $config['next_tag_close'] = '</span><br>';
-  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-blue w3-text-white">';
-  $config['prev_tag_close'] = '</span>';
-  $config['last_link'] = 'Last';
-  $config['display_pages'] = false;
-
-       $this->pagination->initialize($config);
-  $data['pagination'] = $this->pagination->create_links();
-
 
 
 
@@ -1673,52 +1696,18 @@ $data["noindex"] = $this->noindex;
 
       $this->load->view('admin/sidebar_view',$data);
 
-              $this->load->view('admin/campaigns_view',$data);
+      $this->load->view('admin/campaigns_view',$data);
       $this->load->view('admin/footer_view');
 
 }
 
 
-public function spaces($offset=0)
+public function spaces()
 {
-      $limit = 8;
 
 
-    $data['spaces']= $this->admin_model->get_spaces($limit,$offset);
-      $this->load->library('pagination');
-
-    $config['base_url'] = site_url("admin/spaces");
-
-
-
-  $config['total_rows'] = $this->db->count_all('pub_story');
-
-    $config['per_page'] = $limit;
-
-   //$config['uri_segment'] = 4;
-  $config['first_tag_open'] = '<span class="w3-btn w3-blue w3-text-white">';
-  $config['first_tag_close'] = '</span>';
-  $config['last_tag_open'] = '<br><span class="w3-btn w3-blue w3-text-white">';
-  $config['last_tag_close'] = '</span>';
-  $config['first_link'] = 'First';
-
-
-
-  $config['prev_link'] = 'Prev';
-  $config['next_link'] = 'Next';
-  $config['next_tag_open'] = '<span style="margin-left:20%" class="w3-btn w3-blue w3-text-white">';
-  $config['next_tag_close'] = '</span><br>';
-  $config['prev_tag_open'] = '<span style="" class="w3-btn w3-blue w3-text-white">';
-  $config['prev_tag_close'] = '</span>';
-  $config['last_link'] = 'Last';
-  $config['display_pages'] = false;
-
-       $this->pagination->initialize($config);
-  $data['pagination'] = $this->pagination->create_links();
-
-
-
-
+    $data['spaces']= $this->admin_model->get_spaces();
+   
 
 
         //check login for admin here later
