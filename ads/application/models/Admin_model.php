@@ -107,6 +107,26 @@ $slg = url_title($this->input->post('title'),"dash",TRUE);
 }
 
 }
+
+public function insert_notification($user_id, $user_type, $notification)
+{
+
+
+
+ $pag = array(
+
+'user_id' => $user_id,
+'user_type' => $user_type,
+ 'notification' => $notification,
+);
+
+
+ $this->db->insert('notifications',$pag);
+
+
+
+}
+
 public function get_supported_countries()
 {
   $query = $this->db->get('countries');

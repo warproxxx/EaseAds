@@ -29,8 +29,8 @@ foreach ($items as $item)
 {
 
  echo "<a href='".$item['website']."'>".$item['website']."</a>";
- echo '<a href='. site_url('admin/pending_websites_list/approve/'.$item['id']) .' class="w3-btn w3-green">Approve</a>';
- echo '<a href="'. site_url('admin/pending_websites_list/disapprove/'.$item['id']) .'" class="w3-btn w3-red">Disapprove</a>';
+ echo '<a href='. site_url('admin/pending_websites_list/approve/'.$item['id'] . '/' . $item['publisher_id']) .' class="w3-btn w3-green">Approve</a>';
+ echo '<a href="'. site_url('admin/pending_websites_list/disapprove/'.$item['id'] . '/' . $item['publisher_id']) .'" class="w3-btn w3-red">Disapprove</a>';
 }
 
 

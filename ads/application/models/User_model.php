@@ -26,6 +26,12 @@ public function get_categories()
   return $query->result_array();
 }
 
+public function get_notifications($user_type)
+{
+  $query = $this->db->get_where('notifications',array("is_read" => 0, "user_id" => $_SESSION['id'], 'user_type' => $user_type));
+  return $query->result_array();
+}
+
 
 //new
 public function register_advertiser()
@@ -398,6 +404,19 @@ $datab = array(
 "email_vc" => $vcode,
 );
 $this->db->update($account_type."s",$datab,array("email" => $email));
+
+
+}
+
+public function read($id)
+{
+
+
+$datab = array(
+"is_read" => 1
+);
+
+$this->db->update('notifications',$datab, array("id" => $id));
 
 
 }

@@ -106,13 +106,13 @@ echo '<a href="'.site_url("admin/campaign_action/start/".$campaign['ref_id']).'"
 if (strtolower($campaign['approval']) == "pending" || strtolower($campaign['approval']) == "false")
 {
 
-echo '<a href="'.site_url("admin/campaign_action/approve/".$campaign['ref_id']).'" class="w3-btn w3-green w3-margin">Approve</a>';
+echo '<a href="'.site_url("admin/campaign_action/approve/".$campaign['ref_id']."/".$campaign['user_id']).'" class="w3-btn w3-green w3-margin">Approve</a>';
 
 
 }
 
 
-echo '<a href="'.site_url("admin/campaign_action/disapprove/".$campaign['ref_id']).'" class="w3-btn w3-red w3-margin">Disapprove</a>';
+echo '<a href="'.site_url("admin/campaign_action/disapprove/".$campaign['ref_id']."/".$campaign['user_id']).'" class="w3-btn w3-red w3-margin">Disapprove</a>';
 
 ?>
 	</div>

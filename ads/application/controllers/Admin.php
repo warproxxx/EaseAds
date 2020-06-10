@@ -229,18 +229,25 @@ $this->load->view('/admin/header_view',$data);
 
 }
 
-public function pending_websites_list($table_type = NULL,$id = NULL, $offset = 0)
+public function pending_websites_list($table_type = NULL,$id = NULL, $user_id = NULL, $offset = 0)
 {
 
 
   if ($table_type != NULL)
   {
     if ($table_type == 'approve')
+    {
       $str = 1;
+      $this->admin_model->insert_notification($user_id, 'publisher', 'Your website has been approved');
+    }
     elseif ($table_type == 'disapprove')
+    {
       $str = -1;
+      $this->admin_model->insert_notification($user_id, 'publisher', 'Your website has been disapproved');
+    }
 
     $this->admin_model->update_single_website("publishers_websites",array("approved" => $str),$id);
+    
 
   }
 
@@ -341,9 +348,13 @@ public function payment_requests($table_type = NULL,$user_id = NULL, $id=NULL, $
       $previous_bal = $user['account_bal'];
       $new_bal = $amt+$previous_bal;
       $this->advertiser_model->credit_balance_with_id(array('account_bal' =>$new_bal ), $user_id);      
+      $this->admin_model->insert_notification($user_id, 'advertiser', 'The payment request of '. $amt . 'has been approved');
     }
     elseif ($table_type == 'disapprove')
+    {
       $str = "DENIED";
+      $this->admin_model->insert_notification($user_id, 'advertiser', 'The payment request of '. $amt . 'has been denied');
+    }
 
     $this->admin_model->update_single_website("payments",array("status" => $str),$id);
 
@@ -1440,12 +1451,13 @@ $data['country_click_details'] = $this->publisher_model->country_click_by_pub_sp
 
 
 
-public function campaign_action($action,$ref_id)
+public function campaign_action($action,$ref_id,$user_id)
 {
 if($action == "approve")
 {
 //approve here
 $this->campaign_model->edit_campaign(array('approval' => "true","status" => "active"),$ref_id);
+$this->admin_model->insert_notification($user_id, 'advertiser', 'Your website has been approved');
 
 }elseif($action == "disapprove")
 {//disapprove
@@ -1458,6 +1470,8 @@ $this->campaign_model->edit_campaign(array('approval' => "true","status" => "act
   $advertiser_new_balance = $advertiser['account_bal'] + $campaign['balance'];
 
   $this->user_model->edit_user_details(array("account_bal" => $advertiser_new_balance),$campaign['user_id'],"advertisers");
+  $this->admin_model->insert_notification($user_id, 'advertiser', 'Your website has been disapproved');
+
 
 }elseif($action == "pause")
 {//pause

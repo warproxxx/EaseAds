@@ -43,6 +43,42 @@ if (!empty($announcements))
  
 
 }
+
+echo("<br/>");
+if (!empty($notifications))
+{
+  ?>
+  <b>Notifications:</b><br/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+<table class="w3-table w3-striped" border=1>
+    <thead>
+    <tr>
+
+      <th scope="col">Notification</th>
+      <th scope="col">Mark</th>
+
+</tr>
+</thead>
+   
+  <tbody>
+<?php
+  foreach ($notifications as $notification)
+  {
+    echo "<tr>";
+
+    echo "<td>".$notification['notification']."</td>";
+    echo "<td><a href='Publisher_dashboard/read/" . $notification['id'] . "'>Mark as read</td>";
+    echo "</tr>";
+  }
+  echo('</table>');
+
+}
+?> 
+
 ?> 
 </tbody>
 </table>

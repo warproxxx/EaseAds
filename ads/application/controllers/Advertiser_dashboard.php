@@ -47,6 +47,13 @@ public function __construct()
 }
 
 
+public function read($id)
+{
+  $this->user_model->read($id);
+  redirect('/Advertiser_dashboard');
+
+}
+
 
 public function index()
 {
@@ -87,6 +94,7 @@ public function index()
     $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
     $data['general_details'] = $this->advertiser_model->get_general_details();
     $data['announcements'] = $this->admin_model->get_active_announcements();
+    $data['notifications'] = $this->user_model->get_notifications('advertiser');
 
     $data['today_views'] = $this->advertiser_model->get_campaign_views_user(strtotime(date("y-m-d")))[0]['views'];
     $data['today_clicks'] = $this->advertiser_model->get_campaign_clicks_user(strtotime(date("y-m-d")))[0]['clicks'];

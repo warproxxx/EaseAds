@@ -155,6 +155,7 @@ public function index()
       $data['no_clicks'] = $this->publisher_model->get_no_affilate_clicks("publisher");
       $data['no_reg'] = $this->publisher_model->get_no_affilate_reg("publisher");
       $data['announcements'] = $this->admin_model->get_active_announcements();
+      $data['notifications'] = $this->user_model->get_notifications('publisher');
 
 
     $this->load->view('/common/publisher_header_view',$data);
@@ -409,6 +410,12 @@ $w_dat =  array(
     }
  }
 
+ public function read($id)
+{
+  $this->user_model->read($id);
+  redirect('/Advertiser_dashboard');
+
+}
 public function view_details($ref_id)
 {
 
