@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 12, 2020 at 01:49 AM
--- Server version: 5.7.29-0ubuntu0.16.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.12
+-- Host: localhost:3306
+-- Generation Time: Jun 10, 2020 at 01:40 PM
+-- Server version: 5.7.30-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -43,7 +43,18 @@ CREATE TABLE `admin_earning` (
 
 INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `weekday`, `amount`, `time`) VALUES
 (1, 'April', '2020', 'banner', 'view', 'Sunday', '0.0015', '1586653121'),
-(2, 'April', '2020', 'banner', 'click', 'Sunday', '0.0000', '1586656126');
+(2, 'April', '2020', 'banner', 'click', 'Sunday', '0.0000', '1586656126'),
+(3, 'June', '2020', 'text', 'view', 'Sunday', '0.0000', '1591509738'),
+(4, 'June', '2020', 'popup', 'click', 'Sunday', '0.0000', '1591509740'),
+(5, 'June', '2020', 'text', 'view', 'Sunday', '0.0000', '1591522633'),
+(6, 'June', '2020', 'text', 'view', 'Sunday', '0.0000', '1591522877'),
+(7, 'June', '2020', 'popup', 'click', 'Sunday', '0.0000', '1591522879'),
+(8, 'June', '2020', 'text', 'view', 'Monday', '0.0000', '1591585513'),
+(9, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591585515'),
+(10, 'June', '2020', 'text', 'view', 'Monday', '0.0006', '1591589176'),
+(11, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591589178'),
+(12, 'June', '2020', 'text', 'view', 'Monday', '0.0009', '1591598785'),
+(13, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591598820');
 
 -- --------------------------------------------------------
 
@@ -69,15 +80,10 @@ CREATE TABLE `advertisers` (
   `browser` varchar(128) DEFAULT NULL,
   `referral_id` varchar(128) DEFAULT NULL,
   `lastlog` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL
+  `time` int(100) DEFAULT NULL,
+  `token` varchar(255) NOT NULL,
+  `email_verified` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `advertisers`
---
-
-INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`) VALUES
-(8, 'Advertiser', 'Test', 'a3f4186a2f9349f2570dc7d33d5823f6', 'Afghanistan', NULL, 'advertiser@test.com', NULL, 'advertiser', '384.0000', '0.0000', NULL, '["fdx.com"]', 'active', NULL, NULL, NULL, 1586652316);
 
 -- --------------------------------------------------------
 
@@ -124,15 +130,10 @@ CREATE TABLE `adv_story` (
   `action_currency` varchar(128) DEFAULT NULL,
   `action_price` decimal(19,4) DEFAULT NULL,
   `action_type` varchar(128) DEFAULT NULL,
-  `is_default` int(11) NOT NULL DEFAULT '0'
+  `is_default` int(11) NOT NULL DEFAULT '0',
+  `billing` varchar(5) NOT NULL,
+  `raw_traffic` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `adv_story`
---
-
-INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `expire_time`, `start_time`, `per_click`, `per_view`, `per_action`, `budget`, `balance`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`) VALUES
-(1, 1586652959, 8, 0, 0, 1586652959, '0.4000', '0.0050', NULL, '60.0000', '59.5950', 0, '-asdasd', 'waterbot.xyz', 'banner', '300X250', NULL, 'Screenshot_from_2020-04-08_11-44-50.png', NULL, 'f9a926d6fd09fc9d028e', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'false', 'Business', '3', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -235,13 +236,6 @@ CREATE TABLE `clicks` (
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `clicks`
---
-
-INSERT INTO `clicks` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `os`, `is_mobile`, `country`) VALUES
-(1, 1586656126, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', NULL, '0', 'NP');
-
 -- --------------------------------------------------------
 
 --
@@ -330,17 +324,6 @@ CREATE TABLE `history` (
   `account_type` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`id`, `user_id`, `details`, `action`, `time`, `account_type`) VALUES
-(1, '7', 'Your Withdrawal Request Had been Processed', 'w_process', 1579786211, 'publisher'),
-(2, '7', 'You make a withdrawal Request of \n      50.0000 with reference 14271385797', 'w_request', 1586166321, 'publisher'),
-(3, '7', 'Your Withdrawal Request Had been Processed because', 'w_process', 1586494194, 'publisher'),
-(4, '7', 'You make a withdrawal Request of \n      500.0000 with reference 14274337941', 'w_request', 1586494338, 'publisher'),
-(5, '7', 'Your Withdrawal Request Had been Processed because', 'w_process', 1586495312, 'publisher');
-
 -- --------------------------------------------------------
 
 --
@@ -426,13 +409,10 @@ CREATE TABLE `newsletter` (
 
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
-  `sender_id` varchar(128) DEFAULT NULL,
-  `receiver_id` varchar(128) DEFAULT NULL,
-  `slug` varchar(128) DEFAULT NULL,
-  `contents` varchar(128) DEFAULT NULL,
-  `type` varchar(128) DEFAULT NULL,
-  `status` varchar(128) DEFAULT NULL,
-  `time` varchar(128) DEFAULT NULL
+  `user_id` int(11) NOT NULL,
+  `user_type` varchar(10) NOT NULL,
+  `notification` varchar(500) NOT NULL,
+  `is_read` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -480,13 +460,6 @@ CREATE TABLE `payments` (
   `message` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`, `message`) VALUES
-(19, '8', 'advertiser', 'Skrill', NULL, '', '444.0000', 'CONFIRMED', NULL, 'DEPOSIT', '1586652812', NULL, NULL, NULL, NULL, NULL, 'adsd');
-
 -- --------------------------------------------------------
 
 --
@@ -502,17 +475,6 @@ CREATE TABLE `payment_requests` (
   `method` varchar(20) NOT NULL,
   `time` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `payment_requests`
---
-
-INSERT INTO `payment_requests` (`id`, `user_id`, `amount`, `message`, `status`, `method`, `time`) VALUES
-(1, 2, 50, 'add', -1, '', 0),
-(2, 2, 50, 'My deposit ID is ', 1, 'Skrill', 1581498527),
-(3, 2, 100, 'I sent the transaction to: \r\n\r\nasdd', 1, 'Skrill', 1581567644),
-(4, 2, 128, 'asdadasd fasf asdd', 1, 'Bank', 1581588923),
-(5, 2, 222, 'asdad add asd', 1, 'Skrill', 1581589079);
 
 -- --------------------------------------------------------
 
@@ -562,15 +524,10 @@ CREATE TABLE `publishers` (
   `referral_id` varchar(128) DEFAULT NULL,
   `time` int(100) DEFAULT NULL,
   `other_name` text NOT NULL,
-  `other_detail` text NOT NULL
+  `other_detail` text NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `email_verified` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `publishers`
---
-
-INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`, `other_name`, `other_detail`) VALUES
-(1, 'Publisher', 'test', '7b1efd7be3b882eb22af3ffa4cc7d039', 'Afghanistan', NULL, 'publisher@test.com', NULL, 'publisher', '0.2835', '0.0000', '0.0000', NULL, 'active', '["aaa.com"]', NULL, '1586653019', NULL, NULL, NULL, NULL, NULL, NULL, 1586652267, '', '');
 
 -- --------------------------------------------------------
 
@@ -584,18 +541,6 @@ CREATE TABLE `publishers_websites` (
   `website` varchar(255) NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `publishers_websites`
---
-
-INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
-(4, 7, 'waterbot.xy', 1),
-(5, 7, 'ninjasaga.com', 1),
-(6, 8, 'http://googlee.com', 1),
-(7, 9, 'http://aa.com', 1),
-(8, 10, 'http://aaa.com', 1),
-(9, 1, 'aaa.com', 1);
 
 -- --------------------------------------------------------
 
@@ -624,21 +569,6 @@ CREATE TABLE `pub_story` (
   `os` varchar(128) DEFAULT NULL,
   `browser` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pub_story`
---
-
-INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `type`, `size`, `ref_id`, `website`, `name`, `gained`, `country`, `div_id`, `category`, `platform`, `code`, `os`, `browser`) VALUES
-(1, 1579331615, 2, 0, 0, 'active', 'text', '300X250', '9fe4fca09cdb0c9c8ee14d94', 'test.com', 'Test', NULL, NULL, 'Ec8', '["advertising","entertainment","food","gambling","marketing"]', NULL, '<script src="http://127.0.0.1/ads/index.php/campaign_delivery/deliver_text_js/9fe4fca09cdb0c9c8ee14d94"></script>\n<center><div class="w3-margin" id="Ec8" style="max-width: 70%;" class="">\n</div></center>\n', NULL, NULL),
-(2, 1579939308, 7, 0, 0, 'active', 'banner', '300X250', 'b1494f9c8dc5caa30bf4951c', 'waterbot.xy', 'aa', NULL, NULL, 'bC4', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/b1494f9c8dc5caa30bf4951c/box"></script>\n<center><div  class="w3-margin"  id="bC4">\n</div></center>', NULL, NULL),
-(3, 1579939663, 7, 0, 0, 'active', 'banner', '300X250', '54f09680fe266eb4bd5a909a', 'waterbot.xy', 'Multiple Test', NULL, NULL, 'eE7', '["Blog","Adventure","Beauty"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/54f09680fe266eb4bd5a909a/box"></script>\n<center><div  class="w3-margin"  id="eE7">\n</div></center>', NULL, NULL),
-(4, 1580214769, 7, 0, 0, 'active', 'banner', '300X250', '6b4ee6c4fb02909d1c3fbae2', 'waterbot.xy', 'Test', NULL, NULL, 'AC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_banner_js/6b4ee6c4fb02909d1c3fbae2/box"></script>\n<center><div  class="w3-margin"  id="AC0">\n</div></center>', NULL, NULL),
-(5, 1580290225, 7, 0, 0, 'active', 'popup', '300X250', '2f2174e04cc6a9d01811cbd6', 'waterbot.xy', 'asdasdsd', NULL, NULL, 'AB8', '["Business"]', NULL, NULL, NULL, NULL),
-(6, 1580290544, 7, 0, 0, 'active', 'popup', '300X250', '7c05da1f7a906a50cb6f7ed4', 'waterbot.xy', 'Popup working', NULL, NULL, 'ee6', 'null', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/7c05da1f7a906a50cb6f7ed4"></script>\n<div  class="w3-margin"  style="" id="ee6">\n</div>', NULL, NULL),
-(7, 1580302304, 7, 0, 0, 'active', 'popup', '300X250', '2f92e94f7baded459b49f0f6', 'waterbot.xy', 'adds.com', NULL, NULL, 'BE1', '["Business"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/2f92e94f7baded459b49f0f6"></script>\n<div  class="w3-margin"  style="" id="BE1">\n</div>', NULL, NULL),
-(8, 1581148581, 7, 0, 0, 'active', 'popup', '300X250', '17d212057b633e51ea16fb7b', 'waterbot.xy', 'asdsdd', NULL, NULL, 'cc5', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://127.0.0.1/ads/campaign_delivery/deliver_popup_js/17d212057b633e51ea16fb7b"></script>\n<div  class="w3-margin"  style="" id="cc5">\n</div>', NULL, NULL),
-(9, 1586653066, 1, 0, 0, 'active', 'banner', '300X250', 'bc6c1ae50d70ba43c4cd36c6', 'aaa.com', 'Frr', NULL, NULL, 'BC0', '["Business","Blog","Adventure","Beauty","Investing"]', NULL, '<script src="http://3.17.5.137/ads/campaign_delivery/deliver_banner_js/bc6c1ae50d70ba43c4cd36c6/box"></script>\n<center><div  class="w3-margin"  id="BC0">\n</div></center>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -709,15 +639,6 @@ CREATE TABLE `views` (
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `views`
---
-
-INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
-(1, 1586653121, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP'),
-(2, 1586653130, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP'),
-(3, 1586656123, '1', 'bc6c1ae50d70ba43c4cd36c6', '8', 'f9a926d6fd09fc9d028e', '27.34.13.187', NULL, 'Linux', 'Firefox', '0', 'NP');
-
 -- --------------------------------------------------------
 
 --
@@ -738,15 +659,6 @@ CREATE TABLE `withdrawal` (
   `details` text,
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `withdrawal`
---
-
-INSERT INTO `withdrawal` (`id`, `user_id`, `ref`, `method`, `phone`, `amount`, `status`, `approval`, `email`, `time`, `details`, `message`) VALUES
-(2, '7', '14213867760', '', 432434, '50.0000', 'processed', 'pending', 'publisher@test.com', 1579775428, NULL, ''),
-(3, '7', '14271385797', '', 432434, '50.0000', 'processed', 'approved', 'publisher@test.com', 1586166321, NULL, ''),
-(4, '7', '14274337941', '', 432434, '500.0000', 'processed', 'approved', 'publisher@test.com', 1586494337, NULL, '');
 
 --
 -- Indexes for dumped tables
@@ -928,17 +840,17 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
@@ -963,7 +875,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `cmessages`
 --
@@ -1008,7 +920,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -1018,7 +930,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
@@ -1033,17 +945,17 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `publishers_websites`
 --
 ALTER TABLE `publishers_websites`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `system_var`
 --
@@ -1058,7 +970,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
