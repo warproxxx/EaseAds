@@ -7,6 +7,7 @@
 <!-- Campaign Type: <?= $detail['type'] ?>
 <br/> -->
 
+<?= form_open_multipart("advertiser_dashboard/edit/".$this->uri->segment(3)) ?>
 
 Campaign Name:
 <input type="text" name="campaign_name" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="Campaign Name" value="<?= $detail['name'] ?>" required/>
@@ -33,9 +34,10 @@ foreach ($categories as $category)
 if ($detail['type'] == 'banner')
 {
   echo('<br/><br/>Update Banner?<br/>');
-	echo('<input type="radio" id="yes" name="yes" value="yes">
+  echo('<input type="hidden" name="old_banner" value="'. $detail['img_link'] . '">');
+	echo('<input type="radio" id="yes" name="yes_no" value="yes">
 	<label for="yes">Yes</label> 
-	<input type="radio" id="no" name="no" value="no">
+	<input type="radio" id="no" name="yes_no" value="no">
 	<label for="no">No</label><br>');
 
   echo('<span class="w3-serif w3-text-indigo w3-small w3-margin">Upload Banner</span><br>
@@ -47,7 +49,7 @@ if ($detail['type'] == 'banner')
 echo('<br/><span class="w3-serif w3-text-indigo w3-small">Campaign Size/Type</span><br>
 <select name="campaign_size" class="w3-padding w3-border w3-border-blue">
     <option value="300X250">300 X 250 (Banner Only)</option>
-    <option value="720X90"">468 X 60 (Recommended For Mobile Campaign)</option>
+    <option value="720X90">468 X 60 (Recommended For Mobile Campaign)</option>
 
    <!-- <option value="720X90">720 X 90 (Banner Only)</option>
     <option value="160X600">160 X 600 (Banner Only)</option>-->
@@ -365,18 +367,6 @@ Leave these empty to target all
 
 <input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_budget'] ?>' placeholder="Budget" value="<?php echo $detail['budget']; ?>" name="budget"  ><br><br>
 
-<span class="w3-label w3-small">Starting Date:</span><br>
-
-<select class="w3-padding w3-border w3-border-indigo" name="sdate">
-	<option value="now">Now</option>
-	<option value="Next Sunday">Next Sunday (12.00 AM)</option>
-	<option value="Next Monday">Next Monday (12.00 AM)</option>
-  	<option value="Next Tuesday">Next Tuesday (12.00 AM)</option>
-  	<option value="Next Wednesday">Next Wednesday (12.00 AM)</option>
-  	<option value="Next Thursday">Next Thursday (12.00 AM)</option>
-    <option value="Next Friday">Next Friday (12.00 AM)</option>
-  	<option value="Next Saturday">Next Saturday (12.00 AM)</option>
-</select>
 
 	</div>
 
@@ -552,3 +542,4 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 
 </script>
+</form>

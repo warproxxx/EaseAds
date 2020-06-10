@@ -594,20 +594,84 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
       $data['keywords'] =  $this->keywords;
       $data['description'] =  $this->description;
       $data["noindex"] =  $this->noindex;
-$data['user'] =$this->user;
+      $data['user'] =$this->user;
 
 
-$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
-$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-$data['categories'] = $this->user_model->get_categories();
-$data['detail'] = $this->advertiser_model->get_story_details($ref_id);
-$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
-$data['general_details'] = $this->advertiser_model->get_general_details();
+      $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+      $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+      $data['categories'] = $this->user_model->get_categories();
+      $data['detail'] = $this->advertiser_model->get_story_details($ref_id);
+      $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+      $data['general_details'] = $this->advertiser_model->get_general_details();
 
-    $this->load->view('/common/advertiser_header_view',$data);
-      $this->load->view('/common/advertiser_top_tiles',$data);
-    $this->load->view('/user/advertiser/edit_view',$data);
-     $this->load->view('/common/users_footer_view',$data);
+      
+
+      
+      if($this->input->post('campaign_name'))
+      {
+        $banner = $this->input->post('old_banner');
+
+        if($this->input->post('yes_no'))
+        {
+          $config['upload_path'] = "assets/campaigns";
+          $config['allowed_types'] = 'gif|jpg|png|jpeg';
+          $config['max_size'] = '1500';
+          
+          $this->load->library('upload', $config);
+
+          if ( ! $this->upload->do_upload('banner'))
+          {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+          }
+          else
+          {
+            $data = array('upload_data' => $this->upload->data());
+            $banner = $this->upload->data("file_name");
+          }
+        }
+
+        if($this->input->post('billing') == "cpc")
+        {
+          $cpc = $this->input->post('cpc');
+          $cpm = 0;
+        }
+        elseif($this->input->post('billing') == "cpm")
+        {
+          $cpc = 0;
+          $cpm = $this->input->post('cpm');
+        }
+        
+        
+
+        $new_details = array("name" => $this->input->post('campaign_name'),
+                             "dest_link" => $this->input->post('dest_link'),
+                             "category" => $this->input->post('category'),
+                             "tbrowser" => json_encode($this->input->post("browser")),
+                             "tplatform" => json_encode($this->input->post("tplatform")),
+                             "tcountry" => json_encode($this->input->post("tcountry")),
+                             "budget" => $this->input->post('budget'),   
+                             "billing" => $this->input->post('billing'),   
+                             'per_click' => $cpc,
+                             'per_view' => $cpm,
+                             "raw_traffic" => $this->input->post('raw_traffic'),  
+                             "size" => $this->input->post('campaign_size'),
+                             "approval" => "Pending",
+                             "status" => "Pending",
+                             "img_link" => $banner
+                            );
+        
+
+
+        $this->campaign_model->update_campaign($ref_id,$new_details);
+        show_page("advertiser_dashboard/view_details/".$ref_id);
+
+      }
+
+      $this->load->view('/common/advertiser_header_view',$data);
+        $this->load->view('/common/advertiser_top_tiles',$data);
+      $this->load->view('/user/advertiser/edit_view',$data);
+      $this->load->view('/common/users_footer_view',$data);
 
 
 

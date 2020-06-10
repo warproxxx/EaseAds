@@ -49,6 +49,12 @@ public function insert_new_balance($campaign_new_balance,$ref_id)
 	$this->db->update("adv_story", array("balance" => $campaign_new_balance),array("ref_id" => $ref_id));
 }
 
+
+public function update_campaign($ref_id,$new_details)
+{
+	$this->db->update("adv_story", $new_details, array("ref_id" => $ref_id));
+}
+
 public function get_campaign_by_category_text($category)
 {
 /*
