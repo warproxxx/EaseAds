@@ -1,6 +1,18 @@
+
+
 <div class="w3-container w3-center">
 <br><br>
+  
   <b class="w3-serif w3-large w3-text-indigo">Create New Banner Campaign</b><br>
+  <button onclick="goForward()" style="float: right;">Forward</button>
+
+<script>
+function goForward() {
+  window.history.forward();
+}
+</script>
+
+
 
 <br>
 <div class="w3-text-red w3-small"><?= validation_errors()."<br>".$error ?>
@@ -15,7 +27,7 @@ if(isset($campaign_name))
   ?>">
   <div class="w3-third">
     
-<span class="w3-serif w3-text-indigo w3-small">Campaign Name</span><br>
+<span class="w3-serif w3-text-indigo w3-small">Campaign Name (Title for the campaign)</span><br>
 <?php if(!empty($this->uri->segment(3)))
 {
 echo "<span class='w3-gray w3-padding w3-text-white'>";
@@ -25,16 +37,16 @@ echo "</span>";
 <input type="text" value='<?php
 
 echo set_value('campaign_name');
- ?>' name="campaign_name" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="Campaign Name" required/>
+ ?>' name="campaign_name" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="Title for the campaign" required/>
 <br><br>
  </div>
   <div class="w3-third">
 
 
-<span class="w3-text-indigo w3-small">Campaign  Category(Your advertisement category):</span><br><br>
+<span class="w3-text-indigo w3-small">Campaign  Category (Target audiences according to their category):</span><br><br>
 
 <select type="dropdown" name="category" class="w3-padding w3-border w3-border-blue w3-round" id="category">
-<option value=null selected>Choose...</option>
+<option value=null selected>All</option>
 <?php
 foreach ($categories as $category)
 {
@@ -50,7 +62,7 @@ foreach ($categories as $category)
 
   <div class="w3-third">
 
-<span class="w3-serif w3-text-indigo w3-small">Destination Link</span>
+<span class="w3-serif w3-text-indigo w3-small">Destination Link (Campaign URL)</span>
 <br>
 <input type="text" value='<?php
 if(!empty($this->uri->segment(3)))

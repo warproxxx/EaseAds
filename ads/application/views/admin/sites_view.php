@@ -27,7 +27,7 @@ if(!empty($spaces))
 foreach ($spaces as $item) {
 	echo "<tr>";
 	echo "";
-	echo "<td><a href='http://".$item['website']."'><b>".$item['website']."</b>
+	echo "<td><a href='".$item['website']."'><b>".$item['website']."</b>
 	</a></td>";
 	echo "<td>".ucfirst($item['total_clicks'])."</td>";
 	echo "<td>".ucfirst($item['total_views'])."</td>";

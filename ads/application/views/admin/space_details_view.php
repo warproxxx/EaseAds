@@ -15,7 +15,7 @@ if(isset($_SESSION['action_status_report']))
 <a  href="<?=site_url('admin/publisher_profile_details/'.$space['user_id']) ?>" class="w3-btn w3-indigo w3-margin">View Publisher Details</a><br>
 
 
-<a  href="http://<?=$space['website'] ?>" class="w3-btn w3-indigo w3-margin">Go to Publisher Website</a><br>
+<a  href="<?=$space['website'] ?>" class="w3-btn w3-indigo w3-margin">Go to Publisher Website</a><br>
 
 	<?php
 foreach ($space as $key => $value) {

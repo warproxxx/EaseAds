@@ -84,23 +84,32 @@
             echo("</table></center>");
 
             echo("<h3>Clicks</h3>");
-            $keys = array_keys($click_report[0]);
-            echo("<center><table border=1>
-                <tr>
-                    <td>". $keys[0] ."</td>
-                    <td>". $keys[1] ."</td>
-                    <td>". $keys[2] ."</td>
-                </tr>");
 
-            foreach($click_report as $key=>$val)
+            if (count($click_report) > 0)
             {
-                echo("<tr>");
-                echo("<td>" . $val[$keys[0]]. "</td>");
-                echo("<td>" . $val[$keys[1]] . "</td>");
-                echo("<td>" . $val[$keys[2]] . "</td>");
-                echo("</tr>");
+                $keys = array_keys($click_report[0]);
+                echo("<center><table border=1>
+                    <tr>
+                        <td>". $keys[0] ."</td>
+                        <td>". $keys[1] ."</td>
+                        <td>". $keys[2] ."</td>
+                    </tr>");
+
+                foreach($click_report as $key=>$val)
+                {
+                    echo("<tr>");
+                    echo("<td>" . $val[$keys[0]]. "</td>");
+                    echo("<td>" . $val[$keys[1]] . "</td>");
+                    echo("<td>" . $val[$keys[2]] . "</td>");
+                    echo("</tr>");
+                }
+                echo("</table></center>");
             }
-            echo("</table></center>");
+            else
+            {
+                echo("No clicks yet");
+            }
+            
     }
     else
     {

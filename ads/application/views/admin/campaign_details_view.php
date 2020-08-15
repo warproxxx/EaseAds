@@ -14,7 +14,7 @@ if(isset($_SESSION['action_status_report']))
 
 <a  href="<?=site_url('admin/advertiser_profile_details/'.$campaign['user_id']) ?>" class="w3-btn w3-indigo w3-margin">View Advertiser Details</a><br>
 
-<a  href="http://<?=$campaign['dest_link'] ?>" class="w3-btn w3-indigo w3-margin">Go to Landing PAge</a><br>
+<a  href="<?=$campaign['dest_link'] ?>" class="w3-btn w3-indigo w3-margin">Go to Landing PAge</a><br>
 	<?php
 foreach ($campaign as $key => $value) {
 echo "<tr>";

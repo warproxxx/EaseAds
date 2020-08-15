@@ -2,6 +2,14 @@
 <div class="w3-container w3-center">
     <span class="w3-text-indigo w3-xlarge w3-serif">Payment & Budget</span><br>
 
+	<button onclick="goBack()" style="float: left;">Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
 <?= form_open("advertiser_dashboard/campaign_budget/".$this->uri->segment(3)) ?>
 
 <?php
@@ -125,11 +133,11 @@ if($cpa_form_data['access_type'] == 'free')
 </div>
 
 
-<span class="w3-label w3-small">Raw Traffic:</span><br>
+<span class="w3-label w3-small">Raw Traffic: <br/>(Number of times you want to show to the same IP in 24 hrs)</span><br>
 
 <select class="w3-padding w3-border w3-border-indigo" name="raw_traffic">
 	<option value="1">1</option>
-	<option value="2">2</option>
+	<option value="2" selected>2</option>
 	<option value="3">3</option>
 </select>
 

@@ -1,12 +1,28 @@
 <div  class="w3-container w3-center">
     <span class="w3-text-indigo w3-xlarge w3-serif">Targeting Options</span><br>
+    <button onclick="goForward()" style="float: right;">Forward</button>
+
+<script>
+function goForward() {
+  window.history.forward();
+}
+</script>
+
+<button onclick="goBack()" style="float: left;">Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
 
     <a href="<?=site_url("advertiser_dashboard/skip_targeting/".$this->uri->segment(3)) ?>" class="w3-btn w3-indigo">Skip This</a><br>
     <div class="w3-small">By skipping your Campaign will be mark as GENERAL CAMPAIGN(Visible in all category)</div>
 
 <?= form_open("advertiser_dashboard/campaign_target_action/".$this->uri->segment(3)) ?>
 <div class="w3-container w3-center"> 
-	     <i class="w3-text-green">Browser Targeting </i><br>      
+	     <i class="w3-text-green">Browser Targeting: (Target audiences according to Browsers) </i><br>      
 
 <center>
 <div style="width:60%" class="w3-container w3-card w3-padding-large w3-center">
@@ -31,7 +47,7 @@
      <br>     
   <div class="w3-container">
      
-     <i class="w3-text-green">Platform Targeting </i><br>
+     <i class="w3-text-green">Platform Targeting: (Target audiences according to devices) </i><br>
      
 <center>
 <div style="width:60%" class="w3-container w3-card w3-padding-large w3-center">
@@ -106,7 +122,7 @@
 </style>
 <br><br>
 <center>
-         <i class="w3-text-green">Country Targeting</i><br>
+         <i class="w3-text-green">Country Targeting: (Target audiences according to Geos)</i><br>
 
 <div style="overflow:scroll;height:150px" class="w3-container w3-label w3-border w3-cente w3-card" id="african-countries">
 <input type="checkbox" name="tcountry[]"  value="AF">Afghanistan</input><br>
