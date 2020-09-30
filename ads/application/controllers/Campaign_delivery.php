@@ -135,8 +135,12 @@ public function deliver_banner_js($space_id = NULL,$size_type)
 
               if ($total_count <= $resulted_campaign['raw_traffic'])
               {
-                $campaign_to_render = $resulted_campaign;
-                break 3;
+                $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                if ($spent_today < $resulted_campaign['daily_budget'])
+                {
+                  $campaign_to_render = $resulted_campaign;
+                  break 3;
+                }                
               }
             }
           }
@@ -238,24 +242,29 @@ public function deliver_banner_js($space_id = NULL,$size_type)
 public function deliver_popup_js($space_id = NULL)
 {
   $space = $this->campaign_model->get_space_by_ref_id($space_id);
-  $space_categories =[];
+  $resulted_campaigns =[];
   $publisher = $this->publisher_model->get_publisher_by_its_id($space['user_id']);
 
   for ($i=0; $i < count(json_decode($space['category'])) ; $i++) 
   {  
     if(!empty($hold = $this->campaign_model->get_campaign_by_category_popup(json_decode($space['category'])[$i])))
     {
-      array_push($space_categories, $hold[mt_rand(0,count($hold)-1)]['category']);
+      $categories = $hold[mt_rand(0,count($hold)-1)]['category'];
+      $categories = (json_decode($categories));
+
+      foreach($categories as $cat)
+      {
+        foreach($hold as $h)
+        {
+          array_push($resulted_campaigns, $h['ref_id']);
+        }
+      }
+      
       unset($hold);
     }
   }
 
-  //var_dump($space_categories);
-  if(empty($space_categories))
-  {
-    array_push($space_categories,"default");
-    //set ads category to show if publisher category is unavailable
-  }
+  $resulted_campaigns = array_unique($resulted_campaigns);
 
   $campaign_to_render = NULL;
   //targetting variable
@@ -267,14 +276,10 @@ public function deliver_popup_js($space_id = NULL)
 
   $count = 0;
 
-  $category = $space_categories[mt_rand(0,count($space_categories)-1)];
-  //var_dump($category);
-
-  $resulted_campaigns = $this->campaign_model->get_campaign_by_category_popup($category);
-  //note the singularity
   if (count($resulted_campaigns) > 0)
   {
-    $resulted_campaign = $resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)];
+    $resulted_campaign = $this->campaign_model->get_campaign_by_ref($resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)]);
+    $resulted_campaign = json_decode(json_encode($resulted_campaign), true);
     #
     if($resulted_campaign['targeting'] == 'false')
     {
@@ -311,7 +316,8 @@ public function deliver_popup_js($space_id = NULL)
                   $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
                 }
 
-                if ($total_count <= $resulted_campaign['raw_traffic'])
+                $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                if ($spent_today < $resulted_campaign['daily_budget'])
                 {
                   $campaign_to_render = $resulted_campaign;
                   break 3;

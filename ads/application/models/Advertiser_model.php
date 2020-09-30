@@ -622,14 +622,12 @@ return $query->row_array();
 
 public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 {
-
    $time_interval  = $time_interval * 60 * 60;
     $q = "SELECT COUNT(v.id) AS total_views, SUM(a.per_view * a.views) AS total_spent, AVG(a.per_view * a.views) AS eCPM
     FROM views v
     LEFT JOIN adv_story a
     ON a.ref_id = v.story_id
     WHERE v.time >= ".($today - $time_interval)." AND v.time <= ".$today." AND v.story_id= '".$ref_id."'";
-
 
     $query = $this->db->query($q);
     return $query->row_array();
@@ -662,8 +660,9 @@ public function get_campaign_views($ref_id,$today)
 
 public function get_spent($ref_id,$today)
 {
-  $clicks = $this->get_campaign_at_time_clicks($ref_id,$today,strtotime(date("y-m-d")),24);
-  $views = $this->get_campaign_at_time_views($ref_id,$today,strtotime(date("y-m-d")),24);
+  $clicks = $this->get_campaign_at_time_clicks($ref_id,$today,24);
+  $views = $this->get_campaign_at_time_views($ref_id,$today,24);
+
   return $views['eCPM'] + $clicks['eCPC'];
 }
 
