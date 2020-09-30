@@ -45,6 +45,7 @@
                         <td>Clicks</td>
                         <td>eCPM</td>
                         <td>eCPC</td>
+                        <td>Total Spent</td>
                     </tr>");
 
             foreach($day_report as $key=>$val)
@@ -55,6 +56,7 @@
                 echo("<td>" . $val->Clicks . "</td>");
                 echo("<td>" . $val->eCPM . "</td>");
                 echo("<td>" . $val->eCPC . "</td>");
+                echo("<td>" . $val->total_spent . "</td>");
                 echo("</tr>");
             }
 

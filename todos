@@ -1,0 +1,33 @@
+http://easeads.local/publisher_dashboard/add_space/db282fa96b5be1939763c909
+Generates code
+
+Fix delivery for both including category.
+
+Change mail to
+noreply@easeads.com
+M*K6XKzHX!q2Th
+
+based on migadu
+
+admin@easeads.com ko naya password
+Zdq6&ZCchVS&aB
+support@ ko ni tei
+
+
+To clear database:
+DELETE FROM advertisers;
+DELETE FROM adv_story;
+DELETE FROM announcements;
+DELETE FROM clicks;
+DELETE FROM history;
+DELETE FROM notifications;
+DELETE FROM payments;
+DELETE FROM payment_requests;
+DELETE FROM publishers;
+DELETE FROM publishers_websites;
+DELETE FROM pub_story;
+DELETE FROM views;
+DELETE FROM withdrawal;
+
+set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';

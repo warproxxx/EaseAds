@@ -79,7 +79,6 @@ if (!empty($notifications))
 }
 ?> 
 
-?> 
 </tbody>
 </table>
 </div>

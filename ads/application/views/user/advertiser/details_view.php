@@ -106,6 +106,16 @@ echo $_SESSION['action_status_report'];
 			<span class="w3-text-indigo"><b>Campaign Statistics</b></span>
 			<div style="width: 80%" class="w3-container">
   <table class="w3-table w3-striped w3-white">
+
+          <tr>
+            <td><i class="fa fa-dollar w3-text-blue w3-large"></i></td>
+            <td>Today's Spending</td>
+            <td><i><?php
+            echo $spent_today;
+            ?></i></td>
+          </tr>
+
+
           <tr>
             <td><i class="fa fa-eye w3-text-blue w3-large"></i></td>
             <td>Views Today.</td>
@@ -202,8 +212,8 @@ echo "style='display:none;'";}
 ?>
   
             >
-            <td>Cost Per View</td>
-            <td><i> <?= $general_details['currency_code'].' '.$campaign_item['per_view'] ?> </i></td>
+            <td>CPM</td>
+            <td><i> <?= $general_details['currency_code'].' '.$campaign_item['cpm'] ?> </i></td>
           </tr>
             <tr
 <?php

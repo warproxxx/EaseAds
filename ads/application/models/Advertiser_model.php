@@ -18,6 +18,13 @@ class Advertiser_model extends CI_Model {
     $this->load->database();
 
 }
+
+public function delete_campaign($ref_id)
+{
+  $this->db->delete("adv_story",array("ref_id" => $ref_id));
+}
+
+
 public function insert_addon_details($ref_id)
 {
 $data_db= array(
@@ -299,64 +306,74 @@ $this->db->update('adv_story',$datab2, array("ref_id" => $ref_id,"user_id" => $_
 }
 
 
-public function insert_campaign_step_three($ref_id,$user){
-
-
-
-if(($user['account_bal'] < $this->input->post('budget')) || ($this->input->post('budget') <=  $this->input->post('cpc'))){
-//to handle case budget <5
-$_SESSION['action_status_report'] ="<span class='w3-text-red'>Insufficient Budget:your balance is ".$user['account_bal']."</span>" ;
-$this->session->mark_as_flash('action_status_report');
-
-show_page("advertiser_dashboard/campaign_budget/".$ref_id);
-}else
+public function insert_campaign_step_three($ref_id,$user)
 {
-$new_acct_bal = $user['account_bal'] - $this->input->post('budget');
+  if(($user['account_bal'] < $this->input->post('budget')) || ($this->input->post('budget') <=  $this->input->post('cpc')))
+  {
+    $_SESSION['action_status_report'] ="<span class='w3-text-red'>Insufficient Budget:your balance is ".$user['account_bal']."</span>" ;
+    $this->session->mark_as_flash('action_status_report');
+    return 0;
+  }
+  else
+  {
+    $new_acct_bal = $user['account_bal'] - $this->input->post('budget');
 
-$databu = array('account_bal' => $new_acct_bal);
+    $databu = array('account_bal' => $new_acct_bal);
 
-if($this->input->post('billing') == "cpc")
-{
-  $cpc = $this->input->post('cpc');
-  $cpm = 0;
-}
-elseif($this->input->post('billing') == "cpm")
-{
-  $cpc = 0;
-  $cpm = $this->input->post('cpm');
-}
+    if($this->input->post('billing') == "cpc")
+    {
+      $cpc = $this->input->post('cpc');
+      $cpm = 0;
 
-$datab2 = array(
-'budget' => $this->input->post('budget'),
-'per_click' => $cpc,
-'per_view' => $cpm,
-'per_action' => $cpa,
-'start_time' =>   strtotime($this->input->post("sdate")),
-'expire_time' => strtotime($this->input->post("edate")),
-'status' => 'Pending',
-'approval' => 'Pending',
-"edit_status" => "complete",
-'balance' =>  $this->input->post('budget'),
-'time' => time(),
-'cr_level' => "3",
-'billing' => $this->input->post('billing'),
-'raw_traffic' => $this->input->post('raw_traffic')
-);
+      if ($cpc <= 0)
+      {
+        return 0;
+      }
+    }
+    elseif($this->input->post('billing') == "cpm")
+    {
+      $cpc = 0;
+      $cpm = $this->input->post('cpm');
 
-if( $this->db->update('adv_story',$datab2, array("ref_id" => $ref_id,"user_id" => $_SESSION['id'])) && $this->db->update('advertisers',$databu, array("id" => $_SESSION['id'])))
-{
-$_SESSION['action_status_report'] ="Action successful" ;
-$this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/campaign");
+      if ($cpm <= 0)
+      {
+        return 0;
+      }
+    }
 
-  //yes
-}else{
-$_SESSION['action_status_report'] ="unnown error occured" ;
-$this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/campaign_budget/".$ref_id);
+    $datab2 = array(
+    'budget' => $this->input->post('budget'),
+    'daily_budget' => $this->input->post('daily_budget'),
+    'cpm' => $cpm,
+    'cpc' => $cpc,
+    'per_click' => $cpc,
+    'per_view' => $cpm/1000,
+    'per_action' => null,
+    'start_time' =>   strtotime($this->input->post("sdate")),
+    'expire_time' => strtotime($this->input->post("edate")),
+    'status' => 'Pending',
+    'approval' => 'Pending',
+    "edit_status" => "complete",
+    'balance' =>  $this->input->post('budget'),
+    'time' => time(),
+    'cr_level' => "3",
+    'billing' => $this->input->post('billing'),
+    'raw_traffic' => $this->input->post('raw_traffic')
+    );
 
-}
-}
+    if( $this->db->update('adv_story',$datab2, array("ref_id" => $ref_id,"user_id" => $_SESSION['id'])) && $this->db->update('advertisers',$databu, array("id" => $_SESSION['id'])))
+    {
+      $_SESSION['action_status_report'] ="Action successful" ;
+      $this->session->mark_as_flash('action_status_report');
+      return 1;
+    }
+    else
+    {
+      $_SESSION['action_status_report'] ="unnown error occured" ;
+      $this->session->mark_as_flash('action_status_report');
+      return 0;
+    }
+  }
 }
 
 public function skip_targeting($ref_id){
@@ -394,7 +411,8 @@ $datab = array(
 "name" => $this->input->post('cpa_name')."-".$this->input->post('campaign_name'),
 "size" => $this->input->post('campaign_size'),
 "type" => $this->input->post('campaign_type'),
-"category" => $this->input->post('category'),
+"category" => json_encode($this->input->post("category")),
+"vertical" => $this->input->post("vertical"),
 "disp_link" => $this->input->post('display_link'),
 "dest_link" => $this->input->post('destination_link'),
 "text_content" => $this->input->post('campaign_content_text'),
@@ -606,7 +624,7 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 {
 
    $time_interval  = $time_interval * 60 * 60;
-    $q = "SELECT COUNT(v.id) AS total_views, SUM(a.per_view * a.views) AS eCPM
+    $q = "SELECT COUNT(v.id) AS total_views, SUM(a.per_view * a.views) AS total_spent, AVG(a.per_view * a.views) AS eCPM
     FROM views v
     LEFT JOIN adv_story a
     ON a.ref_id = v.story_id
@@ -621,7 +639,7 @@ public function get_campaign_at_time_views($ref_id,$today,$time_interval)
 public function get_campaign_at_time_clicks($ref_id,$today,$time_interval)
 {
   $time_interval  = $time_interval * 60 * 60;
-  $q = "SELECT COUNT(c.id) AS total_clicks, SUM(a.per_click * a.clicks) AS eCPM
+  $q = "SELECT COUNT(c.id) AS total_clicks, SUM(a.per_click * a.clicks) AS total_spent, AVG(a.per_click * a.clicks) AS eCPC
   FROM clicks c
   LEFT JOIN adv_story a
   ON a.ref_id = c.story_id
@@ -640,6 +658,13 @@ public function get_campaign_views($ref_id,$today)
 
  return count($query->result_array());
 
+}
+
+public function get_spent($ref_id,$today)
+{
+  $clicks = $this->get_campaign_at_time_clicks($ref_id,$today,strtotime(date("y-m-d")),24);
+  $views = $this->get_campaign_at_time_views($ref_id,$today,strtotime(date("y-m-d")),24);
+  return $views['eCPM'] + $clicks['eCPC'];
 }
 
 public function get_campaign_views_user($today)
@@ -744,8 +769,9 @@ $this->session->mark_as_flash('action_status_report');
 }else{
 $_SESSION['action_status_report'] ="unnown error occured" ;
 $this->session->mark_as_flash('action_status_report');
-show_page("advertiser_dashboard/campaign_budget/".$ref_id);
+echo("<script>alert('Insufficient Budget:your balance is ".$user['account_bal']."')</alert>");
 
+show_page("advertiser_dashboard/add_banner_campaign/");
 }
 }
 

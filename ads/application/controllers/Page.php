@@ -394,8 +394,8 @@ public function send_email($detail)
     'protocol' => 'smtp',
     'smtp_host' => 'smtp.zoho.com',
     'smtp_port' => 465,
-    'smtp_user' => 'notifications@waterbot.xyz',
-    'smtp_pass' => 'Notify@Bot123',
+    'smtp_user' => 'admin@mayrasales.com',
+    'smtp_pass' => '7Px!wHBwQgx%Tt',
     'mailtype'  => 'html', 
     'charset'   => 'iso-8859-1',
     'smtp_crypto' => 'ssl'
@@ -404,7 +404,7 @@ public function send_email($detail)
   $this->load->library('email', $config);
   $this->email->set_newline("\r\n");
 
-  $this->email->from('notifications@waterbot.xyz', 'EaseAds Team');
+  $this->email->from('admin@mayrasales.com', 'EaseAds Team');
   $this->email->to($address); 
 
   $this->email->subject('Verify your registration at EaseAds');

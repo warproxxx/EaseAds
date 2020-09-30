@@ -200,6 +200,7 @@ $size_to_get = 'rec';
 $datab = array(
 'name' => $this->input->post("space_name"),
 'category' => json_encode($this->input->post("category")),
+'tcategory' => json_encode($this->input->post("category")),
 'website' => $this->input->post("website_url"),
 'type' => $this->input->post("type"),
 'size' => $this->input->post("size"),
@@ -310,6 +311,30 @@ public function get_full_sites()
     LEFT JOIN pub_story ps
     ON ps.website = pw.website
     WHERE pw.publisher_id= ".$_SESSION['id'];
+
+
+    $query = $this->db->query($q);
+    return $query->result_array();
+}
+
+public function get_approved_sites()
+{
+
+  $q = "SELECT SUM(ps.views) AS total_views, SUM(ps.clicks) AS total_clicks, pw.website, pw.approved
+    FROM publishers_websites pw
+    LEFT JOIN pub_story ps
+    ON ps.website = pw.website
+    WHERE pw.approved=1 AND pw.website IS NOT NULL AND pw.publisher_id= ".$_SESSION['id'];
+
+
+    $query = $this->db->query($q);
+    return $query->result_array();
+}
+
+public function get_pending_sites()
+{
+
+  $q = "SELECT * FROM publishers_websites WHERE approved=0 AND publisher_id= ".$_SESSION['id'];
 
 
     $query = $this->db->query($q);

@@ -307,8 +307,8 @@ public function send_email($detail)
     'protocol' => 'smtp',
     'smtp_host' => 'smtp.zoho.com',
     'smtp_port' => 465,
-    'smtp_user' => 'notifications@waterbot.xyz',
-    'smtp_pass' => 'Notify@Bot123',
+    'smtp_user' => 'admin@mayrasales.com',
+    'smtp_pass' => '7Px!wHBwQgx%Tt',
     'mailtype'  => 'html', 
     'charset'   => 'iso-8859-1',
     'smtp_crypto' => 'ssl'
@@ -317,7 +317,7 @@ public function send_email($detail)
   $this->load->library('email', $config);
   $this->email->set_newline("\r\n");
 
-  $this->email->from('notifications@waterbot.xyz', 'Waterbot');
+  $this->email->from('admin@mayrasales.com', 'Waterbot');
   $this->email->to($address); 
 
   $this->email->subject('Verify your registration at EaseAds');
@@ -1451,7 +1451,7 @@ $data['country_click_details'] = $this->publisher_model->country_click_by_pub_sp
 
 
 
-public function campaign_action($action,$ref_id,$user_id)
+public function campaign_action($action,$ref_id,$user_id="")
 {
 if($action == "approve")
 {

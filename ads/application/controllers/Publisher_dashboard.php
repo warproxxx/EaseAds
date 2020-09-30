@@ -413,7 +413,7 @@ $w_dat =  array(
  public function read($id)
 {
   $this->user_model->read($id);
-  redirect('/Advertiser_dashboard');
+  redirect('/Publisher_dashboard');
 
 }
 public function view_details($ref_id)
@@ -537,7 +537,8 @@ public function sites_list()
       $data["noindex"] = $this->noindex;
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-      $data["sites"] = $this->publisher_model->get_full_sites();
+      $data["approved_sites"] = $this->publisher_model->get_approved_sites();
+      $data["pending_sites"] = $this->publisher_model->get_pending_sites();
       
       
       $this->load->view('/common/publisher_header_view',$data);

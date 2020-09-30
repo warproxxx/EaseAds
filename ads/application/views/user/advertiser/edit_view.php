@@ -370,6 +370,14 @@ Leave these empty to target all
 
 	</div>
 
+	<div class="w3-container">
+		<span class="w3-label w3-small">Daily Budget ($)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
+
+<input class="w3-padding w3-border w3-border-indigo" type="number" min='10' placeholder="Budget" value="<?php echo $detail['daily_budget']; ?>" name="daily_budget"  ><br><br>
+
+
+	</div>
+
   </div>
 
   <div class="w3-container">
@@ -438,7 +446,7 @@ else
 
 
 	<div class="w3-show" id="cpm_div">		
-<span class="w3-label w3-small">Cost Per View<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
+<span class="w3-label w3-small">Cost Per Mile<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
 <span class="w3-text-red">min: <?=$general_details['currency_code']." ".$general_details['minimum_cpm'] ?> </span><br>
 
        <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?= $general_details['minimum_cpm'] ?>" placeholder="Cost Per View" name="cpm" value="<?= $detail['per_view'] ?>" /><br><br>

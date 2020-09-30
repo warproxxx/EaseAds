@@ -419,6 +419,36 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 
 }
 
+public function submit_banner()
+{
+  $config['upload_path'] = "assets/campaigns";
+  $config['allowed_types'] = 'gif|jpg|png|jpeg';
+ $config['max_size'] = '1500';
+
+ $this->load->library('upload', $config);
+ $this->upload->do_upload('banner');
+
+  $banner = $this->upload->data("file_name");
+
+  $ref_id =  substr(md5(time()), 12);
+
+  //create id for the advert here if not exist
+  $this->advertiser_model->insert_campaign_step_one($banner,$ref_id,NULL);
+  $this->advertiser_model->insert_campaign_step_two($ref_id);
+  $ret = $this->advertiser_model->insert_campaign_step_three($ref_id,$this->user);
+  
+  if ($ret == 0)
+  {
+    $this->advertiser_model->delete_campaign($ref_id);
+    echo("You may not enough balance");
+  }
+  else
+  {
+    show_page("advertiser_dashboard/view_details/".$ref_id);
+  }
+  
+}
+
 public function add_banner_campaign($cpa_ref_id = NULL)
  {
 
@@ -444,18 +474,12 @@ if(!$this->form_validation->run())
       $data["noindex"] =  $this->noindex;
 $data['user'] =$this->user;
 
-if(!empty($cpa_ref_id))
-{
-//set campaign name and disable text input
-  $data['campaign_name'] = $this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['name'];
-
-  $data['campaign_dest'] = site_url('form/'.$this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['form_slug']);
-
-}
-
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 $data['categories'] = $this->user_model->get_categories();
+$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+$data['general_details'] = $this->advertiser_model->get_general_details();
+$data['cpa_form_data'] =NULL;
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -465,20 +489,25 @@ $data['categories'] = $this->user_model->get_categories();
 
 
 
-}else{
-$banner = $this->upload->data("file_name");
+}else
+{
+  $banner = $this->upload->data("file_name");
 
-$ref_id =  substr(md5(time()), 12);
+  $ref_id =  substr(md5(time()), 12);
 
-//create id for the advert here if not exist
-$this->advertiser_model->insert_campaign_step_one($banner,$ref_id,$cpa_ref_id);
+  //create id for the advert here if not exist
+  $this->advertiser_model->insert_campaign_step_one($banner,$ref_id,NULL);
+  $this->advertiser_model->insert_campaign_step_two($ref_id);
+  $this->advertiser_model->insert_campaign_step_three($ref_id,$this->user);
 
-  //save to db move to next step
-show_page("advertiser_dashboard/campaign_target/".$ref_id);
+  show_page("advertiser_dashboard/view_details/".$ref_id);
 }
 
 
- }public function add_text_campaign($cpa_ref_id = NULL)
+ }
+ 
+ 
+ public function add_text_campaign($cpa_ref_id = NULL)
  {
 
 $this->form_validation->set_rules('campaign_name','Campaign Name','required|max_length[30]',array("max_length" => "Campaign Name is too long <br> The allow Character length is 30"));
@@ -535,61 +564,73 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
  public function add_popup($cpa_ref_id = NULL)
  {
 
-$this->form_validation->set_rules('campaign_name','Campaign Name','required|max_length[30]',array("max_length" => "Campaign Name is too long <br> The allow Character length is 30"));
-$this->form_validation->set_rules('campaign_title','Campaign Title','max_length[160]',array("max_length" => "Campaign Title is too long <br> The allow Character length is 160"));
-$this->form_validation->set_rules('destination_link','Destination Link','required');
-$this->form_validation->set_rules('campaign_type','Campaign Type','required',array("required" => "Please Select Campaign Type"));
+    $this->form_validation->set_rules('campaign_name','Campaign Name','required|max_length[30]',array("max_length" => "Campaign Name is too long <br> The allow Character length is 30"));
+    $this->form_validation->set_rules('campaign_title','Campaign Title','max_length[160]',array("max_length" => "Campaign Title is too long <br> The allow Character length is 160"));
+    $this->form_validation->set_rules('destination_link','Destination Link','required');
+    $this->form_validation->set_rules('campaign_type','Campaign Type','required',array("required" => "Please Select Campaign Type"));
 
 
-  $config['upload_path'] = "assets/campaigns";
-  $config['allowed_types'] = 'gif|jpg|png|jpeg';
- $config['max_size'] = '1500';
+      $config['upload_path'] = "assets/campaigns";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+    $config['max_size'] = '1500';
 
- $this->load->library('upload', $config);
- $this->upload->do_upload('banner');
-if(!$this->form_validation->run())
-{
- $data['error'] =  $this->upload->display_errors();
+    $this->load->library('upload', $config);
+    $this->upload->do_upload('banner');
+    if(!$this->form_validation->run())
+    {
+    $data['error'] =  $this->upload->display_errors();
 
-      $data['title'] = $this->siteName." | Add Campaign";
-      $data['author'] =  $this->author;
-      $data['keywords'] =  $this->keywords;
-      $data['description'] =  $this->description;
-      $data["noindex"] =  $this->noindex;
-$data['user'] =$this->user;
+          $data['title'] = $this->siteName." | Add Campaign";
+          $data['author'] =  $this->author;
+          $data['keywords'] =  $this->keywords;
+          $data['description'] =  $this->description;
+          $data["noindex"] =  $this->noindex;
+    $data['user'] =$this->user;
 
-if(!empty($cpa_ref_id))
-{
-//set campaign name and disable text input
-  $data['campaign_name'] = $this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['name'];
+    if(!empty($cpa_ref_id))
+    {
+    //set campaign name and disable text input
+      $data['campaign_name'] = $this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['name'];
 
-  $data['campaign_dest'] = site_url('form/'.$this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['form_slug']);
+      $data['campaign_dest'] = site_url('form/'.$this->advertiser_model->get_cpa_form_by_ref_id($cpa_ref_id)['form_slug']);
 
-}
+    }
 
-$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
-$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
-$data['categories'] = $this->user_model->get_categories();
+    $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+    $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+    $data['categories'] = $this->user_model->get_categories();
+    $data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+    $data['general_details'] = $this->advertiser_model->get_general_details();
+    $data['cpa_form_data'] =NULL;
 
-    $this->load->view('/common/advertiser_header_view',$data);
-      $this->load->view('/common/advertiser_top_tiles',$data);
-    $this->load->view('/user/advertiser/add_popup_view',$data);
-     $this->load->view('/common/users_footer_view',$data);
+        $this->load->view('/common/advertiser_header_view',$data);
+          $this->load->view('/common/advertiser_top_tiles',$data);
+        $this->load->view('/user/advertiser/add_popup_view',$data);
+        $this->load->view('/common/users_footer_view',$data);
 
 
 
 
-}else{
-$banner = $this->upload->data("file_name");
-
-$ref_id =  substr(md5(time()), 12);
-
-//create id for the advert here if not exist
-$this->advertiser_model->insert_campaign_step_one($banner,$ref_id,$cpa_ref_id);
-
-  //save to db move to next step
-show_page("advertiser_dashboard/campaign_target/".$ref_id);
-}
+    }
+    else
+    {
+      $ref_id =  substr(md5(time()), 12);
+    
+      //create id for the advert here if not exist
+      $this->advertiser_model->insert_campaign_step_one(NULL,$ref_id,NULL);
+      $this->advertiser_model->insert_campaign_step_two($ref_id);
+      $ret = $this->advertiser_model->insert_campaign_step_three($ref_id,$this->user);
+      
+      if ($ret == 0)
+      {
+        $this->advertiser_model->delete_campaign($ref_id);
+        echo("You may not enough balance");
+      }
+      else
+      {
+        show_page("advertiser_dashboard/view_details/".$ref_id);
+      }
+    }
 
 
  }
@@ -658,6 +699,7 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
                              "tbrowser" => json_encode($this->input->post("browser")),
                              "tplatform" => json_encode($this->input->post("tplatform")),
                              "tcountry" => json_encode($this->input->post("tcountry")),
+                             "daily_budget" => $this->input->post('daily_budget'),   
                              "budget" => $this->input->post('budget'),   
                              "billing" => $this->input->post('billing'),   
                              'per_click' => $cpc,
@@ -762,6 +804,22 @@ $data['user'] =$this->user;
 $data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
 $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 $data['categories'] = $this->user_model->get_categories();
+$data['country_details'] = $this->advertiser_model->get_country_details($data['user']['country']);
+$data['general_details'] = $this->advertiser_model->get_general_details();
+
+
+
+$data["count_campaigns"] = $this->advertiser_model->count_advertisers_campaigns();
+$data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
+$campaign =$this->advertiser_model->get_campaign_ref_id($ref_id);
+if(empty($campaign['cpa_id']))
+{
+$data['cpa_form_data'] =NULL;
+}else{
+  $data['cpa_form_data'] = $this->advertiser_model->get_cpa_form_by_ref_id($campaign['cpa_id']);
+
+}
+
 
     $this->load->view('/common/advertiser_header_view',$data);
       $this->load->view('/common/advertiser_top_tiles',$data);
@@ -926,6 +984,7 @@ $data["count_cpa"] = $this->advertiser_model->count_advertisers_cpa();
 
 $data['campaign_item'] = $this->advertiser_model->get_campaign_ref_id($ref_id);
 $data['today_views'] = $this->advertiser_model->get_campaign_views($ref_id,strtotime(date("y-m-d")));
+$data['spent_today'] = $this->advertiser_model->get_spent($ref_id,strtotime(date("y-m-d")));
 $data['today_clicks'] = $this->advertiser_model->get_campaign_clicks($ref_id,strtotime(date("y-m-d")));
 $data['country_click_details'] = $this->advertiser_model->country_click_by_story_id($ref_id);
 
@@ -1093,7 +1152,8 @@ public function report()
                               "Views" => $view_details['total_views'],
                               "eCPM" => $view_details['eCPM'],
                               "Clicks" => $click_details['total_clicks'],
-                              "eCPC" => $click_details['total_clicks']
+                              "eCPC" => $click_details['eCPC'],
+                              "total_spent" => $click_details['total_spent'] + $view_details['total_spent']
                             ); 
 
           $report_details[] = $curr_array;

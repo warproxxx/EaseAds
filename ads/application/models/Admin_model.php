@@ -170,6 +170,12 @@ $this->db->update($table_name,$_new,array('id' => $id));
 
 }
 
+public function update_ad($datab,$id)
+{
+$this->db->update("adv_story",$datab,array('id' => $id));
+
+}
+
 public function messages($limit,$offset)
 {
 
