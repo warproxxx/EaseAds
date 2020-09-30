@@ -94,59 +94,62 @@ public function deliver_banner_js($space_id = NULL,$size_type)
 
   if (count($resulted_campaigns) > 0)
   {
-    $resulted_campaign = $this->campaign_model->get_campaign_by_ref($resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)]);
-    $resulted_campaign = json_decode(json_encode($resulted_campaign), true);
+    foreach($resulted_campaigns as $campaign)
+    {
+      $resulted_campaign = $this->campaign_model->get_campaign_by_ref($campaign);
+      $resulted_campaign = json_decode(json_encode($resulted_campaign), true);
 
-    if($resulted_campaign['targeting'] == 'false')
-    {
-      //if general or targetting option is skipped by advertiser
-      $campaign_to_render = $resulted_campaign;
-    }
-    else
-    {
-      #handle NULL
-      if ($resulted_campaign['tplatform'] == NULL)
-        $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
-      
-      foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
+      if($resulted_campaign['targeting'] == 'false')
       {
-        if ($resulted_campaign['tbrowser'] == NULL)
-          $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
-
-        foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
+        //if general or targetting option is skipped by advertiser
+        $campaign_to_render = $resulted_campaign;
+      }
+      else
+      {
+        #handle NULL
+        if ($resulted_campaign['tplatform'] == NULL)
+          $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
+        
+        foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
         {
-          if ($resulted_campaign['tcountry'] == NULL)
-            $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+          if ($resulted_campaign['tbrowser'] == NULL)
+            $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
 
-          foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
+          foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
           {
-            
-            if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+            if ($resulted_campaign['tcountry'] == NULL)
+              $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+
+            foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
             {
+              
+              if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+              {
 
-              if ($resulted_campaign['billing'] == 'cpm')
-              {
-                $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
-              }
-              else
-              {
-                $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
-              }
-
-              if ($total_count <= $resulted_campaign['raw_traffic'])
-              {
-                $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
-                if ($spent_today < $resulted_campaign['daily_budget'])
+                if ($resulted_campaign['billing'] == 'cpm')
                 {
-                  $campaign_to_render = $resulted_campaign;
-                  break 3;
-                }                
+                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                }
+                else
+                {
+                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+                }
+
+                if ($total_count <= $resulted_campaign['raw_traffic'])
+                {
+                  $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                  if ($spent_today < $resulted_campaign['daily_budget'])
+                  {
+                    $campaign_to_render = $resulted_campaign;
+                    break 4;
+                  }                
+                }
               }
             }
           }
         }
       }
-    } #works
+    }
   }
   else
   {
@@ -278,56 +281,59 @@ public function deliver_popup_js($space_id = NULL)
 
   if (count($resulted_campaigns) > 0)
   {
-    $resulted_campaign = $this->campaign_model->get_campaign_by_ref($resulted_campaigns[mt_rand(0,count($resulted_campaigns)-1)]);
-    $resulted_campaign = json_decode(json_encode($resulted_campaign), true);
-    #
-    if($resulted_campaign['targeting'] == 'false')
+    foreach($resulted_campaigns as $campaign)
     {
-    //if general or targetting option is skipped by advertiser
-      $campaign_to_render = $resulted_campaign;
-    }
-    else
-    {
-
-      if ($resulted_campaign['tplatform'] == NULL)
-        $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
-      
-      foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
+      $resulted_campaign = $this->campaign_model->get_campaign_by_ref($campaign);
+      $resulted_campaign = json_decode(json_encode($resulted_campaign), true);
+      #
+      if($resulted_campaign['targeting'] == 'false')
       {
-        if ($resulted_campaign['tbrowser'] == NULL)
-          $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
+      //if general or targetting option is skipped by advertiser
+        $campaign_to_render = $resulted_campaign;
+      }
+      else
+      {
 
-        foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
+        if ($resulted_campaign['tplatform'] == NULL)
+          $resulted_campaign['tplatform'] = '["' . $client_os  . '"]';
+        
+        foreach (json_decode($resulted_campaign['tplatform'] ) as $target_platform) 
         {
-          if ($resulted_campaign['tcountry'] == NULL)
-            $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+          if ($resulted_campaign['tbrowser'] == NULL)
+            $resulted_campaign['tbrowser'] = '["' . $client_browser  . '"]';
 
-          foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
+          foreach (json_decode($resulted_campaign['tbrowser'] ) as $target_browser) 
           {
-            if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+            if ($resulted_campaign['tcountry'] == NULL)
+              $resulted_campaign['tcountry'] = '["' . $client_country  . '"]';
+
+            foreach (json_decode($resulted_campaign['tcountry'] ) as $target_country) 
             {
+              if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
+              {
 
-                if ($resulted_campaign['billing'] == 'cpm')
-                {
-                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
-                }
-                else
-                {
-                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
-                }
+                  if ($resulted_campaign['billing'] == 'cpm')
+                  {
+                    $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                  }
+                  else
+                  {
+                    $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+                  }
 
-                $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
-                if ($spent_today < $resulted_campaign['daily_budget'])
-                {
-                  $campaign_to_render = $resulted_campaign;
-                  break 3;
-                }
-                
+                  $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                  if ($spent_today < $resulted_campaign['daily_budget'])
+                  {
+                    $campaign_to_render = $resulted_campaign;
+                    break 3;
+                  }
+                  
+              }
             }
           }
         }
-      }
 
+      }
     }
   }
   else
