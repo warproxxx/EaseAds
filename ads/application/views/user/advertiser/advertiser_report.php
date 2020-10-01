@@ -3,11 +3,12 @@
 
 <form method="post">
     Start Date:
-    <input type="date" name="start" value="2019-01-01">
+    
+    <input type="date" name="start" value="<?php echo(gmdate("Y-m-d", $user['time'])) ?>">
     <br>
 
     End Date:
-    <input type="date" name="end">
+    <input type="date" name="end" value="<?php echo date('Y-m-d'); ?>">
     <br>
 
     Report Type:
@@ -43,8 +44,8 @@
                         <td>Time</td>
                         <td>Views</td>
                         <td>Clicks</td>
-                        <td>eCPM</td>
-                        <td>eCPC</td>
+                        <td>CPM</td>
+                        <td>CPC</td>
                         <td>Total Spent</td>
                     </tr>");
 
@@ -54,9 +55,9 @@
                 echo("<td>" . $val->Time . "</td>");
                 echo("<td>" . $val->Views . "</td>");
                 echo("<td>" . $val->Clicks . "</td>");
-                echo("<td>" . $val->eCPM . "</td>");
-                echo("<td>" . $val->eCPC . "</td>");
-                echo("<td>" . $val->total_spent . "</td>");
+                echo("<td>" . $val->eCPM . "$</td>");
+                echo("<td>" . $val->eCPC . "$</td>");
+                echo("<td>" . $val->total_spent . "$</td>");
                 echo("</tr>");
             }
 

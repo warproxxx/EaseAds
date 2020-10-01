@@ -1,6 +1,43 @@
 <div class="w3-container w3-center">
 
-Pending Sites:
+<h3>Approved Sites:</h3>
+<center>
+
+<?php
+if(!empty($approved_sites))
+{
+	echo("<table class='w3-table w3-striped sortable' border='1'>");
+	echo("<tr>
+			<th>Site URL</th>
+			<th>Total impressions</th>
+			<th>Total clicks</th>
+		 <tr/>	");
+
+		 
+foreach ($approved_sites as $item) {
+	if ($item['approved'] == 1)
+	{
+		echo("<tr>");
+		echo("<td>" . $item['website'] . "</td>");
+		echo("<td>" . $item['total_views'] . "</td>");
+		echo("<td>" . $item['total_clicks'] . "</td>");
+		echo("</tr>");
+	}
+	
+}
+echo("</table>");
+}
+else
+{
+
+	echo "No Approved sites available";
+}
+
+?>
+</center>
+
+
+<h3>Pending Sites:</h3>
 <center>
 
 <?php
@@ -26,45 +63,11 @@ echo("</table>");
 else
 {
 
-	echo "No Approved sites available";
+	echo "No Pending sites available<br/><br/>";
 }
 
 ?>
 
 
-Approved Sites:
-<center>
 
-<?php
-if(!empty($approved_sites))
-{
-	echo("<table class='w3-table w3-striped sortable' border='1'>");
-	echo("<tr>
-			<td>Site URL</td>
-			<td>Total impressions</td>
-			<td>Total clicks</td>
-		 <tr/>	");
-
-		 
-foreach ($approved_sites as $item) {
-	if ($item['approved'] == 1)
-	{
-		echo("<tr>");
-		echo("<th>" . $item['website'] . "</th>");
-		echo("<th>" . $item['total_views'] . "</th>");
-		echo("<th>" . $item['total_clicks'] . "</th>");
-		echo("</tr>");
-	}
-	
-}
-echo("</table>");
-}
-else
-{
-
-	echo "No Approved sites available";
-}
-
-?>
-</center>
 </div>

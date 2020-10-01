@@ -81,25 +81,56 @@ public function report()
       $report_details = array();
 
       
+      $total_views = 0;
+      $total_clicks = 0;
+      $avg_cpm = 0;
+      $avg_cpc = 0;
+      $total = 0;
 
       foreach ($period as $dt) 
       {
+        $dt->modify('+2 day');
         $view_details = $this->publisher_model->get_campaign_at_time_views($campaign, $dt->getTimestamp(),24);
-      $click_details = $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24);
-          $curr_array = array("Time" => $dt->format("Y-m-d"), 
+        $click_details = $this->publisher_model->get_campaign_at_time_clicks($campaign, $dt->getTimestamp(),24);
+          $curr_array = array("Time" => $dt->modify('-1 day')->format("Y-m-d"), 
                               "Views" => $view_details['total_views'],
                               "eCPM" => $view_details['eCPM'],
                               "Clicks" => $click_details['total_clicks'],
-                              "eCPC" => $click_details['total_clicks']
+                              "eCPC" => $click_details['eCPC']
                             );
           $report_details[] = $curr_array;
+
+          $total = $total + 1;
+          $total_views = $total_views + $view_details['total_views'];
+          $total_clicks = $total_clicks + $click_details['total_clicks'];
+          $avg_cpm = $avg_cpm + $view_details['eCPM'];
+          $avg_cpc = $avg_cpc + $click_details['eCPC'];
       }
+
+      if ($total == 0)
+      {
+        $total = 1;
+      }
+
+      $avg_cpm = $avg_cpm / $total;
+      $avg_cpc =$avg_cpc / $total;
+
+      $total_array = array("Time" => "Total", 
+                              "Views" => $total_views,
+                              "eCPM" => $avg_cpm,
+                              "Clicks" => $total_clicks,
+                              "eCPC" => $avg_cpc
+                            );
+
+      $report_details[] = $total_array;
+
       $json = json_decode(json_encode($report_details));
       $data['day_report'] = $json;
 
     }
     else
     {
+      $end_date->modify('+2 day');
       #also send campaign id. Check report sending value AND space_id = "'.$ref_id.'";'
       $start_date = $start_date->getTimestamp();
       $end_date = $end_date->getTimestamp();

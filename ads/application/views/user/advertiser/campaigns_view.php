@@ -71,12 +71,14 @@
       <th scope="col">Campaign Status</th>
       <th scope="col">Campaign Budget</th>
       <th scope="col">Total impressions</i></th>
+      <th scope="col">Views Spent</th>
+      <th scope="col">CPM</th>
       <th scope="col">Total clicks</th>
-      <th scope="col">eCPM</th>
-      <th scope="col">eCPC</th>
-      <th scope="col">Review campaign</th>
+      <th scope="col">Clicks Spent</th>
+      <th scope="col">CPC</th>
+      <th scope="col">Review</th>
 
-</tr>
+    </tr>
 </thead>
    
   <tbody>
@@ -91,10 +93,16 @@ echo("<tr>");
 echo("<td><a href='".site_url('advertiser_dashboard/view_details/'.$item['ref_id'])."'>" . $item['name'] . "</a></td>");
 echo("<td>" . $item['status'] . "</td>");
 echo("<td>" . $item['budget'] . "$</td>");
+
 echo("<td>" . $item['views'] . "</td>");
+echo("<td>" . $item['per_view'] * $item['views'] . "$</td>");
+echo("<td>" . $item['per_view'] * 1000 . "$</td>");
+
 echo("<td>" . $item['clicks'] . "</td>");
-echo("<td>" . $item['per_view'] * ($item['views']/100) . "$</td>");
-echo("<td>" . $item['per_click'] * ($item['clicks']/100) . "$</td>");
+echo("<td>" . $item['per_click'] * $item['clicks'] . "$</td>");
+echo("<td>" . $item['per_click'] . "$</td>");
+
+
 echo("<td><a href='".site_url('advertiser_dashboard/view_details/'.$item['ref_id'])."'>Click Here</a></td>");
 echo("</tr>");
 }

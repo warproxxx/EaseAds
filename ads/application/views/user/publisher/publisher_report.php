@@ -5,11 +5,11 @@
 
     <form method="post">
         Start Date:
-        <input type="date" name="start" value="2019-01-01">
+        <input type="date" name="start" value="<?php echo(gmdate("Y-m-d", $user['time'])) ?>">
         <br/>
 
         End Date:
-        <input type="date" name="end">
+        <input type="date" name="end" value="<?php echo date('Y-m-d'); ?>">
         <br/>
 
         Report Type:
@@ -120,7 +120,7 @@
     ?>
     </div>
 
-</center>
 
 
 <a download="report.xls" href="#" onclick="return ExcellentExport.excel(this, 'reporttable', 'Report');">Download Report</a>
+</center>
