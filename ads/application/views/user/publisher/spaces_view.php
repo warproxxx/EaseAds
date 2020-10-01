@@ -58,16 +58,18 @@
 <?php
 if(!empty($items))
 {
-	echo("<table border=1>");
+	echo("<table class='w3-table w3-striped sortable' border='1'>");
 	echo("<tr>
-			<td>Ad Space Name</td>
-			<td>Category</td>
-			<td>Space</td>
-			<td>Status</td>
-			<td>Total impressions</td>
-			<td>Total clicks</td>
-			<td>Total earnings</td>	
-			<td>Review Space</td>
+			<th>Ad Space Name</th>
+			<th>Category</th>
+			<th>Space</th>
+			<th>Status</th>
+			<th>Total impressions</th>
+			<th>Total clicks</th>
+      <th>Impressions earnings</th>	
+      <th>Clicks earnings</th>	
+      <th>Total earnings</th>	
+      <th>Review Space</th>
 		 <tr/>	");
 
 		 
@@ -78,10 +80,12 @@ foreach ($items as $item) {
 	echo("<td>" . $item['category'] . "</td>");
 	echo("<td>" . $item['type'] . "</td>");
 	echo("<td>" . $item['status'] . "</td>");
-	echo("<td>" . $item['views'] . "$</td>");
-	echo("<td>" . $item['clicks'] . "$</td>");
-	echo("<td>" . $item['gained'] . "$</td>");
-	echo("<td><a href='".site_url('publisher_dashboard/view_details/'.$item['ref_id'])."'>Click Here</a></td>");
+	echo("<td>" . $item['views'] . "</td>");
+	echo("<td>" . $item['clicks'] . "</td>");
+  echo("<td>" . $this->publisher_model->views_earning($item['ref_id']) . "$</td>");
+  echo("<td>" . $this->publisher_model->clicks_earning($item['ref_id']) . "$</td>");
+  echo("<td>" . $this->publisher_model->get_earning($item['ref_id']) . "$</td>");
+  echo("<td><a href='".site_url('publisher_dashboard/view_details/'.$item['ref_id'])."' style='color:blue'>Review</a></td>");
 	echo("</tr>");
 
 

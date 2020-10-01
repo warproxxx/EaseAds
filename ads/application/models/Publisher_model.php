@@ -260,11 +260,64 @@ public function spaces()
 
     $this->db->order_by("id","DESC");
 
-$query = $this->db->get_where("pub_story",array('user_id' => $_SESSION['id']));
-return $query->result_array();
+    $query = $this->db->get_where("pub_story",array('user_id' => $_SESSION['id']));
+    return $query->result_array();
 
 
 }
+
+public function views_earning($ref_id)
+{
+  $q =  "SELECT COUNT(v.id) as total_views, SUM(a.per_view) as earned_views
+  FROM views v
+  LEFT JOIN pub_story p
+  ON p.ref_id = v.space_id
+  LEFT JOIN adv_story a
+  ON a.ref_id = v.story_id
+  WHERE v.space_id= '".$ref_id."'";
+  $query = $this->db->query($q);
+
+  $res = $query->row_array();
+  return $res['earned_views'];
+}
+
+
+public function clicks_earning($ref_id)
+{
+  $q = "SELECT COUNT(c.id) as total_clicks, SUM(a.per_click) as earned_clicks
+  FROM clicks c
+  LEFT JOIN pub_story p
+  ON p.ref_id = c.space_id
+  LEFT JOIN adv_story a
+  ON a.ref_id = c.story_id
+  WHERE c.space_id= '".$ref_id."'";
+  $query = $this->db->query($q);
+
+  $res2 = $query->row_array();
+  return $res2['earned_clicks'];
+}
+
+
+public function get_earning($ref_id)
+{
+  $res = $this->views_earning($ref_id);
+  $res2 = $this->clicks_earning($ref_id);
+
+ return $res + $res2;
+}
+
+public function spaces_advanced()
+{
+  $q = "SELECT p.ref_id, p.name, p.category, p.type, p.status, p.views, p.clicks, p.gained 
+        FROM pub_story p";
+
+
+  $query = $this->db->query($q);
+  return $query->result_array();
+
+
+}
+
 
 public function count_advertisers_campaigns()
 {
