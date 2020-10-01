@@ -54,6 +54,15 @@ foreach ($categories as $category)
       <option value="popup">Popunder</option>
       <option value="banner">Banner Campaigns</option>      
 </select>
+<br><span class="w3-text-indigo">Ad Vertical</span><br>
+<select name="vertical" class="w3-padding w3-border w3-border-blue">
+    <option value="mainstream">Mainstream</option>
+    <option value="adult"">Adult</option>
+
+   <!-- <option value="720X90">720 X 90 (Banner Only)</option>
+    <option value="160X600">160 X 600 (Banner Only)</option>-->
+</select>
+
 <br>
 <div id="rec_div" style="display: none;" class="">
   <span class="w3-text-indigo w3-small w3-margin">Number Of Recommendation:</span><br>

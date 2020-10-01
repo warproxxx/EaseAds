@@ -568,7 +568,7 @@ public function sites_list()
       $data["noindex"] = $this->noindex;
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-      $data["approved_sites"] = $this->publisher_model->get_approved_sites();
+      $data["approved_sites"] = $this->publisher_model->get_approved_sites_only();
       $data["pending_sites"] = $this->publisher_model->get_pending_sites();
       
       

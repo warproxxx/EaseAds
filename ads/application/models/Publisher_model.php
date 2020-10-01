@@ -203,6 +203,7 @@ $datab = array(
 'tcategory' => json_encode($this->input->post("category")),
 'website' => $this->input->post("website_url"),
 'type' => $this->input->post("type"),
+'vertical' => $this->input->post("vertical"),
 'size' => $this->input->post("size"),
 'ref_id' => $ref_id,
 'user_id' => $_SESSION['id'],
@@ -317,10 +318,26 @@ public function get_full_sites()
     return $query->result_array();
 }
 
+public function get_approved_sites_only()
+{
+
+  $q = "SELECT website, approved
+  FROM publishers_websites
+  WHERE approved=1 AND website IS NOT NULL AND publisher_id= ".$_SESSION['id'];
+
+
+    $query = $this->db->query($q);
+    return $query->result_array();
+}
+
+
+
+
+
 public function get_approved_sites()
 {
 
-  $q = "SELECT SUM(ps.views) AS total_views, SUM(ps.clicks) AS total_clicks, pw.website, pw.approved
+  $q = "SELECT website, pw.approved
     FROM publishers_websites pw
     LEFT JOIN pub_story ps
     ON ps.website = pw.website

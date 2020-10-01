@@ -9,8 +9,6 @@ if(!empty($approved_sites))
 	echo("<table class='w3-table w3-striped sortable' border='1'>");
 	echo("<tr>
 			<th>Site URL</th>
-			<th>Total impressions</th>
-			<th>Total clicks</th>
 		 <tr/>	");
 
 		 
@@ -19,8 +17,6 @@ foreach ($approved_sites as $item) {
 	{
 		echo("<tr>");
 		echo("<td>" . $item['website'] . "</td>");
-		echo("<td>" . $item['total_views'] . "</td>");
-		echo("<td>" . $item['total_clicks'] . "</td>");
 		echo("</tr>");
 	}
 	
@@ -43,7 +39,7 @@ else
 <?php
 if(!empty($pending_sites))
 {
-	echo("<table class='w3-table w3-striped sortable'>");
+	echo("<table class='w3-table w3-striped sortable' border='1'>");
 	echo("<tr>
 			<th>Site URL</th>
 		 <tr/>	");

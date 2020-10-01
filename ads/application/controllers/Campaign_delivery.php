@@ -125,24 +125,27 @@ public function deliver_banner_js($space_id = NULL,$size_type)
               
               if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
               {
+                if ($resulted_campaign['vertical'] == $space['vertical'])
+                {
 
-                if ($resulted_campaign['billing'] == 'cpm')
-                {
-                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
-                }
-                else
-                {
-                  $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
-                }
+                    if ($resulted_campaign['billing'] == 'cpm')
+                    {
+                      $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                    }
+                    else
+                    {
+                      $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+                    }
 
-                if ($total_count <= $resulted_campaign['raw_traffic'])
-                {
-                  $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
-                  if ($spent_today < $resulted_campaign['daily_budget'])
-                  {
-                    $campaign_to_render = $resulted_campaign;
-                    break 4;
-                  }                
+                    if ($total_count <= $resulted_campaign['raw_traffic'])
+                    {
+                      $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                      if ($spent_today < $resulted_campaign['daily_budget'])
+                      {
+                        $campaign_to_render = $resulted_campaign;
+                        break 4;
+                      }                
+                    }
                 }
               }
             }
@@ -312,21 +315,25 @@ public function deliver_popup_js($space_id = NULL)
               if ((strtolower($client_os) == strtolower($target_platform)) and (strtolower($client_browser) == strtolower($target_browser)) and(strtolower($client_country) == strtolower($target_country)))
               {
 
-                  if ($resulted_campaign['billing'] == 'cpm')
+                  if ($resulted_campaign['vertical'] == $space['vertical'])
                   {
-                    $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                    if ($resulted_campaign['billing'] == 'cpm')
+                    {
+                      $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'views');
+                    }
+                    else
+                    {
+                      $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
+                    }
+  
+                    $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
+                    if ($spent_today < $resulted_campaign['daily_budget'])
+                    {
+                      $campaign_to_render = $resulted_campaign;
+                      break 3;
+                    }
                   }
-                  else
-                  {
-                    $total_count = $this->campaign_model->count_24_hr($resulted_campaign['ref_id'], $ip, 'clicks');
-                  }
-
-                  $spent_today = $this->advertiser_model->get_spent($resulted_campaign['ref_id'],strtotime(date("y-m-d")));
-                  if ($spent_today < $resulted_campaign['daily_budget'])
-                  {
-                    $campaign_to_render = $resulted_campaign;
-                    break 3;
-                  }
+                  
                   
               }
             }
