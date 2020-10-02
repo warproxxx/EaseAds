@@ -585,38 +585,7 @@ else
 
        
    </div>
-		
-<div  class="<?php
-if(empty($cpa_form_data))
-{
-	echo 'w3-hide';
-}
 
-	?>" id="cpa_div">
-  <span class="w3-label w3-small">Cost Per Action-CPA( ex:Total Amount  you want to pay per Action in  <?=$general_details['currency_code'] ?>)<sup><b class="w3-text-red w3-large">*</b></sup>:</span><br>
-<span class="w3-text-red">min: <?=$general_details['currency_code']." "?><?php
-//check if free if not use paid_action minimum
-if($cpa_form_data['access_type'] == 'free')
-{
-	echo $general_details['minimum_cpa'];
-}else{
-		echo $general_details['minimum_paid_cpa'];
-
-}
-        ?>  </span><br>
-
-       <input  class="w3-padding w3-border w3-border-indigo" type="number" step="0.001" min="<?php
-//check if free if not use paid_action minimum
-if($cpa_form_data['access_type'] == 'free')
-{
-	echo $general_details['minimum_cpa'];
-}else{
-		echo $general_details['minimum_paid_cpa'];
-
-}
-        ?>" placeholder="Cost Per Action" value="<?php echo set_value('cpa'); ?>" name="cpa"  /><br>
-   </div>
-		
 
 
 	<div class="w3-show" id="cpm_div">		

@@ -278,6 +278,9 @@ public function views_earning($ref_id)
   $query = $this->db->query($q);
 
   $res = $query->row_array();
+
+  if ($res['earned_views'] == '')
+    return 0;
   return $res['earned_views'];
 }
 
@@ -294,6 +297,10 @@ public function clicks_earning($ref_id)
   $query = $this->db->query($q);
 
   $res2 = $query->row_array();
+
+  if ($res2['earned_clicks'] == '')
+    return 0;
+
   return $res2['earned_clicks'];
 }
 

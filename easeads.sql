@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 10, 2020 at 01:40 PM
--- Server version: 5.7.30-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.6
+-- Generation Time: Oct 02, 2020 at 04:11 PM
+-- Server version: 8.0.21-0ubuntu0.20.04.4
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `custch`
+-- Database: `easeads`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin_earning` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `month` varchar(128) DEFAULT NULL,
   `year` varchar(10) DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
@@ -63,7 +65,7 @@ INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `wee
 --
 
 CREATE TABLE `advertisers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `firstname` varchar(128) DEFAULT NULL,
   `lastname` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
@@ -80,10 +82,17 @@ CREATE TABLE `advertisers` (
   `browser` varchar(128) DEFAULT NULL,
   `referral_id` varchar(128) DEFAULT NULL,
   `lastlog` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL,
+  `time` int DEFAULT NULL,
   `token` varchar(255) NOT NULL,
-  `email_verified` int(11) NOT NULL DEFAULT '0'
+  `email_verified` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `advertisers`
+--
+
+INSERT INTO `advertisers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_spent`, `platform`, `websites`, `account_status`, `browser`, `referral_id`, `lastlog`, `time`, `token`, `email_verified`) VALUES
+(20, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'Afghanistan', NULL, 'jdoe03744@gmail.com', NULL, 'warproxxx', '400.0000', '0.0000', NULL, '[\"http:\\/\\/127.0.0.1\"]', 'active', NULL, '', '1601634255', 1601632970, 'c3d83f068afd6d044dbf0ab2ca8499fd', 1);
 
 -- --------------------------------------------------------
 
@@ -92,18 +101,21 @@ CREATE TABLE `advertisers` (
 --
 
 CREATE TABLE `adv_story` (
-  `id` int(11) NOT NULL,
-  `time` int(100) DEFAULT NULL,
-  `user_id` int(100) DEFAULT NULL,
-  `clicks` int(50) DEFAULT NULL,
-  `expire_time` int(100) DEFAULT NULL,
-  `start_time` int(100) DEFAULT NULL,
+  `id` int NOT NULL,
+  `time` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `clicks` int DEFAULT NULL,
+  `cpc` decimal(19,4) DEFAULT NULL,
+  `expire_time` int DEFAULT NULL,
+  `start_time` int DEFAULT NULL,
   `per_click` decimal(19,4) DEFAULT NULL,
   `per_view` decimal(19,4) DEFAULT NULL,
+  `cpm` decimal(19,4) DEFAULT NULL,
   `per_action` decimal(19,4) DEFAULT NULL,
   `budget` decimal(19,4) DEFAULT NULL,
   `balance` decimal(19,4) DEFAULT NULL,
-  `views` int(100) DEFAULT NULL,
+  `daily_budget` decimal(19,4) DEFAULT NULL,
+  `views` int DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `dest_link` varchar(259) DEFAULT NULL,
   `type` varchar(59) DEFAULT NULL,
@@ -124,16 +136,25 @@ CREATE TABLE `adv_story` (
   `tbrowser` text,
   `tcountry` text,
   `targeting` text,
-  `category` varchar(128) DEFAULT NULL,
+  `category` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
+  `vertical` varchar(10) NOT NULL DEFAULT 'mainstream',
   `cr_level` varchar(12) DEFAULT NULL,
   `platform` varchar(128) DEFAULT NULL,
   `action_currency` varchar(128) DEFAULT NULL,
   `action_price` decimal(19,4) DEFAULT NULL,
   `action_type` varchar(128) DEFAULT NULL,
-  `is_default` int(11) NOT NULL DEFAULT '0',
+  `is_default` int NOT NULL DEFAULT '0',
   `billing` varchar(5) NOT NULL,
-  `raw_traffic` int(11) NOT NULL
+  `raw_traffic` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adv_story`
+--
+
+INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `cpc`, `expire_time`, `start_time`, `per_click`, `per_view`, `cpm`, `per_action`, `budget`, `balance`, `daily_budget`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `vertical`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`, `billing`, `raw_traffic`) VALUES
+(17, 1601633765, 20, 0, '0.0000', 0, 1601633765, '0.0000', '0.0005', '0.5000', NULL, '50.0000', '50.0000', '20.0000', 0, '-banner_test', 'https://old.reddit.com/user/warproxxx/', 'banner', '300X250', NULL, 'banner43.jpeg', NULL, '18cb6d98d1dafd319456', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2),
+(18, 1601634225, 20, 0, '0.0000', 0, 1601634225, '0.0000', '0.0020', '2.0000', NULL, '50.0000', '50.0000', '15.0000', 0, '-popunder_test', 'https://old.reddit.com/user/warproxxx/', 'popup', NULL, NULL, '', NULL, 'a2ffbae944bd61cacadd', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2);
 
 -- --------------------------------------------------------
 
@@ -142,10 +163,10 @@ CREATE TABLE `adv_story` (
 --
 
 CREATE TABLE `affilate_clicks` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `referral_id` varchar(128) DEFAULT NULL,
   `account_type` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL
+  `time` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -155,20 +176,13 @@ CREATE TABLE `affilate_clicks` (
 --
 
 CREATE TABLE `announcements` (
-  `id` int(11) NOT NULL,
-  `receiver` int(11) NOT NULL DEFAULT '0',
+  `id` int NOT NULL,
+  `receiver` int NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `title` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `posted_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `announcements`
---
-
-INSERT INTO `announcements` (`id`, `receiver`, `active`, `title`, `message`, `posted_date`) VALUES
-(1, 0, 1, 'Test Announcement', 'This is a test announcement', '2020-01-25');
 
 -- --------------------------------------------------------
 
@@ -177,13 +191,13 @@ INSERT INTO `announcements` (`id`, `receiver`, `active`, `title`, `message`, `po
 --
 
 CREATE TABLE `blog` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(128) NOT NULL,
   `slug` varchar(128) DEFAULT NULL,
   `author` varchar(128) DEFAULT NULL,
   `author_id` varchar(128) DEFAULT NULL,
-  `time` int(100) NOT NULL,
-  `time_edit` int(100) DEFAULT NULL,
+  `time` int NOT NULL,
+  `time_edit` int DEFAULT NULL,
   `keywords` varchar(225) DEFAULT NULL,
   `description` varchar(225) DEFAULT NULL,
   `img_url` varchar(225) DEFAULT NULL,
@@ -199,7 +213,7 @@ CREATE TABLE `blog` (
 --
 
 CREATE TABLE `categories` (
-  `id` int(5) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -212,7 +226,23 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (3, 'Blog'),
 (4, 'Adventure'),
 (5, 'Beauty'),
-(6, 'Investing');
+(6, 'Investing'),
+(7, 'Gambling'),
+(8, 'Careers'),
+(9, 'Food & Drink'),
+(10, 'Family & Parenting'),
+(11, 'Automotive'),
+(12, 'Crypto/Blog'),
+(13, 'Crypto/Forum'),
+(14, 'Make Money'),
+(15, 'Gambling/Blog'),
+(16, 'Gambling/Videos'),
+(17, 'Casino/forums'),
+(18, 'Ecommerce '),
+(20, 'Gambling / Bingo'),
+(21, 'Gambling / Bingo'),
+(22, 'Gambling / Casinos'),
+(23, 'Gambling /Gambling');
 
 -- --------------------------------------------------------
 
@@ -221,8 +251,8 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `clicks` (
-  `id` int(11) NOT NULL,
-  `time` int(100) DEFAULT NULL,
+  `id` int NOT NULL,
+  `time` int DEFAULT NULL,
   `story_pid` varchar(100) DEFAULT NULL,
   `space_id` varchar(100) DEFAULT NULL,
   `story_aid` varchar(100) DEFAULT NULL,
@@ -243,8 +273,8 @@ CREATE TABLE `clicks` (
 --
 
 CREATE TABLE `cmessages` (
-  `id` int(11) NOT NULL,
-  `phone` int(128) DEFAULT NULL,
+  `id` int NOT NULL,
+  `phone` int DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `title` varchar(128) NOT NULL,
@@ -261,7 +291,7 @@ CREATE TABLE `cmessages` (
 --
 
 CREATE TABLE `countries` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   `select_value` varchar(128) DEFAULT NULL,
   `language` varchar(128) DEFAULT NULL,
@@ -293,7 +323,7 @@ INSERT INTO `countries` (`id`, `name`, `select_value`, `language`, `currency_cod
 --
 
 CREATE TABLE `cpa_forms` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `advertisers_id` varchar(128) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `ref_id` varchar(128) DEFAULT NULL,
@@ -316,11 +346,11 @@ CREATE TABLE `cpa_forms` (
 --
 
 CREATE TABLE `history` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `user_id` varchar(128) DEFAULT NULL,
   `details` varchar(128) DEFAULT NULL,
   `action` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL,
+  `time` int DEFAULT NULL,
   `account_type` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -331,7 +361,7 @@ CREATE TABLE `history` (
 --
 
 CREATE TABLE `manual_payment` (
-  `id` int(10) NOT NULL,
+  `id` int NOT NULL,
   `payment_method` varchar(50) NOT NULL,
   `deposit_1_name` varchar(50) NOT NULL,
   `deposit_1_value` varchar(50) NOT NULL,
@@ -343,7 +373,7 @@ CREATE TABLE `manual_payment` (
   `deposit_4_value` varchar(50) NOT NULL,
   `deposit_5_name` varchar(50) NOT NULL,
   `deposit_5_value` varchar(50) NOT NULL,
-  `values_used` int(11) NOT NULL,
+  `values_used` int NOT NULL,
   `message` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -362,10 +392,10 @@ INSERT INTO `manual_payment` (`id`, `payment_method`, `deposit_1_name`, `deposit
 --
 
 CREATE TABLE `media` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   `time` varchar(128) DEFAULT NULL,
-  `ctime` int(11) DEFAULT NULL,
+  `ctime` int DEFAULT NULL,
   `link` varchar(128) DEFAULT NULL,
   `type` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -377,7 +407,7 @@ CREATE TABLE `media` (
 --
 
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `receiver_id` varchar(128) DEFAULT NULL,
   `receiver_type` varchar(128) DEFAULT NULL,
   `title` varchar(128) NOT NULL,
@@ -395,7 +425,7 @@ CREATE TABLE `messages` (
 --
 
 CREATE TABLE `newsletter` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `email` varchar(128) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `status` varchar(128) DEFAULT NULL
@@ -408,12 +438,20 @@ CREATE TABLE `newsletter` (
 --
 
 CREATE TABLE `notifications` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
   `user_type` varchar(10) NOT NULL,
   `notification` varchar(500) NOT NULL,
-  `is_read` int(1) NOT NULL DEFAULT '0'
+  `is_read` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `user_id`, `user_type`, `notification`, `is_read`) VALUES
+(2, 20, 'advertiser', 'Your website has been approved', 0),
+(3, 20, 'advertiser', 'Your website has been approved', 0);
 
 -- --------------------------------------------------------
 
@@ -422,7 +460,7 @@ CREATE TABLE `notifications` (
 --
 
 CREATE TABLE `pages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(128) NOT NULL,
   `slug` varchar(128) NOT NULL,
   `author` varchar(128) DEFAULT NULL,
@@ -434,6 +472,13 @@ CREATE TABLE `pages` (
   `text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `slug`, `author`, `time`, `type`, `keywords`, `description`, `status`, `text`) VALUES
+(1, 'Terms and Conditions', 'terms', 'admin', '', '', 'admin', 'EaseAds TOS', 'active', 'TOS');
+
 -- --------------------------------------------------------
 
 --
@@ -441,11 +486,11 @@ CREATE TABLE `pages` (
 --
 
 CREATE TABLE `payments` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `user_id` varchar(128) NOT NULL,
   `user_type` varchar(128) NOT NULL,
   `method` varchar(128) NOT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` int DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `amount` decimal(19,4) NOT NULL,
   `status` varchar(128) DEFAULT 'CONFIRMED',
@@ -460,6 +505,13 @@ CREATE TABLE `payments` (
   `message` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `user_id`, `user_type`, `method`, `phone`, `email`, `amount`, `status`, `particular`, `payment_type`, `time`, `time_of_completion`, `txn_id`, `payer_id`, `payment_token`, `ldetails`, `message`) VALUES
+(22, '20', 'advertisers', 'Manual', NULL, '', '500.0000', 'CONFIRMED', NULL, 'MANUAL', '1601633643', NULL, NULL, NULL, NULL, NULL, 'Take it bro');
+
 -- --------------------------------------------------------
 
 --
@@ -467,13 +519,13 @@ CREATE TABLE `payments` (
 --
 
 CREATE TABLE `payment_requests` (
-  `id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
-  `amount` int(10) NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `amount` int NOT NULL,
   `message` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
+  `status` int NOT NULL DEFAULT '0',
   `method` varchar(20) NOT NULL,
-  `time` int(10) NOT NULL
+  `time` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -483,11 +535,11 @@ CREATE TABLE `payment_requests` (
 --
 
 CREATE TABLE `projects` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `user_id` varchar(128) DEFAULT NULL,
   `category` varchar(128) DEFAULT NULL,
   `approval` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL,
+  `time` int DEFAULT NULL,
   `link` varchar(128) DEFAULT NULL,
   `type` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -499,7 +551,7 @@ CREATE TABLE `projects` (
 --
 
 CREATE TABLE `publishers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `firstname` varchar(128) DEFAULT NULL,
   `lastname` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
@@ -522,12 +574,19 @@ CREATE TABLE `publishers` (
   `bank_no` varchar(128) DEFAULT NULL,
   `payment_type` varchar(128) DEFAULT NULL,
   `referral_id` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL,
+  `time` int DEFAULT NULL,
   `other_name` text NOT NULL,
   `other_detail` text NOT NULL,
   `token` varchar(255) NOT NULL,
-  `email_verified` int(11) NOT NULL DEFAULT '0'
+  `email_verified` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `publishers`
+--
+
+INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`, `other_name`, `other_detail`, `token`, `email_verified`) VALUES
+(3, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'Afghanistan', NULL, 'danielsapkota13@gmail.com', NULL, 'da', '0.0000', '0.0000', '0.0000', NULL, 'active', '[\"http:\\/\\/127.0.0.1\"]', NULL, '1601634354', NULL, NULL, NULL, NULL, NULL, '', 1601634282, '', '', '55555473074276e7fec14d945ae95f32', 1);
 
 -- --------------------------------------------------------
 
@@ -536,11 +595,18 @@ CREATE TABLE `publishers` (
 --
 
 CREATE TABLE `publishers_websites` (
-  `id` int(10) NOT NULL,
-  `publisher_id` int(100) NOT NULL,
+  `id` int NOT NULL,
+  `publisher_id` int NOT NULL,
   `website` varchar(255) NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `publishers_websites`
+--
+
+INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
+(14, 3, 'http://127.0.0.1', 0);
 
 -- --------------------------------------------------------
 
@@ -549,11 +615,11 @@ CREATE TABLE `publishers_websites` (
 --
 
 CREATE TABLE `pub_story` (
-  `id` int(11) NOT NULL,
-  `time` int(100) DEFAULT NULL,
-  `user_id` int(100) NOT NULL,
-  `clicks` int(100) DEFAULT NULL,
-  `views` int(100) DEFAULT NULL,
+  `id` int NOT NULL,
+  `time` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `clicks` int DEFAULT NULL,
+  `views` int DEFAULT NULL,
   `status` varchar(128) DEFAULT NULL,
   `type` varchar(128) DEFAULT NULL,
   `size` varchar(128) DEFAULT NULL,
@@ -564,6 +630,7 @@ CREATE TABLE `pub_story` (
   `country` varchar(128) DEFAULT NULL,
   `div_id` varchar(22) DEFAULT NULL,
   `category` text,
+  `vertical` varchar(10) NOT NULL DEFAULT 'mainstream',
   `platform` varchar(128) DEFAULT NULL,
   `code` text,
   `os` varchar(128) DEFAULT NULL,
@@ -577,7 +644,7 @@ CREATE TABLE `pub_story` (
 --
 
 CREATE TABLE `system_var` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `variable_name` varchar(128) DEFAULT NULL,
   `variable_value` varchar(128) DEFAULT NULL,
   `long_value` text
@@ -601,7 +668,7 @@ INSERT INTO `system_var` (`id`, `variable_name`, `variable_value`, `long_value`)
 --
 
 CREATE TABLE `team` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `firstname` varchar(128) DEFAULT NULL,
   `lastname` varchar(128) DEFAULT NULL,
   `username` varchar(128) DEFAULT NULL,
@@ -625,8 +692,8 @@ INSERT INTO `team` (`id`, `firstname`, `lastname`, `username`, `perm`, `email`, 
 --
 
 CREATE TABLE `views` (
-  `id` int(11) NOT NULL,
-  `time` int(100) DEFAULT NULL,
+  `id` int NOT NULL,
+  `time` int DEFAULT NULL,
   `story_pid` varchar(100) DEFAULT NULL,
   `space_id` varchar(100) DEFAULT NULL,
   `story_aid` varchar(100) DEFAULT NULL,
@@ -646,16 +713,16 @@ CREATE TABLE `views` (
 --
 
 CREATE TABLE `withdrawal` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `user_id` varchar(128) NOT NULL,
   `ref` varchar(128) NOT NULL,
   `method` varchar(128) NOT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` int DEFAULT NULL,
   `amount` decimal(19,4) NOT NULL,
   `status` varchar(128) DEFAULT NULL,
   `approval` varchar(128) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `time` int(100) DEFAULT NULL,
+  `time` int DEFAULT NULL,
   `details` text,
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -840,142 +907,171 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT for table `advertisers`
 --
 ALTER TABLE `advertisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT for table `adv_story`
 --
 ALTER TABLE `adv_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `affilate_clicks`
 --
 ALTER TABLE `affilate_clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
 --
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `cmessages`
 --
 ALTER TABLE `cmessages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `cpa_forms`
 --
 ALTER TABLE `cpa_forms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `manual_payment`
 --
 ALTER TABLE `manual_payment`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
 ALTER TABLE `payment_requests`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `publishers_websites`
 --
 ALTER TABLE `publishers_websites`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `system_var`
 --
 ALTER TABLE `system_var`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
 --
 -- AUTO_INCREMENT for table `withdrawal`
 --
 ALTER TABLE `withdrawal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -65,7 +65,7 @@ $data['num_of_campaigns_24'] = count($this->user_model->count_campaigns_at_time(
 $data['num_of_campaigns_7d'] = count($this->user_model->count_campaigns_at_time(86400*7));
 $data['num_of_campaigns_30d'] = count($this->user_model->count_campaigns_at_time(2592000));
 //exchange rate naira
-$data['naira_rate'] = $this->publisher_model->get_naira_xrate();
+// $data['naira_rate'] = $this->publisher_model->get_naira_xrate();
 //other block here
 $data['num_of_views_24'] = count($this->admin_model->count_views_at_time(86400));
 $data['num_of_views_7d'] = count($this->admin_model->count_views_at_time(86400 *7));
