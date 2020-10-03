@@ -425,6 +425,32 @@ public function announcements($table_type = NULL,$id = NULL)
 
 }
 
+public function edit_announcement($id)
+{
+
+  $title = $this->input->post("title");
+  $body = $this->input->post("body");
+
+  if ($title != "")
+  {
+        $array = array("title"=> $title, "message"=>$body);
+        $this->admin_model->edit_announcement($array, $id);
+  }
+
+  $data['title'] =$this->siteName." | Edit Announcement";
+  $data['description'] ="Admin Dashboard";
+  $data['announcement'] = $this->admin_model->get_announcement($id);
+
+  $this->load->view('/admin/header_view',$data);
+
+  $this->load->view('admin/sidebar_view',$data);
+
+  $this->load->view('admin/edit_announcement',$data);
+  $this->load->view('admin/footer_view');
+
+
+
+}
 
 public function categories($table_type = NULL,$id = NULL)
 {

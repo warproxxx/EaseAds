@@ -26,6 +26,7 @@
 	<td>Title</td>
 	<td>Announcement</td>
 	<td>Change Status</td>
+	<td>Edit</td>
 </tr>
 <?php
 	if (!empty($announcements))
@@ -41,6 +42,8 @@
 				echo '<a href='. site_url('admin/announcements/inactive/'.$announcement['id']) .' class="w3-btn w3-red">Make Inactive</a>';
 			else
 				echo '<a href='. site_url('admin/announcements/active/'.$announcement['id']) .' class="w3-btn w3-green">Make Active</a>';
+
+			echo '<td><a href='. site_url('admin/edit_announcement/'.$announcement['id']) .' class="w3-btn w3-green">Edit</a></td>';
 			echo "</td>";
 			echo "</tr>";
 		}

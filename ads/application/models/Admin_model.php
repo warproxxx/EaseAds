@@ -510,6 +510,11 @@ $this->db->insert('history',$dab);
 
 }
 
+public function edit_announcement($dab ,$id)
+{
+
+$this->db->update('announcements',$dab,array('id' => $id));
+}
 
 public function edit_withdrawal_single($dab ,$id)
 {
@@ -580,6 +585,13 @@ public function get_announcements()
 
   $query = $this->db->get('announcements');
   return $query->result_array();
+}
+
+public function get_announcement($id)
+{
+
+  $query = $this->db->get_where('announcements',array("id" => $id));
+  return $query->row_array();
 }
 
 public function get_admins()
