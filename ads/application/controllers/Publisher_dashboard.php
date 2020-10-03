@@ -630,7 +630,15 @@ $data['country_click_details'] = $this->publisher_model->country_click_by_pub_id
       $data["noindex"] = $this->noindex;
       $data['user'] = $this->publisher_model->get_publisher_by_id();
       $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
-      $data["code"] = $this->publisher_model->get_space($ref_id)['code'];
+
+  
+      $code = $this->publisher_model->get_space($ref_id);
+
+      if(!empty($code))
+      {
+        $data['code'] = $code['code'];
+      }
+
       $data['sites'] = $this->publisher_model->get_publisher_sites();
       $data['categories'] = $this->user_model->get_categories();
       

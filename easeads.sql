@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 02, 2020 at 04:11 PM
+-- Generation Time: Oct 03, 2020 at 11:46 AM
 -- Server version: 8.0.21-0ubuntu0.20.04.4
 -- PHP Version: 7.4.3
 
@@ -56,7 +56,11 @@ INSERT INTO `admin_earning` (`id`, `month`, `year`, `type`, `earning_type`, `wee
 (10, 'June', '2020', 'text', 'view', 'Monday', '0.0006', '1591589176'),
 (11, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591589178'),
 (12, 'June', '2020', 'text', 'view', 'Monday', '0.0009', '1591598785'),
-(13, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591598820');
+(13, 'June', '2020', 'popup', 'click', 'Monday', '0.0000', '1591598820'),
+(14, 'October', '2020', 'banner', 'view', 'Saturday', '0.0002', '1601704405'),
+(15, 'October', '2020', 'text', 'view', 'Saturday', '0.0006', '1601704411'),
+(16, 'October', '2020', 'popup', 'click', 'Saturday', '0.0000', '1601704413'),
+(17, 'October', '2020', 'banner', 'click', 'Saturday', '0.0000', '1601704416');
 
 -- --------------------------------------------------------
 
@@ -153,8 +157,8 @@ CREATE TABLE `adv_story` (
 --
 
 INSERT INTO `adv_story` (`id`, `time`, `user_id`, `clicks`, `cpc`, `expire_time`, `start_time`, `per_click`, `per_view`, `cpm`, `per_action`, `budget`, `balance`, `daily_budget`, `views`, `name`, `dest_link`, `type`, `size`, `disp_link`, `img_link`, `keywords`, `ref_id`, `cpa_id`, `text_title`, `text_content`, `spent`, `approval`, `edit_status`, `status`, `tplatform`, `tcategory`, `tbrowser`, `tcountry`, `targeting`, `category`, `vertical`, `cr_level`, `platform`, `action_currency`, `action_price`, `action_type`, `is_default`, `billing`, `raw_traffic`) VALUES
-(17, 1601633765, 20, 0, '0.0000', 0, 1601633765, '0.0000', '0.0005', '0.5000', NULL, '50.0000', '50.0000', '20.0000', 0, '-banner_test', 'https://old.reddit.com/user/warproxxx/', 'banner', '300X250', NULL, 'banner43.jpeg', NULL, '18cb6d98d1dafd319456', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2),
-(18, 1601634225, 20, 0, '0.0000', 0, 1601634225, '0.0000', '0.0020', '2.0000', NULL, '50.0000', '50.0000', '15.0000', 0, '-popunder_test', 'https://old.reddit.com/user/warproxxx/', 'popup', NULL, NULL, '', NULL, 'a2ffbae944bd61cacadd', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2);
+(17, 1601633765, 20, 1, '0.0000', 0, 1601633765, '0.0000', '0.0005', '0.5000', NULL, '50.0000', '49.9995', '20.0000', 1, '-banner_test', 'https://old.reddit.com/user/warproxxx/', 'banner', '300X250', NULL, 'banner43.jpeg', NULL, '18cb6d98d1dafd319456', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2),
+(18, 1601634225, 20, 1, '0.0000', 0, 1601634225, '0.0000', '0.0020', '2.0000', NULL, '50.0000', '49.9980', '15.0000', 1, '-popunder_test', 'https://old.reddit.com/user/warproxxx/', 'popup', NULL, NULL, '', NULL, 'a2ffbae944bd61cacadd', NULL, NULL, NULL, '0.00', 'true', 'complete', 'active', NULL, NULL, NULL, NULL, 'true', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', '3', NULL, NULL, NULL, NULL, 0, 'cpm', 2);
 
 -- --------------------------------------------------------
 
@@ -265,6 +269,14 @@ CREATE TABLE `clicks` (
   `is_mobile` varchar(128) DEFAULT NULL,
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clicks`
+--
+
+INSERT INTO `clicks` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `os`, `is_mobile`, `country`) VALUES
+(8, 1601704413, '3', '13c81d09b430b8962b02d7f3', '20', 'a2ffbae944bd61cacadd', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL),
+(9, 1601704416, '3', 'd4c1fa87df8fbfb3b87de3b6', '20', '18cb6d98d1dafd319456', '127.0.0.1', NULL, 'Linux', 'Firefox', NULL, '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -451,7 +463,8 @@ CREATE TABLE `notifications` (
 
 INSERT INTO `notifications` (`id`, `user_id`, `user_type`, `notification`, `is_read`) VALUES
 (2, 20, 'advertiser', 'Your website has been approved', 0),
-(3, 20, 'advertiser', 'Your website has been approved', 0);
+(3, 20, 'advertiser', 'Your website has been approved', 0),
+(4, 3, 'publisher', 'Your website has been approved', 0);
 
 -- --------------------------------------------------------
 
@@ -586,7 +599,7 @@ CREATE TABLE `publishers` (
 --
 
 INSERT INTO `publishers` (`id`, `firstname`, `lastname`, `password`, `country`, `state`, `email`, `email_vc`, `phone`, `account_bal`, `total_earned`, `pending_bal`, `platform`, `account_status`, `websites`, `browser`, `lastlog`, `bank_name`, `bank_acct`, `bank_det`, `bank_no`, `payment_type`, `referral_id`, `time`, `other_name`, `other_detail`, `token`, `email_verified`) VALUES
-(3, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'Afghanistan', NULL, 'danielsapkota13@gmail.com', NULL, 'da', '0.0000', '0.0000', '0.0000', NULL, 'active', '[\"http:\\/\\/127.0.0.1\"]', NULL, '1601634354', NULL, NULL, NULL, NULL, NULL, '', 1601634282, '', '', '55555473074276e7fec14d945ae95f32', 1);
+(3, 'Daniel', 'Sapkota', 'e20a922006822f58699cbe1e181be9be', 'Afghanistan', NULL, 'danielsapkota13@gmail.com', NULL, 'da', '0.0018', '0.0000', '0.0000', NULL, 'active', '[\"http:\\/\\/127.0.0.1\"]', NULL, '1601701151', NULL, NULL, NULL, NULL, NULL, '', 1601634282, '', '', '55555473074276e7fec14d945ae95f32', 1);
 
 -- --------------------------------------------------------
 
@@ -606,7 +619,7 @@ CREATE TABLE `publishers_websites` (
 --
 
 INSERT INTO `publishers_websites` (`id`, `publisher_id`, `website`, `approved`) VALUES
-(14, 3, 'http://127.0.0.1', 0);
+(14, 3, 'http://127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -630,12 +643,22 @@ CREATE TABLE `pub_story` (
   `country` varchar(128) DEFAULT NULL,
   `div_id` varchar(22) DEFAULT NULL,
   `category` text,
+  `tcategory` text,
   `vertical` varchar(10) NOT NULL DEFAULT 'mainstream',
   `platform` varchar(128) DEFAULT NULL,
   `code` text,
   `os` varchar(128) DEFAULT NULL,
   `browser` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pub_story`
+--
+
+INSERT INTO `pub_story` (`id`, `time`, `user_id`, `clicks`, `views`, `status`, `type`, `size`, `ref_id`, `website`, `name`, `gained`, `country`, `div_id`, `category`, `tcategory`, `vertical`, `platform`, `code`, `os`, `browser`) VALUES
+(12, 1601701167, 3, 1, 1, 'active', 'banner', '300X250', 'd4c1fa87df8fbfb3b87de3b6', 'http://127.0.0.1', 'Banner', NULL, NULL, 'ca4', '[\"Business\",\"Blog\",\"Adventure\"]', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', NULL, '<script src=\"http://easeads.local/campaign_delivery/deliver_banner_js/d4c1fa87df8fbfb3b87de3b6/box\"></script>\n<center><div  class=\"w3-margin\"  id=\"ca4\">\n</div></center>', NULL, NULL),
+(13, 1601701183, 3, 1, 1, 'active', 'popup', '300X250', '13c81d09b430b8962b02d7f3', 'http://127.0.0.1', 'popunder', NULL, NULL, 'aB10', '[\"Business\",\"Blog\",\"Adventure\"]', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', NULL, '<script src=\"http://easeads.local/campaign_delivery/deliver_popup_js/13c81d09b430b8962b02d7f3\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"aB10\">\n</div>', NULL, NULL),
+(14, 1601704317, 3, 0, 0, 'active', 'popup', '300X250', '8525e6f5ef240a6413e5deea', 'http://127.0.0.1', 'another_test', NULL, NULL, 'aE0', '[\"Business\",\"Blog\",\"Adventure\"]', '[\"Business\",\"Blog\",\"Adventure\"]', 'mainstream', NULL, '<script src=\"http://easeads.local/campaign_delivery/deliver_popup_js/8525e6f5ef240a6413e5deea\"></script>\n<div  class=\"w3-margin\"  style=\"\" id=\"aE0\">\n</div>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -705,6 +728,14 @@ CREATE TABLE `views` (
   `is_mobile` varchar(128) DEFAULT NULL,
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `views`
+--
+
+INSERT INTO `views` (`id`, `time`, `story_pid`, `space_id`, `story_aid`, `story_id`, `ip`, `status`, `platform`, `browser`, `is_mobile`, `country`) VALUES
+(50, 1601704405, '3', 'd4c1fa87df8fbfb3b87de3b6', '20', '18cb6d98d1dafd319456', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL),
+(51, 1601704411, '3', '13c81d09b430b8962b02d7f3', '20', 'a2ffbae944bd61cacadd', '127.0.0.1', NULL, 'Linux', 'Firefox', '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -907,7 +938,7 @@ ALTER TABLE `withdrawal`
 -- AUTO_INCREMENT for table `admin_earning`
 --
 ALTER TABLE `admin_earning`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `advertisers`
@@ -949,7 +980,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cmessages`
@@ -1003,7 +1034,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1045,7 +1076,7 @@ ALTER TABLE `publishers_websites`
 -- AUTO_INCREMENT for table `pub_story`
 --
 ALTER TABLE `pub_story`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `system_var`
@@ -1063,7 +1094,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `withdrawal`
