@@ -36,6 +36,12 @@ public function get_publishers()
   return $query->result_array();
 }
 
+public function delete_story($ref_id)
+{
+	$this->db->where('ref_id', $ref_id);
+	$this->db->delete('pub_story');
+}
+
 public function get_withdrawals($id)
 {
 $query= $this->db->get_where('withdrawal',array('user_id' => $id));
@@ -266,6 +272,11 @@ public function spaces()
 
 }
 
+public function update_story($ref_id,$new_details)
+{
+	$this->db->update("pub_story", $new_details, array("ref_id" => $ref_id));
+}
+
 public function views_earning($ref_id)
 {
   $q =  "SELECT COUNT(v.id) as total_views, SUM(a.per_view) as earned_views
@@ -346,6 +357,12 @@ return $query->row_array();
 
 
 }
+
+public function edit_space($data_array,$ref_id)
+{
+$this->db->update('pub_story',$data_array,array("ref_id" => $ref_id));
+}
+
 
 public function count_publishers_spaces()
 {

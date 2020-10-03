@@ -462,7 +462,7 @@ public function view_details($ref_id)
 
       
 
-
+$data['campaign_item'] = $this->publisher_model->get_space_by_id($ref_id);
 $data['user'] = $this->publisher_model->get_publisher_by_id();
 $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
 $data['item'] = $this->publisher_model->get_space_by_id($ref_id);
@@ -496,6 +496,79 @@ $data['country_click_details'] = $this->publisher_model->country_click_by_pub_sp
 
 
 }
+
+public function campaign_action($action,$ref_id)
+{
+  $campaign = $this->publisher_model->get_space_by_id($ref_id);
+  if($action == "stop")
+  {
+    $this->publisher_model->edit_space(array('status' => "inactive"),$ref_id);
+
+    $_SESSION['action_status_report'] ="<span class='w3-text-green'>Space STOPPED successfully</span>";
+    $this->session->mark_as_flash("action_status_report");
+    show_page('publisher_dashboard/view_details/'.$ref_id);
+
+  }
+  elseif($action == "start")
+  {
+    $this->publisher_model->edit_space(array('status' => "active"),$ref_id);
+      $_SESSION['action_status_report'] ="<span class='w3-text-green'>Campaign ".$action." successfully</span>";
+      $this->session->mark_as_flash("action_status_report");
+      show_page('publisher_dashboard/view_details/'.$ref_id);
+
+  }
+  elseif ($action == "delete")
+  {
+    $this->publisher_model->delete_story($ref_id);
+    redirect('publisher_dashboard/spaces/');
+  }
+
+}
+
+public function edit($ref_id)
+{
+     $data['title'] = $this->siteName." | Edit Space";
+     $data['author'] =  $this->author;
+     $data['keywords'] =  $this->keywords;
+     $data['description'] =  $this->description;
+     $data["noindex"] =  $this->noindex;
+
+     $data['categories'] = $this->user_model->get_categories();
+     $data['detail'] = $this->publisher_model->get_space_by_id($ref_id);
+     $data['general_details'] = $this->advertiser_model->get_general_details();
+     $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+
+
+     
+
+     
+     if($this->input->post('campaign_name'))
+     { 
+       
+
+       $new_details = array("name" => $this->input->post('campaign_name'),
+                             "category" => json_encode($this->input->post("category")),
+                             "tcategory" => json_encode($this->input->post("category")),
+                            );
+       
+
+
+       $this->publisher_model->update_story($ref_id,$new_details);
+       show_page("publisher_dashboard/view_details/".$ref_id);
+
+     }
+
+     $this->load->view('/common/publisher_header_view',$data);
+       $this->load->view('/common/publisher_top_tiles',$data);
+     $this->load->view('/user/publisher/edit_view',$data);
+     $this->load->view('/common/users_footer_view',$data);
+
+
+
+
+}
+
+
 public function affilate()
 {
 

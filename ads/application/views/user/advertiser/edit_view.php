@@ -15,21 +15,30 @@ Campaign Name:
 Destination Link:
 <input type="text" name="dest_link" class="w3-padding w3-border w3-border-blue w3-round w3-margin" placeholder="Link" value="<?= $detail['dest_link'] ?>" required/>
 <br/>
+<center>
 Category:
-<select type="dropdown" name="category" class="w3-padding w3-border w3-border-blue w3-round" id="category">
 <?php
+
+$curr_categories = (json_decode($detail['category']));
+
+ echo '<div class="w3-card w3-border w3-border-indigo w3-center" style="max-width: 300px;height:250px;	 overflow: scroll;">  <span class="">';
+ echo '<span class="">';
 foreach ($categories as $category)
 {
+	if( in_array($category['name'] ,$curr_categories ))
+	{
+		echo '<input type="checkbox" class="w3-check" value="'.$category['name'].'" name="category[]" checked><span class="w3-text-grey">'.$category['name'].'</span> </span><br/>';
+	}
+	else
+	{
+		echo '<input type="checkbox" class="w3-check" value="'.$category['name'].'" name="category[]"><span class="w3-text-grey">'.$category['name'].'</span> </span><br/>';
+	}
 
-  if ($category['name'] == $detail['category'])
-    echo '<option value="'.$category['name'].'" selected>'.$category['name'].'</option>';
- else
-      echo '<option value="'.$category['name'].'">'.$category['name'].'</option>';
+ 
 }
 ?>
-
-</select>
-
+</center>
+</div>
 <?php
 if ($detail['type'] == 'banner')
 {

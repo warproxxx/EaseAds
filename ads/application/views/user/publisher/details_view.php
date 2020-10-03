@@ -127,6 +127,33 @@
 </div>
 
 
+<div class="w3-container">
+
+
+	<?php
+if($campaign_item['status'] == "active")
+{
+echo "<a  class='w3-button w3-red w3-margin' href='".site_url('publisher_dashboard/campaign_action/stop/'.$this->uri->segment(3))."'>Stop</a>";
+
+
+}elseif($campaign_item['status'] == "pending")
+{
+  echo "<a  class='w3-button w3-grey w3-margin' href=''>Pending</a>";
+  
+
+
+}elseif($campaign_item['status'] == "inactive")
+{
+	echo "<a  class='w3-button w3-green w3-margin' href='".site_url('publisher_dashboard/campaign_action/start/'.$this->uri->segment(3))."'>Start</a>";
+
+}
+
+echo "<a  class='w3-button w3-red w3-margin' href='".site_url('publisher_dashboard/campaign_action/delete/'.$this->uri->segment(3))."'>Delete</a>";
+echo "<a  class='w3-button w3-red w3-margin' href='".site_url('publisher_dashboard/edit/'.$this->uri->segment(3))."'>Edit</a>";
+
+?>
+
+</div>
 
 <div class="w3-container">
 	<div class="w3-twothird">

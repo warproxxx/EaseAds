@@ -695,7 +695,8 @@ show_page("advertiser_dashboard/campaign_target/".$ref_id);
 
         $new_details = array("name" => $this->input->post('campaign_name'),
                              "dest_link" => $this->input->post('dest_link'),
-                             "category" => $this->input->post('category'),
+                             "category" => json_encode($this->input->post("category")),
+                             "tcategory" => json_encode($this->input->post("category")),
                              "tbrowser" => json_encode($this->input->post("browser")),
                              "tplatform" => json_encode($this->input->post("tplatform")),
                              "tcountry" => json_encode($this->input->post("tcountry")),

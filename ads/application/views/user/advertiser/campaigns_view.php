@@ -103,7 +103,7 @@ echo("<td>" . $item['per_click'] * $item['clicks'] . "$</td>");
 echo("<td>" . $item['per_click'] . "$</td>");
 
 
-echo("<td><a href='".site_url('advertiser_dashboard/view_details/'.$item['ref_id'])."'>Click Here</a></td>");
+echo("<td><a href='".site_url('advertiser_dashboard/view_details/'.$item['ref_id'])."' style='color:blue;'>Click Here</a></td>");
 echo("</tr>");
 }
 echo("</table>");
