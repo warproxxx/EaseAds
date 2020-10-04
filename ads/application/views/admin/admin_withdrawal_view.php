@@ -40,7 +40,14 @@ else if ($withdraw['payment_type'] == "paypal")
 {
 	echo "<div class='w3-small w3-serif'> Payment Type:".$withdraw['payment_type'];
 	echo "<br>";
-	echo "Email:".$withdraw['payment_type'];
+	echo "Email:".$withdraw['bank_acct'];
+	echo "<br>";
+}
+else
+{
+	echo "<div class='w3-small w3-serif'> Payment Type:".$withdraw['other_name'];
+	echo "<br>";
+	echo "Details:".$withdraw['other_detail'];
 	echo "<br>";
 }
 

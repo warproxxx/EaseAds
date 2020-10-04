@@ -456,14 +456,14 @@ echo 'readonly';
 <br/>
 <div class="w3-half">
 		<span class="w3-label w3-small">Budget ($)<sup><b class="w3-text-red w3-large">*</b></sup>:<br>
-		This is the total budget for campaign. Minimum budget to start a campaign is $10</span><br/>
+		This is the total budget for campaign. Minimum budget to start a campaign is $<?=$general_details['minimum_budget'] ?></span><br/>
 
         <input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_budget'] ?>' placeholder="Budget" value="<?php echo set_value('budget'); ?>" name="budget"  required><br><br>
 
         <span class="w3-label w3-small">Daily Budget ($)<sup><b class="w3-text-red w3-large">*</b></sup>:<br>
-        (This is the daily spending limit you want on the campaign) (minimum is $10) </span><br/>
+        (This is the daily spending limit you want on the campaign) (minimum is $<?=$general_details['minimum_daily'] ?>) </span><br/>
 
-        <input class="w3-padding w3-border w3-border-indigo" type="number" min='10' placeholder="Daily Budget" value="<?php echo set_value('daily_budget'); ?>" name="daily_budget"  required><br><br>
+        <input class="w3-padding w3-border w3-border-indigo" type="number" min='<?=$general_details['minimum_daily'] ?>' placeholder="Daily Budget" value="<?php echo set_value('daily_budget'); ?>" name="daily_budget"  required><br><br>
 
 
         <span class="w3-label w3-small">Starting Date:</span><br>

@@ -13,5 +13,9 @@
 	<br/><br/>
 	Minimum Campaign Budget: <input type="number" name="minimum_budget" step="0.001" value="<?=$minimum_budget?>">
 	<br/><br/>
+	Minimum Withdrawl: <input type="number" name="minimum_payout" step="0.001" value="<?=$minimum_payout ?>">
+	<br/><br/>
+	Minimum Daily Budget: <input type="number" name="minimum_daily" step="0.001" value="<?=$minimum_daily?>">
+	<br/><br/>
 	<input type="submit" name="submit" value="Update Minimum">
 </form>

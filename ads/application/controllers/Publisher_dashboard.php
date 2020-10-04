@@ -342,29 +342,17 @@ $data['manual_payments'] = $this->advertiser_model->get_manual_payments();
 }
 
 
-
-
-
-
-  public function req_withdrawal()
-  {
-//later check here for new guidelines also
+public function withdrawl_process()
+{
+  //later check here for new guidelines also
 $data['user'] = $this->publisher_model->get_publisher_by_id();
-    //check if account details is set
-    if (empty($data['user']['bank_acct']))
-    {
-//redirect
-      show_page('publisher_dashboard/payment');
-    }
-
-
 $data['general_details'] = $this->advertiser_model->get_general_details();
-
+$withdraw_amt = $this->input->post('withdraw_amount');
 
 //check if balance is ok
-   
-    if($data['user']['account_bal'] >= $data['general_details']['minimum_payout'])
-    {
+
+if(($data['user']['account_bal'] >= $withdraw_amt) && ($withdraw_amt > $data['general_details']['minimum_payout']))
+{
 
 //check if there is previous pending balance
 if($data['user']['pending_bal'] > 0)
@@ -372,73 +360,104 @@ if($data['user']['pending_bal'] > 0)
 
 //please there is already pending balance
 
-       $_SESSION['err_msg'] = "<script>alert('Please there is already a pending balance');</script>";
-        $this->session->mark_as_flash('err_msg');
-        show_page("publisher_dashboard");
+   $_SESSION['err_msg'] = "<script>alert('Please there is already a pending balance');</script>";
+    $this->session->mark_as_flash('err_msg');
+    show_page("publisher_dashboard");
 
 
 }
 else{
-    //insert  balance to pending
+//insert  balance to pending
 $ref = ((time()-456788)*9);
 
 
-$new_pending = $data['user']['account_bal'] +
+$new_pending = $withdraw_amt +
 $data['user']['pending_bal'];
-      $w_dat =  array('pending_bal' => $new_pending );
+  $w_dat =  array('pending_bal' => $new_pending );
 
 
-      $this->user_model->edit_user_details($w_dat,$data['user']['id'],'publishers');
-      //insert to wildrawal
+  $this->user_model->edit_user_details($w_dat,$data['user']['id'],'publishers');
+  //insert to wildrawal
 
 $w_dat =  array(
-        'amount' => $data['user']['account_bal'],
+    'amount' => $withdraw_amt,
+    'user_id' => $_SESSION['id'],
+    'approval' => "pending",
+    'status' => "pending",
+    'email' => $data['user']['email'],
+    'phone' => $data['user']['phone'],
+    'ref'  => $ref,
+    'payment_type' => $this->input->post('payment_type'),
+    'time' => time()
+     );
+
+  $this->user_model->insert_to_with_req($w_dat);
+ 
+  //insert to history
+  $details = "You make a withdrawal Request of 
+  ".$withdraw_amt." with reference ".$ref;
+        $h_dat =  array(
+        'details' => $details,
+        'action' => 'w_request' ,
         'user_id' => $_SESSION['id'],
-        'approval' => "pending",
-        'status' => "pending",
-        'email' => $data['user']['email'],
-        'phone' => $data['user']['phone'],
-        'ref'  => $ref,
+        'account_type' => "publisher",
         'time' => time()
-         );
-
-      $this->user_model->insert_to_with_req($w_dat);
-     
-      //insert to history
-      $details = "You make a withdrawal Request of 
-      ".$data['user']['account_bal']." with reference ".$ref;
-            $h_dat =  array(
-            'details' => $details,
-            'action' => 'w_request' ,
-            'user_id' => $_SESSION['id'],
-            'account_type' => "publisher",
-            'time' => time()
-            );
+        );
 
 
-      $this->user_model->insert_to_history($h_dat);
-     //send email here
-      
-      //insert 00.00 to account bal
+  $this->user_model->insert_to_history($h_dat);
+ //send email here
+  
+  //insert 00.00 to account bal
 
 
-      $w_dat =  array('account_bal' => 0.00 );
+  $w_dat =  array('account_bal' =>  $data['user']['account_bal']-$withdraw_amt);
 
-      $this->user_model->edit_user_details($w_dat,$data['user']['id'],'publishers');
+  $this->user_model->edit_user_details($w_dat,$data['user']['id'],'publishers');
 
 
 
-             $_SESSION['err_msg'] = "<script>alert('Your withdrawal Request has been submitted successfully');</script>";
-              $this->session->mark_as_flash('err_msg');
-              show_page("Publisher_dashboard");
+         $_SESSION['err_msg'] = "<script>alert('Your withdrawal Request has been submitted successfully');</script>";
+          $this->session->mark_as_flash('err_msg');
+          show_page("Publisher_dashboard");
 
 }
 //echo success
-    }else{
-             $_SESSION['err_msg'] = "<script>alert('Insufficient Balance');</script>";
-              $this->session->mark_as_flash('err_msg');
-              show_page("Publisher_dashboard");
-    }
+}else{
+         $_SESSION['err_msg'] = "<script>alert('Insufficient Balance');</script>";
+          $this->session->mark_as_flash('err_msg');
+}
+}
+
+
+
+
+  public function req_withdrawal()
+  {
+
+
+
+
+
+      $data['title'] = $this->siteName." |  Publisher Payment Settings";
+            $data['author'] = $this->author;
+      $data['keywords'] = $this->keywords;
+      $data['description'] = $this->description;
+      $data["noindex"] = $this->noindex;
+  $data['user'] = $this->publisher_model->get_publisher_by_id();
+  $data["count_spaces"] = $this->publisher_model->count_publishers_spaces();
+  $data['withdrawals'] = $this->publisher_model->get_withdrawals($_SESSION['id']);
+  $data['manual_payments'] = $this->advertiser_model->get_manual_payments();
+  $data['general_details'] = $this->advertiser_model->get_general_details();
+
+
+    $this->load->view('/common/publisher_header_view',$data);
+    $this->load->view('/common/publisher_top_tiles',$data);
+    $this->load->view('/user/publisher/withdrawl',$data);
+     $this->load->view('/common/users_footer_view',$data);
+
+
+
  }
 
  public function read($id)

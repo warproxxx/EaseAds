@@ -785,6 +785,8 @@ public function size()
   $minimum_cpm = $this->input->post("minimum_cpm");
   $minimum_deposit = $this->input->post("minimum_deposit");
   $minimum_budget = $this->input->post("minimum_budget");
+  $minimum_payout = $this->input->post("minimum_payout");
+  $minimum_daily = $this->input->post("minimum_daily");
 
   if ($minimum_cpc != "")
   {
@@ -792,6 +794,8 @@ public function size()
       "minimum_cpc" => $minimum_cpc,
       "minimum_cpm" => $minimum_cpm,
       "minimum_deposit" => $minimum_deposit,
+      "minimum_payout" => $minimum_payout,
+      "minimum_daily" => $minimum_daily,
       "minimum_budget" => $minimum_budget);
 
     $this->admin_model->update_defaults($datab);
@@ -803,6 +807,8 @@ public function size()
   $data['minimum_cpm'] = $defaults['minimum_cpm'];
   $data['minimum_deposit'] = $defaults['minimum_deposit'];
   $data['minimum_budget'] = $defaults['minimum_budget'];
+  $data['minimum_payout'] = $defaults['minimum_payout'];
+  $data['minimum_daily'] = $defaults['minimum_daily'];
   
 
 
